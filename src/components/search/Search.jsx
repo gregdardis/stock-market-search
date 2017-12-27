@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 
-import SearchBar from '../searchBar';
 import './search.css';
 
 class Search extends Component {
   render() {
     return (
       <div className='search'>
-        <SearchBar />
+        <input type='text'
+          placeholder='Ticker or name'
+          className='searchText' />
+        <button className='searchButton'>
+          Search
+        </button>
       </div>
     );
   }

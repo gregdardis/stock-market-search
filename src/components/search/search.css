@@ -1,0 +1,12 @@
+.search {
+  display: flex;
+  justify-content: center;
+}
+
+.searchText {
+  font-size: 1.5em;
+}
+
+.searchButton {
+  font-size: 1.5em;
+}
