@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 
+import './searchBar.css';
+
 class SearchBar extends Component {
   render() {
     return (
-      <input type='text' />
+      <div className='searchBar'>
+        <input type='text' />
+      </div>
     );
   }
 }
