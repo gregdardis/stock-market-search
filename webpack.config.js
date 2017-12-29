@@ -54,5 +54,12 @@ module.exports = {
   // import MyComponent from './my-component.jsx';
   resolve: {
     extensions: ['.js', '.jsx']
+  },
+  devServer: {
+    proxy: {
+      '/': {
+        target: 'http://localhost:3000'
+      }
+    }
   }
 };
