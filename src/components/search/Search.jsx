@@ -16,7 +16,9 @@ class Search extends Component {
   }
 
   handleSearch() {
-    alert('Text submitted: ' + this.state.searchText);
+    fetch(`/stocks/${this.state.searchText}`)
+      .then(res => res.json())
+      .then(jsonData => console.log(jsonData));
   }
 
   render() {
