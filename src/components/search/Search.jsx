@@ -52,7 +52,7 @@ const Search = (props) => {
         onChange={ event => props.updateSearchTerm(event.target.value) }
         onKeyDown={ (event) => {
           if (event.key === 'Escape') {
-            console.log('you pressed escape');
+            props.clearSearchTerm();
           }
         }}
         placeholder='Ticker or name'
@@ -69,7 +69,8 @@ const Search = (props) => {
 
 Search.propTypes = {
   searchTerm: PropTypes.string.isRequired,
-  updateSearchTerm: PropTypes.func.isRequired
+  updateSearchTerm: PropTypes.func.isRequired,
+  clearSearchTerm: PropTypes.func.isRequired
 };
 
 export default Search;
