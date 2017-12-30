@@ -3,12 +3,16 @@ import PropTypes from 'prop-types';
 
 import Search from './components/search';
 
-const App = (props) => (
+const App = ({
+  searchTerm,
+  updateSearchTerm,
+  clearSearchTerm
+}) => (
   <div>
     <Search
-      searchTerm={ props.searchTerm }
-      updateSearchTerm={ props.updateSearchTerm }
-      clearSearchTerm={ props.clearSearchTerm }
+      searchTerm={ searchTerm }
+      updateSearchTerm={ updateSearchTerm }
+      clearSearchTerm={ clearSearchTerm }
     />
   </div>
 );

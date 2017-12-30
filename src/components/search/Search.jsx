@@ -42,19 +42,27 @@ import './search.css';
 //   }
 // }
 
-const Search = (props) => {
+const Search = ({
+  searchTerm,
+  updateSearchTerm,
+  clearSearchTerm
+}) => {
+  const handleChange = event => {
+    updateSearchTerm(event.target.value);
+  };
+  const handleKeyDown = event => {
+    if (event.key === 'Escape') {
+      clearSearchTerm();
+    }
+  };
   return (
     <div className='search'>
       <input
         type='text'
         className='searchText'
-        value={ props.searchTerm }
-        onChange={ event => props.updateSearchTerm(event.target.value) }
-        onKeyDown={ (event) => {
-          if (event.key === 'Escape') {
-            props.clearSearchTerm();
-          }
-        }}
+        value={ searchTerm }
+        onChange={ handleChange }
+        onKeyDown={ handleKeyDown }
         placeholder='Ticker or name'
       />
       <button
