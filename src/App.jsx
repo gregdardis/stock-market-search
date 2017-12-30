@@ -1,26 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Search from './components/search';
+import SearchContainer from './components/search/SearchContainer';
 
 const App = ({
-  searchTerm,
-  updateSearchTerm,
-  clearSearchTerm
+  store
 }) => (
   <div>
-    <Search
-      searchTerm={ searchTerm }
-      updateSearchTerm={ updateSearchTerm }
-      clearSearchTerm={ clearSearchTerm }
+    <SearchContainer
+      store={ store }
     />
   </div>
 );
 
 App.propTypes = {
-  searchTerm: PropTypes.string.isRequired,
-  updateSearchTerm: PropTypes.func.isRequired,
-  clearSearchTerm: PropTypes.func.isRequired
+  store: PropTypes.object.isRequired
 };
 
 export default App;
+
+// const App = ({
+//   searchTerm,
+//   updateSearchTerm,
+//   clearSearchTerm
+// }) => (
+//   <div>
+//     <Search
+//       searchTerm={ searchTerm }
+//       updateSearchTerm={ updateSearchTerm }
+//       clearSearchTerm={ clearSearchTerm }
+//     />
+//   </div>
+// );
+
+// App.propTypes = {
+//   searchTerm: PropTypes.string.isRequired,
+//   updateSearchTerm: PropTypes.func.isRequired,
+//   clearSearchTerm: PropTypes.func.isRequired
+// };

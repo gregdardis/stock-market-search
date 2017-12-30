@@ -13,18 +13,7 @@ const store = createStore(
 const render = () => {
   ReactDOM.render(
     <App
-      searchTerm={ store.getState().searchTerm }
-      updateSearchTerm={ searchTerm =>
-        store.dispatch({
-          type: 'UPDATE_SEARCH_TERM',
-          searchTerm
-        })
-      }
-      clearSearchTerm={ () =>
-        store.dispatch({
-          type: 'CLEAR_SEARCH_TERM'
-        })
-      }
+      store={ store }
     />,
     document.getElementById('app')
   );
