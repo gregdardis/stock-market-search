@@ -4,15 +4,9 @@ import { createStore } from 'redux';
 
 import App from './App';
 
-// // example action
-// const myAction = {
-//   type: 'UPDATE_SEARCH_TERM',
-//   searchTerm: 'GOOG'
-// };
-
 // takes the old state and an action,
 // then returns the new state
-const searchReducer = (state = 'asdfff', action) => {
+const searchReducer = (state = '', action) => {
   switch (action.type) {
   case 'UPDATE_SEARCH_TERM':
     return action.searchTerm;
@@ -27,6 +21,12 @@ const render = () => {
   ReactDOM.render(
     <App
       searchTerm={ store.getState() }
+      updateSearchTerm={searchTerm =>
+        store.dispatch({
+          type: 'UPDATE_SEARCH_TERM',
+          searchTerm
+        })
+      }
     />,
     document.getElementById('app')
   );

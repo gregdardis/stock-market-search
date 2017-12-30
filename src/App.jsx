@@ -3,27 +3,18 @@ import PropTypes from 'prop-types';
 
 import Search from './components/search';
 
-
-// export default class App extends Component {
-//   render() {
-//     return (
-//       <div>
-//         <Search />
-//       </div>
-//     );
-//   }
-// }
-
 const App = (props) => (
   <div>
     <Search
-      searchTerm={props.searchTerm}
+      searchTerm={ props.searchTerm }
+      updateSearchTerm={ props.updateSearchTerm }
     />
   </div>
 );
 
 App.propTypes = {
-  searchTerm: PropTypes.string.isRequired
+  searchTerm: PropTypes.string.isRequired,
+  updateSearchTerm: PropTypes.func.isRequired
 };
 
 export default App;

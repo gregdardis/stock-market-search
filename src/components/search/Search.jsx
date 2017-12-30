@@ -49,8 +49,7 @@ const Search = (props) => {
         type='text'
         className='searchText'
         value={ props.searchTerm }
-        readOnly={ true }
-        // onChange={  }
+        onChange={ event => props.updateSearchTerm(event.target.value) }
         placeholder='Ticker or name'
       />
       <button
@@ -64,7 +63,8 @@ const Search = (props) => {
 };
 
 Search.propTypes = {
-  searchTerm: PropTypes.string.isRequired
+  searchTerm: PropTypes.string.isRequired,
+  updateSearchTerm: PropTypes.func.isRequired
 };
 
 export default Search;
