@@ -56,7 +56,7 @@ const Search = (props) => {
         className='searchButton'
         // onClick={ this.handleSearch }
       >
-          Search
+        Search
       </button>
     </div>
   );
