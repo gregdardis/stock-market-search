@@ -14,10 +14,15 @@ const render = () => {
   ReactDOM.render(
     <App
       searchTerm={ store.getState().searchTerm }
-      updateSearchTerm={ term =>
+      updateSearchTerm={ searchTerm =>
         store.dispatch({
           type: 'UPDATE_SEARCH_TERM',
-          searchTerm: term
+          searchTerm
+        })
+      }
+      clearSearchTerm={ () =>
+        store.dispatch({
+          type: 'CLEAR_SEARCH_TERM'
         })
       }
     />,

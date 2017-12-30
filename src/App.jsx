@@ -8,13 +8,15 @@ const App = (props) => (
     <Search
       searchTerm={ props.searchTerm }
       updateSearchTerm={ props.updateSearchTerm }
+      clearSearchTerm={ props.clearSearchTerm }
     />
   </div>
 );
 
 App.propTypes = {
   searchTerm: PropTypes.string.isRequired,
-  updateSearchTerm: PropTypes.func.isRequired
+  updateSearchTerm: PropTypes.func.isRequired,
+  clearSearchTerm: PropTypes.func.isRequired
 };
 
 export default App;

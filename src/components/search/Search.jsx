@@ -50,6 +50,11 @@ const Search = (props) => {
         className='searchText'
         value={ props.searchTerm }
         onChange={ event => props.updateSearchTerm(event.target.value) }
+        onKeyDown={ (event) => {
+          if (event.key === 'Escape') {
+            console.log('you pressed escape');
+          }
+        }}
         placeholder='Ticker or name'
       />
       <button
