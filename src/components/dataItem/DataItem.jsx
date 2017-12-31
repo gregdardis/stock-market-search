@@ -7,7 +7,9 @@ const DataItem = ({
   label,
   optionalLabel,
   value,
-  optionalValue
+  optionalValue,
+  valueSuffix,
+  optionalValueSuffix
 }) => {
   return (
     <div className='dataItem'>
@@ -15,9 +17,9 @@ const DataItem = ({
       { optionalLabel
         ? <a>({ optionalLabel })</a>
         : ' ' }
-      <span>{ value }</span>
+      <span>{ value + valueSuffix }</span>
       { optionalValue
-        ? <span>({ optionalValue })</span>
+        ? <span>({ optionalValue + optionalValueSuffix })</span>
         : ' '}
     </div>
   );
@@ -25,7 +27,9 @@ const DataItem = ({
 DataItem.propTypes = {
   label: PropTypes.string.isRequired,
   optionalLabel: PropTypes.string,
-  value: PropTypes.string.isRequired,
-  optionalValue: PropTypes.string
+  value: PropTypes.number.isRequired,
+  optionalValue: PropTypes.number,
+  valueSuffix: PropTypes.string,
+  optionalValueSuffix: PropTypes.string
 };
 export default DataItem;
