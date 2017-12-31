@@ -1,20 +1,7 @@
 import { connect } from 'react-redux';
 
 import Search from './search';
-
-// ACTION CREATORS
-const updateSearchTerm = searchTerm => {
-  return {
-    type: 'UPDATE_SEARCH_TERM',
-    searchTerm
-  };
-};
-
-const clearSearchTerm = () => {
-  return {
-    type: 'CLEAR_SEARCH_TERM'
-  };
-};
+import { updateSearchTerm, clearSearchTerm } from '../../actions';
 
 // takes the state from the redux store
 // and returns the props, calculated from it
