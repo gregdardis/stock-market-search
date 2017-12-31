@@ -1,44 +1,19 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Search from './search';
 
-/* Contains all methods and non presentational parts of Search component */
-class SearchContainer extends Component {
-  componentDidMount() {
-    const { store } = this.context;
-    this.unsubscribe = store.subscribe(() =>
-      this.forceUpdate()
-    );
-  }
+// ACTION CREATORS
+const updateSearchTerm = searchTerm => {
+  return {
+    type: 'UPDATE_SEARCH_TERM',
+    searchTerm
+  };
+};
 
-  componentWillUnmount() {
-    this.unsubscribe();
-  }
-
-  render() {
-    const { store } = this.context;
-    return (
-      <Search
-        searchTerm={ store.getState().searchTerm }
-        updateSearchTerm={ searchTerm =>
-          store.dispatch({
-            type: 'UPDATE_SEARCH_TERM',
-            searchTerm
-          })
-        }
-        clearSearchTerm={ () =>
-          store.dispatch({
-            type: 'CLEAR_SEARCH_TERM'
-          })
-        }
-      />
-    );
-  }
-}
-SearchContainer.contextTypes = {
-  store: PropTypes.object
+const clearSearchTerm = () => {
+  return {
+    type: 'CLEAR_SEARCH_TERM'
+  };
 };
 
 // takes the state from the redux store
@@ -49,15 +24,14 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   updateSearchTerm: searchTerm => {
-    dispatch({
-      type: 'UPDATE_SEARCH_TERM',
-      searchTerm: searchTerm
-    });
+    dispatch(
+      updateSearchTerm(searchTerm)
+    );
   },
   clearSearchTerm: () => {
-    dispatch({
-      type: 'CLEAR_SEARCH_TERM'
-    });
+    dispatch(
+      clearSearchTerm()
+    );
   }
 });
 
@@ -69,5 +43,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Search);
-
-// export default SearchContainer;
