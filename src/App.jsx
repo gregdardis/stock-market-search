@@ -13,6 +13,9 @@ const App = () => (
       label='Div'
       optionalLabel='%'
     />
+    <DataItem
+      label='High'
+    />
   </div>
 );
 
