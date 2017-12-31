@@ -1,3 +1,26 @@
-import Search from './Search';
+import { connect } from 'react-redux';
 
-export default Search;
+import Search from './search';
+import { updateSearchTerm, clearSearchTerm } from '../../actions';
+
+const mapStateToProps = state => ({
+  searchTerm: state.searchTerm
+});
+
+const mapDispatchToProps = dispatch => ({
+  updateSearchTerm(searchTerm) {
+    dispatch(
+      updateSearchTerm(searchTerm)
+    );
+  },
+  clearSearchTerm() {
+    dispatch(
+      clearSearchTerm()
+    );
+  }
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Search);
