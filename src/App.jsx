@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import SearchContainer from './components/search/SearchContainer';
+import Search from './components/search';
 
 const App = ({
   store
 }) => (
   <div>
-    <SearchContainer
+    <Search
       store={ store }
     />
   </div>
