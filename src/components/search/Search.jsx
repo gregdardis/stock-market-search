@@ -44,6 +44,7 @@ Search.propTypes = {
 
 export default Search;
 
+// TODO: use this code to help us fetch api data before deleting this
 // class Search extends Component {
 //   constructor(props) {
 //     super(props);
