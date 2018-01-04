@@ -12,7 +12,11 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = null;
 
-export default connect(
+const dataItemContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(DataItem);
+
+console.log(typeof dataItemContainer);
+
+export default dataItemContainer;

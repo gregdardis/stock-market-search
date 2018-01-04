@@ -1,20 +1,24 @@
 import React from 'react';
 
 import Search from './components/search';
-import DataItem from './components/dataItem';
+import Column from './components/column';
 
 const App = () => (
   <div>
     <Search />
-    <DataItem
-      label='Open'
-    />
-    <DataItem
-      label='Div'
-      optionalLabel='%'
-    />
-    <DataItem
-      label='High'
+    <Column
+      componentsProps={[
+        {
+          label: 'Open'
+        },
+        {
+          label: 'Div',
+          optionalLabel: '%'
+        },
+        {
+          label: 'High'
+        }
+      ]}
     />
   </div>
 );

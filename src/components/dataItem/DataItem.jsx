@@ -13,14 +13,20 @@ const DataItem = ({
 }) => {
   return (
     <div className='dataItem'>
-      <a>{ label }</a>
-      { optionalLabel
-        ? <a>({ optionalLabel })</a>
-        : ' ' }
-      <span>{ value + valueSuffix }</span>
-      { optionalValue
-        ? <span>({ optionalValue + optionalValueSuffix })</span>
-        : ' '}
+      <span>
+        <a>{ label }</a>
+        { optionalLabel
+          ? <a>({ optionalLabel })</a>
+          : ' ' }
+      </span>
+      <span>
+        <span className='value'>{ value + valueSuffix }</span>
+        { optionalValue
+          ? <span className='optional-value'>
+            ({ optionalValue + optionalValueSuffix })
+          </span>
+          : ' '}
+      </span>
     </div>
   );
 };

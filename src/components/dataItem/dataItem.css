@@ -1,4 +1,6 @@
 .dataItem {
-  display: inline-block;
+  display: flex;
   padding: 10px;
+  border-bottom: 1px solid grey;
+  justify-content: space-between;
 }
