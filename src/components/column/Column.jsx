@@ -1,22 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import DataItem from '../dataItem';
 import './column.css';
 
 const Column = ({
-  componentsProps
-}) => (
-  <div className='column'>
-    { componentsProps.map(p => (
-      <DataItem
-        key={ p.label }
-        { ...p } />
-    ))}
-  </div>
-);
+  componentsProps,
+  columnCellComponent
+}) => {
+  const ColumnCell = columnCellComponent;
+  return (
+    <div className='column'>
+      { componentsProps.map(p => (
+        <ColumnCell
+          key={ p.label }
+          { ...p } />
+      ))}
+    </div>
+  );
+};
+// TODO: if we don't want them to be required, handle that case with a ternary in the jsx
+// before deleting isRequired
 Column.propTypes = {
-  componentsProps: PropTypes.array
+  componentsProps: PropTypes.array.isRequired,
+  columnCellComponent: PropTypes.func.isRequired
 };
 
 export default Column;

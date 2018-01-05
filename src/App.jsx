@@ -2,6 +2,7 @@ import React from 'react';
 
 import Search from './components/search';
 import Column from './components/column';
+import DataItem from './components/dataItem';
 
 const App = () => (
   <div>
@@ -19,6 +20,7 @@ const App = () => (
           label: 'High'
         }
       ]}
+      columnCellComponent={ DataItem }
     />
   </div>
 );
