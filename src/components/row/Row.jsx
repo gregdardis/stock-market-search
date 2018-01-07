@@ -11,10 +11,10 @@ const Row = ({
   const RowCell = rowCellComponent;
   return (
     <div className='row'>
-      { componentsProps.map(p => (
+      { componentsProps.map(cellProps => (
         <RowCell
-          key={ p[rowKeyName] }
-          { ...p }
+          key={ cellProps[rowKeyName] }
+          { ...cellProps }
         />
       ))}
     </div>
