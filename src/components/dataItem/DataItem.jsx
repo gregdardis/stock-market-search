@@ -16,16 +16,20 @@ const DataItem = ({
       <span>
         <a>{ label }</a>
         { optionalLabel
-          ? <a>({ optionalLabel })</a>
+          ? <a>
+            { ' ' }
+            ({ optionalLabel })
+          </a>
           : ' ' }
       </span>
       <span>
         <span className='value'>{ value + valueSuffix }</span>
         { optionalValue
           ? <span className='optional-value'>
+            { ' ' }
             ({ optionalValue + optionalValueSuffix })
           </span>
-          : ' '}
+          : ' ' }
       </span>
     </div>
   );
