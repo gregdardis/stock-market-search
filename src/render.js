@@ -21,11 +21,29 @@ const initialState = {
       valueSuffix: '',
       optionalValueSuffix: ''
     },
+    Low: {
+      value: 25.90,
+      optionalValue: null,
+      valueSuffix: '',
+      optionalValueSuffix: ''
+    },
     Div: {
       value: 1.50,
       optionalValue: 6.04,
       valueSuffix: '',
       optionalValueSuffix: '%'
+    },
+    'Mkt Cap': {
+      value: 1,
+      optionalLabel: 'M/B',
+      valueSuffix: 'B',
+      optionalValueSuffix: ''
+    },
+    Volume: {
+      value: 40.2,
+      optionalValue: null,
+      valueSuffix: '',
+      optionalValueSuffix: ''
     }
   }
 };

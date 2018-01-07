@@ -2,25 +2,52 @@ import React from 'react';
 
 import Search from './components/search';
 import Column from './components/column';
+import Row from './components/row';
 import DataItem from './components/dataItem';
 
 const App = () => (
   <div>
     <Search />
-    <Column
+    <Row
       componentsProps={[
         {
-          label: 'Open'
+          componentsProps: [
+            {
+              label: 'Open'
+            },
+            {
+              label: 'High'
+            },
+            {
+              label: 'Low'
+            }
+          ],
+          keyName: 'label',
+          columnCellComponent: DataItem,
+          rowKey: '1'
         },
         {
-          label: 'Div',
-          optionalLabel: '%'
-        },
-        {
-          label: 'High'
+          componentsProps: [
+            {
+              label: 'Mkt Cap',
+              optionalLabel: 'M/B'
+            },
+            {
+              label: 'Volume',
+              optionalLabel: 'K/M'
+            },
+            {
+              label: 'Div',
+              optionalLabel: '%'
+            }
+          ],
+          keyName: 'label',
+          columnCellComponent: DataItem,
+          rowKey: '2'
         }
       ]}
-      columnCellComponent={ DataItem }
+      keyName='rowKey'
+      rowCellComponent= { Column }
     />
   </div>
 );
