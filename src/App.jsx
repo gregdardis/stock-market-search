@@ -22,7 +22,7 @@ const App = () => (
               label: 'Low'
             }
           ],
-          keyName: 'label',
+          columnKeyName: 'label',
           columnCellComponent: DataItem,
           rowKey: '1'
         },
@@ -41,12 +41,12 @@ const App = () => (
               optionalLabel: '%'
             }
           ],
-          keyName: 'label',
+          columnKeyName: 'label',
           columnCellComponent: DataItem,
           rowKey: '2'
         }
       ]}
-      keyName='rowKey'
+      rowKeyName='rowKey'
       rowCellComponent= { Column }
     />
   </div>

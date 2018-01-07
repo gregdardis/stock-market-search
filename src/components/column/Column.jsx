@@ -5,7 +5,7 @@ import './column.css';
 
 const Column = ({
   componentsProps,
-  keyName,
+  columnKeyName,
   columnCellComponent
 }) => {
   const ColumnCell = columnCellComponent;
@@ -13,7 +13,7 @@ const Column = ({
     <div className='column'>
       { componentsProps.map(p => (
         <ColumnCell
-          key={ p[keyName] }
+          key={ p[columnKeyName] }
           { ...p }
         />
       ))}
@@ -24,7 +24,7 @@ const Column = ({
 // before deleting isRequired
 Column.propTypes = {
   componentsProps: PropTypes.array.isRequired,
-  keyName: PropTypes.string.isRequired,
+  columnKeyName: PropTypes.string.isRequired,
   columnCellComponent: PropTypes.func.isRequired
 };
 

@@ -5,7 +5,7 @@ import './row.css';
 
 const Row = ({
   componentsProps,
-  keyName,
+  rowKeyName,
   rowCellComponent
 }) => {
   const RowCell = rowCellComponent;
@@ -13,7 +13,7 @@ const Row = ({
     <div className='row'>
       { componentsProps.map(p => (
         <RowCell
-          key={ p[keyName] }
+          key={ p[rowKeyName] }
           { ...p }
         />
       ))}
@@ -23,7 +23,7 @@ const Row = ({
 
 Row.propTypes = {
   componentsProps: PropTypes.array.isRequired,
-  keyName: PropTypes.string.isRequired,
+  rowKeyName: PropTypes.string.isRequired,
   rowCellComponent: PropTypes.func.isRequired
 };
 
