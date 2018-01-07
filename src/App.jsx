@@ -1,20 +1,17 @@
 import React from 'react';
 
 import Search from './components/search';
-import DataItem from './components/dataItem';
+import Column from './components/column';
+import Row from './components/row';
+import { rowComponentsProps } from './testData';
 
 const App = () => (
   <div>
     <Search />
-    <DataItem
-      label='Open'
-    />
-    <DataItem
-      label='Div'
-      optionalLabel='%'
-    />
-    <DataItem
-      label='High'
+    <Row
+      componentsProps={ rowComponentsProps }
+      rowKeyName='rowKey'
+      rowCellComponent={ Column }
     />
   </div>
 );
