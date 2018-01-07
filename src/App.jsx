@@ -29,12 +29,11 @@ const App = () => (
         {
           componentsProps: [
             {
-              label: 'Mkt Cap',
-              optionalLabel: 'M/B'
+              label: 'Mkt Cap'
             },
             {
               label: 'Volume',
-              optionalLabel: 'K/M'
+              optionalLabel: 'Avg'
             },
             {
               label: 'Div',
@@ -44,6 +43,23 @@ const App = () => (
           columnKeyName: 'label',
           columnCellComponent: DataItem,
           rowKey: '2'
+        },
+        {
+          componentsProps: [
+            {
+              label: 'P/E Ratio',
+              optionalLabel: 'eps'
+            },
+            {
+              label: 'ROE'
+            },
+            {
+              label: 'FCFY'
+            }
+          ],
+          columnKeyName: 'label',
+          columnCellComponent: DataItem,
+          rowKey: '3'
         }
       ]}
       rowKeyName='rowKey'

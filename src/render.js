@@ -7,7 +7,6 @@ import App from './App';
 import { reducer } from './reducers';
 
 const initialState = {
-  searchTerm: 'hi',
   dataItems: {
     Open: {
       value: 26.50,
@@ -35,14 +34,32 @@ const initialState = {
     },
     'Mkt Cap': {
       value: 1,
-      optionalLabel: 'M/B',
+      optionalValue: null,
       valueSuffix: 'B',
       optionalValueSuffix: ''
     },
     Volume: {
       value: 40.2,
-      optionalValue: null,
+      optionalValue: 50.5,
+      valueSuffix: 'k',
+      optionalValueSuffix: 'k'
+    },
+    'P/E Ratio': {
+      value: 500,
+      optionalValue: 0.002,
       valueSuffix: '',
+      optionalValueSuffix: ''
+    },
+    ROE: {
+      value: 21,
+      optionalValue: null,
+      valueSuffix: '%',
+      optionalValueSuffix: ''
+    },
+    FCFY: {
+      value: 10,
+      optionalValue: null,
+      valueSuffix: '%',
       optionalValueSuffix: ''
     }
   }
