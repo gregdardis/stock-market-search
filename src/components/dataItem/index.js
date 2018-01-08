@@ -14,14 +14,17 @@ const formatLabelFromStateAndProps = (state, ownProps) => {
 };
 
 const formatValueFromStateAndProps = (state, ownProps) => {
-  const value = state.dataItems[ownProps.label].value;
-  const optionalValue = state.dataItems[ownProps.label].optionalValue;
+  let value = state.dataItems[ownProps.label].value;
+  let optionalValue = state.dataItems[ownProps.label].optionalValue;
   const valueSuffix = state.dataItems[ownProps.label].valueSuffix;
   const optionalValueSuffix = state.dataItems[ownProps.label].optionalValueSuffix;
+
+  value = value.toFixed(ownProps.valuePrecision);
 
   if (!optionalValue) {
     return value + valueSuffix;
   }
+  optionalValue = optionalValue.toFixed(ownProps.valuePrecision);
   return value + valueSuffix + ' (' + optionalValue + optionalValueSuffix + ') ';
 };
 

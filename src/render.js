@@ -39,14 +39,14 @@ const initialState = {
       optionalValueSuffix: ''
     },
     Volume: {
-      value: 40.2,
-      optionalValue: 50.5,
-      valueSuffix: 'k',
-      optionalValueSuffix: 'k'
+      value: 403214,
+      optionalValue: 532423,
+      valueSuffix: '',
+      optionalValueSuffix: ''
     },
     'P/E Ratio': {
       value: 500,
-      optionalValue: 0.002,
+      optionalValue: 0.02,
       valueSuffix: '',
       optionalValueSuffix: ''
     },
