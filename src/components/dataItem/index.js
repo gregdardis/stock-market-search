@@ -13,6 +13,19 @@ const formatLabelFromStateAndProps = (state, ownProps) => {
   return label + ' (' + optionalLabel + ') ';
 };
 
+/* Takes a number or string */
+const addCommas = number => {
+  let parts = number.toString().split('.');
+
+  const wholeNumberIndex = 0;
+  const wholeNumber = parts[wholeNumberIndex];
+  const wholeNumberWithCommas = wholeNumber.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+  parts[wholeNumberIndex] = wholeNumberWithCommas;
+
+  return parts.join('.');
+};
+
 const formatValueFromStateAndProps = (state, ownProps) => {
   let value = state.dataItems[ownProps.label].value;
   let optionalValue = state.dataItems[ownProps.label].optionalValue;
@@ -20,11 +33,13 @@ const formatValueFromStateAndProps = (state, ownProps) => {
   const optionalValueSuffix = state.dataItems[ownProps.label].optionalValueSuffix;
 
   value = value.toFixed(ownProps.valuePrecision);
+  value = addCommas(value);
 
   if (!optionalValue) {
     return value + valueSuffix;
   }
   optionalValue = optionalValue.toFixed(ownProps.valuePrecision);
+  optionalValue = addCommas(value);
   return value + valueSuffix + ' (' + optionalValue + optionalValueSuffix + ') ';
 };
 
