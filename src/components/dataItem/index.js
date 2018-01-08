@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import DataItem from './dataItem';
+import { addCommas } from '../../utils/formatting';
 
 const formatLabelFromStateAndProps = (state, ownProps) => {
   const label = ownProps.label;
@@ -11,19 +12,6 @@ const formatLabelFromStateAndProps = (state, ownProps) => {
     return label;
   }
   return label + ' (' + optionalLabel + ') ';
-};
-
-/* Takes a number or string */
-const addCommas = number => {
-  let parts = number.toString().split('.');
-
-  const wholeNumberIndex = 0;
-  const wholeNumber = parts[wholeNumberIndex];
-  const wholeNumberWithCommas = wholeNumber.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-
-  parts[wholeNumberIndex] = wholeNumberWithCommas;
-
-  return parts.join('.');
 };
 
 const formatValueFromStateAndProps = (state, ownProps) => {
