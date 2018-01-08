@@ -26,8 +26,8 @@ const formatValueFromStateAndProps = (state, ownProps) => {
   if (!optionalValue) {
     return value + valueSuffix;
   }
-  optionalValue = optionalValue.toFixed(ownProps.valuePrecision);
-  optionalValue = addCommas(value);
+  optionalValue = optionalValue.toFixed(ownProps.optionalValuePrecision);
+  optionalValue = addCommas(optionalValue);
   return value + valueSuffix + ' (' + optionalValue + optionalValueSuffix + ') ';
 };
 
