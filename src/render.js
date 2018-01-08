@@ -45,7 +45,7 @@ const initialState = {
       optionalValueSuffix: ''
     },
     'P/E Ratio': {
-      value: 500,
+      value: 50,
       optionalValue: 0.02,
       valueSuffix: '',
       optionalValueSuffix: ''
