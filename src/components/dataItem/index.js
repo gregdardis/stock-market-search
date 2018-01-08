@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import DataItem from './dataItem';
 
@@ -9,7 +10,7 @@ const formatLabelFromStateAndProps = (state, ownProps) => {
   if (!optionalLabel) {
     return label;
   }
-  return label + ' (' + optionalLabel + ') '; 
+  return label + ' (' + optionalLabel + ') ';
 };
 
 const formatValueFromStateAndProps = (state, ownProps) => {
@@ -36,6 +37,11 @@ const dataItemContainer = connect(
   mapDispatchToProps
 )(DataItem);
 
-console.log(typeof dataItemContainer);
+dataItemContainer.propTypes = {
+  label: PropTypes.string.isRequired,
+  optionalLabel: PropTypes.string,
+  valuePrecision: PropTypes.number.isRequired,
+  optionalValuePrecision: PropTypes.number
+};
 
 export default dataItemContainer;
