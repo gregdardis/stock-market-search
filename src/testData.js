@@ -4,13 +4,16 @@ export const rowComponentsProps = [
   {
     componentsProps: [
       {
-        label: 'Open'
+        label: 'Open',
+        valuePrecision: 2
       },
       {
-        label: 'High'
+        label: 'High',
+        valuePrecision: 2
       },
       {
-        label: 'Low'
+        label: 'Low',
+        valuePrecision: 2
       }
     ],
     columnKeyName: 'label',
@@ -20,15 +23,19 @@ export const rowComponentsProps = [
   {
     componentsProps: [
       {
-        label: 'Mkt Cap'
+        label: 'Mkt Cap',
+        valuePrecision: 3
       },
       {
         label: 'Volume',
-        optionalLabel: 'Avg'
+        optionalLabel: 'Avg',
+        valuePrecision: 0
       },
       {
         label: 'Div',
-        optionalLabel: '%'
+        optionalLabel: '%',
+        valuePrecision: 2,
+        optionalValuePrecision: 2
       }
     ],
     columnKeyName: 'label',
@@ -39,13 +46,17 @@ export const rowComponentsProps = [
     componentsProps: [
       {
         label: 'P/E Ratio',
-        optionalLabel: 'eps'
+        optionalLabel: 'eps',
+        valuePrecision: 2,
+        optionalValuePrecision: 2
       },
       {
-        label: 'ROE'
+        label: 'ROE',
+        valuePrecision: 1
       },
       {
-        label: 'FCFY'
+        label: 'FCFY',
+        valuePrecision: 1
       }
     ],
     columnKeyName: 'label',

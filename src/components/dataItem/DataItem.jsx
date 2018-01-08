@@ -5,41 +5,21 @@ import './dataItem.css';
 
 const DataItem = ({
   label,
-  optionalLabel,
-  value,
-  optionalValue,
-  valueSuffix,
-  optionalValueSuffix
+  value
 }) => {
   return (
     <div className='dataItem'>
       <span>
-        <a>{ label }</a>
-        { optionalLabel
-          ? <a>
-            { ' ' }
-            ({ optionalLabel })
-          </a>
-          : ' ' }
+        { label }
       </span>
       <span>
-        <span className='value'>{ value + valueSuffix }</span>
-        { optionalValue
-          ? <span className='optional-value'>
-            { ' ' }
-            ({ optionalValue + optionalValueSuffix })
-          </span>
-          : ' ' }
+        { value }
       </span>
     </div>
   );
 };
 DataItem.propTypes = {
   label: PropTypes.string.isRequired,
-  optionalLabel: PropTypes.string,
-  value: PropTypes.number.isRequired,
-  optionalValue: PropTypes.number,
-  valueSuffix: PropTypes.string,
-  optionalValueSuffix: PropTypes.string
+  value: PropTypes.string.isRequired
 };
 export default DataItem;

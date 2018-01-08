@@ -1,13 +1,39 @@
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import DataItem from './dataItem';
+import { addCommas } from '../../utils/formatting';
 
-// retrieves props from dataItems object of objects based on key 'label'
+const formatLabelFromStateAndProps = (state, ownProps) => {
+  const label = ownProps.label;
+  const optionalLabel = ownProps.optionalLabel;
+
+  if (!optionalLabel) {
+    return label;
+  }
+  return label + ' (' + optionalLabel + ') ';
+};
+
+const formatValueFromStateAndProps = (state, ownProps) => {
+  let value = state.dataItems[ownProps.label].value;
+  let optionalValue = state.dataItems[ownProps.label].optionalValue;
+  const valueSuffix = state.dataItems[ownProps.label].valueSuffix;
+  const optionalValueSuffix = state.dataItems[ownProps.label].optionalValueSuffix;
+
+  value = value.toFixed(ownProps.valuePrecision);
+  value = addCommas(value);
+
+  if (!optionalValue) {
+    return value + valueSuffix;
+  }
+  optionalValue = optionalValue.toFixed(ownProps.valuePrecision);
+  optionalValue = addCommas(value);
+  return value + valueSuffix + ' (' + optionalValue + optionalValueSuffix + ') ';
+};
+
 const mapStateToProps = (state, ownProps) => ({
-  value: state.dataItems[ownProps.label].value,
-  optionalValue: state.dataItems[ownProps.label].optionalValue,
-  valueSuffix: state.dataItems[ownProps.label].valueSuffix,
-  optionalValueSuffix: state.dataItems[ownProps.label].optionalValueSuffix
+  label: formatLabelFromStateAndProps(state, ownProps),
+  value: formatValueFromStateAndProps(state, ownProps)
 });
 
 const mapDispatchToProps = null;
@@ -17,6 +43,11 @@ const dataItemContainer = connect(
   mapDispatchToProps
 )(DataItem);
 
-console.log(typeof dataItemContainer);
+dataItemContainer.propTypes = {
+  label: PropTypes.string.isRequired,
+  optionalLabel: PropTypes.string,
+  valuePrecision: PropTypes.number.isRequired,
+  optionalValuePrecision: PropTypes.number
+};
 
 export default dataItemContainer;
