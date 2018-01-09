@@ -5,8 +5,10 @@ import Column from './components/column';
 import Row from './components/row';
 import { rowComponentsProps } from './testData';
 
+import './app.css';
+
 const App = () => (
-  <div>
+  <div className='app'>
     <Search />
     <Row
       componentsProps={ rowComponentsProps }
