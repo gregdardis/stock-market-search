@@ -43,7 +43,7 @@ Search.propTypes = {
   searchTerm: PropTypes.string.isRequired,
   updateSearchTerm: PropTypes.func.isRequired,
   clearSearchTerm: PropTypes.func.isRequired,
-  handleSearch: PropTypes.func
+  handleSearch: PropTypes.func.isRequired
 };
 
 export default Search;
