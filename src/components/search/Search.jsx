@@ -6,13 +6,17 @@ import './search.css';
 const Search = ({
   searchTerm,
   updateSearchTerm,
-  clearSearchTerm
+  clearSearchTerm,
+  handleSearch
 }) => {
   const handleChange = event => {
     updateSearchTerm(event.target.value);
   };
   const handleKeyDown = event => {
-    if (event.key === 'Escape') {
+    const keyPressed = event.key;
+    if (keyPressed === 'Enter') {
+      handleSearch();
+    } else if (keyPressed === 'Escape') {
       clearSearchTerm();
     }
   };
@@ -28,8 +32,7 @@ const Search = ({
       />
       <button
         className='searchButton'
-        // onClick={ this.handleSearch }
-      >
+        onClick={ handleSearch }>
         Search
       </button>
     </div>
@@ -39,7 +42,8 @@ const Search = ({
 Search.propTypes = {
   searchTerm: PropTypes.string.isRequired,
   updateSearchTerm: PropTypes.func.isRequired,
-  clearSearchTerm: PropTypes.func.isRequired
+  clearSearchTerm: PropTypes.func.isRequired,
+  handleSearch: PropTypes.func
 };
 
 export default Search;
