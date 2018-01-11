@@ -11,14 +11,12 @@ const initialState = {
   stocks: {
     GOOG: {
       isFetching: true,
-      didInvalidate: false,
-      dataItems: {}
+      stockData: {}
     },
     YAHOO: {
       isFetching: false,
-      didInvalidate: false,
       lastUpdated: 1439478405547,
-      dataItems: {
+      stockData: {
         Open: {
           value: 26.50,
           optionalValue: null,
