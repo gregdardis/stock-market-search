@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import DataItem from './dataItem';
+import DataItem from './DataItem';
 import { addCommas } from '../../utils/formatting';
 
 const formatLabelFromStateAndProps = (state, ownProps) => {
@@ -38,16 +38,16 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = null;
 
-const dataItemContainer = connect(
+const DataItemContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(DataItem);
 
-dataItemContainer.propTypes = {
+DataItemContainer.propTypes = {
   label: PropTypes.string.isRequired,
   optionalLabel: PropTypes.string,
   valuePrecision: PropTypes.number.isRequired,
   optionalValuePrecision: PropTypes.number
 };
 
-export default dataItemContainer;
+export default DataItemContainer;
