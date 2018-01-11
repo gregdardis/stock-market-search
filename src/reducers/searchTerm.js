@@ -1,7 +1,7 @@
 import {
   UPDATE_SEARCH_TERM,
   CLEAR_SEARCH_TERM,
-  HANDLE_SEARCH
+  PERFORM_SEARCH
 } from '../actions';
 
 export const reducer = (state = '', action) => {
@@ -10,7 +10,7 @@ export const reducer = (state = '', action) => {
     return action.searchTerm;
   case CLEAR_SEARCH_TERM:
     return '';
-  case HANDLE_SEARCH:
+  case PERFORM_SEARCH:
     return 'YOU SEARCHED!!!!!!!!!!!!!!!!!!';
   default:
     return state;
