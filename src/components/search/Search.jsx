@@ -15,7 +15,7 @@ const Search = ({
   const handleKeyDown = event => {
     const keyPressed = event.key;
     if (keyPressed === 'Enter') {
-      handleSearch();
+      handleSearch(searchTerm);
     } else if (keyPressed === 'Escape') {
       clearSearchTerm();
     }
@@ -32,7 +32,7 @@ const Search = ({
       />
       <button
         className='searchButton'
-        onClick={ handleSearch }>
+        onClick={ () => handleSearch(searchTerm) }>
         Search
       </button>
     </div>

@@ -8,6 +8,9 @@ export const FETCH_STOCK_REQUEST = 'FETCH_STOCK_REQUEST';
 export const FETCH_STOCK_SUCCESS = 'FETCH_STOCK_SUCCESS';
 export const FETCH_STOCK_FAILURE = 'FETCH_STOCK_FAILURE';
 
+export const REQUEST_STOCK = 'REQUEST_STOCK';
+export const RECEIVE_STOCK = 'RECEIVE_STOCK';
+
 export const updateSearchTerm = searchTerm => ({
   type: UPDATE_SEARCH_TERM,
   searchTerm
@@ -17,18 +20,31 @@ export const clearSearchTerm = () => ({
   type: CLEAR_SEARCH_TERM
 });
 
-export const performSearch = () => ({
-  type: PERFORM_SEARCH
+export const performSearch = searchTerm => ({
+  type: PERFORM_SEARCH,
+  searchTerm
 });
 
-export const fetchStockRequest = () => ({
-  type: FETCH_STOCK_REQUEST
+// export const fetchStockRequest = () => ({
+//   type: FETCH_STOCK_REQUEST
+// });
+
+// export const fetchStockSuccess = () => ({
+//   type: FETCH_STOCK_SUCCESS
+// });
+
+// export const fetchStockFailure = () => ({
+//   type: FETCH_STOCK_FAILURE
+// });
+
+export const requestStock = stockIdentifier => ({
+  type: REQUEST_STOCK,
+  stockIdentifier
 });
 
-export const fetchStockSuccess = () => ({
-  type: FETCH_STOCK_SUCCESS
-});
-
-export const fetchStockFailure = () => ({
-  type: FETCH_STOCK_FAILURE
+export const receiveStock = (stockIdentifier, json) => ({
+  type: RECEIVE_STOCK,
+  stockIdentifier,
+  stockData: json.data.children.map(child => child.data),
+  receivedAt: Date.now()
 });
