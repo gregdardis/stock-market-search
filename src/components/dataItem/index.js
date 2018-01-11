@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import DataItem from './DataItem';
 import { addCommas } from '../../utils/formatting';
 
-const formatLabelFromStateAndProps = (state, ownProps) => {
+const formatLabelFromProps = ownProps => {
   const label = ownProps.label;
   const optionalLabel = ownProps.optionalLabel;
 
@@ -15,10 +15,16 @@ const formatLabelFromStateAndProps = (state, ownProps) => {
 };
 
 const formatValueFromStateAndProps = (state, ownProps) => {
-  let value = state.dataItems[ownProps.label].value;
-  let optionalValue = state.dataItems[ownProps.label].optionalValue;
-  const valueSuffix = state.dataItems[ownProps.label].valueSuffix;
-  const optionalValueSuffix = state.dataItems[ownProps.label].optionalValueSuffix;
+  const ticker = state.selectedStock;
+  const selectedStock = state.stocks[ticker];
+  const stockData = selectedStock.stockData;
+
+  const dataItemLabel = ownProps.label;
+
+  let value = stockData[dataItemLabel].value;
+  let optionalValue = stockData[dataItemLabel].optionalValue;
+  const valueSuffix = stockData[dataItemLabel].valueSuffix;
+  const optionalValueSuffix = stockData[dataItemLabel].optionalValueSuffix;
 
   value = value.toFixed(ownProps.valuePrecision);
   value = addCommas(value);
@@ -32,7 +38,7 @@ const formatValueFromStateAndProps = (state, ownProps) => {
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  label: formatLabelFromStateAndProps(state, ownProps),
+  label: formatLabelFromProps(ownProps),
   value: formatValueFromStateAndProps(state, ownProps)
 });
 
