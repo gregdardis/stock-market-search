@@ -8,7 +8,7 @@ import { reducer } from './reducers';
 
 const initialState = {
   selectedStock: 'YAHOO',
-  dataByStock: {
+  stocks: {
     GOOG: {
       isFetching: true,
       didInvalidate: false,

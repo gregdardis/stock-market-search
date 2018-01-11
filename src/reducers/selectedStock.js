@@ -1,6 +1,6 @@
 import { PERFORM_SEARCH } from '../actions';
 
-const selectedStock = (state = '', action) => {
+export const reducer = (state = '', action) => {
   switch (action.type) {
   case PERFORM_SEARCH:
     return action.searchTerm;
@@ -8,5 +8,3 @@ const selectedStock = (state = '', action) => {
     return state;
   }
 };
-
-export default selectedStock;
