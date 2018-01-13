@@ -21,17 +21,10 @@ export const clearSearchTerm = () => ({
   type: CLEAR_SEARCH_TERM
 });
 
-export const performSearch = searchTerm => {
-  if (searchTerm === '') {
-    return {
-      type: EMPTY_SEARCH
-    };
-  }
-  return {
-    type: PERFORM_SEARCH,
-    searchTerm
-  };
-};
+export const performSearch = searchTerm => ({
+  type: PERFORM_SEARCH,
+  searchTerm
+});
 
 // export const fetchStockRequest = () => ({
 //   type: FETCH_STOCK_REQUEST

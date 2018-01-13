@@ -18,7 +18,7 @@ const mapDispatchToProps = dispatch => ({
       clearSearchTerm()
     );
   },
-  handleSearch(searchTerm) {
+  performSearch(searchTerm) {
     dispatch(
       performSearch(searchTerm)
     );

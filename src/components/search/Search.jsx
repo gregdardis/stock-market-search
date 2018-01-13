@@ -7,19 +7,27 @@ const Search = ({
   searchTerm,
   updateSearchTerm,
   clearSearchTerm,
-  handleSearch
+  performSearch
 }) => {
+  const handleSearch = () => {
+    if (searchTerm !== '') {
+      performSearch();
+    }
+  };
+
   const handleChange = event => {
     updateSearchTerm(event.target.value);
   };
+
   const handleKeyDown = event => {
     const keyPressed = event.key;
     if (keyPressed === 'Enter') {
-      handleSearch(searchTerm);
+      handleSearch();
     } else if (keyPressed === 'Escape') {
       clearSearchTerm();
     }
   };
+
   return (
     <div className='search'>
       <input
@@ -32,7 +40,7 @@ const Search = ({
       />
       <button
         className='searchButton'
-        onClick={ () => handleSearch(searchTerm) }>
+        onClick={ handleSearch }>
         Search
       </button>
     </div>
@@ -43,7 +51,7 @@ Search.propTypes = {
   searchTerm: PropTypes.string.isRequired,
   updateSearchTerm: PropTypes.func.isRequired,
   clearSearchTerm: PropTypes.func.isRequired,
-  handleSearch: PropTypes.func.isRequired
+  performSearch: PropTypes.func.isRequired
 };
 
 export default Search;
