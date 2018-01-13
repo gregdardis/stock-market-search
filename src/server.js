@@ -28,48 +28,51 @@ const createStockDataEntry = (value, options = {}) => {
 };
 
 const processStockData = ({
-  summaryDetail,
-  financialData,
-  defaultKeyStatistics
+  averageVolume,
+  dayHigh,
+  dayLow,
+  dividendRate,
+  dividendYield,
+  freeCashflow,
+  marketCap,
+  open,
+  returnOnEquity,
+  trailingEps,
+  trailingPE,
+  volume
 }) => {
   const stockData = {
-    Open: createStockDataEntry(
-      summaryDetail.open
-    ),
-    High: createStockDataEntry(
-      summaryDetail.dayHigh
-    ),
-    Low: createStockDataEntry(
-      summaryDetail.dayLow
-    ),
+    Open: createStockDataEntry(open),
+    High: createStockDataEntry(dayHigh),
+    Low: createStockDataEntry(dayLow),
     Div: createStockDataEntry(
-      summaryDetail.dividendYield,
+      dividendYield,
       {
-        optionalValue: summaryDetail.dividendRate,
+        optionalValue: dividendRate,
         optionalValueSuffix: '%'
       }
     ),
-    'Mkt Cap': createStockDataEntry(summaryDetail.marketCap),
+    'Mkt Cap': createStockDataEntry(marketCap),
     Volume: createStockDataEntry(
-      summaryDetail.volume,
+      volume,
       {
-        optionalValue: summaryDetail.averageVolume
+        optionalValue: averageVolume
       }
     ),
     'P/E Ratio': createStockDataEntry(
-      summaryDetail.trailingPE,
+      trailingPE,
       {
-        optionalValue: defaultKeyStatistics.trailingEps
+        optionalValue: trailingEps
       }
     ),
     ROE: createStockDataEntry(
-      convertDecimalToPercent(financialData.returnOnEquity),
+      convertDecimalToPercent(returnOnEquity),
       {
         valueSuffix: '%'
       }
     ),
     FCFY: createStockDataEntry(
-      calculateFcfy(financialData.freeCashflow, summaryDetail.marketCap),
+      calculateFcfy(freeCashflow, marketCap),
       {
         valueSuffix: '%'
       }
@@ -88,7 +91,14 @@ const createStock = quote => {
   return {
     companyName: price.shortName,
     symbol: price.symbol,
-    stockData: processStockData({ summaryDetail, financialData, defaultKeyStatistics })
+    stockData: processStockData(
+      Object.assign(
+        {},
+        summaryDetail,
+        financialData,
+        defaultKeyStatistics
+      )
+    )
   };
 };
 
