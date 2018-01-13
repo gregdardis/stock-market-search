@@ -49,3 +49,16 @@ export const receiveStock = (stockIdentifier, json) => ({
   stockData: json.data.children.map(child => child.data),
   receivedAt: Date.now()
 });
+
+export const fetchStock = stockIdentifier => (
+  dispatch => {
+    dispatch(
+      requestStock(stockIdentifier)
+    );
+    return fetch(`http://localhost:3000/stocks/${stockIdentifier}`)
+      .then(
+        res => console.log(res),
+        error => console.log('THERE WAS AN ERROR' + error)
+      );
+  }
+);
