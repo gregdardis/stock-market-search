@@ -57,7 +57,7 @@ module.exports = {
   },
   devServer: {
     proxy: {
-      '/': {
+      '/api/stocks/*': {
         target: 'http://localhost:3000'
       }
     }

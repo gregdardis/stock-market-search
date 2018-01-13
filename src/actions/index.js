@@ -55,7 +55,7 @@ export const fetchStock = stockIdentifier => (
     dispatch(
       requestStock(stockIdentifier)
     );
-    return fetch(`http://localhost:3000/stocks/${stockIdentifier}`)
+    return fetch(`/api/stocks/${stockIdentifier}`)
       .then(
         res => console.log(res),
         error => console.log('THERE WAS AN ERROR' + error)
