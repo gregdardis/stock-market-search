@@ -11,7 +11,7 @@ const Search = ({
 }) => {
   const handleSearch = () => {
     if (searchTerm !== '') {
-      performSearch();
+      performSearch(searchTerm);
     }
   };
 
