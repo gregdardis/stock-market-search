@@ -5,7 +5,7 @@ const app = express();
 
 const stock = {
   companyName: 'Alphabet Inc Class C',
-  ticker: 'GOOG',
+  symbol: 'GOOG',
   stockData: {
     Open: {
       value: 26.50,

@@ -43,10 +43,10 @@ export const requestStock = stockIdentifier => ({
   stockIdentifier
 });
 
-export const receiveStock = (stockIdentifier, json) => ({
+export const receiveStock = json => ({
   type: RECEIVE_STOCK,
-  stockIdentifier,
-  stockData: json.data.children.map(child => child.data),
+  stockIdentifier: json.symbol,
+  stockData: json.stockData,
   receivedAt: Date.now()
 });
 
@@ -60,7 +60,9 @@ export const fetchStock = stockIdentifier => (
         res => res.json(),
         error => console.log('THERE WAS AN ERROR' + error)
       ).then(
-        json => console.log('Here is the json: ' + JSON.stringify(json, null, 2))
+        json => dispatch(
+          receiveStock(json)
+        )
       );
   }
 );
