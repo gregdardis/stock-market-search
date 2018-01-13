@@ -57,8 +57,10 @@ export const fetchStock = stockIdentifier => (
     );
     return fetch(`/api/stocks/${stockIdentifier}`)
       .then(
-        res => console.log(res),
+        res => res.json(),
         error => console.log('THERE WAS AN ERROR' + error)
+      ).then(
+        json => console.log('Here is the json: ' + JSON.stringify(json, null, 2))
       );
   }
 );
