@@ -1,3 +1,3 @@
-import { dummyTest } from './components/dataItem';
+import { formatValueFromStateAndPropsTest } from './utils/formatting';
 
-dummyTest();
+formatValueFromStateAndPropsTest();
