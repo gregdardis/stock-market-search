@@ -26,18 +26,6 @@ export const performSearch = searchTerm => ({
   searchTerm
 });
 
-// export const fetchStockRequest = () => ({
-//   type: FETCH_STOCK_REQUEST
-// });
-
-// export const fetchStockSuccess = () => ({
-//   type: FETCH_STOCK_SUCCESS
-// });
-
-// export const fetchStockFailure = () => ({
-//   type: FETCH_STOCK_FAILURE
-// });
-
 export const requestStock = stockIdentifier => ({
   type: REQUEST_STOCK,
   stockIdentifier

@@ -24,7 +24,7 @@ export const rowComponentsProps = [
     componentsProps: [
       {
         label: 'Mkt Cap',
-        valuePrecision: 3
+        valuePrecision: 0
       },
       {
         label: 'Volume',
