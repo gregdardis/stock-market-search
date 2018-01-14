@@ -27,6 +27,16 @@ const createState = ({
   return state;
 };
 
+const createProps = ({
+  label,
+  valuePrecision,
+  optionalValuePrecision
+}) => ({
+  label,
+  valuePrecision,
+  optionalValuePrecision
+});
+
 export const formatValueFromStateAndPropsTest = () => {
   describe('formatValueFromStateAndProps', () => {
     it('should properly format when all fields are defined', () => {
@@ -36,11 +46,11 @@ export const formatValueFromStateAndPropsTest = () => {
         valueSuffix: '',
         optionalValueSuffix: '%'
       });
-      const ownProps = {
+      const ownProps = createProps({
         label: 'Div',
         valuePrecision: 2,
         optionalValuePrecision: 2
-      };
+      });
       expect(formatValueFromStateAndProps(state, ownProps)).to.equal('3.54 (0.45%)');
     });
   });
