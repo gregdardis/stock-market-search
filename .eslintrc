@@ -2,10 +2,14 @@
   "env": {
     "browser": true,
     "node": true,
-    "es6": true
+    "es6": true,
+    "mocha": true
   },
 
-  "plugins": ["react"],
+  "plugins": [
+    "react",
+    "mocha"
+  ],
 
   "parserOptions": {
       "sourceType": "module",
@@ -16,6 +20,9 @@
   },
 
   "rules": {
+
+    // Mocha
+    "mocha/no-exclusive-tests": 2,
 
     //
     //Possible Errors

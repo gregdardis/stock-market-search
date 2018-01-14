@@ -23,12 +23,16 @@ const formatValueFromStateAndProps = (state, ownProps) => {
 
   let value = stockData[dataItemLabel].value;
   let optionalValue = stockData[dataItemLabel].optionalValue;
-  const valueSuffix = stockData[dataItemLabel].valueSuffix;
+  let valueSuffix = stockData[dataItemLabel].valueSuffix;
   const optionalValueSuffix = stockData[dataItemLabel].optionalValueSuffix;
 
-  value = value.toFixed(ownProps.valuePrecision);
-  value = addCommas(value);
-
+  if (value) {
+    value = value.toFixed(ownProps.valuePrecision);
+    value = addCommas(value);
+  } else {
+    value = '--';
+    valueSuffix = '';
+  }
   if (!optionalValue) {
     return value + valueSuffix;
   }
