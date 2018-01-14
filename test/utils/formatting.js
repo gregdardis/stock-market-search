@@ -100,5 +100,19 @@ export const formatValueFromStateAndPropsTest = () => {
       expect(formatValueFromStateAndProps(state, ownProps)).to
         .equal(VALUE + VALUE_SUFFIX);
     });
+    it('should properly format when all fields except value are defined', () => {
+      const state = createState({
+        optionalValue: OPTIONAL_VALUE,
+        valueSuffix: VALUE_SUFFIX,
+        optionalValueSuffix: OPTIONAL_VALUE_SUFFIX
+      });
+      const ownProps = createProps({
+        label: 'Div',
+        valuePrecision: 2,
+        optionalValuePrecision: 2
+      });
+      expect(formatValueFromStateAndProps(state, ownProps)).to
+        .equal('-- (' + OPTIONAL_VALUE + OPTIONAL_VALUE_SUFFIX + ')');
+    });
   });
 };

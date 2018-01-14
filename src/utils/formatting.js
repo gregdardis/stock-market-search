@@ -25,6 +25,7 @@ export const formatValueFromStateAndProps = (state, ownProps) => {
 
   // TODO: make valueSuffix allowed to be undefined and this still work
   // currently if it is undefined we set it to the empty string
+  // FIX TESTS TO TEST FOR THIS
   if (value) {
     value = value.toFixed(ownProps.valuePrecision);
     value = addCommas(value);
