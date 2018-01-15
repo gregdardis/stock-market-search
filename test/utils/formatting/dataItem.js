@@ -1,6 +1,6 @@
 import expect from 'expect.js';
 
-import { formatValueFromStateAndProps } from '../../src/utils/formatting';
+import { formatValueFromStateAndProps } from '../../../src/utils/formatting/dataItem';
 
 const createState = ({
   symbol = 'MSFT',
