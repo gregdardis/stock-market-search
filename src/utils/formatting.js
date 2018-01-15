@@ -11,6 +11,7 @@ export const addCommas = number => {
   return parts.join('.');
 };
 
+// TODO: clean this up
 export const formatValueFromStateAndProps = (state, ownProps) => {
   const symbol = state.selectedStock;
   const selectedStock = state.stocks[symbol];
