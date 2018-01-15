@@ -3,7 +3,8 @@
   "scripts": {
     "build": "webpack",
     "dev": "webpack-dev-server",
-    "start": "nodemon src/server.js"
+    "start": "nodemon src/server.js",
+    "test": "mocha --compilers js:babel-core/register"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -13,8 +14,11 @@
     "css-loader": "^0.28.7",
     "eslint": "^4.14.0",
     "eslint-loader": "^1.9.0",
+    "eslint-plugin-mocha": "^4.11.0",
     "eslint-plugin-react": "^7.5.1",
+    "expect.js": "^0.3.1",
     "html-webpack-plugin": "^2.30.1",
+    "mocha": "^4.1.0",
     "nodemon": "^1.14.6",
     "style-loader": "^0.19.1",
     "webpack": "^3.10.0",
@@ -27,6 +31,7 @@
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0",
     "yahoo-finance": "^0.3.5"
   }
 }

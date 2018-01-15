@@ -2,9 +2,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import DataItem from './DataItem';
-import { addCommas } from '../../utils/formatting';
+import { formatValueFromStateAndProps } from '../../utils/formatting';
 
-const formatLabelFromStateAndProps = (state, ownProps) => {
+const formatLabelFromProps = ownProps => {
   const label = ownProps.label;
   const optionalLabel = ownProps.optionalLabel;
 
@@ -14,25 +14,8 @@ const formatLabelFromStateAndProps = (state, ownProps) => {
   return label + ' (' + optionalLabel + ') ';
 };
 
-const formatValueFromStateAndProps = (state, ownProps) => {
-  let value = state.dataItems[ownProps.label].value;
-  let optionalValue = state.dataItems[ownProps.label].optionalValue;
-  const valueSuffix = state.dataItems[ownProps.label].valueSuffix;
-  const optionalValueSuffix = state.dataItems[ownProps.label].optionalValueSuffix;
-
-  value = value.toFixed(ownProps.valuePrecision);
-  value = addCommas(value);
-
-  if (!optionalValue) {
-    return value + valueSuffix;
-  }
-  optionalValue = optionalValue.toFixed(ownProps.optionalValuePrecision);
-  optionalValue = addCommas(optionalValue);
-  return value + valueSuffix + ' (' + optionalValue + optionalValueSuffix + ') ';
-};
-
 const mapStateToProps = (state, ownProps) => ({
-  label: formatLabelFromStateAndProps(state, ownProps),
+  label: formatLabelFromProps(ownProps),
   value: formatValueFromStateAndProps(state, ownProps)
 });
 
