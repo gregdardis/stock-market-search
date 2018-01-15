@@ -40,6 +40,9 @@ export const formatValueFromStateAndPropsTest = () => {
   const VALUE_SUFFIX = '%';
   const OPTIONAL_VALUE_SUFFIX = '%';
 
+  const VALUE_PRECISION = 2;
+  const OPTIONAL_VALUE_PRECISION = 2;
+
   describe('formatValueFromStateAndProps', () => {
     it('should properly format when all fields are defined', () => {
       const state = createState({
@@ -50,13 +53,55 @@ export const formatValueFromStateAndPropsTest = () => {
       });
       const ownProps = createProps({
         label: 'Div',
-        valuePrecision: 2,
-        optionalValuePrecision: 2
+        valuePrecision: VALUE_PRECISION,
+        optionalValuePrecision: OPTIONAL_VALUE_PRECISION
       });
       expect(formatValueFromStateAndProps(state, ownProps)).to
         .equal(VALUE + VALUE_SUFFIX + ' (' + OPTIONAL_VALUE + OPTIONAL_VALUE_SUFFIX + ')');
     });
-    it('should properly format when all fields except optionalValueSuffix are defined', () => {
+    it('should properly format when value is not defined', () => {
+      const state = createState({
+        optionalValue: OPTIONAL_VALUE,
+        valueSuffix: VALUE_SUFFIX,
+        optionalValueSuffix: OPTIONAL_VALUE_SUFFIX
+      });
+      const ownProps = createProps({
+        label: 'Div',
+        valuePrecision: VALUE_PRECISION,
+        optionalValuePrecision: OPTIONAL_VALUE_PRECISION
+      });
+      expect(formatValueFromStateAndProps(state, ownProps)).to
+        .equal('-- (' + OPTIONAL_VALUE + OPTIONAL_VALUE_SUFFIX + ')');
+    });
+    it('should properly format when optionalValue is not defined', () => {
+      const state = createState({
+        value: VALUE,
+        valueSuffix: VALUE_SUFFIX,
+        optionalValueSuffix: OPTIONAL_VALUE_SUFFIX
+      });
+      const ownProps = createProps({
+        label: 'Div',
+        valuePrecision: VALUE_PRECISION,
+        optionalValuePrecision: OPTIONAL_VALUE_PRECISION
+      });
+      expect(formatValueFromStateAndProps(state, ownProps)).to
+        .equal(VALUE + VALUE_SUFFIX);
+    });
+    it('should properly format when valueSuffix is not defined', () => {
+      const state = createState({
+        value: VALUE,
+        optionalValue: OPTIONAL_VALUE,
+        optionalValueSuffix: OPTIONAL_VALUE_SUFFIX
+      });
+      const ownProps = createProps({
+        label: 'Div',
+        valuePrecision: VALUE_PRECISION,
+        optionalValuePrecision: OPTIONAL_VALUE_PRECISION
+      });
+      expect(formatValueFromStateAndProps(state, ownProps)).to
+        .equal(VALUE + ' (' + OPTIONAL_VALUE + OPTIONAL_VALUE_SUFFIX + ')');
+    });
+    it('should properly format when optionalValueSuffix is not defined', () => {
       const state = createState({
         value: VALUE,
         optionalValue: OPTIONAL_VALUE,
@@ -64,53 +109,63 @@ export const formatValueFromStateAndPropsTest = () => {
       });
       const ownProps = createProps({
         label: 'Div',
-        valuePrecision: 2,
-        optionalValuePrecision: 2
+        valuePrecision: VALUE_PRECISION,
+        optionalValuePrecision: OPTIONAL_VALUE_PRECISION
       });
       expect(formatValueFromStateAndProps(state, ownProps)).to
         .equal(VALUE + VALUE_SUFFIX + ' (' + OPTIONAL_VALUE + ')');
     });
-    it('should properly format when all fields except valueSuffix are defined', () => {
-      const state = createState({
-        value: VALUE,
-        optionalValue: OPTIONAL_VALUE,
-        optionalValueSuffix: OPTIONAL_VALUE_SUFFIX
-      });
-      const ownProps = createProps({
-        label: 'Div',
-        valuePrecision: 2,
-        optionalValuePrecision: 2
-      });
-      expect(formatValueFromStateAndProps(state, ownProps)).to
-        .equal(VALUE + ' (' + OPTIONAL_VALUE + OPTIONAL_VALUE_SUFFIX + ')');
-    });
-    it('should properly format when all fields except optionalValue are defined', () => {
-      const state = createState({
-        value: VALUE,
-        valueSuffix: VALUE_SUFFIX,
-        optionalValueSuffix: OPTIONAL_VALUE_SUFFIX
-      });
-      const ownProps = createProps({
-        label: 'Div',
-        valuePrecision: 2,
-        optionalValuePrecision: 2
-      });
-      expect(formatValueFromStateAndProps(state, ownProps)).to
-        .equal(VALUE + VALUE_SUFFIX);
-    });
-    it('should properly format when all fields except value are defined', () => {
+    it('should properly format when value and valueSuffix are not defined', () => {
       const state = createState({
         optionalValue: OPTIONAL_VALUE,
-        valueSuffix: VALUE_SUFFIX,
         optionalValueSuffix: OPTIONAL_VALUE_SUFFIX
       });
       const ownProps = createProps({
         label: 'Div',
-        valuePrecision: 2,
-        optionalValuePrecision: 2
+        valuePrecision: VALUE_PRECISION,
+        optionalValuePrecision: OPTIONAL_VALUE_PRECISION
       });
       expect(formatValueFromStateAndProps(state, ownProps)).to
         .equal('-- (' + OPTIONAL_VALUE + OPTIONAL_VALUE_SUFFIX + ')');
+    });
+    it('should properly format when value and optionalValue are not defined', () => {
+      const state = createState({
+        valueSuffix: VALUE_SUFFIX,
+        optionalValueSuffix: OPTIONAL_VALUE_SUFFIX
+      });
+      const ownProps = createProps({
+        label: 'Div',
+        valuePrecision: VALUE_PRECISION,
+        optionalValuePrecision: OPTIONAL_VALUE_PRECISION
+      });
+      expect(formatValueFromStateAndProps(state, ownProps)).to
+        .equal('--');
+    });
+    it('should properly format when value and optionalValueSuffix are not defined', () => {
+      const state = createState({
+        optionalValue: OPTIONAL_VALUE,
+        valueSuffix: VALUE_SUFFIX
+      });
+      const ownProps = createProps({
+        label: 'Div',
+        valuePrecision: VALUE_PRECISION,
+        optionalValuePrecision: OPTIONAL_VALUE_PRECISION
+      });
+      expect(formatValueFromStateAndProps(state, ownProps)).to
+        .equal('-- (' + OPTIONAL_VALUE + ')');
+    });
+    it('should properly format when optionalValue and valueSuffix are not defined', () => {
+      const state = createState({
+        value: VALUE,
+        optionalValueSuffix: OPTIONAL_VALUE_SUFFIX
+      });
+      const ownProps = createProps({
+        label: 'Div',
+        valuePrecision: VALUE_PRECISION,
+        optionalValuePrecision: OPTIONAL_VALUE_PRECISION
+      });
+      expect(formatValueFromStateAndProps(state, ownProps)).to
+        .equal(VALUE.toFixed(VALUE_PRECISION));
     });
   });
 };
