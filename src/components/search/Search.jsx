@@ -36,7 +36,8 @@ const Search = ({
         value={ searchTerm }
         onChange={ handleChange }
         onKeyDown={ handleKeyDown }
-        placeholder='Ticker or name'
+        placeholder='Stock symbol'
+        required
       />
       <button
         className='searchButton'
