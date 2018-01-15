@@ -23,9 +23,6 @@ export const formatValueFromStateAndProps = (state, ownProps) => {
   let valueSuffix = stockData[dataItemLabel].valueSuffix;
   const optionalValueSuffix = stockData[dataItemLabel].optionalValueSuffix;
 
-  // TODO: make valueSuffix allowed to be undefined and this still work
-  // currently if it is undefined we set it to the empty string
-  // FIX TESTS TO TEST FOR THIS
   if (value) {
     value = value.toFixed(ownProps.valuePrecision);
     value = addCommas(value);
@@ -33,10 +30,16 @@ export const formatValueFromStateAndProps = (state, ownProps) => {
     value = '--';
     valueSuffix = '';
   }
+  if (!valueSuffix) {
+    valueSuffix = '';
+  }
   if (!optionalValue) {
     return value + valueSuffix;
   }
   optionalValue = optionalValue.toFixed(ownProps.optionalValuePrecision);
   optionalValue = addCommas(optionalValue);
-  return value + valueSuffix + ' (' + optionalValue + optionalValueSuffix + ')';
+  if (optionalValueSuffix) {
+    return value + valueSuffix + ' (' + optionalValue + optionalValueSuffix + ')';
+  }
+  return value + valueSuffix + ' (' + optionalValue + ')';
 };

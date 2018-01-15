@@ -60,8 +60,7 @@ export const formatValueFromStateAndPropsTest = () => {
       const state = createState({
         value: VALUE,
         optionalValue: OPTIONAL_VALUE,
-        valueSuffix: VALUE_SUFFIX,
-        optionalValueSuffix: ''
+        valueSuffix: VALUE_SUFFIX
       });
       const ownProps = createProps({
         label: 'Div',
@@ -75,7 +74,6 @@ export const formatValueFromStateAndPropsTest = () => {
       const state = createState({
         value: VALUE,
         optionalValue: OPTIONAL_VALUE,
-        valueSuffix: '',
         optionalValueSuffix: OPTIONAL_VALUE_SUFFIX
       });
       const ownProps = createProps({
