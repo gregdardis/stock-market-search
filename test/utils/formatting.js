@@ -167,5 +167,31 @@ export const formatValueFromStateAndPropsTest = () => {
       expect(formatValueFromStateAndProps(state, ownProps)).to
         .equal(VALUE.toFixed(VALUE_PRECISION));
     });
+    it('should properly format when optionalValue and optionalValueSuffix are not defined', () => {
+      const state = createState({
+        value: VALUE,
+        valueSuffix: VALUE_SUFFIX
+      });
+      const ownProps = createProps({
+        label: 'Div',
+        valuePrecision: VALUE_PRECISION,
+        optionalValuePrecision: OPTIONAL_VALUE_PRECISION
+      });
+      expect(formatValueFromStateAndProps(state, ownProps)).to
+        .equal(VALUE + VALUE_SUFFIX);
+    });
+    it('should properly format when valueSuffix and optionalValueSuffix are not defined', () => {
+      const state = createState({
+        value: VALUE,
+        optionalValue: OPTIONAL_VALUE
+      });
+      const ownProps = createProps({
+        label: 'Div',
+        valuePrecision: VALUE_PRECISION,
+        optionalValuePrecision: OPTIONAL_VALUE_PRECISION
+      });
+      expect(formatValueFromStateAndProps(state, ownProps)).to
+        .equal(VALUE + ' (' + OPTIONAL_VALUE + ')');
+    });
   });
 };
