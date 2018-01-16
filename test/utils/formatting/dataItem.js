@@ -25,13 +25,11 @@ const createState = ({
 });
 
 const createProps = ({
-  label,
-  valuePrecision,
-  optionalValuePrecision
+  valuePrecision
 }) => ({
-  label,
+  label: 'Div',
   valuePrecision,
-  optionalValuePrecision
+  optionalValuePrecision: 2
 });
 
 export const formatValueFromStateAndPropsTest = () => {
@@ -41,20 +39,17 @@ export const formatValueFromStateAndPropsTest = () => {
   const OPTIONAL_VALUE_SUFFIX = '%';
 
   const VALUE_PRECISION = 2;
-  const OPTIONAL_VALUE_PRECISION = 2;
 
   describe('formatValueFromStateAndProps', () => {
+    const ownProps = createProps({
+      valuePrecision: VALUE_PRECISION
+    });
     it('should properly format when ALL fields are defined', () => {
       const state = createState({
         value: VALUE,
         optionalValue: OPTIONAL_VALUE,
         valueSuffix: VALUE_SUFFIX,
         optionalValueSuffix: OPTIONAL_VALUE_SUFFIX
-      });
-      const ownProps = createProps({
-        label: 'Div',
-        valuePrecision: VALUE_PRECISION,
-        optionalValuePrecision: OPTIONAL_VALUE_PRECISION
       });
       expect(formatValueFromStateAndProps(state, ownProps)).to
         .equal(`${VALUE}${VALUE_SUFFIX} (${OPTIONAL_VALUE}${OPTIONAL_VALUE_SUFFIX})`);
@@ -65,11 +60,6 @@ export const formatValueFromStateAndPropsTest = () => {
         valueSuffix: VALUE_SUFFIX,
         optionalValueSuffix: OPTIONAL_VALUE_SUFFIX
       });
-      const ownProps = createProps({
-        label: 'Div',
-        valuePrecision: VALUE_PRECISION,
-        optionalValuePrecision: OPTIONAL_VALUE_PRECISION
-      });
       expect(formatValueFromStateAndProps(state, ownProps)).to
         .equal(`-- (${OPTIONAL_VALUE}${OPTIONAL_VALUE_SUFFIX})`);
     });
@@ -78,11 +68,6 @@ export const formatValueFromStateAndPropsTest = () => {
         value: VALUE,
         valueSuffix: VALUE_SUFFIX,
         optionalValueSuffix: OPTIONAL_VALUE_SUFFIX
-      });
-      const ownProps = createProps({
-        label: 'Div',
-        valuePrecision: VALUE_PRECISION,
-        optionalValuePrecision: OPTIONAL_VALUE_PRECISION
       });
       expect(formatValueFromStateAndProps(state, ownProps)).to
         .equal(`${VALUE}${VALUE_SUFFIX}`);
@@ -93,11 +78,6 @@ export const formatValueFromStateAndPropsTest = () => {
         optionalValue: OPTIONAL_VALUE,
         optionalValueSuffix: OPTIONAL_VALUE_SUFFIX
       });
-      const ownProps = createProps({
-        label: 'Div',
-        valuePrecision: VALUE_PRECISION,
-        optionalValuePrecision: OPTIONAL_VALUE_PRECISION
-      });
       expect(formatValueFromStateAndProps(state, ownProps)).to
         .equal(`${VALUE} (${OPTIONAL_VALUE}${OPTIONAL_VALUE_SUFFIX})`);
     });
@@ -107,11 +87,6 @@ export const formatValueFromStateAndPropsTest = () => {
         optionalValue: OPTIONAL_VALUE,
         valueSuffix: VALUE_SUFFIX
       });
-      const ownProps = createProps({
-        label: 'Div',
-        valuePrecision: VALUE_PRECISION,
-        optionalValuePrecision: OPTIONAL_VALUE_PRECISION
-      });
       expect(formatValueFromStateAndProps(state, ownProps)).to
         .equal(`${VALUE}${VALUE_SUFFIX} (${OPTIONAL_VALUE})`);
     });
@@ -119,11 +94,6 @@ export const formatValueFromStateAndPropsTest = () => {
       const state = createState({
         optionalValue: OPTIONAL_VALUE,
         optionalValueSuffix: OPTIONAL_VALUE_SUFFIX
-      });
-      const ownProps = createProps({
-        label: 'Div',
-        valuePrecision: VALUE_PRECISION,
-        optionalValuePrecision: OPTIONAL_VALUE_PRECISION
       });
       expect(formatValueFromStateAndProps(state, ownProps)).to
         .equal(`-- (${OPTIONAL_VALUE}${OPTIONAL_VALUE_SUFFIX})`);
@@ -133,11 +103,6 @@ export const formatValueFromStateAndPropsTest = () => {
         valueSuffix: VALUE_SUFFIX,
         optionalValueSuffix: OPTIONAL_VALUE_SUFFIX
       });
-      const ownProps = createProps({
-        label: 'Div',
-        valuePrecision: VALUE_PRECISION,
-        optionalValuePrecision: OPTIONAL_VALUE_PRECISION
-      });
       expect(formatValueFromStateAndProps(state, ownProps)).to
         .equal('--');
     });
@@ -145,11 +110,6 @@ export const formatValueFromStateAndPropsTest = () => {
       const state = createState({
         optionalValue: OPTIONAL_VALUE,
         valueSuffix: VALUE_SUFFIX
-      });
-      const ownProps = createProps({
-        label: 'Div',
-        valuePrecision: VALUE_PRECISION,
-        optionalValuePrecision: OPTIONAL_VALUE_PRECISION
       });
       expect(formatValueFromStateAndProps(state, ownProps)).to
         .equal(`-- (${OPTIONAL_VALUE})`);
@@ -159,11 +119,6 @@ export const formatValueFromStateAndPropsTest = () => {
         value: VALUE,
         optionalValueSuffix: OPTIONAL_VALUE_SUFFIX
       });
-      const ownProps = createProps({
-        label: 'Div',
-        valuePrecision: VALUE_PRECISION,
-        optionalValuePrecision: OPTIONAL_VALUE_PRECISION
-      });
       expect(formatValueFromStateAndProps(state, ownProps)).to
         .equal(VALUE.toFixed(VALUE_PRECISION));
     });
@@ -171,11 +126,6 @@ export const formatValueFromStateAndPropsTest = () => {
       const state = createState({
         value: VALUE,
         valueSuffix: VALUE_SUFFIX
-      });
-      const ownProps = createProps({
-        label: 'Div',
-        valuePrecision: VALUE_PRECISION,
-        optionalValuePrecision: OPTIONAL_VALUE_PRECISION
       });
       expect(formatValueFromStateAndProps(state, ownProps)).to
         .equal(`${VALUE}${VALUE_SUFFIX}`);
@@ -185,22 +135,12 @@ export const formatValueFromStateAndPropsTest = () => {
         value: VALUE,
         optionalValue: OPTIONAL_VALUE
       });
-      const ownProps = createProps({
-        label: 'Div',
-        valuePrecision: VALUE_PRECISION,
-        optionalValuePrecision: OPTIONAL_VALUE_PRECISION
-      });
       expect(formatValueFromStateAndProps(state, ownProps)).to
         .equal(`${VALUE} (${OPTIONAL_VALUE})`);
     });
     it('should properly format when only value is defined', () => {
       const state = createState({
         value: VALUE
-      });
-      const ownProps = createProps({
-        label: 'Div',
-        valuePrecision: VALUE_PRECISION,
-        optionalValuePrecision: OPTIONAL_VALUE_PRECISION
       });
       expect(formatValueFromStateAndProps(state, ownProps)).to
         .equal(VALUE.toFixed(VALUE_PRECISION));
@@ -209,22 +149,12 @@ export const formatValueFromStateAndPropsTest = () => {
       const state = createState({
         optionalValue: OPTIONAL_VALUE
       });
-      const ownProps = createProps({
-        label: 'Div',
-        valuePrecision: VALUE_PRECISION,
-        optionalValuePrecision: OPTIONAL_VALUE_PRECISION
-      });
       expect(formatValueFromStateAndProps(state, ownProps)).to
         .equal(`-- (${OPTIONAL_VALUE})`);
     });
     it('should properly format when only valueSuffix is defined', () => {
       const state = createState({
         valueSuffix: VALUE_SUFFIX
-      });
-      const ownProps = createProps({
-        label: 'Div',
-        valuePrecision: VALUE_PRECISION,
-        optionalValuePrecision: OPTIONAL_VALUE_PRECISION
       });
       expect(formatValueFromStateAndProps(state, ownProps)).to
         .equal('--');
@@ -233,21 +163,11 @@ export const formatValueFromStateAndPropsTest = () => {
       const state = createState({
         optionalValueSuffix: OPTIONAL_VALUE_SUFFIX
       });
-      const ownProps = createProps({
-        label: 'Div',
-        valuePrecision: VALUE_PRECISION,
-        optionalValuePrecision: OPTIONAL_VALUE_PRECISION
-      });
       expect(formatValueFromStateAndProps(state, ownProps)).to
         .equal('--');
     });
     it('should properly format when NO fields are defined', () => {
       const state = createState({});
-      const ownProps = createProps({
-        label: 'Div',
-        valuePrecision: VALUE_PRECISION,
-        optionalValuePrecision: OPTIONAL_VALUE_PRECISION
-      });
       expect(formatValueFromStateAndProps(state, ownProps)).to
         .equal('--');
     });
