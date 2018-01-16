@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import FontAwesome from 'react-fontawesome';
 
 import './search.css';
 
@@ -36,13 +37,14 @@ const Search = ({
         value={ searchTerm }
         onChange={ handleChange }
         onKeyDown={ handleKeyDown }
-        placeholder='Ticker or name'
+        placeholder='Stock symbol'
+        required
       />
-      <button
+      <FontAwesome
         className='searchButton'
-        onClick={ handleSearch }>
-        Search
-      </button>
+        name='search'
+        onClick={ handleSearch }
+      />
     </div>
   );
 };
