@@ -4,7 +4,8 @@ import { formatValueFromStateAndProps } from '../../../src/utils/formatting/data
 import {
   BLANK_FIELD,
   LABEL_DIVIDEND,
-  DIVIDEND_VALUE_PRECISION
+  DIVIDEND_VALUE_PRECISION,
+  OPTIONAL_VALUE_SUFFIX_DIVIDEND
 } from '../../../src/constants';
 
 const createState = ({
@@ -41,7 +42,7 @@ export const formatValueFromStateAndPropsTest = () => {
   const VALUE = 3.54;
   const OPTIONAL_VALUE = 0.45;
   const VALUE_SUFFIX = '%';
-  const OPTIONAL_VALUE_SUFFIX = '%';
+  const OPTIONAL_VALUE_SUFFIX = OPTIONAL_VALUE_SUFFIX_DIVIDEND;
 
   const VALUE_PRECISION = DIVIDEND_VALUE_PRECISION;
 

@@ -24,3 +24,8 @@ export const PE_VALUE_PRECISION = 2;
 export const ROE_VALUE_PRECISION = 1;
 export const FCFY_VALUE_PRECISION = 1;
 export const EPS_VALUE_PRECISION = 2;
+
+export const VALUE_SUFFIX_ROE = '%';
+export const VALUE_SUFFIX_FCFY = '%';
+
+export const OPTIONAL_VALUE_SUFFIX_DIVIDEND = '%';

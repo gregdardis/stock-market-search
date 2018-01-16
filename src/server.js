@@ -1,3 +1,9 @@
+// import {
+//   VALUE_SUFFIX_FCFY,
+//   VALUE_SUFFIX_ROE,
+//   OPTIONAL_VALUE_SUFFIX_DIVIDEND
+// } from './constants';
+
 const express = require('express');
 const yahooFinance = require('yahoo-finance');
 
@@ -49,7 +55,7 @@ const processStockData = ({
       dividendYield,
       {
         optionalValue: dividendRate,
-        optionalValueSuffix: '%'
+        optionalValueSuffix: '%' //OPTIONAL_VALUE_SUFFIX_DIVIDEND
       }
     ),
     'Mkt Cap': createStockDataEntry(marketCap),
@@ -68,13 +74,13 @@ const processStockData = ({
     ROE: createStockDataEntry(
       convertDecimalToPercent(returnOnEquity),
       {
-        valueSuffix: '%'
+        valueSuffix: '%'//VALUE_SUFFIX_ROE
       }
     ),
     FCFY: createStockDataEntry(
       calculateFcfy(freeCashflow, marketCap),
       {
-        valueSuffix: '%'
+        valueSuffix: '%'//VALUE_SUFFIX_FCFY
       }
     )
   };
