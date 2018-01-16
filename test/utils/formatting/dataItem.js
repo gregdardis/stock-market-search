@@ -34,7 +34,7 @@ const createProps = ({
 }) => ({
   label: LABEL_DIVIDEND,
   valuePrecision,
-  optionalValuePrecision: 2
+  optionalValuePrecision: DIVIDEND_VALUE_PRECISION
 });
 
 export const formatValueFromStateAndPropsTest = () => {
