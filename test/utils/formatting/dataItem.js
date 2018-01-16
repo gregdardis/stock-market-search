@@ -1,6 +1,9 @@
 import expect from 'expect.js';
 
 import { formatValueFromStateAndProps } from '../../../src/utils/formatting/dataItem';
+import {
+  BLANK_FIELD
+} from '../../../src/constants';
 
 const createState = ({
   symbol = 'MSFT',
@@ -63,7 +66,7 @@ export const formatValueFromStateAndPropsTest = () => {
       });
       expect(formatValueFromStateAndProps(state, ownProps))
         .to
-        .equal(`-- (${OPTIONAL_VALUE}${OPTIONAL_VALUE_SUFFIX})`);
+        .equal(`${BLANK_FIELD} (${OPTIONAL_VALUE}${OPTIONAL_VALUE_SUFFIX})`);
     });
     it('should properly format when optionalValue is not defined', () => {
       const state = createState({
@@ -102,7 +105,7 @@ export const formatValueFromStateAndPropsTest = () => {
       });
       expect(formatValueFromStateAndProps(state, ownProps))
         .to
-        .equal(`-- (${OPTIONAL_VALUE}${OPTIONAL_VALUE_SUFFIX})`);
+        .equal(`${BLANK_FIELD} (${OPTIONAL_VALUE}${OPTIONAL_VALUE_SUFFIX})`);
     });
     it('should properly format when value and optionalValue are not defined', () => {
       const state = createState({
@@ -111,7 +114,7 @@ export const formatValueFromStateAndPropsTest = () => {
       });
       expect(formatValueFromStateAndProps(state, ownProps))
         .to
-        .equal('--');
+        .equal(BLANK_FIELD);
     });
     it('should properly format when value and optionalValueSuffix are not defined', () => {
       const state = createState({
@@ -120,7 +123,7 @@ export const formatValueFromStateAndPropsTest = () => {
       });
       expect(formatValueFromStateAndProps(state, ownProps))
         .to
-        .equal(`-- (${OPTIONAL_VALUE})`);
+        .equal(`${BLANK_FIELD} (${OPTIONAL_VALUE})`);
     });
     it('should properly format when optionalValue and valueSuffix are not defined', () => {
       const state = createState({
@@ -163,7 +166,7 @@ export const formatValueFromStateAndPropsTest = () => {
       });
       expect(formatValueFromStateAndProps(state, ownProps))
         .to
-        .equal(`-- (${OPTIONAL_VALUE})`);
+        .equal(`${BLANK_FIELD} (${OPTIONAL_VALUE})`);
     });
     it('should properly format when only valueSuffix is defined', () => {
       const state = createState({
@@ -171,7 +174,7 @@ export const formatValueFromStateAndPropsTest = () => {
       });
       expect(formatValueFromStateAndProps(state, ownProps))
         .to
-        .equal('--');
+        .equal(BLANK_FIELD);
     });
     it('should properly format when only optionalValueSuffix is defined', () => {
       const state = createState({
@@ -179,13 +182,13 @@ export const formatValueFromStateAndPropsTest = () => {
       });
       expect(formatValueFromStateAndProps(state, ownProps))
         .to
-        .equal('--');
+        .equal(BLANK_FIELD);
     });
     it('should properly format when NO fields are defined', () => {
       const state = createState({});
       expect(formatValueFromStateAndProps(state, ownProps))
         .to
-        .equal('--');
+        .equal(BLANK_FIELD);
     });
   });
 };

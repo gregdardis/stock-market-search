@@ -1,3 +1,7 @@
+import {
+  BLANK_FIELD
+} from '../../constants';
+
 /* Takes a number or string */
 export const addCommas = number => {
   let parts = number.toString().split('.');
@@ -28,7 +32,7 @@ export const formatValueFromStateAndProps = (state, ownProps) => {
     value = value.toFixed(ownProps.valuePrecision);
     value = addCommas(value);
   } else {
-    value = '--';
+    value = BLANK_FIELD;
     valueSuffix = '';
   }
   if (!valueSuffix) {
