@@ -6,10 +6,11 @@
 
 .searchText {
   font-size: 1.5em;
-  height: 18px;
-  padding: 8px;
-  background: rgba(50, 50, 50, 0.2);
+  padding: 4px 8px;
+  background-color: #f4f4f4;
   border: 1px solid #5998ff;
+  border-radius: 4px;
+  width: 400px;
 }
 
 .searchText:focus, .searchButton:focus {
@@ -18,23 +19,17 @@
 
 .searchButton {
   font-size: 1.3em;
-  position: relative;
   height: 36px;
   padding: 4px 15px;
-  left: 4px;
+  margin-left: 4px;
   border: 2px solid #5998ff;
   background-color: #5998ff;
   color: #fafafa;
   border-radius: 4px;
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.1), 0 6px 20px 0 rgba(0,0,0,0.1);
 }
 
 .searchButton:hover {
   background-color: #fafafa;
   color: #207cca;
   cursor: pointer;
-}
-
-.searchButton:active {
-  transform: translateY(1px);
 }
