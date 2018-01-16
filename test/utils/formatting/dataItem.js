@@ -71,7 +71,7 @@ export const formatValueFromStateAndPropsTest = () => {
         optionalValuePrecision: OPTIONAL_VALUE_PRECISION
       });
       expect(formatValueFromStateAndProps(state, ownProps)).to
-        .equal('-- (' + OPTIONAL_VALUE + OPTIONAL_VALUE_SUFFIX + ')');
+        .equal(`-- (${OPTIONAL_VALUE}${OPTIONAL_VALUE_SUFFIX})`);
     });
     it('should properly format when optionalValue is not defined', () => {
       const state = createState({
@@ -85,7 +85,7 @@ export const formatValueFromStateAndPropsTest = () => {
         optionalValuePrecision: OPTIONAL_VALUE_PRECISION
       });
       expect(formatValueFromStateAndProps(state, ownProps)).to
-        .equal(VALUE + VALUE_SUFFIX);
+        .equal(`${VALUE}${VALUE_SUFFIX}`);
     });
     it('should properly format when valueSuffix is not defined', () => {
       const state = createState({
@@ -99,7 +99,7 @@ export const formatValueFromStateAndPropsTest = () => {
         optionalValuePrecision: OPTIONAL_VALUE_PRECISION
       });
       expect(formatValueFromStateAndProps(state, ownProps)).to
-        .equal(VALUE + ' (' + OPTIONAL_VALUE + OPTIONAL_VALUE_SUFFIX + ')');
+        .equal(`${VALUE} (${OPTIONAL_VALUE}${OPTIONAL_VALUE_SUFFIX})`);
     });
     it('should properly format when optionalValueSuffix is not defined', () => {
       const state = createState({
@@ -113,7 +113,7 @@ export const formatValueFromStateAndPropsTest = () => {
         optionalValuePrecision: OPTIONAL_VALUE_PRECISION
       });
       expect(formatValueFromStateAndProps(state, ownProps)).to
-        .equal(VALUE + VALUE_SUFFIX + ' (' + OPTIONAL_VALUE + ')');
+        .equal(`${VALUE}${VALUE_SUFFIX} (${OPTIONAL_VALUE})`);
     });
     it('should properly format when value and valueSuffix are not defined', () => {
       const state = createState({
@@ -126,7 +126,7 @@ export const formatValueFromStateAndPropsTest = () => {
         optionalValuePrecision: OPTIONAL_VALUE_PRECISION
       });
       expect(formatValueFromStateAndProps(state, ownProps)).to
-        .equal('-- (' + OPTIONAL_VALUE + OPTIONAL_VALUE_SUFFIX + ')');
+        .equal(`-- (${OPTIONAL_VALUE}${OPTIONAL_VALUE_SUFFIX})`);
     });
     it('should properly format when value and optionalValue are not defined', () => {
       const state = createState({
@@ -152,7 +152,7 @@ export const formatValueFromStateAndPropsTest = () => {
         optionalValuePrecision: OPTIONAL_VALUE_PRECISION
       });
       expect(formatValueFromStateAndProps(state, ownProps)).to
-        .equal('-- (' + OPTIONAL_VALUE + ')');
+        .equal(`-- (${OPTIONAL_VALUE})`);
     });
     it('should properly format when optionalValue and valueSuffix are not defined', () => {
       const state = createState({
@@ -178,7 +178,7 @@ export const formatValueFromStateAndPropsTest = () => {
         optionalValuePrecision: OPTIONAL_VALUE_PRECISION
       });
       expect(formatValueFromStateAndProps(state, ownProps)).to
-        .equal(VALUE + VALUE_SUFFIX);
+        .equal(`${VALUE}${VALUE_SUFFIX}`);
     });
     it('should properly format when valueSuffix and optionalValueSuffix are not defined', () => {
       const state = createState({
@@ -191,7 +191,7 @@ export const formatValueFromStateAndPropsTest = () => {
         optionalValuePrecision: OPTIONAL_VALUE_PRECISION
       });
       expect(formatValueFromStateAndProps(state, ownProps)).to
-        .equal(VALUE + ' (' + OPTIONAL_VALUE + ')');
+        .equal(`${VALUE} (${OPTIONAL_VALUE})`);
     });
     it('should properly format when only value is defined', () => {
       const state = createState({
@@ -215,7 +215,7 @@ export const formatValueFromStateAndPropsTest = () => {
         optionalValuePrecision: OPTIONAL_VALUE_PRECISION
       });
       expect(formatValueFromStateAndProps(state, ownProps)).to
-        .equal('-- (' + OPTIONAL_VALUE + ')');
+        .equal(`-- (${OPTIONAL_VALUE})`);
     });
     it('should properly format when only valueSuffix is defined', () => {
       const state = createState({
