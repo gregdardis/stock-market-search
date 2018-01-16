@@ -2,7 +2,9 @@ import expect from 'expect.js';
 
 import { formatValueFromStateAndProps } from '../../../src/utils/formatting/dataItem';
 import {
-  BLANK_FIELD
+  BLANK_FIELD,
+  LABEL_DIVIDEND,
+  DIVIDEND_VALUE_PRECISION
 } from '../../../src/constants';
 
 const createState = ({
@@ -30,7 +32,7 @@ const createState = ({
 const createProps = ({
   valuePrecision
 }) => ({
-  label: 'Div',
+  label: LABEL_DIVIDEND,
   valuePrecision,
   optionalValuePrecision: 2
 });
@@ -41,7 +43,7 @@ export const formatValueFromStateAndPropsTest = () => {
   const VALUE_SUFFIX = '%';
   const OPTIONAL_VALUE_SUFFIX = '%';
 
-  const VALUE_PRECISION = 2;
+  const VALUE_PRECISION = DIVIDEND_VALUE_PRECISION;
 
   describe('formatValueFromStateAndProps', () => {
     const ownProps = createProps({

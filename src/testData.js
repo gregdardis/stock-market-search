@@ -9,9 +9,10 @@ import {
   LABEL_AVERAGE,
   LABEL_DIVIDEND,
   LABEL_PE_RATIO,
-  LABEL_EPS,
+  OPTIONAL_LABEL_EPS,
   LABEL_ROE,
   LABEL_FCFY,
+  OPTIONAL_LABEL_DIVIDEND,
   OPEN_VALUE_PRECISION,
   HIGH_VALUE_PRECISION,
   LOW_VALUE_PRECISION,
@@ -20,7 +21,8 @@ import {
   DIVIDEND_VALUE_PRECISION,
   PE_VALUE_PRECISION,
   ROE_VALUE_PRECISION,
-  FCFY_VALUE_PRECISION
+  FCFY_VALUE_PRECISION,
+  EPS_VALUE_PRECISION
 } from './constants';
 
 export const rowComponentsProps = [
@@ -56,9 +58,9 @@ export const rowComponentsProps = [
       },
       {
         label: LABEL_DIVIDEND,
-        optionalLabel: '%',
+        optionalLabel: OPTIONAL_LABEL_DIVIDEND,
         valuePrecision: DIVIDEND_VALUE_PRECISION,
-        optionalValuePrecision: 2
+        optionalValuePrecision: DIVIDEND_VALUE_PRECISION
       }
     ],
     columnKeyName: 'label',
@@ -69,9 +71,9 @@ export const rowComponentsProps = [
     componentsProps: [
       {
         label: LABEL_PE_RATIO,
-        optionalLabel: LABEL_EPS,
+        optionalLabel: OPTIONAL_LABEL_EPS,
         valuePrecision: PE_VALUE_PRECISION,
-        optionalValuePrecision: 2
+        optionalValuePrecision: EPS_VALUE_PRECISION
       },
       {
         label: LABEL_ROE,
