@@ -1,19 +1,42 @@
 import DataItem from './components/dataItem';
 
+import {
+  LABEL_OPEN,
+  LABEL_HIGH,
+  LABEL_LOW,
+  LABEL_MARKET_CAP,
+  LABEL_VOLUME,
+  LABEL_AVERAGE,
+  LABEL_DIVIDEND,
+  LABEL_PE_RATIO,
+  LABEL_EPS,
+  LABEL_ROE,
+  LABEL_FCFY,
+  OPEN_VALUE_PRECISION,
+  HIGH_VALUE_PRECISION,
+  LOW_VALUE_PRECISION,
+  MARKET_CAP_VALUE_PRECISION,
+  VOLUME_VALUE_PRECISION,
+  DIVIDEND_VALUE_PRECISION,
+  PE_VALUE_PRECISION,
+  ROE_VALUE_PRECISION,
+  FCFY_VALUE_PRECISION
+} from './constants';
+
 export const rowComponentsProps = [
   {
     componentsProps: [
       {
-        label: 'Open',
-        valuePrecision: 2
+        label: LABEL_OPEN,
+        valuePrecision: OPEN_VALUE_PRECISION
       },
       {
-        label: 'High',
-        valuePrecision: 2
+        label: LABEL_HIGH,
+        valuePrecision: HIGH_VALUE_PRECISION
       },
       {
-        label: 'Low',
-        valuePrecision: 2
+        label: LABEL_LOW,
+        valuePrecision: LOW_VALUE_PRECISION
       }
     ],
     columnKeyName: 'label',
@@ -23,18 +46,18 @@ export const rowComponentsProps = [
   {
     componentsProps: [
       {
-        label: 'Mkt Cap',
-        valuePrecision: 0
+        label: LABEL_MARKET_CAP,
+        valuePrecision: MARKET_CAP_VALUE_PRECISION
       },
       {
-        label: 'Volume',
-        optionalLabel: 'Avg',
-        valuePrecision: 0
+        label: LABEL_VOLUME,
+        optionalLabel: LABEL_AVERAGE,
+        valuePrecision: VOLUME_VALUE_PRECISION
       },
       {
-        label: 'Div',
+        label: LABEL_DIVIDEND,
         optionalLabel: '%',
-        valuePrecision: 2,
+        valuePrecision: DIVIDEND_VALUE_PRECISION,
         optionalValuePrecision: 2
       }
     ],
@@ -45,18 +68,18 @@ export const rowComponentsProps = [
   {
     componentsProps: [
       {
-        label: 'P/E Ratio',
-        optionalLabel: 'eps',
-        valuePrecision: 2,
+        label: LABEL_PE_RATIO,
+        optionalLabel: LABEL_EPS,
+        valuePrecision: PE_VALUE_PRECISION,
         optionalValuePrecision: 2
       },
       {
-        label: 'ROE',
-        valuePrecision: 1
+        label: LABEL_ROE,
+        valuePrecision: ROE_VALUE_PRECISION
       },
       {
-        label: 'FCFY',
-        valuePrecision: 1
+        label: LABEL_FCFY,
+        valuePrecision: FCFY_VALUE_PRECISION
       }
     ],
     columnKeyName: 'label',
