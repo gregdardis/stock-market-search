@@ -43,13 +43,8 @@ const Search = ({
       <FontAwesome
         className='searchButton'
         name='search'
-        // size='1x'
+        onClick={ handleSearch }
       />
-      {/* <button
-        className='searchButton'
-        onClick={ handleSearch }>
-        Search
-      </button> */}
     </div>
   );
 };
