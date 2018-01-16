@@ -35,12 +35,12 @@ export const formatValueFromStateAndProps = (state, ownProps) => {
     valueSuffix = '';
   }
   if (!optionalValue) {
-    return value + valueSuffix;
+    return `${value}${valueSuffix}`;
   }
   optionalValue = optionalValue.toFixed(ownProps.optionalValuePrecision);
   optionalValue = addCommas(optionalValue);
   if (optionalValueSuffix) {
-    return value + valueSuffix + ' (' + optionalValue + optionalValueSuffix + ')';
+    return `${value}${valueSuffix} (${optionalValue}${optionalValueSuffix})`;
   }
-  return value + valueSuffix + ' (' + optionalValue + ')';
+  return `${value}${valueSuffix} (${optionalValue})`;
 };

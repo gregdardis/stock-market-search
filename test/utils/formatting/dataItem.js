@@ -57,7 +57,7 @@ export const formatValueFromStateAndPropsTest = () => {
         optionalValuePrecision: OPTIONAL_VALUE_PRECISION
       });
       expect(formatValueFromStateAndProps(state, ownProps)).to
-        .equal(VALUE + VALUE_SUFFIX + ' (' + OPTIONAL_VALUE + OPTIONAL_VALUE_SUFFIX + ')');
+        .equal(`${VALUE}${VALUE_SUFFIX} (${OPTIONAL_VALUE}${OPTIONAL_VALUE_SUFFIX})`);
     });
     it('should properly format when value is not defined', () => {
       const state = createState({
