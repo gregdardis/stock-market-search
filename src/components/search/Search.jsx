@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import FontAwesome from 'react-fontawesome';
 
 import './search.css';
 
@@ -39,11 +40,16 @@ const Search = ({
         placeholder='Stock symbol'
         required
       />
-      <button
+      <FontAwesome
+        className='searchButton'
+        name='search'
+        // size='1x'
+      />
+      {/* <button
         className='searchButton'
         onClick={ handleSearch }>
         Search
-      </button>
+      </button> */}
     </div>
   );
 };
