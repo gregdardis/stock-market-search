@@ -4,7 +4,7 @@ import { formatValueFromStateAndProps } from '../../../src/utils/formatting/data
 import {
   BLANK_FIELD,
   LABEL_DIVIDEND,
-  DIVIDEND_VALUE_PRECISION,
+  VALUE_PRECISION_DIVIDEND,
   OPTIONAL_VALUE_SUFFIX_DIVIDEND
 } from '../../../src/constants';
 
@@ -35,7 +35,7 @@ const createProps = ({
 }) => ({
   label: LABEL_DIVIDEND,
   valuePrecision,
-  optionalValuePrecision: DIVIDEND_VALUE_PRECISION
+  optionalValuePrecision: VALUE_PRECISION_DIVIDEND
 });
 
 export const formatValueFromStateAndPropsTest = () => {
@@ -44,7 +44,7 @@ export const formatValueFromStateAndPropsTest = () => {
   const VALUE_SUFFIX = '%';
   const OPTIONAL_VALUE_SUFFIX = OPTIONAL_VALUE_SUFFIX_DIVIDEND;
 
-  const VALUE_PRECISION = DIVIDEND_VALUE_PRECISION;
+  const VALUE_PRECISION = VALUE_PRECISION_DIVIDEND;
 
   describe('formatValueFromStateAndProps', () => {
     const ownProps = createProps({

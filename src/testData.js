@@ -13,16 +13,16 @@ import {
   LABEL_ROE,
   LABEL_FCFY,
   OPTIONAL_LABEL_DIVIDEND,
-  OPEN_VALUE_PRECISION,
-  HIGH_VALUE_PRECISION,
-  LOW_VALUE_PRECISION,
-  MARKET_CAP_VALUE_PRECISION,
-  VOLUME_VALUE_PRECISION,
-  DIVIDEND_VALUE_PRECISION,
-  PE_VALUE_PRECISION,
-  ROE_VALUE_PRECISION,
-  FCFY_VALUE_PRECISION,
-  EPS_VALUE_PRECISION
+  VALUE_PRECISION_OPEN,
+  VALUE_PRECISION_HIGH,
+  VALUE_PRECISION_LOW,
+  VALUE_PRECISION_MARKET_CAP,
+  VALUE_PRECISION_VOLUME,
+  VALUE_PRECISION_DIVIDEND,
+  VALUE_PRECISION_PE,
+  VALUE_PRECISION_ROE,
+  VALUE_PRECISION_FCFY,
+  VALUE_PRECISION_EPS
 } from './constants';
 
 export const rowComponentsProps = [
@@ -30,15 +30,15 @@ export const rowComponentsProps = [
     componentsProps: [
       {
         label: LABEL_OPEN,
-        valuePrecision: OPEN_VALUE_PRECISION
+        valuePrecision: VALUE_PRECISION_OPEN
       },
       {
         label: LABEL_HIGH,
-        valuePrecision: HIGH_VALUE_PRECISION
+        valuePrecision: VALUE_PRECISION_HIGH
       },
       {
         label: LABEL_LOW,
-        valuePrecision: LOW_VALUE_PRECISION
+        valuePrecision: VALUE_PRECISION_LOW
       }
     ],
     columnKeyName: 'label',
@@ -49,18 +49,18 @@ export const rowComponentsProps = [
     componentsProps: [
       {
         label: LABEL_MARKET_CAP,
-        valuePrecision: MARKET_CAP_VALUE_PRECISION
+        valuePrecision: VALUE_PRECISION_MARKET_CAP
       },
       {
         label: LABEL_VOLUME,
         optionalLabel: LABEL_AVERAGE,
-        valuePrecision: VOLUME_VALUE_PRECISION
+        valuePrecision: VALUE_PRECISION_VOLUME
       },
       {
         label: LABEL_DIVIDEND,
         optionalLabel: OPTIONAL_LABEL_DIVIDEND,
-        valuePrecision: DIVIDEND_VALUE_PRECISION,
-        optionalValuePrecision: DIVIDEND_VALUE_PRECISION
+        valuePrecision: VALUE_PRECISION_DIVIDEND,
+        optionalValuePrecision: VALUE_PRECISION_DIVIDEND
       }
     ],
     columnKeyName: 'label',
@@ -72,16 +72,16 @@ export const rowComponentsProps = [
       {
         label: LABEL_PE_RATIO,
         optionalLabel: OPTIONAL_LABEL_EPS,
-        valuePrecision: PE_VALUE_PRECISION,
-        optionalValuePrecision: EPS_VALUE_PRECISION
+        valuePrecision: VALUE_PRECISION_PE,
+        optionalValuePrecision: VALUE_PRECISION_EPS
       },
       {
         label: LABEL_ROE,
-        valuePrecision: ROE_VALUE_PRECISION
+        valuePrecision: VALUE_PRECISION_ROE
       },
       {
         label: LABEL_FCFY,
-        valuePrecision: FCFY_VALUE_PRECISION
+        valuePrecision: VALUE_PRECISION_FCFY
       }
     ],
     columnKeyName: 'label',
