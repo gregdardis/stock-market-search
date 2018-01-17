@@ -1,8 +1,4 @@
-// import {
-//   VALUE_SUFFIX_FCFY,
-//   VALUE_SUFFIX_ROE,
-//   OPTIONAL_VALUE_SUFFIX_DIVIDEND
-// } from './constants';
+const constants = require('./constants');
 
 const express = require('express');
 const yahooFinance = require('yahoo-finance');
@@ -47,43 +43,79 @@ const processStockData = ({
   trailingPE,
   volume
 }) => {
-  const stockData = {
-    Open: createStockDataEntry(open),
-    High: createStockDataEntry(dayHigh),
-    Low: createStockDataEntry(dayLow),
-    Div: createStockDataEntry(
-      dividendYield,
-      {
-        optionalValue: dividendRate,
-        optionalValueSuffix: '%' //OPTIONAL_VALUE_SUFFIX_DIVIDEND
-      }
-    ),
-    'Mkt Cap': createStockDataEntry(marketCap),
-    Volume: createStockDataEntry(
-      volume,
-      {
-        optionalValue: averageVolume
-      }
-    ),
-    'P/E Ratio': createStockDataEntry(
-      trailingPE,
-      {
-        optionalValue: trailingEps
-      }
-    ),
-    ROE: createStockDataEntry(
-      convertDecimalToPercent(returnOnEquity),
-      {
-        valueSuffix: '%'//VALUE_SUFFIX_ROE
-      }
-    ),
-    FCFY: createStockDataEntry(
-      calculateFcfy(freeCashflow, marketCap),
-      {
-        valueSuffix: '%'//VALUE_SUFFIX_FCFY
-      }
-    )
-  };
+  const stockData = {};
+  //   Open: createStockDataEntry(open),
+  //   High: createStockDataEntry(dayHigh),
+  //   Low: createStockDataEntry(dayLow),
+  //   Div: createStockDataEntry(
+  //     dividendYield,
+  //     {
+  //       optionalValue: dividendRate,
+  //       optionalValueSuffix: constants.OPTIONAL_VALUE_SUFFIX_DIVIDEND
+  //     }
+  //   ),
+  //   'Mkt Cap': createStockDataEntry(marketCap),
+  //   Volume: createStockDataEntry(
+  //     volume,
+  //     {
+  //       optionalValue: averageVolume
+  //     }
+  //   ),
+  //   'P/E Ratio': createStockDataEntry(
+  //     trailingPE,
+  //     {
+  //       optionalValue: trailingEps
+  //     }
+  //   ),
+  //   ROE: createStockDataEntry(
+  //     convertDecimalToPercent(returnOnEquity),
+  //     {
+  //       valueSuffix: constants.VALUE_SUFFIX_ROE
+  //     }
+  //   ),
+  //   FCFY: createStockDataEntry(
+  //     calculateFcfy(freeCashflow, marketCap),
+  //     {
+  //       valueSuffix: constants.VALUE_SUFFIX_FCFY
+  //     }
+  //   )
+  // };
+  stockData[constants.LABEL_OPEN] = createStockDataEntry(open);
+  stockData[constants.LABEL_HIGH] = createStockDataEntry(dayHigh);
+  stockData[constants.LABEL_LOW] = createStockDataEntry(dayLow);
+  stockData[constants.LABEL_DIVIDEND] = createStockDataEntry(
+    dividendYield,
+    {
+      optionalValue: dividendRate,
+      optionalValueSuffix: constants.OPTIONAL_VALUE_SUFFIX_DIVIDEND
+    }
+  );
+  stockData[constants.LABEL_MARKET_CAP] = createStockDataEntry(marketCap);
+  stockData[constants.LABEL_VOLUME] = createStockDataEntry(
+    volume,
+    {
+      optionalValue: averageVolume
+    }
+  );
+  stockData[constants.LABEL_PE_RATIO] = createStockDataEntry(
+    trailingPE,
+    {
+      optionalValue: trailingEps
+    }
+  );
+  stockData[constants.LABEL_ROE] = createStockDataEntry(
+    convertDecimalToPercent(returnOnEquity),
+    {
+      valueSuffix: constants.VALUE_SUFFIX_ROE
+    }
+  );
+  stockData[constants.LABEL_FCFY] = createStockDataEntry(
+    calculateFcfy(freeCashflow, marketCap),
+    {
+      valueSuffix: constants.VALUE_SUFFIX_FCFY
+    }
+  );
+
   return stockData;
 };
 
