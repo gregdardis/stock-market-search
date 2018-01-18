@@ -118,15 +118,3 @@ const port = 3000;
 app.listen(port, () => {
   console.log(`app is listening on port ${port}`);
 });
-
-// const stock = {
-//   companyName: 'Alphabet Inc Class C',
-//   symbol: 'GOOG',
-//   stockData: {
-//     Open: {
-//       value: 26.50,
-//       optionalValue: null,
-//       valueSuffix: '',
-//       optionalValueSuffix: ''
-//     },
-// }
