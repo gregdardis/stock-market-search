@@ -15,18 +15,24 @@ export const addCommas = number => {
   return parts.join('.');
 };
 
-// TODO: clean this up
-export const formatValueFromStateAndProps = (state, ownProps) => {
+const getSelectedStockDataFromState = state => {
   const symbol = state.selectedStock;
   const selectedStock = state.stocks[symbol];
-  const stockData = selectedStock.stockData;
+  return selectedStock.stockData;
+};
+
+// TODO: clean this up
+export const formatValueFromStateAndProps = (state, ownProps) => {
+  const stockData = getSelectedStockDataFromState(state);
 
   const dataItemLabel = ownProps.label;
 
-  let value = stockData[dataItemLabel].value;
-  let optionalValue = stockData[dataItemLabel].optionalValue;
-  let valueSuffix = stockData[dataItemLabel].valueSuffix;
-  const optionalValueSuffix = stockData[dataItemLabel].optionalValueSuffix;
+  let {
+    value,
+    optionalValue,
+    valueSuffix,
+    optionalValueSuffix
+  } = stockData[dataItemLabel];
 
   if (value) {
     value = value.toFixed(ownProps.valuePrecision);
