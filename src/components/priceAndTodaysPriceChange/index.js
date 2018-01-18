@@ -6,7 +6,9 @@ import { addCommas } from '../../utils/formatting/dataItem';
 import {
   LABEL_CURRENT_PRICE,
   LABEL_OPEN,
-  VALUE_PRECISION_CURRENT_PRICE
+  VALUE_PRECISION_CURRENT_PRICE,
+  VALUE_PRECISION_PRICE_CHANGE,
+  VALUE_PRECISION_PRICE_CHANGE_PERCENTAGE
 } from '../../constants';
 
 const getCurrentPrice = state => {
@@ -24,11 +26,13 @@ const calculatePriceChange = state => {
   const stockData = selectedStock.stockData;
 
   const openPrice = stockData[LABEL_OPEN].value;
-  return (getCurrentPrice(state) - openPrice).toString();
+  return (getCurrentPrice(state) - openPrice)
+    .toFixed(VALUE_PRECISION_PRICE_CHANGE);
 };
 
 const calculatePriceChangePercentage = state => {
-  return `${(calculatePriceChange(state) / getCurrentPrice(state) * 100).toString()}%`;
+  return `${(calculatePriceChange(state) / getCurrentPrice(state) * 100)
+    .toFixed(VALUE_PRECISION_PRICE_CHANGE_PERCENTAGE)}%`;
 };
 
 const mapStateToProps = state => ({
