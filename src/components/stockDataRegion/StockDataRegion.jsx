@@ -12,6 +12,7 @@ const StockDataRegion = ({
   hasData ?
     <div className='stockDataRegion'>
       <CompanyNameAndSymbol />
+      {/* <PriceAndTodaysPriceChange /> */}
       <Row
         componentsProps={ rowComponentsProps }
         rowKeyName='rowKey'

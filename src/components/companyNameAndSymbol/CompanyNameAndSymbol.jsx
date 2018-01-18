@@ -9,7 +9,7 @@ const CompanyNameAndSymbol = ({
 }) => {
   return (
     <div className='companyNameAndSymbol'>
-      <h1>{ companyName } ({ symbol })</h1>
+      <h2>{ companyName } ({ symbol })</h2>
     </div>
   );
 };
