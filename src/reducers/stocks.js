@@ -7,7 +7,7 @@ export const reducer = (state = {}, action) => {
   case RECEIVE_STOCK:
   case REQUEST_STOCK:
     return Object.assign({}, state, {
-      [action.stockIdentifier]: stock(state[action.stockIdentifier], action)
+      [action.symbol]: stock(state[action.symbol], action)
     });
   default:
     return state;

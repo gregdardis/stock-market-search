@@ -26,24 +26,25 @@ export const performSearch = searchTerm => ({
   searchTerm
 });
 
-export const requestStock = stockIdentifier => ({
+export const requestStock = symbol => ({
   type: REQUEST_STOCK,
-  stockIdentifier
+  symbol
 });
 
 export const receiveStock = json => ({
   type: RECEIVE_STOCK,
-  stockIdentifier: json.symbol,
+  companyName: json.companyName,
+  symbol: json.symbol,
   stockData: json.stockData,
   receivedAt: Date.now()
 });
 
-export const fetchStock = stockIdentifier => (
+export const fetchStock = symbol => (
   dispatch => {
     dispatch(
-      requestStock(stockIdentifier)
+      requestStock(symbol)
     );
-    return fetch(`/api/stocks/${stockIdentifier}`)
+    return fetch(`/api/stocks/${symbol}`)
       .then(
         res => res.json(),
         error => console.log('THERE WAS AN ERROR' + error)

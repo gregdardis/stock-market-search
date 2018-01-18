@@ -2,6 +2,8 @@ import { REQUEST_STOCK, RECEIVE_STOCK } from '../actions';
 
 export const reducer = (
   state = {
+    companyName: '',
+    symbol: '',
     isFetching: false,
     stockData: {}
   },
@@ -14,6 +16,8 @@ export const reducer = (
     });
   case RECEIVE_STOCK:
     return Object.assign({}, state, {
+      companyName: action.companyName,
+      symbol: action.symbol,
       isFetching: false,
       stockData: action.stockData,
       lastUpdated: action.receivedAt
