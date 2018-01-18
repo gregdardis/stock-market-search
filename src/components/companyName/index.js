@@ -2,8 +2,14 @@ import { connect } from 'react-redux';
 
 import CompanyName from './CompanyName';
 
+const getCompanyName = state => {
+  const symbol = state.selectedStock;
+  const selectedStock = state.stocks[symbol];
+  return selectedStock.companyName;
+};
+
 const mapStateToProps = state => ({
-  companyName: state.companyName
+  companyName: getCompanyName(state)
 });
 
 const mapDispatchToProps = null;

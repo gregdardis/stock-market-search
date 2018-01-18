@@ -9,17 +9,16 @@ import { rowComponentsProps } from '../../dataItemProps';
 const StockDataRegion = ({
   hasData
 }) => (
-  <div className='stockDataRegion'>
-    {/* <CompanyName /> */}
-    { hasData
-      ? <Row
+  hasData ?
+    <div className='stockDataRegion'>
+      <CompanyName />
+      <Row
         componentsProps={ rowComponentsProps }
         rowKeyName='rowKey'
         rowCellComponent={ Column }
       />
-      : <p>No data to make a table with! PLACEHOLDER!!!!!</p>
-    }
-  </div>
+    </div>
+    : <p>No data to make a table with! PLACEHOLDER!!!!!</p>
 );
 
 StockDataRegion.propTypes = {
