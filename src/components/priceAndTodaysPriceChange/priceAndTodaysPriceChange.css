@@ -1,0 +1,18 @@
+.priceAndTodaysPriceChange {
+  clear: both;
+  display: flex;
+  align-items: center;
+}
+
+h1, h2 {
+  float: left;
+}
+
+h1 {
+  margin-left: 10px;
+  
+}
+
+h2 {
+  margin-left: 1.5em;
+}

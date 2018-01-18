@@ -11,19 +11,21 @@ import {
   VALUE_PRECISION_PRICE_CHANGE_PERCENTAGE
 } from '../../constants';
 
-const getCurrentPrice = state => {
+const getStockData = state => {
   const symbol = state.selectedStock;
   const selectedStock = state.stocks[symbol];
-  const stockData = selectedStock.stockData;
+  return selectedStock.stockData;
+};
+
+const getCurrentPrice = state => {
+  const stockData = getStockData(state);
 
   const currentPrice = stockData[LABEL_CURRENT_PRICE].value;
   return currentPrice.toFixed(VALUE_PRECISION_CURRENT_PRICE);
 };
 
 const calculatePriceChange = state => {
-  const symbol = state.selectedStock;
-  const selectedStock = state.stocks[symbol];
-  const stockData = selectedStock.stockData;
+  const stockData = getStockData(state);
 
   const openPrice = stockData[LABEL_OPEN].value;
   return (getCurrentPrice(state) - openPrice)
