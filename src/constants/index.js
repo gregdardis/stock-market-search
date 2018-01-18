@@ -1,6 +1,7 @@
 module.exports = Object.freeze({
   BLANK_FIELD: '--',
   LABEL_AVERAGE: 'Avg',
+  LABEL_CURRENT_PRICE: 'Current Price',
   LABEL_DIVIDEND: 'Div',
   LABEL_FCFY: 'FCFY',
   LABEL_HIGH: 'High',

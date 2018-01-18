@@ -31,6 +31,7 @@ const createStockDataEntry = (value, options = {}) => {
 
 const processStockData = ({
   averageVolume,
+  currentPrice,
   dayHigh,
   dayLow,
   dividendRate,
@@ -44,6 +45,7 @@ const processStockData = ({
   volume
 }) => {
   return {
+    [constants.LABEL_CURRENT_PRICE]: createStockDataEntry(currentPrice),
     [constants.LABEL_OPEN]: createStockDataEntry(open),
     [constants.LABEL_HIGH]: createStockDataEntry(dayHigh),
     [constants.LABEL_LOW]: createStockDataEntry(dayLow),

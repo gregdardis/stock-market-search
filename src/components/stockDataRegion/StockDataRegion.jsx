@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Column from '../column';
 import Row from '../row';
 import CompanyNameAndSymbol from '../companyNameAndSymbol';
+import PriceAndTodaysPriceChange from '../priceAndTodaysPriceChange';
 import { rowComponentsProps } from '../../dataItemProps';
 
 const StockDataRegion = ({
@@ -12,7 +13,7 @@ const StockDataRegion = ({
   hasData ?
     <div className='stockDataRegion'>
       <CompanyNameAndSymbol />
-      {/* <PriceAndTodaysPriceChange /> */}
+      <PriceAndTodaysPriceChange />
       <Row
         componentsProps={ rowComponentsProps }
         rowKeyName='rowKey'

@@ -14,3 +14,9 @@ const PriceAndTodaysPriceChange = ({
     </div>
   );
 };
+PriceAndTodaysPriceChange.propTypes = {
+  currentPrice: PropTypes.string.isRequired,
+  priceChange: PropTypes.string.isRequired,
+  priceChangePercentage: PropTypes.string.isRequired
+};
+export default PriceAndTodaysPriceChange;
