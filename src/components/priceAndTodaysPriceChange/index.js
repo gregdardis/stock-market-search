@@ -1,17 +1,21 @@
 import { connect } from 'react-redux';
 
 import PriceAndTodaysPriceChange from './PriceAndTodaysPriceChange';
+import { addCommas } from '../../utils/formatting/dataItem';
 
 import {
   LABEL_CURRENT_PRICE,
-  LABEL_OPEN
+  LABEL_OPEN,
+  VALUE_PRECISION_CURRENT_PRICE
 } from '../../constants';
 
 const getCurrentPrice = state => {
   const symbol = state.selectedStock;
   const selectedStock = state.stocks[symbol];
   const stockData = selectedStock.stockData;
-  return (stockData[LABEL_CURRENT_PRICE].value).toString();
+
+  const currentPrice = stockData[LABEL_CURRENT_PRICE].value;
+  return currentPrice.toFixed(VALUE_PRECISION_CURRENT_PRICE);
 };
 
 const calculatePriceChange = state => {
@@ -28,7 +32,7 @@ const calculatePriceChangePercentage = state => {
 };
 
 const mapStateToProps = state => ({
-  currentPrice: getCurrentPrice(state),
+  currentPrice: addCommas(getCurrentPrice(state)),
   priceChange: calculatePriceChange(state),
   priceChangePercentage: calculatePriceChangePercentage(state)
 });
