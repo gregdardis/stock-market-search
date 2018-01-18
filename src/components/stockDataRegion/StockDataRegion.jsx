@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Column from '../column';
 import Row from '../row';
-import CompanyName from '../companyName';
+import CompanyNameAndSymbol from '../companyNameAndSymbol';
 import { rowComponentsProps } from '../../dataItemProps';
 
 const StockDataRegion = ({
@@ -11,7 +11,7 @@ const StockDataRegion = ({
 }) => (
   hasData ?
     <div className='stockDataRegion'>
-      <CompanyName />
+      <CompanyNameAndSymbol />
       <Row
         componentsProps={ rowComponentsProps }
         rowKeyName='rowKey'

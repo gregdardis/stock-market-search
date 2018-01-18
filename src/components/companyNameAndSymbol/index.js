@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import CompanyName from './CompanyName';
+import CompanyNameAndSymbol from './CompanyNameAndSymbol';
 
 const getCompanyName = state => {
   const symbol = state.selectedStock;
@@ -9,14 +9,15 @@ const getCompanyName = state => {
 };
 
 const mapStateToProps = state => ({
-  companyName: getCompanyName(state)
+  companyName: getCompanyName(state),
+  symbol: state.selectedStock
 });
 
 const mapDispatchToProps = null;
 
-const CompanyNameContainer = connect(
+const CompanyNameAndSymbolContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(CompanyName);
+)(CompanyNameAndSymbol);
 
-export default CompanyNameContainer;
+export default CompanyNameAndSymbolContainer;
