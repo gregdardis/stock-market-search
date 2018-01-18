@@ -21,10 +21,26 @@ const getSelectedStockDataFromState = state => {
   return selectedStock.stockData;
 };
 
-// TODO: clean this up
+const roundAndAddCommas = (value, precision) => {
+  let result = value.toFixed(precision);
+  return addCommas(result);
+};
+
+const convertToEmptyStringIfFalsy = str => {
+  return str ? str : '';
+};
+
+const formatValueForDisplay = (value, valueSuffix, valuePrecision) => {
+  if (!value) {
+    return BLANK_FIELD;
+  }
+  const result = roundAndAddCommas(value, valuePrecision);
+  const resultSuffix = convertToEmptyStringIfFalsy(valueSuffix);
+  return `${result}${resultSuffix}`;
+};
+
 export const formatValueFromStateAndProps = (state, ownProps) => {
   const stockData = getSelectedStockDataFromState(state);
-
   const dataItemLabel = ownProps.label;
 
   let {
@@ -34,23 +50,17 @@ export const formatValueFromStateAndProps = (state, ownProps) => {
     optionalValueSuffix
   } = stockData[dataItemLabel];
 
-  if (value) {
-    value = value.toFixed(ownProps.valuePrecision);
-    value = addCommas(value);
-  } else {
-    value = BLANK_FIELD;
-    valueSuffix = '';
-  }
-  if (!valueSuffix) {
-    valueSuffix = '';
-  }
+  const {
+    valuePrecision,
+    optionalValuePrecision
+  } = ownProps;
+
+  const formattedValue = formatValueForDisplay(value, valueSuffix, valuePrecision);
+
   if (!optionalValue) {
-    return `${value}${valueSuffix}`;
+    return formattedValue;
   }
-  optionalValue = optionalValue.toFixed(ownProps.optionalValuePrecision);
-  optionalValue = addCommas(optionalValue);
-  if (optionalValueSuffix) {
-    return `${value}${valueSuffix} (${optionalValue}${optionalValueSuffix})`;
-  }
-  return `${value}${valueSuffix} (${optionalValue})`;
+
+  const formattedOptionalValue = formatValueForDisplay(optionalValue, optionalValueSuffix, optionalValuePrecision);
+  return `${formattedValue} (${formattedOptionalValue})`;
 };
