@@ -1,3 +1,5 @@
+const constants = require('./constants');
+
 const express = require('express');
 const yahooFinance = require('yahoo-finance');
 
@@ -41,44 +43,43 @@ const processStockData = ({
   trailingPE,
   volume
 }) => {
-  const stockData = {
-    Open: createStockDataEntry(open),
-    High: createStockDataEntry(dayHigh),
-    Low: createStockDataEntry(dayLow),
-    Div: createStockDataEntry(
+  return {
+    [constants.LABEL_OPEN]: createStockDataEntry(open),
+    [constants.LABEL_HIGH]: createStockDataEntry(dayHigh),
+    [constants.LABEL_LOW]: createStockDataEntry(dayLow),
+    [constants.LABEL_DIVIDEND]: createStockDataEntry(
       dividendYield,
       {
         optionalValue: dividendRate,
-        optionalValueSuffix: '%'
+        optionalValueSuffix: constants.OPTIONAL_VALUE_SUFFIX_DIVIDEND
       }
     ),
-    'Mkt Cap': createStockDataEntry(marketCap),
-    Volume: createStockDataEntry(
+    [constants.LABEL_MARKET_CAP]: createStockDataEntry(marketCap),
+    [constants.LABEL_VOLUME]: createStockDataEntry(
       volume,
       {
         optionalValue: averageVolume
       }
     ),
-    'P/E Ratio': createStockDataEntry(
+    [constants.LABEL_PE_RATIO]: createStockDataEntry(
       trailingPE,
       {
         optionalValue: trailingEps
       }
     ),
-    ROE: createStockDataEntry(
+    [constants.LABEL_ROE]: createStockDataEntry(
       convertDecimalToPercent(returnOnEquity),
       {
-        valueSuffix: '%'
+        valueSuffix: constants.VALUE_SUFFIX_ROE
       }
     ),
-    FCFY: createStockDataEntry(
+    [constants.LABEL_FCFY]: createStockDataEntry(
       calculateFcfy(freeCashflow, marketCap),
       {
-        valueSuffix: '%'
+        valueSuffix: constants.VALUE_SUFFIX_FCFY
       }
     )
   };
-  return stockData;
 };
 
 const createStock = quote => {
@@ -128,3 +129,4 @@ app.listen(port, () => {
 //       valueSuffix: '',
 //       optionalValueSuffix: ''
 //     },
+// }

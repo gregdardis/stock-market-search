@@ -1,3 +1,3 @@
-import { formatValueFromStateAndPropsTest } from './utils/formatting';
+import { formatValueFromStateAndPropsTest } from './utils/formatting/dataItem';
 
 formatValueFromStateAndPropsTest();
