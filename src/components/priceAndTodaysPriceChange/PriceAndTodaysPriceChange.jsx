@@ -8,17 +8,15 @@ const PriceAndTodaysPriceChange = ({
   priceChange,
   priceChangePercentage,
   isPositiveChange
-}) => {
-  return (
-    <div className='priceAndTodaysPriceChange'>
-      <h1>{ currentPrice }</h1>
-      { isPositiveChange ?
-        <h2 className='green'>{ priceChange } ({ priceChangePercentage })</h2>
-        : <h2 className='red'>{ priceChange } ({ priceChangePercentage })</h2>
-      }
-    </div>
-  );
-};
+}) => (
+  <div className='priceAndTodaysPriceChange'>
+    <h1>{ currentPrice }</h1>
+    { isPositiveChange ?
+      <h2 className='green'>{ priceChange } ({ priceChangePercentage })</h2>
+      : <h2 className='red'>{ priceChange } ({ priceChangePercentage })</h2>
+    }
+  </div>
+);
 PriceAndTodaysPriceChange.propTypes = {
   currentPrice: PropTypes.string.isRequired,
   priceChange: PropTypes.string.isRequired,
