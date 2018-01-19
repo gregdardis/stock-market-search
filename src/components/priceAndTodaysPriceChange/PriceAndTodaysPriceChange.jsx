@@ -12,7 +12,7 @@ const PriceAndTodaysPriceChange = ({
   <div className='priceAndTodaysPriceChange'>
     <h1>{ currentPrice }</h1>
     { isPositiveChange ?
-      <h2 className='green'>{ priceChange } ({ priceChangePercentage })</h2>
+      <h2 className='green'>+{ priceChange } (+{ priceChangePercentage })</h2>
       : <h2 className='red'>{ priceChange } ({ priceChangePercentage })</h2>
     }
   </div>
