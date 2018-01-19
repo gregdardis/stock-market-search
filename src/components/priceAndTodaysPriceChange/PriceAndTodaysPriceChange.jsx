@@ -6,17 +6,23 @@ import './PriceAndTodaysPriceChange.css';
 const PriceAndTodaysPriceChange = ({
   currentPrice,
   priceChange,
-  priceChangePercentage
+  priceChangePercentage,
+  isPositiveChange
 }) => {
   return (
     <div className='priceAndTodaysPriceChange'>
-      <h1>{ currentPrice }</h1> <h2>{ priceChange } ({ priceChangePercentage })</h2>
+      <h1>{ currentPrice }</h1>
+      { isPositiveChange ?
+        <h2 className='green'>{ priceChange } ({ priceChangePercentage })</h2>
+        : <h2 className='red'>{ priceChange } ({ priceChangePercentage })</h2>
+      }
     </div>
   );
 };
 PriceAndTodaysPriceChange.propTypes = {
   currentPrice: PropTypes.string.isRequired,
   priceChange: PropTypes.string.isRequired,
-  priceChangePercentage: PropTypes.string.isRequired
+  priceChangePercentage: PropTypes.string.isRequired,
+  isPositiveChange: PropTypes.bool
 };
 export default PriceAndTodaysPriceChange;
