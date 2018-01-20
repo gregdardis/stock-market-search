@@ -12,7 +12,7 @@ const paths = {
 
 // Webpack configuration
 module.exports = {
-  entry: ['react-hot-loader/patch', path.join(paths.SRC, 'render.js')],
+  entry: path.join(paths.SRC, 'render.js'),
   output: {
     path: paths.DIST,
     filename: 'app.bundle.js'
