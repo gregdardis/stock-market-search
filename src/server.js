@@ -104,7 +104,7 @@ const createStock = quote => {
   };
 };
 
-app.get(config.host, (req, res) => {
+app.get('/api/stocks/:symbol', (req, res) => {
   const symbol = req.params.symbol;
   yahooFinance.quote({
     symbol,
