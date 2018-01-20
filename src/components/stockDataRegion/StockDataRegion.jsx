@@ -6,6 +6,7 @@ import Row from '../row';
 import CompanyNameAndSymbol from '../companyNameAndSymbol';
 import PriceAndTodaysPriceChange from '../priceAndTodaysPriceChange';
 import { rowComponentsProps } from '../../dataItemProps';
+import './stockDataRegion.css';
 
 const StockDataRegion = ({
   hasData
