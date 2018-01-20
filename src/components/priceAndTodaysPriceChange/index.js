@@ -40,8 +40,7 @@ const calculatePriceChangePercentage = state => {
 const mapStateToProps = state => ({
   currentPrice: addCommas(getCurrentPrice(state)),
   priceChange: calculatePriceChange(state),
-  priceChangePercentage: calculatePriceChangePercentage(state),
-  isPositiveChange: (calculatePriceChange(state) >= 0)
+  priceChangePercentage: calculatePriceChangePercentage(state)
 });
 
 const PriceAndTodaysPriceChangeContainer = connect(
