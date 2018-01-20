@@ -111,8 +111,14 @@ app.get('/api/stocks/:symbol', (req, res) => {
     symbol,
     modules: ['summaryDetail', 'defaultKeyStatistics', 'financialData', 'price']
   }).then(
-    quote => res.send(createStock(quote)),
-    error => console.log(error)
+    quote => {
+      if (!quote.price || !quote.summaryDetail || !quote.defaultKeyStatistics || !quote.financialData) {
+        res.status(404).send('Stock symbol not found.');
+        return;
+      }
+      res.send(createStock(quote));
+    },
+    () => res.status(404).send('Stock symbol not found.')
   );
 });
 

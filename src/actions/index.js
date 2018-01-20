@@ -46,12 +46,18 @@ export const fetchStock = symbol => (
     );
     return fetch(`/api/stocks/${symbol}`)
       .then(
-        res => res.json(),
+        res => (
+          res.ok ? res.json() : null
+        ),
         error => console.log('THERE WAS AN ERROR' + error)
       ).then(
-        json => dispatch(
-          receiveStock(json)
-        )
+        json => {
+          if (json) {
+            dispatch(
+              receiveStock(json)
+            );
+          }
+        }
       );
   }
 );

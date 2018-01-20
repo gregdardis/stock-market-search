@@ -17,31 +17,30 @@ const getStockData = state => {
   return selectedStock.stockData;
 };
 
-const getCurrentPrice = state => {
-  const stockData = getStockData(state);
-
+const getCurrentPrice = stockData => {
   const currentPrice = stockData[LABEL_CURRENT_PRICE].value;
   return currentPrice.toFixed(VALUE_PRECISION_CURRENT_PRICE);
 };
 
-const calculatePriceChange = state => {
-  const stockData = getStockData(state);
-
+const calculatePriceChange = stockData => {
   const openPrice = stockData[LABEL_OPEN].value;
-  return (getCurrentPrice(state) - openPrice)
+  return (getCurrentPrice(stockData) - openPrice)
     .toFixed(VALUE_PRECISION_PRICE_CHANGE);
 };
 
-const calculatePriceChangePercentage = state => {
-  return `${(calculatePriceChange(state) / getCurrentPrice(state) * 100)
+const calculatePriceChangePercentage = stockData => {
+  return `${(calculatePriceChange(stockData) / getCurrentPrice(stockData) * 100)
     .toFixed(VALUE_PRECISION_PRICE_CHANGE_PERCENTAGE)}%`;
 };
 
-const mapStateToProps = state => ({
-  currentPrice: addCommas(getCurrentPrice(state)),
-  priceChange: calculatePriceChange(state),
-  priceChangePercentage: calculatePriceChangePercentage(state)
-});
+const mapStateToProps = state => {
+  const stockData = getStockData(state);
+  return {
+    currentPrice: addCommas(getCurrentPrice(stockData)),
+    priceChange: addCommas(calculatePriceChange(stockData)),
+    priceChangePercentage: calculatePriceChangePercentage(stockData)
+  };
+};
 
 const PriceAndTodaysPriceChangeContainer = connect(
   mapStateToProps
