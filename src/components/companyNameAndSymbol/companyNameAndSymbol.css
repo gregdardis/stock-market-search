@@ -1,4 +1,3 @@
-.companyNameAndSymbol {
-  position: relative;
-  right: 1.2em;
+.companyNameAndSymbol h1 {
+  font-size: 1.8em;
 }

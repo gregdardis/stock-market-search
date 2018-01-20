@@ -8,7 +8,7 @@ const CompanyNameAndSymbol = ({
   symbol
 }) => (
   <div className='companyNameAndSymbol'>
-    <h2>{ companyName } ({ symbol })</h2>
+    <h1>{ companyName } ({ symbol })</h1>
   </div>
 );
 CompanyNameAndSymbol.propTypes = {

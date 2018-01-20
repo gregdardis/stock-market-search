@@ -12,14 +12,12 @@ h1 {
   margin-left: 0.4em;
 }
 
-h2 {
-  margin-left: 1.5em;
-}
-
 .green {
   color: green;
+  margin-left: 1.5em;
 }
 
 .red {
   color: red;
+  margin-left: 1.5em;
 }
