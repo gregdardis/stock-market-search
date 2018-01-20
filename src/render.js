@@ -1,3 +1,4 @@
+import { AppContainer } from 'react-hot-loader';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -13,9 +14,22 @@ const store = createStore(
     window.devToolsExtension ? window.devToolsExtension() : f => f)
 );
 
-ReactDOM.render(
-  <Provider store={ store }>
-    <App />
-  </Provider>,
-  document.getElementById('app')
-);
+const render = Component => {
+  ReactDOM.render(
+    <Provider store={ store }>
+      <AppContainer>
+        <Component />
+      </AppContainer>
+    </Provider>,
+    document.getElementById('app')
+  );
+};
+
+render(App);
+
+// Webpack Hot Module Replacement API
+if (module.hot) {
+  module.hot.accept('./App', () => {
+    render(App);
+  });
+}
