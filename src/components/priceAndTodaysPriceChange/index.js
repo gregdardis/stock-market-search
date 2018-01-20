@@ -44,11 +44,8 @@ const mapStateToProps = state => ({
   isPositiveChange: (calculatePriceChange(state) >= 0)
 });
 
-const mapDispatchToProps = null;
-
 const PriceAndTodaysPriceChangeContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(PriceAndTodaysPriceChange);
 
 export default PriceAndTodaysPriceChangeContainer;

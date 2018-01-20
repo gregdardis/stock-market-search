@@ -13,11 +13,8 @@ const mapStateToProps = state => ({
   symbol: state.selectedStock
 });
 
-const mapDispatchToProps = null;
-
 const CompanyNameAndSymbolContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(CompanyNameAndSymbol);
 
 export default CompanyNameAndSymbolContainer;
