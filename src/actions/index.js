@@ -35,6 +35,7 @@ export const receiveStock = json => ({
   type: RECEIVE_STOCK,
   companyName: json.companyName,
   symbol: json.symbol,
+  exchange: json.exchange,
   stockData: json.stockData,
   receivedAt: Date.now()
 });
