@@ -4,7 +4,8 @@
     "build": "webpack",
     "dev": "webpack-dev-server",
     "start": "nodemon src/server.js",
-    "test": "mocha --compilers js:babel-core/register"
+    "test": "mocha --compilers js:babel-core/register",
+    "test:watch": "mocha --watch --compilers js:babel-core/register"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
