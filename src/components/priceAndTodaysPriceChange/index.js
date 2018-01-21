@@ -11,34 +11,47 @@ import {
   VALUE_PRECISION_PRICE_CHANGE_PERCENTAGE
 } from '../../constants';
 
+const getCurrentPrice = stockData =>
+  stockData[LABEL_CURRENT_PRICE].value;
+
+const calculatePriceChange = stockData => {
+  const openPrice = stockData[LABEL_OPEN].value;
+  return getCurrentPrice(stockData) - openPrice;
+};
+
+const calculatePriceChangePercentage = stockData =>
+  calculatePriceChange(stockData) / getCurrentPrice(stockData) * 100;
+
+const getFormattedCurrentPrice = stockData =>
+  addCommas(
+    getCurrentPrice(
+      stockData
+    ).toFixed(VALUE_PRECISION_CURRENT_PRICE)
+  );
+
+const getFormattedPriceChange = stockData =>
+  addCommas(
+    calculatePriceChange(
+      stockData
+    ).toFixed(VALUE_PRECISION_PRICE_CHANGE)
+  );
+
+const getFormattedPriceChangePercentage = stockData =>
+  `${calculatePriceChangePercentage(stockData)
+    .toFixed(VALUE_PRECISION_PRICE_CHANGE_PERCENTAGE)}%`;
+
 const getStockData = state => {
   const symbol = state.selectedStock;
   const selectedStock = state.stocks[symbol];
   return selectedStock.stockData;
 };
 
-const getCurrentPrice = stockData => {
-  const currentPrice = stockData[LABEL_CURRENT_PRICE].value;
-  return currentPrice.toFixed(VALUE_PRECISION_CURRENT_PRICE);
-};
-
-const calculatePriceChange = stockData => {
-  const openPrice = stockData[LABEL_OPEN].value;
-  return (getCurrentPrice(stockData) - openPrice)
-    .toFixed(VALUE_PRECISION_PRICE_CHANGE);
-};
-
-const calculatePriceChangePercentage = stockData => (
-  calculatePriceChange(stockData) / getCurrentPrice(stockData) * 100
-);
-
 const mapStateToProps = state => {
   const stockData = getStockData(state);
   return {
-    currentPrice: addCommas(getCurrentPrice(stockData)),
-    priceChange: addCommas(calculatePriceChange(stockData)),
-    priceChangePercentage: `${calculatePriceChangePercentage(stockData)
-      .toFixed(VALUE_PRECISION_PRICE_CHANGE_PERCENTAGE)}%`
+    currentPrice: getFormattedCurrentPrice(stockData),
+    priceChange: getFormattedPriceChange(stockData),
+    priceChangePercentage: getFormattedPriceChangePercentage(stockData)
   };
 };
 
