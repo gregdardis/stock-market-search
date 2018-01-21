@@ -1,4 +1,5 @@
 const constants = require('./constants');
+const config = require('./config');
 
 const express = require('express');
 const yahooFinance = require('yahoo-finance');
@@ -114,7 +115,7 @@ app.get('/api/stocks/:symbol', (req, res) => {
   );
 });
 
-const port = 3000;
+const port = config.port;
 app.listen(port, () => {
   console.log(`app is listening on port ${port}`);
 });
