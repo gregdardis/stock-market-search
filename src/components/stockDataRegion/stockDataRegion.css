@@ -1,0 +1,4 @@
+.stockDataRegion {
+  display: flex;
+  flex-direction: column;
+}

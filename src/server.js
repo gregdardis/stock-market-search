@@ -32,6 +32,7 @@ const createStockDataEntry = (value, options = {}) => {
 
 const processStockData = ({
   averageVolume,
+  currentPrice,
   dayHigh,
   dayLow,
   dividendRate,
@@ -45,6 +46,7 @@ const processStockData = ({
   volume
 }) => {
   return {
+    [constants.LABEL_CURRENT_PRICE]: createStockDataEntry(currentPrice),
     [constants.LABEL_OPEN]: createStockDataEntry(open),
     [constants.LABEL_HIGH]: createStockDataEntry(dayHigh),
     [constants.LABEL_LOW]: createStockDataEntry(dayLow),
@@ -105,17 +107,26 @@ const createStock = quote => {
 };
 
 app.get('/api/stocks/:symbol', (req, res) => {
+  const modules = ['summaryDetail', 'defaultKeyStatistics', 'financialData', 'price'];
   const symbol = req.params.symbol;
   yahooFinance.quote({
     symbol,
-    modules: ['summaryDetail', 'defaultKeyStatistics', 'financialData', 'price']
+    modules
   }).then(
-    quote => res.send(createStock(quote)),
-    error => console.log(error)
+    quote => {
+      modules.forEach(module => {
+        if (!quote[module]) {
+          throw new Error(`Module '${module}' was not found.`);
+        }
+      });
+      res.send(createStock(quote));
+    }
+  ).catch(() =>
+    res.status(404).send('Stock symbol not found.')
   );
 });
 
 const port = config.port;
-app.listen(port, () => {
-  console.log(`app is listening on port ${port}`);
-});
+app.listen(port, () =>
+  console.log(`app is listening on port ${port}`)
+);

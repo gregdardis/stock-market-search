@@ -3,21 +3,25 @@ import PropTypes from 'prop-types';
 
 import Column from '../column';
 import Row from '../row';
+import CompanyNameAndSymbol from '../companyNameAndSymbol';
+import PriceAndTodaysPriceChange from '../priceAndTodaysPriceChange';
 import { rowComponentsProps } from '../../dataItemProps';
+import './stockDataRegion.css';
 
 const StockDataRegion = ({
   hasData
 }) => (
-  <div className='stockDataRegion'>
-    { hasData
-      ? <Row
+  hasData ?
+    <div className='stockDataRegion'>
+      <CompanyNameAndSymbol />
+      <PriceAndTodaysPriceChange />
+      <Row
         componentsProps={ rowComponentsProps }
         rowKeyName='rowKey'
         rowCellComponent={ Column }
       />
-      : <p>No data to make a table with! PLACEHOLDER!!!!!</p>
-    }
-  </div>
+    </div>
+    : <p>No data to make a table with! PLACEHOLDER!!!!!</p>
 );
 
 StockDataRegion.propTypes = {
