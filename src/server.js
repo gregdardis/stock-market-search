@@ -106,13 +106,17 @@ const createStock = quote => {
 };
 
 app.get('/api/stocks/:symbol', (req, res) => {
+  const modules = ['summaryDetail', 'defaultKeyStatistics', 'financialData', 'price'];
   const symbol = req.params.symbol;
   yahooFinance.quote({
     symbol,
-    modules: ['summaryDetail', 'defaultKeyStatistics', 'financialData', 'price']
+    modules
   }).then(
     quote => {
-      if (!quote.price || !quote.summaryDetail || !quote.defaultKeyStatistics || !quote.financialData) {
+      const missingModules = modules.some(module => (
+        !quote[module]
+      ));
+      if (missingModules) {
         res.status(404).send('Stock symbol not found.');
         return;
       }

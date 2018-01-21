@@ -39,25 +39,25 @@ export const receiveStock = json => ({
   receivedAt: Date.now()
 });
 
+// Help from https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 export const fetchStock = symbol => (
   dispatch => {
-    dispatch(
-      requestStock(symbol)
-    );
+    dispatch(requestStock(symbol));
+
     return fetch(`/api/stocks/${symbol}`)
       .then(
-        res => (
-          res.ok ? res.json() : null
-        ),
-        error => console.log('THERE WAS AN ERROR' + error)
-      ).then(
-        json => {
-          if (json) {
-            dispatch(
-              receiveStock(json)
-            );
+        res => {
+          if (!res.ok) {
+            throw new Error(`Result not ok, status code: ${res.status}`);
           }
-        }
-      );
+          return res.json();
+        })
+      .then(json =>
+        dispatch(receiveStock(json))
+      )
+      .catch(error => {
+        // TODO: dispatch an action to show an error message
+        console.log(`Error on fetchStock: ${error}`);
+      });
   }
 );
