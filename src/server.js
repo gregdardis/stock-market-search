@@ -113,20 +113,19 @@ app.get('/api/stocks/:symbol', (req, res) => {
     modules
   }).then(
     quote => {
-      const missingModules = modules.some(module => (
-        !quote[module]
-      ));
-      if (missingModules) {
-        res.status(404).send('Stock symbol not found.');
-        return;
-      }
+      modules.forEach(module => {
+        if (!quote[module]) {
+          throw new Error(`Module '${module}' was not found.`);
+        }
+      });
       res.send(createStock(quote));
-    },
-    () => res.status(404).send('Stock symbol not found.')
+    }
+  ).catch(() =>
+    res.status(404).send('Stock symbol not found.')
   );
 });
 
 const port = 3000;
-app.listen(port, () => {
-  console.log(`app is listening on port ${port}`);
-});
+app.listen(port, () =>
+  console.log(`app is listening on port ${port}`)
+);
