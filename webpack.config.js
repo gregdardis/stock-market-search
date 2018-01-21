@@ -1,8 +1,8 @@
 // We are using node's native package 'path'
 // https://nodejs.org/api/path.html
 const path = require('path');
-
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
 
 // Constant with our paths
 const paths = {
@@ -22,7 +22,9 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(paths.SRC, 'index.html')
-    })
+    }),
+    new webpack.NamedModulesPlugin(),
+    new webpack.HotModuleReplacementPlugin()
   ],
   // Loaders configuration
   // We are telling webpack to use "babel-loader" for .js and .jsx files
@@ -56,6 +58,7 @@ module.exports = {
     extensions: ['.js', '.jsx']
   },
   devServer: {
+    hot: true,
     proxy: {
       '/api/stocks/*': {
         target: 'http://localhost:3000'
