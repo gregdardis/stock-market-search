@@ -1,29 +1,12 @@
 import {
   BLANK_FIELD
 } from '../../constants';
-
-/* Takes a number or string */
-export const addCommas = number => {
-  let parts = number.toString().split('.');
-
-  const wholeNumberIndex = 0;
-  const wholeNumber = parts[wholeNumberIndex];
-  const wholeNumberWithCommas = wholeNumber.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-
-  parts[wholeNumberIndex] = wholeNumberWithCommas;
-
-  return parts.join('.');
-};
+import { roundAndAddCommas } from './numberFormatting';
 
 const getSelectedStockDataFromState = state => {
   const symbol = state.selectedStock;
   const selectedStock = state.stocks[symbol];
   return selectedStock.stockData;
-};
-
-const roundAndAddCommas = (value, precision) => {
-  let result = value.toFixed(precision);
-  return addCommas(result);
 };
 
 const convertToEmptyStringIfFalsy = str => {
