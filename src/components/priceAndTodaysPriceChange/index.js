@@ -28,17 +28,17 @@ const calculatePriceChange = stockData => {
     .toFixed(VALUE_PRECISION_PRICE_CHANGE);
 };
 
-const calculatePriceChangePercentage = stockData => {
-  return `${(calculatePriceChange(stockData) / getCurrentPrice(stockData) * 100)
-    .toFixed(VALUE_PRECISION_PRICE_CHANGE_PERCENTAGE)}%`;
-};
+const calculatePriceChangePercentage = stockData => (
+  calculatePriceChange(stockData) / getCurrentPrice(stockData) * 100
+);
 
 const mapStateToProps = state => {
   const stockData = getStockData(state);
   return {
     currentPrice: addCommas(getCurrentPrice(stockData)),
     priceChange: addCommas(calculatePriceChange(stockData)),
-    priceChangePercentage: calculatePriceChangePercentage(stockData)
+    priceChangePercentage: `${calculatePriceChangePercentage(stockData)
+      .toFixed(VALUE_PRECISION_PRICE_CHANGE_PERCENTAGE)}%`
   };
 };
 
