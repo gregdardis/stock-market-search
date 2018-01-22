@@ -95,6 +95,7 @@ const createStock = quote => {
   return {
     companyName: price.shortName,
     symbol: price.symbol,
+    exchange: price.exchangeName,
     stockData: processStockData(
       Object.assign(
         {},

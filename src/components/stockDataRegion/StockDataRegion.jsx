@@ -6,6 +6,7 @@ import Row from '../row';
 import CompanyNameAndSymbol from '../companyNameAndSymbol';
 import PriceAndTodaysPriceChange from '../priceAndTodaysPriceChange';
 import { rowComponentsProps } from '../../dataItemProps';
+import Exchange from '../exchange';
 import './stockDataRegion.css';
 
 const StockDataRegion = ({
@@ -14,6 +15,7 @@ const StockDataRegion = ({
   hasData ?
     <div className='stockDataRegion'>
       <CompanyNameAndSymbol />
+      <Exchange />
       <PriceAndTodaysPriceChange />
       <Row
         componentsProps={ rowComponentsProps }
