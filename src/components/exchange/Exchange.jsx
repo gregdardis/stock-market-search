@@ -8,7 +8,10 @@ const Exchange = ({
 }) => {
   return (
     <div className='exchange'>
-      { exchange ? <span>{ exchange }</span> : <span>Unknown stock exchange</span>}
+      { exchange
+        ? <span>{ exchange }</span>
+        : <span>Unknown stock exchange</span>
+      }
     </div>
   );
 };
