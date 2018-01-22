@@ -2,12 +2,7 @@ import {
   BLANK_FIELD
 } from '../../constants';
 import { roundAndAddCommas } from './numberFormatting';
-
-const getSelectedStockDataFromState = state => {
-  const symbol = state.selectedStock;
-  const selectedStock = state.stocks[symbol];
-  return selectedStock.stockData;
-};
+import { getSelectedStockValueForKey } from '../stateGetters';
 
 const convertToEmptyStringIfFalsy = str => {
   return str ? str : '';
@@ -23,7 +18,7 @@ const formatValueForDisplay = (value, valueSuffix, valuePrecision) => {
 };
 
 export const formatValueFromStateAndProps = (state, ownProps) => {
-  const stockData = getSelectedStockDataFromState(state);
+  const stockData = getSelectedStockValueForKey(state, 'stockData');
   const dataItemLabel = ownProps.label;
 
   let {

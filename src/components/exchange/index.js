@@ -1,15 +1,10 @@
 import { connect } from 'react-redux';
 
 import Exchange from './Exchange';
-
-const getStockExchange = state => {
-  const symbol = state.selectedStock;
-  const selectedStock = state.stocks[symbol];
-  return selectedStock.exchange;
-};
+import { getSelectedStockValueForKey } from '../../utils/stateGetters';
 
 const getFormattedStockExchange = state => {
-  const exchange = getStockExchange(state);
+  const exchange = getSelectedStockValueForKey(state, 'exchange');
   switch (exchange) {
   case 'Toronto':
     return 'TSX';
