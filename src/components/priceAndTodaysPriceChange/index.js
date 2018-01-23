@@ -5,7 +5,7 @@ import { roundAndAddCommas } from '../../utils/formatting/numberFormatting';
 
 import {
   LABEL_CURRENT_PRICE,
-  LABEL_OPEN,
+  LABEL_PREVIOUS_CLOSE,
   VALUE_PRECISION_CURRENT_PRICE,
   VALUE_PRECISION_PRICE_CHANGE,
   VALUE_PRECISION_PRICE_CHANGE_PERCENTAGE
@@ -15,8 +15,8 @@ const getCurrentPrice = stockData =>
   stockData[LABEL_CURRENT_PRICE].value;
 
 const calculatePriceChange = stockData => {
-  const openPrice = stockData[LABEL_OPEN].value;
-  return getCurrentPrice(stockData) - openPrice;
+  const previousClosePrice = stockData[LABEL_PREVIOUS_CLOSE].value;
+  return getCurrentPrice(stockData) - previousClosePrice;
 };
 
 const calculatePriceChangePercentage = stockData =>
