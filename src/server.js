@@ -129,6 +129,20 @@ const formatDate = date => {
   return `${year}-${month}-${day}`;
 };
 
+const getDatesAndPrices = quotes => {
+  let datesAndPrices = [];
+  quotes.forEach(({
+    date,
+    close
+  }) => {
+    datesAndPrices.unshift({
+      date: formatDate(date),
+      price: close
+    });
+  });
+  return datesAndPrices;
+};
+
 app.get('/api/stocks/:symbol', (req, res) => {
   const modules = ['summaryDetail', 'defaultKeyStatistics', 'financialData', 'price'];
   const symbol = req.params.symbol;
@@ -155,6 +169,8 @@ app.get('/api/stocks/:symbol', (req, res) => {
               JSON.stringify(quotes[quotes.length - 1], null, 2)
             );
           }
+          const dailyDatesAndPrices = getDatesAndPrices(quotes);
+          console.log(dailyDatesAndPrices);
         }
       );
       res.send(createStock(quote));
