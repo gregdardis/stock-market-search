@@ -163,6 +163,9 @@ app.get('/api/stocks/:symbol', (req, res) => {
         period: 'd'
       }).then(
         quotes => {
+          if (!quotes[0]) {
+            throw new Error('Historical data was not found.');
+          }
           stock.oneYearData = getDatesAndPrices(quotes);
           res.send(stock);
         }
