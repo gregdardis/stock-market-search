@@ -163,13 +163,6 @@ app.get('/api/stocks/:symbol', (req, res) => {
         period: 'd'
       }).then(
         quotes => {
-          if (quotes[0]) {
-            console.log(
-              '%s\n...\n%s',
-              JSON.stringify(quotes[0], null, 2),
-              JSON.stringify(quotes[quotes.length - 1], null, 2)
-            );
-          }
           stock.oneYearData = getDatesAndPrices(quotes);
           res.send(stock);
         }
