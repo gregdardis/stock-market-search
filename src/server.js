@@ -156,6 +156,7 @@ app.get('/api/stocks/:symbol', (req, res) => {
           throw new Error(`Module '${module}' was not found.`);
         }
       });
+      const stock = createStock(quote);
       yahooFinance.historical({
         symbol: symbol,
         from: formatDate(calculateDateYearsInPast(1)),
@@ -169,11 +170,10 @@ app.get('/api/stocks/:symbol', (req, res) => {
               JSON.stringify(quotes[quotes.length - 1], null, 2)
             );
           }
-          const dailyDatesAndPrices = getDatesAndPrices(quotes);
-          console.log(dailyDatesAndPrices);
+          stock.oneYearData = getDatesAndPrices(quotes);
+          res.send(stock);
         }
       );
-      res.send(createStock(quote));
     }
   ).catch(() =>
     res.status(404).send('Stock symbol not found.')
