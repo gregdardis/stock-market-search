@@ -136,7 +136,7 @@ const getDatesAndPrices = quotes => {
     close
   }) => {
     datesAndPrices.unshift({
-      date: formatDate(date),
+      date,
       price: close
     });
   });
