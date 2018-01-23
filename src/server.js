@@ -177,6 +177,15 @@ app.get('/api/stocks/:symbol', (req, res) => {
 });
 
 const port = config.port;
-app.listen(port, () =>
-  console.log(`app is listening on port ${port}`)
-);
+// if statement stops a second server from trying to run on the same
+// port when tests are running on server functions
+if (!module.parent) {
+  app.listen(port, () =>
+    console.log(`app is listening on port ${port}`)
+  );
+}
+
+// exports for unit testing
+module.exports = Object.freeze({
+  padSingleDigitWithZero
+});
