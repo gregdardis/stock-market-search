@@ -107,6 +107,28 @@ const createStock = quote => {
   };
 };
 
+const calculateDateYearsInPast = years => {
+  const year = new Date().getFullYear() - years;
+  const date = new Date();
+  date.setFullYear(year);
+  return date;
+};
+
+const padSingleDigitWithZero = num =>
+  num < 10 ? '0' + num : num.toString();
+
+const formatDate = date => {
+  let day = date.getDate();
+  day = padSingleDigitWithZero(day);
+
+  // month is zero indexed
+  let month = date.getMonth() + 1;
+  month = padSingleDigitWithZero(month);
+
+  const year = date.getFullYear();
+  return `${year}-${month}-${day}`;
+};
+
 app.get('/api/stocks/:symbol', (req, res) => {
   const modules = ['summaryDetail', 'defaultKeyStatistics', 'financialData', 'price'];
   const symbol = req.params.symbol;
@@ -120,6 +142,21 @@ app.get('/api/stocks/:symbol', (req, res) => {
           throw new Error(`Module '${module}' was not found.`);
         }
       });
+      yahooFinance.historical({
+        symbol: symbol,
+        from: formatDate(calculateDateYearsInPast(1)),
+        period: 'd'
+      }).then(
+        quotes => {
+          if (quotes[0]) {
+            console.log(
+              '%s\n...\n%s',
+              JSON.stringify(quotes[0], null, 2),
+              JSON.stringify(quotes[quotes.length - 1], null, 2)
+            );
+          }
+        }
+      );
       res.send(createStock(quote));
     }
   ).catch(() =>
