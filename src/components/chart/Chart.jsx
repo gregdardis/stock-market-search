@@ -19,7 +19,7 @@ const Chart = ({
     <XAxis dataKey='date' />
     <YAxis dataKey='price' />
     <Tooltip />
-    <Line type='monotone' dataKey='price' stroke='red' />
+    <Line type='monotone' dataKey='price' dot={false} stroke='red' />
   </LineChart>
 );
 Chart.propTypes = {
