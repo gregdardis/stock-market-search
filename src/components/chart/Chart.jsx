@@ -9,6 +9,7 @@ import {
   Line
 } from 'recharts';
 
+import { addCommas } from '../../utils/formatting/numberFormatting';
 import './chart.css';
 
 const Chart = ({
@@ -17,7 +18,7 @@ const Chart = ({
   <LineChart width={1000} height={400} data={data} className='chart'>
     <CartesianGrid strokeDashArray='3 3' />
     <XAxis dataKey='date' />
-    <YAxis dataKey='price' domain={['auto', 'auto']} />
+    <YAxis dataKey='price' domain={['auto', 'auto']} tickFormatter={addCommas} />
     <Tooltip />
     <Line type='monotone' dataKey='price' dot={false} stroke='red' />
   </LineChart>
