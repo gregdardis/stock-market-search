@@ -7,6 +7,7 @@ import CompanyNameAndSymbol from '../companyNameAndSymbol';
 import PriceAndTodaysPriceChange from '../priceAndTodaysPriceChange';
 import { rowComponentsProps } from '../../dataItemProps';
 import Exchange from '../exchange';
+import Chart from '../chart';
 import './stockDataRegion.css';
 
 const StockDataRegion = ({
@@ -17,6 +18,7 @@ const StockDataRegion = ({
       <CompanyNameAndSymbol />
       <Exchange />
       <PriceAndTodaysPriceChange />
+      <Chart />
       <Row
         componentsProps={ rowComponentsProps }
         rowKeyName='rowKey'
