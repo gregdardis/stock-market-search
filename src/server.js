@@ -116,7 +116,7 @@ const calculateDateYearsInPast = years => {
 
 const padSingleDigitWithZero = value => {
   if (typeof value !== 'number' && typeof value !== 'string') {
-    throw new Error('padSingleDigitWithZero requires a number or string');
+    throw new Error(`${padSingleDigitWithZero.name} requires a number or string`);
   }
   let num = parseInt(value);
   return num < 10 ? '0' + num : num.toString();
@@ -124,7 +124,7 @@ const padSingleDigitWithZero = value => {
 
 const formatDate = date => {
   if (!(date instanceof Date)) {
-    throw new Error('formatDate requires a date');
+    throw new Error(`${formatDate.name} requires a date`);
   }
 
   let day = date.getDate();
