@@ -1,4 +1,4 @@
-import expect from 'expect.js';
+import { expect } from 'chai';
 
 import {
   padSingleDigitWithZero,
@@ -189,35 +189,35 @@ export const formatDateTest = () => {
         .to
         .equal(`${YEAR}-12-${daysInMonth.december}`);
     });
-    it('should return null when given the empty string', () => {
-      expect(formatDate(''))
-        .to
-        .equal(null);
+    it('should throw an error when given the empty string', () => {
+      expect(() => {
+        formatDate('');
+      }).to.throw();
     });
-    it('should return null when given a number', () => {
-      expect(formatDate(4))
-        .to
-        .equal(null);
+    it('should throw an error when given a number', () => {
+      expect(() => {
+        formatDate(4);
+      }).to.throw();
     });
-    it('should return null when given an object', () => {
-      expect(formatDate({}))
-        .to
-        .equal(null);
+    it('should throw an error when given an object', () => {
+      expect(() => {
+        formatDate({});
+      }).to.throw();
     });
-    it('should return null when given an array', () => {
-      expect(formatDate([]))
-        .to
-        .equal(null);
+    it('should throw an error when given an array', () => {
+      expect(() => {
+        formatDate([]);
+      }).to.throw();
     });
-    it('should return null when given a boolean', () => {
-      expect(formatDate(true))
-        .to
-        .equal(null);
+    it('should throw an error when given a boolean', () => {
+      expect(() => {
+        formatDate(true);
+      }).to.throw();
     });
-    it('should return null when given null', () => {
-      expect(formatDate(null))
-        .to
-        .equal(null);
+    it('should throw an error when given null', () => {
+      expect(() => {
+        formatDate(null);
+      }).to.throw();
     });
   });
 };

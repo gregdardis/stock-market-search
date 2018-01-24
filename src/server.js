@@ -123,8 +123,9 @@ const padSingleDigitWithZero = num => {
 
 const formatDate = date => {
   if (!(date instanceof Date)) {
-    return null;
+    throw new Error('formatDate requires a date');
   }
+
   let day = date.getDate();
   day = padSingleDigitWithZero(day);
 
