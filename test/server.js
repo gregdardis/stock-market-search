@@ -7,63 +7,63 @@ import {
 
 export const padSingleDigitWithZeroTest = () => {
   describe('padSingleDigitWithZero', () => {
-    it('should pad 0 with a 0', () => {
+    it('should pad 0 with a 0 and stringify', () => {
       expect(padSingleDigitWithZero(0))
         .to
         .equal('00');
     });
-    it('should pad 1 with a 0', () => {
-      expect(padSingleDigitWithZero(1))
+    it('should pad \'1\' with a 0', () => {
+      expect(padSingleDigitWithZero('1'))
         .to
         .equal('01');
     });
-    it('should pad 2 with a 0', () => {
+    it('should pad 2 with a 0 and stringify', () => {
       expect(padSingleDigitWithZero(2))
         .to
         .equal('02');
     });
-    it('should pad 3 with a 0', () => {
-      expect(padSingleDigitWithZero(3))
+    it('should pad \'3\' with a 0', () => {
+      expect(padSingleDigitWithZero('3'))
         .to
         .equal('03');
     });
-    it('should pad 4 with a 0', () => {
+    it('should pad 4 with a 0 and stringify', () => {
       expect(padSingleDigitWithZero(4))
         .to
         .equal('04');
     });
-    it('should pad 5 with a 0', () => {
-      expect(padSingleDigitWithZero(5))
+    it('should pad \'5\' with a 0', () => {
+      expect(padSingleDigitWithZero('5'))
         .to
         .equal('05');
     });
-    it('should pad 6 with a 0', () => {
+    it('should pad 6 with a 0 and stringify', () => {
       expect(padSingleDigitWithZero(6))
         .to
         .equal('06');
     });
-    it('should pad 7 with a 0', () => {
-      expect(padSingleDigitWithZero(7))
+    it('should pad \'7\' with a 0', () => {
+      expect(padSingleDigitWithZero('7'))
         .to
         .equal('07');
     });
-    it('should pad 8 with a 0', () => {
+    it('should pad 8 with a 0 and stringify', () => {
       expect(padSingleDigitWithZero(8))
         .to
         .equal('08');
     });
-    it('should pad 9 with a 0', () => {
-      expect(padSingleDigitWithZero(9))
+    it('should pad \'9\' with a 0', () => {
+      expect(padSingleDigitWithZero('9'))
         .to
         .equal('09');
     });
-    it('should not change 10', () => {
+    it('should not change 10 but stringify', () => {
       expect(padSingleDigitWithZero(10))
         .to
         .equal('10');
     });
-    it('should not change 11', () => {
-      expect(padSingleDigitWithZero(11))
+    it('should not change \'11\'', () => {
+      expect(padSingleDigitWithZero('11'))
         .to
         .equal('11');
     });
@@ -72,30 +72,29 @@ export const padSingleDigitWithZeroTest = () => {
         .to
         .equal('31');
     });
-    it('should return null if given a string', () => {
-      expect(padSingleDigitWithZero('hello'))
-        .to
-        .equal(null);
+    it('should throw an error if given an object', () => {
+      expect(() => {
+        padSingleDigitWithZero({});
+      }).to
+        .throw();
     });
-    it('should return null if given an object', () => {
-      expect(padSingleDigitWithZero({}))
-        .to
-        .equal(null);
+    it('should throw an error if given an array', () => {
+      expect(() => {
+        padSingleDigitWithZero([]);
+      }).to
+        .throw();
     });
-    it('should return null if given an array', () => {
-      expect(padSingleDigitWithZero([]))
-        .to
-        .equal(null);
+    it('should throw an error if given a boolean', () => {
+      expect(() => {
+        padSingleDigitWithZero(true);
+      }).to
+        .throw();
     });
-    it('should return null if given a boolean', () => {
-      expect(padSingleDigitWithZero(true))
-        .to
-        .equal(null);
-    });
-    it('should return null if given null', () => {
-      expect(padSingleDigitWithZero(null))
-        .to
-        .equal(null);
+    it('should throw an error if given null', () => {
+      expect(() => {
+        padSingleDigitWithZero(null);
+      }).to
+        .throw();
     });
   });
 };
@@ -192,32 +191,38 @@ export const formatDateTest = () => {
     it('should throw an error when given the empty string', () => {
       expect(() => {
         formatDate('');
-      }).to.throw();
+      }).to
+        .throw();
     });
     it('should throw an error when given a number', () => {
       expect(() => {
         formatDate(4);
-      }).to.throw();
+      }).to
+        .throw();
     });
     it('should throw an error when given an object', () => {
       expect(() => {
         formatDate({});
-      }).to.throw();
+      }).to
+        .throw();
     });
     it('should throw an error when given an array', () => {
       expect(() => {
         formatDate([]);
-      }).to.throw();
+      }).to
+        .throw();
     });
     it('should throw an error when given a boolean', () => {
       expect(() => {
         formatDate(true);
-      }).to.throw();
+      }).to
+        .throw();
     });
     it('should throw an error when given null', () => {
       expect(() => {
         formatDate(null);
-      }).to.throw();
+      }).to
+        .throw();
     });
   });
 };

@@ -114,10 +114,11 @@ const calculateDateYearsInPast = years => {
   return date;
 };
 
-const padSingleDigitWithZero = num => {
-  if (typeof num !== 'number') {
-    return null;
+const padSingleDigitWithZero = value => {
+  if (typeof value !== 'number' && typeof value !== 'string') {
+    throw new Error('padSingleDigitWithZero requires a number or string');
   }
+  let num = parseInt(value);
   return num < 10 ? '0' + num : num.toString();
 };
 
