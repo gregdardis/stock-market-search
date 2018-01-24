@@ -114,10 +114,17 @@ const calculateDateYearsInPast = years => {
   return date;
 };
 
-const padSingleDigitWithZero = num =>
-  num < 10 ? '0' + num : num.toString();
+const padSingleDigitWithZero = num => {
+  if (typeof num !== 'number') {
+    return null;
+  }
+  return num < 10 ? '0' + num : num.toString();
+};
 
 const formatDate = date => {
+  if (!(date instanceof Date)) {
+    return null;
+  }
   let day = date.getDate();
   day = padSingleDigitWithZero(day);
 
@@ -187,5 +194,6 @@ if (!module.parent) {
 
 // exports for unit testing
 module.exports = Object.freeze({
-  padSingleDigitWithZero
+  padSingleDigitWithZero,
+  formatDate
 });

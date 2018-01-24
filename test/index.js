@@ -1,5 +1,9 @@
 import { formatValueFromStateAndPropsTest } from './utils/formatting/dataItem';
-import { padSingleDigitWithZeroTest } from './server';
+import {
+  padSingleDigitWithZeroTest,
+  formatDateTest
+} from './server';
 
 formatValueFromStateAndPropsTest();
 padSingleDigitWithZeroTest();
+formatDateTest();
