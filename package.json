@@ -12,7 +12,7 @@
     "dev": "webpack-dev-server",
     "dev:test": "npm-run-all --parallel dev test:watch",
     "postinstall": "cd src/client/ && npm i && cd ../server/ && npm i & cd ../../",
-    "start": "nodemon src/server/server.js",
+    "start": "nodemon src/server",
     "test": "mocha --compilers js:babel-core/register",
     "test:watch": "mocha --watch --compilers js:babel-core/register"
   },
