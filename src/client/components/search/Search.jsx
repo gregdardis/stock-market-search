@@ -15,11 +15,9 @@ const Search = ({
       performSearch(searchTerm);
     }
   };
-
   const handleChange = event => {
     updateSearchTerm(event.target.value);
   };
-
   const handleKeyDown = event => {
     const keyPressed = event.key;
     if (keyPressed === 'Enter') {
@@ -28,7 +26,6 @@ const Search = ({
       clearSearchTerm();
     }
   };
-
   return (
     <div className='search'>
       <input
