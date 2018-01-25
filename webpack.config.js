@@ -7,12 +7,13 @@ const webpack = require('webpack');
 // Constant with our paths
 const paths = {
   DIST: path.resolve(__dirname, 'dist'),
-  SRC: path.resolve(__dirname, 'src')
+  SRC: path.resolve(__dirname, 'src'),
+  CLIENT: path.join(__dirname, 'src', 'client')
 };
 
 // Webpack configuration
 module.exports = {
-  entry: path.join(paths.SRC, 'render.js'),
+  entry: path.join(paths.CLIENT, 'render.js'),
   output: {
     path: paths.DIST,
     filename: 'app.bundle.js'
@@ -21,7 +22,7 @@ module.exports = {
   // index.html is used as a template in which it'll inject bundled app.
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(paths.SRC, 'index.html')
+      template: path.join(paths.CLIENT, 'index.html')
     }),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin()

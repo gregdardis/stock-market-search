@@ -1,4 +1,4 @@
-const constants = require('./constants');
+const constants = require('../constants');
 const config = require('./config');
 
 const express = require('express');

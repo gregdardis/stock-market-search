@@ -2,7 +2,7 @@ import { formatValueFromStateAndPropsTest } from './utils/formatting/dataItem';
 import {
   padSingleDigitWithZeroTest,
   formatDateTest
-} from './server';
+} from './server/server';
 
 formatValueFromStateAndPropsTest();
 padSingleDigitWithZeroTest();

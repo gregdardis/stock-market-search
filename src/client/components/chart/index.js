@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import Chart from './Chart';
-import { getSelectedStockValueForKey } from '../../utils/stateGetters';
+import { getSelectedStockValueForKey } from '../../../utils/stateGetters';
 
 
 const mapStateToProps = state => ({

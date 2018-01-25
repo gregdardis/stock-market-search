@@ -4,7 +4,7 @@
     "build": "webpack",
     "dev": "webpack-dev-server",
     "dev:test": "npm-run-all --parallel dev test:watch",
-    "start": "nodemon src/server.js",
+    "start": "nodemon src/server/server.js",
     "test": "mocha --compilers js:babel-core/register",
     "test:watch": "mocha --watch --compilers js:babel-core/register"
   },

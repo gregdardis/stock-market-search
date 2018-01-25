@@ -10,7 +10,7 @@ import {
 } from 'recharts';
 import dateFormat from 'dateformat';
 
-import { addCommas } from '../../utils/formatting/numberFormatting';
+import { addCommas } from '../../../utils/formatting/numberFormatting';
 import './chart.css';
 
 const Chart = ({

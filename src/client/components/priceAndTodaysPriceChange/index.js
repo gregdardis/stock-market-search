@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import PriceAndTodaysPriceChange from './PriceAndTodaysPriceChange';
-import { roundAndAddCommas } from '../../utils/formatting/numberFormatting';
+import { roundAndAddCommas } from '../../../utils/formatting/numberFormatting';
 
 import {
   LABEL_CURRENT_PRICE,
@@ -9,7 +9,7 @@ import {
   VALUE_PRECISION_CURRENT_PRICE,
   VALUE_PRECISION_PRICE_CHANGE,
   VALUE_PRECISION_PRICE_CHANGE_PERCENTAGE
-} from '../../constants';
+} from '../../../constants';
 
 const getCurrentPrice = stockData =>
   stockData[LABEL_CURRENT_PRICE].value;
