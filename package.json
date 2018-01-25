@@ -2,8 +2,8 @@
   "name": "stock-market-info",
   "version": "1.0.0",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/gregdardis/stock-market-info.git"
+    "type": "git",
+    "url": "https://github.com/gregdardis/stock-market-info.git"
   },
   "license": "ISC",
   "scripts": {
