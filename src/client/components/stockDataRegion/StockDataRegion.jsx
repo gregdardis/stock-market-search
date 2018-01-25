@@ -5,7 +5,7 @@ import Column from '../column';
 import Row from '../row';
 import CompanyNameAndSymbol from '../companyNameAndSymbol';
 import PriceAndTodaysPriceChange from '../priceAndTodaysPriceChange';
-import { rowComponentsProps } from '../../dataItemProps';
+import { rowComponentsProps } from './childProps';
 import Exchange from '../exchange';
 import Chart from '../chart';
 import './stockDataRegion.css';
