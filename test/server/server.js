@@ -96,6 +96,24 @@ export const padSingleDigitWithZeroTest = () => {
       }).to
         .throw();
     });
+    it('should throw an error if given numbers followed by letters (in a string)', () => {
+      expect(() => {
+        padSingleDigitWithZero('12hello');
+      }).to
+        .throw();
+    });
+    it('should throw an error if given letters followed by numbers (in a string)', () => {
+      expect(() => {
+        padSingleDigitWithZero('hello12');
+      }).to
+        .throw();
+    });
+    it('should throw an error if given letters (in a string)', () => {
+      expect(() => {
+        padSingleDigitWithZero('hello');
+      }).to
+        .throw();
+    });
   });
 };
 

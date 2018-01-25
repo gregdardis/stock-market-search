@@ -115,10 +115,10 @@ const calculateDateYearsInPast = years => {
 };
 
 const padSingleDigitWithZero = value => {
-  if (typeof value !== 'number' && typeof value !== 'string') {
+  let num = parseInt(value);
+  if (isNaN(value) || isNaN(num)) {
     throw new Error(`${padSingleDigitWithZero.name} requires a number or string`);
   }
-  let num = parseInt(value);
   return num < 10 ? '0' + num : num.toString();
 };
 
