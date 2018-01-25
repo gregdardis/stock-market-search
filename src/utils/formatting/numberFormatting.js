@@ -1,5 +1,5 @@
 /* Takes a number or string */
-const addCommas = number => {
+export const addCommas = number => {
   let parts = number.toString().split('.');
 
   const wholeNumberIndex = 0;

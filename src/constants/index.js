@@ -1,5 +1,6 @@
 module.exports = Object.freeze({
   BLANK_FIELD: '--',
+  CHART_X_AXIS_DATE_FORMAT: 'mmm d',
   LABEL_AVERAGE: 'Avg',
   LABEL_CURRENT_PRICE: 'Current Price',
   LABEL_DIVIDEND: 'Div',
@@ -18,6 +19,9 @@ module.exports = Object.freeze({
   VALUE_SUFFIX_FCFY: '%',
   VALUE_SUFFIX_ROE: '%',
 
+  CHART_HEIGHT: 400,
+  CHART_WIDTH: 1000,
+  CHART_X_AXIS_MIN_TICK_GAP: 30,
   VALUE_PRECISION_CURRENT_PRICE: 2,
   VALUE_PRECISION_DIVIDEND: 2,
   VALUE_PRECISION_EPS: 2,

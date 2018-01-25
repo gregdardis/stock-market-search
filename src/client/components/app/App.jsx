@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Search from './components/search';
-import StockDataRegion from './components/stockDataRegion';
+import Search from '../search';
+import StockDataRegion from '../stockDataRegion';
 
 import './app.css';
 

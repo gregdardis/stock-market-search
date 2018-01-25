@@ -18,11 +18,12 @@ export const reducer = (
   case RECEIVE_STOCK:
     return Object.assign({}, state, {
       companyName: action.companyName,
-      symbol: action.symbol,
       exchange: action.exchange,
       isFetching: false,
+      lastUpdated: action.receivedAt,
+      oneYearData: action.oneYearData,
       stockData: action.stockData,
-      lastUpdated: action.receivedAt
+      symbol: action.symbol
     });
   default:
     return state;

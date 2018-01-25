@@ -1,4 +1,4 @@
-const constants = require('./constants');
+const constants = require('../constants');
 const config = require('./config');
 
 const express = require('express');
@@ -109,6 +109,52 @@ const createStock = quote => {
   };
 };
 
+const calculateDateYearsInPast = years => {
+  const year = new Date().getFullYear() - years;
+  const date = new Date();
+  date.setFullYear(year);
+  return date;
+};
+
+const padSingleDigitWithZero = value => {
+  let num = parseInt(value);
+  // need to check value because parseInt turns '12hello' into a number
+  if (isNaN(value) || isNaN(num)) {
+    throw new TypeError(`${padSingleDigitWithZero.name} requires a number or numeric string`);
+  }
+  return num < 10 ? '0' + num : num.toString();
+};
+
+const formatDate = date => {
+  if (!(date instanceof Date)) {
+    throw new TypeError(`${formatDate.name} requires a date`);
+  }
+
+  let day = date.getDate();
+  day = padSingleDigitWithZero(day);
+
+  // month is zero indexed
+  let month = date.getMonth() + 1;
+  month = padSingleDigitWithZero(month);
+
+  const year = date.getFullYear();
+  return `${year}-${month}-${day}`;
+};
+
+const getDatesAndPrices = quotes => {
+  let datesAndPrices = [];
+  quotes.forEach(({
+    date,
+    close
+  }) => {
+    datesAndPrices.unshift({
+      date,
+      price: close
+    });
+  });
+  return datesAndPrices;
+};
+
 app.get('/api/stocks/:symbol', (req, res) => {
   const modules = ['summaryDetail', 'defaultKeyStatistics', 'financialData', 'price'];
   const symbol = req.params.symbol;
@@ -122,7 +168,20 @@ app.get('/api/stocks/:symbol', (req, res) => {
           throw new Error(`Module '${module}' was not found.`);
         }
       });
-      res.send(createStock(quote));
+      const stock = createStock(quote);
+      yahooFinance.historical({
+        symbol: symbol,
+        from: formatDate(calculateDateYearsInPast(1)),
+        period: 'd'
+      }).then(
+        quotes => {
+          if (!quotes[0]) {
+            throw new Error('Historical data was not found.');
+          }
+          stock.oneYearData = getDatesAndPrices(quotes);
+          res.send(stock);
+        }
+      );
     }
   ).catch(() =>
     res.status(404).send('Stock symbol not found.')
@@ -130,6 +189,16 @@ app.get('/api/stocks/:symbol', (req, res) => {
 });
 
 const port = config.port;
-app.listen(port, () =>
-  console.log(`app is listening on port ${port}`)
-);
+// if statement stops a second server from trying to run on the same
+// port when tests are running on server functions
+if (!module.parent) {
+  app.listen(port, () =>
+    console.log(`app is listening on port ${port}`)
+  );
+}
+
+// exports for unit testing
+module.exports = Object.freeze({
+  padSingleDigitWithZero,
+  formatDate
+});
