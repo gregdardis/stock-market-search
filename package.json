@@ -1,10 +1,17 @@
 {
   "name": "stock-market-info",
+  "version": "1.0.0",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/gregdardis/stock-market-info.git"
+  },
+  "license": "ISC",
   "scripts": {
     "build": "webpack --config ./src/client/config/webpack.config.js",
+    "clean": "rm -r node_modules && cd src/client/ && rm -r node_modules && cd ../../",
     "dev": "webpack-dev-server --config ./src/client/config/webpack.config.js",
     "dev:test": "npm-run-all --parallel dev test:watch",
-    "install": "npm install && cd src/client/ && npm install",
+    "postinstall": "cd src/client/ && npm install && cd ../../",
     "start": "nodemon src/server/server.js",
     "test": "mocha --compilers js:babel-core/register",
     "test:watch": "mocha --watch --compilers js:babel-core/register"
