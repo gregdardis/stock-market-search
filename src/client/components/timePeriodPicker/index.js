@@ -11,7 +11,11 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
+const mapStateToProps = state => ({
+  chartTimePeriod: state.chartTimePeriod
+});
+
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(TimePeriodPicker);

@@ -14,38 +14,52 @@ import {
 } from '../../../constants';
 
 const TimePeriodPicker = ({
-  updateChartTimePeriod
+  updateChartTimePeriod,
+  chartTimePeriod
 }) => {
   const handleClick = timePeriod => {
     updateChartTimePeriod(timePeriod);
   };
+  const setLabelColor = buttonLabel => {
+    if (chartTimePeriod === buttonLabel) {
+      return 'blue';
+    }
+    return 'black';
+  };
   return (
     <div className='timePeriodPicker'>
       <RaisedButton label={ TIME_PERIOD_ONE_DAY }
+        labelColor={ setLabelColor(TIME_PERIOD_ONE_DAY) }
         onClick={ () => {
           handleClick(TIME_PERIOD_ONE_DAY);
         } } />
       <RaisedButton label={ TIME_PERIOD_FIVE_DAY }
+        labelColor={ setLabelColor(TIME_PERIOD_FIVE_DAY) }
         onClick={ () => {
           handleClick(TIME_PERIOD_FIVE_DAY);
         } } />
       <RaisedButton label={ TIME_PERIOD_ONE_MONTH }
+        labelColor={ setLabelColor(TIME_PERIOD_ONE_MONTH) }
         onClick={ () => {
           handleClick(TIME_PERIOD_ONE_MONTH);
         } } />
       <RaisedButton label={ TIME_PERIOD_THREE_MONTH }
+        labelColor={ setLabelColor(TIME_PERIOD_THREE_MONTH) }
         onClick={ () => {
           handleClick(TIME_PERIOD_THREE_MONTH);
         } } />
       <RaisedButton label={ TIME_PERIOD_ONE_YEAR }
+        labelColor={ setLabelColor(TIME_PERIOD_ONE_YEAR) }
         onClick={ () => {
           handleClick(TIME_PERIOD_ONE_YEAR);
         } } />
       <RaisedButton label={ TIME_PERIOD_FIVE_YEAR }
+        labelColor={ setLabelColor(TIME_PERIOD_FIVE_YEAR) }
         onClick={ () => {
           handleClick(TIME_PERIOD_FIVE_YEAR);
         } } />
       <RaisedButton label={ TIME_PERIOD_MAX }
+        labelColor={ setLabelColor(TIME_PERIOD_MAX) }
         onClick={ () => {
           handleClick(TIME_PERIOD_MAX);
         } } />
@@ -53,6 +67,7 @@ const TimePeriodPicker = ({
   );
 };
 TimePeriodPicker.propTypes = {
-  updateChartTimePeriod: PropTypes.func.isRequired
+  updateChartTimePeriod: PropTypes.func.isRequired,
+  chartTimePeriod: PropTypes.string.isRequired
 };
 export default TimePeriodPicker;
