@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 
 import './timePeriodPicker.css';
 import {
+  CHART_BUTTON_DEFAULT_LABEL_COLOR,
+  CHART_BUTTON_SELECTED_LABEL_COLOR,
   TIME_PERIOD_ONE_DAY,
   TIME_PERIOD_FIVE_DAY,
   TIME_PERIOD_ONE_MONTH,
@@ -22,9 +24,9 @@ const TimePeriodPicker = ({
   };
   const setLabelColor = buttonLabel => {
     if (chartTimePeriod === buttonLabel) {
-      return 'blue';
+      return CHART_BUTTON_SELECTED_LABEL_COLOR;
     }
-    return 'black';
+    return CHART_BUTTON_DEFAULT_LABEL_COLOR;
   };
   return (
     <div className='timePeriodPicker'>
