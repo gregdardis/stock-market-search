@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import { formatValueFromStateAndProps } from '../../../src/utils/formatting/dataItem';
+import { formatValueFromStateAndProps } from '../../../src/utils/formatting/stringFormatting';
 import {
   BLANK_FIELD,
   LABEL_DIVIDEND,
