@@ -8,6 +8,7 @@ module.exports = Object.freeze({
   LABEL_HIGH: 'High',
   LABEL_LOW: 'Low',
   LABEL_MARKET_CAP: 'Mkt Cap',
+  LABEL_PREVIOUS_CLOSE: 'Previous Close',
   LABEL_OPEN: 'Open',
   LABEL_PE_RATIO: 'P/E Ratio',
   LABEL_ROE: 'ROE',

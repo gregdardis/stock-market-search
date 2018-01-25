@@ -40,12 +40,14 @@ const processStockData = ({
   freeCashflow,
   marketCap,
   open,
+  previousClose,
   returnOnEquity,
   trailingEps,
   trailingPE,
   volume
 }) => {
   return {
+    [constants.LABEL_PREVIOUS_CLOSE]: createStockDataEntry(previousClose),
     [constants.LABEL_CURRENT_PRICE]: createStockDataEntry(currentPrice),
     [constants.LABEL_OPEN]: createStockDataEntry(open),
     [constants.LABEL_HIGH]: createStockDataEntry(dayHigh),
