@@ -1,3 +1,17 @@
-import TimePeriodPicker from './TimePeriodPicker';
+import { connect } from 'react-redux';
 
-export default TimePeriodPicker;
+import TimePeriodPicker from './TimePeriodPicker';
+import { updateChartTimePeriod } from '../../actions';
+
+const mapDispatchToProps = dispatch => ({
+  updateChartTimePeriod(timePeriod) {
+    dispatch(
+      updateChartTimePeriod(timePeriod)
+    );
+  }
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(TimePeriodPicker);

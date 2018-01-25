@@ -19,6 +19,14 @@ module.exports = Object.freeze({
   VALUE_SUFFIX_FCFY: '%',
   VALUE_SUFFIX_ROE: '%',
 
+  TIME_PERIOD_ONE_DAY: '1 day',
+  TIME_PERIOD_FIVE_DAY: '5 day',
+  TIME_PERIOD_ONE_MONTH: '1 month',
+  TIME_PERIOD_THREE_MONTH: '3 month',
+  TIME_PERIOD_ONE_YEAR: '1 year',
+  TIME_PERIOD_FIVE_YEAR: '5 year',
+  TIME_PERIOD_MAX: 'max',
+
   CHART_HEIGHT: 400,
   CHART_WIDTH: 1000,
   CHART_X_AXIS_MIN_TICK_GAP: 30,

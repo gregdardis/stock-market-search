@@ -12,6 +12,9 @@ export const FETCH_STOCK_FAILURE = 'FETCH_STOCK_FAILURE';
 export const REQUEST_STOCK = 'REQUEST_STOCK';
 export const RECEIVE_STOCK = 'RECEIVE_STOCK';
 
+export const SET_CHART_TO_DEFAULT_TIME_PERIOD = 'SET_CHART_TO_DEFAULT_TIME_PERIOD';
+export const UPDATE_CHART_TIME_PERIOD = 'UPDATE_CHART_TIME_PERIOD';
+
 export const updateSearchTerm = searchTerm => ({
   type: UPDATE_SEARCH_TERM,
   searchTerm
@@ -47,6 +50,15 @@ export const receiveStock = ({
   symbol
 });
 
+export const updateChartTimePeriod = timePeriod => ({
+  type: UPDATE_CHART_TIME_PERIOD,
+  timePeriod
+});
+
+export const setChartToDefaultTimePeriod = () => ({
+  type: SET_CHART_TO_DEFAULT_TIME_PERIOD
+});
+
 // Help from https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 export const fetchStock = symbol => (
   dispatch => {
@@ -60,9 +72,10 @@ export const fetchStock = symbol => (
           }
           return res.json();
         })
-      .then(json =>
-        dispatch(receiveStock(json))
-      )
+      .then(json => {
+        dispatch(receiveStock(json));
+        dispatch(setChartToDefaultTimePeriod());
+      })
       .catch(error => {
         // TODO: dispatch an action to show an error message
         console.log(`Error on fetchStock: ${error}`);
