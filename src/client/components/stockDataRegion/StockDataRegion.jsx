@@ -5,6 +5,7 @@ import Column from '../column';
 import Row from '../row';
 import CompanyNameAndSymbol from '../companyNameAndSymbol';
 import PriceAndTodaysPriceChange from '../priceAndTodaysPriceChange';
+import TimePeriodPicker from '../timePeriodPicker';
 import { rowComponentsProps } from './childProps';
 import Exchange from '../exchange';
 import Chart from '../chart';
@@ -18,6 +19,7 @@ const StockDataRegion = ({
       <CompanyNameAndSymbol />
       <Exchange />
       <PriceAndTodaysPriceChange />
+      <TimePeriodPicker />
       <Chart />
       <Row
         componentsProps={ rowComponentsProps }
