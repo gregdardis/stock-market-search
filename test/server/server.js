@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import {
   padSingleDigitWithZero,
   formatDate
-} from '../../src/server/server';
+} from '../../src/server';
 
 export const padSingleDigitWithZeroTest = () => {
   describe('padSingleDigitWithZero', () => {
