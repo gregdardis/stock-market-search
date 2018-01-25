@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import Exchange from './Exchange';
-import { getSelectedStockValueForKey } from '../../utils/stateGetters';
+import { getSelectedStockValueForKey } from '../../../utils/stateGetters';
 
 const getFormattedStockExchange = state => {
   const exchange = getSelectedStockValueForKey(state, 'exchange');

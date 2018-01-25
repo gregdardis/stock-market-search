@@ -1,6 +1,9 @@
 import { reducer as stock } from './stock';
 
-import { RECEIVE_STOCK, REQUEST_STOCK } from '../actions';
+import {
+  RECEIVE_STOCK,
+  REQUEST_STOCK
+} from '../actions';
 
 export const reducer = (state = {}, action) => {
   switch (action.type) {

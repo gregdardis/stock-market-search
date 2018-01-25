@@ -31,13 +31,20 @@ export const requestStock = symbol => ({
   symbol
 });
 
-export const receiveStock = json => ({
+export const receiveStock = ({
+  companyName,
+  exchange,
+  oneYearData,
+  stockData,
+  symbol
+}) => ({
   type: RECEIVE_STOCK,
-  companyName: json.companyName,
-  symbol: json.symbol,
-  exchange: json.exchange,
-  stockData: json.stockData,
-  receivedAt: Date.now()
+  companyName,
+  exchange,
+  oneYearData,
+  receivedAt: Date.now(),
+  stockData,
+  symbol
 });
 
 // Help from https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch

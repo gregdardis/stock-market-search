@@ -1,0 +1,7 @@
+{
+  "name": "server",
+  "dependencies": {
+    "express": "^4.16.2",
+    "yahoo-finance": "^0.3.5"
+  }
+}

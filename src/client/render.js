@@ -6,7 +6,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 
-import App from './App';
+import App from './components/app';
 import { reducer } from './reducers';
 
 const store = createStore(
@@ -30,7 +30,7 @@ render(App);
 
 // Webpack Hot Module Replacement API
 if (module.hot) {
-  module.hot.accept('./App', () => {
+  module.hot.accept('./components/app', () => {
     render(App);
   });
 }

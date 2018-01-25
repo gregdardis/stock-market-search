@@ -1,4 +1,4 @@
-import DataItem from './components/dataItem';
+import DataItem from '../dataItem';
 
 import {
   LABEL_AVERAGE,
@@ -23,7 +23,7 @@ import {
   VALUE_PRECISION_PE,
   VALUE_PRECISION_ROE,
   VALUE_PRECISION_VOLUME
-} from './constants';
+} from '../../../constants';
 
 export const rowComponentsProps = [
   {
