@@ -116,15 +116,16 @@ const calculateDateYearsInPast = years => {
 
 const padSingleDigitWithZero = value => {
   let num = parseInt(value);
+  // need to check value because parseInt turns '12hello' into a number
   if (isNaN(value) || isNaN(num)) {
-    throw new Error(`${padSingleDigitWithZero.name} requires a number or string`);
+    throw new TypeError(`${padSingleDigitWithZero.name} requires a number or numeric string`);
   }
   return num < 10 ? '0' + num : num.toString();
 };
 
 const formatDate = date => {
   if (!(date instanceof Date)) {
-    throw new Error(`${formatDate.name} requires a date`);
+    throw new TypeError(`${formatDate.name} requires a date`);
   }
 
   let day = date.getDate();
