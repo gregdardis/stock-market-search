@@ -1,4 +1,4 @@
-import expect from 'expect.js';
+import { expect } from 'chai';
 
 import { formatValueFromStateAndProps } from '../../../src/utils/formatting/dataItem';
 import {
