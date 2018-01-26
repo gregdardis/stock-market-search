@@ -1,14 +1,12 @@
 import React from 'react';
 
-import Search from '../search';
-import StockDataRegion from '../stockDataRegion';
+import Home from '../home';
 
 import './app.css';
 
 const App = () => (
   <div className='app'>
-    <Search />
-    <StockDataRegion />
+    <Home />
   </div>
 );
 
