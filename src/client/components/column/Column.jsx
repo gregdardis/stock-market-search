@@ -16,7 +16,7 @@ const Column = ({
           key={ cellProps[columnKeyName] }
           { ...cellProps }
         />
-      ))}
+      )) }
     </div>
   );
 };
