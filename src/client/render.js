@@ -5,7 +5,6 @@ import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import App from './components/app';
 import { reducer } from './reducers';
@@ -20,9 +19,7 @@ const render = Component => {
   ReactDOM.render(
     <Provider store={ store }>
       <AppContainer>
-        <MuiThemeProvider>
-          <Component />
-        </MuiThemeProvider>
+        <Component />
       </AppContainer>
     </Provider>,
     document.getElementById('app')

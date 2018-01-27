@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import Search from './search';
 import { updateSearchTerm, clearSearchTerm, fetchStock } from '../../actions';
 
+const mapStateToProps = state => ({
+  searchTerm: state.searchTerm
+});
+
 const mapDispatchToProps = dispatch => ({
   updateSearchTerm(searchTerm) {
     dispatch(
@@ -19,10 +23,6 @@ const mapDispatchToProps = dispatch => ({
       fetchStock(searchTerm)
     );
   }
-});
-
-const mapStateToProps = state => ({
-  searchTerm: state.searchTerm
 });
 
 export default connect(
