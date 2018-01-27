@@ -6,12 +6,8 @@ import {
 } from 'react-router-dom';
 
 import Home from '../home';
+import Glossary from '../glossary';
 import './app.css';
-
-// TODO: extract to file
-const Glossary = () => (
-  <div>Glossary Page</div>
-);
 
 const App = () => (
   <Router>
