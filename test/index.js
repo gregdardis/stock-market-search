@@ -2,7 +2,7 @@ import { formatValueFromStateAndPropsTest } from './utils/formatting/stringForma
 import {
   padSingleDigitWithZeroTest,
   formatDateTest
-} from './server/server';
+} from './server';
 import { addCommasTest } from './utils/formatting/numberFormatting';
 
 formatValueFromStateAndPropsTest();
