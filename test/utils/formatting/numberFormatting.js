@@ -44,5 +44,47 @@ export const addCommasTest = () => {
         .to
         .equal('3,535,353');
     });
+    it('should throw an error if given an object', () => {
+      expect(() => {
+        addCommas({});
+      }).to
+        .throw();
+    });
+    it('should throw an error if given an array', () => {
+      expect(() => {
+        addCommas([]);
+      }).to
+        .throw();
+    });
+    it('should throw an error if given a boolean', () => {
+      expect(() => {
+        addCommas(true);
+      }).to
+        .throw();
+    });
+    it('should throw an error if given null', () => {
+      expect(() => {
+        addCommas(null);
+      }).to
+        .throw();
+    });
+    it('should throw an error if given numbers followed by letters (in a string)', () => {
+      expect(() => {
+        addCommas('12hello');
+      }).to
+        .throw();
+    });
+    it('should throw an error if given letters followed by numbers (in a string)', () => {
+      expect(() => {
+        addCommas('hello12');
+      }).to
+        .throw();
+    });
+    it('should throw an error if given letters (in a string)', () => {
+      expect(() => {
+        addCommas('hello');
+      }).to
+        .throw();
+    });
   });
 };
