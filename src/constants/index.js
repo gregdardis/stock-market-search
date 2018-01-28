@@ -19,6 +19,11 @@ module.exports = Object.freeze({
   VALUE_SUFFIX_FCFY: '%',
   VALUE_SUFFIX_ROE: '%',
 
+  DEFINITION_OPEN: 'Open',
+  DEFINITION_HIGH: 'Close',
+  DEFINITION_LOW: 'Low',
+  DEFINITION_MARKET_CAP: 'Market Cap',
+
   CHART_HEIGHT: 400,
   CHART_WIDTH: 1000,
   CHART_X_AXIS_MIN_TICK_GAP: 30,
