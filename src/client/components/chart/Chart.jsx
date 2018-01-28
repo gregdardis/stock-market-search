@@ -17,7 +17,8 @@ import {
   CHART_WIDTH,
   CHART_TOOLTIP_DATE_FORMAT,
   CHART_X_AXIS_DATE_FORMAT,
-  CHART_X_AXIS_MIN_TICK_GAP
+  CHART_X_AXIS_MIN_TICK_GAP,
+  VALUE_PRECISION_CURRENT_PRICE
 } from '../../../constants';
 
 const Chart = ({
@@ -28,7 +29,8 @@ const Chart = ({
     <XAxis dataKey='date' tickFormatter={ date => dateFormat(date, CHART_X_AXIS_DATE_FORMAT) }
       minTickGap={ CHART_X_AXIS_MIN_TICK_GAP } />
     <YAxis dataKey='price' domain={ ['auto', 'auto'] } tickFormatter={ addCommas } />
-    <Tooltip labelFormatter={ date => dateFormat(date, CHART_TOOLTIP_DATE_FORMAT) } />
+    <Tooltip labelFormatter={ date => dateFormat(date, CHART_TOOLTIP_DATE_FORMAT) }
+      formatter={ price => price.toFixed(VALUE_PRECISION_CURRENT_PRICE) } />
     <Line type='monotone' dataKey='price' dot={ false } stroke='red' />
   </LineChart>
 );
