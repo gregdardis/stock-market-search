@@ -1,5 +1,6 @@
 /* Takes a number or string */
 export const addCommas = number => {
+  // must check array and boolean separately they both are not NaN
   if (isNaN(number) || Array.isArray(number) || typeof number === 'boolean') {
     throw new TypeError(`${addCommas.name} requires a number or numeric string.`);
   }
