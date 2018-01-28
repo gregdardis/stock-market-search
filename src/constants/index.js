@@ -1,5 +1,6 @@
 module.exports = Object.freeze({
   BLANK_FIELD: '--',
+  CHART_TOOLTIP_DATE_FORMAT: 'mmm d, yyyy',
   CHART_X_AXIS_DATE_FORMAT: 'mmm d',
   LABEL_AVERAGE: 'Avg',
   LABEL_CURRENT_PRICE: 'Current Price',
