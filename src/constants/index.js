@@ -19,16 +19,6 @@ module.exports = Object.freeze({
   VALUE_SUFFIX_FCFY: '%',
   VALUE_SUFFIX_ROE: '%',
 
-  DEFINITION_OPEN: 'Open',
-  DEFINITION_HIGH: 'High',
-  DEFINITION_LOW: 'Low',
-  DEFINITION_MARKET_CAP: 'Market Cap',
-  DEFINITION_VOLUME: 'Volume (Avg)',
-  DEFINITION_DIVIDEND: 'Dividend (Yield %)',
-  DEFINITION_PE_RATIO: 'Price-Earnings Ratio (EPS)',
-  DEFINITION_ROE: 'Return On Equity (abbrev. as ROE)',
-  DEFINITION_FCFY: 'Free Cash Flow Yield (abbrev. as FCFY)',
-
   CHART_BUTTON_LABEL_COLOR_DEFAULT: '#000000',
   CHART_BUTTON_LABEL_COLOR_SELECTED: '#3223ff',
   TIME_PERIOD_FIVE_DAY: '5 day',
