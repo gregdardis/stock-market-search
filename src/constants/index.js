@@ -20,7 +20,7 @@ module.exports = Object.freeze({
   VALUE_SUFFIX_ROE: '%',
 
   DEFINITION_OPEN: 'Open',
-  DEFINITION_HIGH: 'Close',
+  DEFINITION_HIGH: 'High',
   DEFINITION_LOW: 'Low',
   DEFINITION_MARKET_CAP: 'Market Cap',
   DEFINITION_VOLUME: 'Volume (Avg)',
