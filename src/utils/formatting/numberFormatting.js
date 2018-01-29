@@ -1,9 +1,13 @@
 /* Takes a number or string */
 export const addCommas = number => {
-  // must check array and boolean separately they both are not NaN
-  if (isNaN(number) || Array.isArray(number) || typeof number === 'boolean') {
+  const parsedNum = parseFloat(number);
+  // need to check number because parseFloat turns '12hello' into a number
+  if (isNaN(parsedNum) || isNaN(number)) {
     throw new TypeError(`${addCommas.name} requires a number or numeric string.`);
   }
+  // if (isNaN(number) || Array.isArray(number) || typeof number === 'boolean') {
+  //   throw new TypeError(`${addCommas.name} requires a number or numeric string.`);
+  // }
   let parts = number.toString().split('.');
 
   const wholeNumberIndex = 0;
