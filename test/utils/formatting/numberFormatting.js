@@ -80,9 +80,15 @@ export const addCommasTest = () => {
       }).to
         .throw();
     });
-    it('should throw an error if given non-numeric string', () => {
+    it('should throw an error if given a non-numeric string', () => {
       expect(() => {
         addCommas('hello');
+      }).to
+        .throw();
+    });
+    it('should throw an error if given a function', () => {
+      expect(() => {
+        addCommas(() => console.log('function'));
       }).to
         .throw();
     });

@@ -73,9 +73,15 @@ export const padSingleDigitWithZeroTest = () => {
       }).to
         .throw();
     });
-    it('should throw an error if given letters (in a string)', () => {
+    it('should throw an error if given a non-numeric string', () => {
       expect(() => {
         padSingleDigitWithZero('hello');
+      }).to
+        .throw();
+    });
+    it('should throw an error if given a function', () => {
+      expect(() => {
+        padSingleDigitWithZero(() => console.log('function'));
       }).to
         .throw();
     });
@@ -153,6 +159,12 @@ export const formatDateTest = () => {
     it('should throw an error when given null', () => {
       expect(() => {
         formatDate(null);
+      }).to
+        .throw();
+    });
+    it('should throw an error if given a function', () => {
+      expect(() => {
+        formatDate(() => console.log('function'));
       }).to
         .throw();
     });

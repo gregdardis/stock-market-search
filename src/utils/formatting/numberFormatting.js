@@ -5,9 +5,6 @@ export const addCommas = number => {
   if (isNaN(parsedNum) || isNaN(number)) {
     throw new TypeError(`${addCommas.name} requires a number or numeric string.`);
   }
-  // if (isNaN(number) || Array.isArray(number) || typeof number === 'boolean') {
-  //   throw new TypeError(`${addCommas.name} requires a number or numeric string.`);
-  // }
   let parts = number.toString().split('.');
 
   const wholeNumberIndex = 0;
