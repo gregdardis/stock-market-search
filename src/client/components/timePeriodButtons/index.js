@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import TimePeriodPicker from './TimePeriodPicker';
+import TimePeriodButtons from './TimePeriodButtons';
 import { updateChartTimePeriod } from '../../actions';
 
 const mapDispatchToProps = dispatch => ({
@@ -18,4 +18,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(TimePeriodPicker);
+)(TimePeriodButtons);

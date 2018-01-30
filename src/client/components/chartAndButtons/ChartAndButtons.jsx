@@ -1,11 +1,11 @@
 import React from 'react';
 
-import TimePeriodPicker from '../timePeriodPicker';
+import TimePeriodButtons from '../timePeriodButtons';
 import Chart from '../chart';
 
 const ChartAndButtons = () => (
   <div className='chartAndButtons'>
-    <TimePeriodPicker />
+    <TimePeriodButtons />
     <Chart />
   </div>
 );
