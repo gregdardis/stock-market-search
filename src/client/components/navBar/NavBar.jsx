@@ -1,6 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import {
+  URL_GLOSSARY,
+  URL_HOME
+} from '../../../constants';
 import './navBar.css';
 
 const NavBar = () => {
@@ -8,8 +12,8 @@ const NavBar = () => {
     <div className='navBar'>
       <span>Stock Market Search</span>
       <ul className='nav'>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/glossary">Glossary</Link></li>
+        <li><Link to={ URL_HOME }>Home</Link></li>
+        <li><Link to={ URL_GLOSSARY }>Glossary</Link></li>
       </ul>
     </div>
   );

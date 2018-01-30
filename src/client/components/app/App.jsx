@@ -4,6 +4,10 @@ import {
   Route
 } from 'react-router-dom';
 
+import {
+  URL_GLOSSARY,
+  URL_HOME
+} from '../../../constants';
 import Home from '../home';
 import Glossary from '../glossary';
 import NavBar from '../navBar';
@@ -13,8 +17,8 @@ const App = () => (
   <Router>
     <div className='app'>
       <NavBar />
-      <Route exact path="/" component={ Home }/>
-      <Route path="/glossary" component={ Glossary }/>
+      <Route exact path={ URL_HOME } component={ Home }/>
+      <Route path={ URL_GLOSSARY } component={ Glossary }/>
     </div>
   </Router>
 );

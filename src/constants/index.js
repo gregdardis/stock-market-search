@@ -17,6 +17,8 @@ module.exports = Object.freeze({
   OPTIONAL_LABEL_DIVIDEND: '%',
   OPTIONAL_LABEL_EPS: 'EPS',
   OPTIONAL_VALUE_SUFFIX_DIVIDEND: '%',
+  URL_GLOSSARY: '/glossary',
+  URL_HOME: '/',
   VALUE_SUFFIX_FCFY: '%',
   VALUE_SUFFIX_ROE: '%',
 
