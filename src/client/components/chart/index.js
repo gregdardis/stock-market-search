@@ -47,11 +47,11 @@ const formatDate = date => {
   return `${year}-${month}-${day}`;
 };
 
-const getStockDataOneYear = maxStockData => {
-  const oneYearData = formatDate(calculateDateYearsInPast(1));
+const getStockDataForPreviousYears = (maxStockData, years) => {
+  const cutoffDate = formatDate(calculateDateYearsInPast(years));
   const elementPosition = maxStockData.map(data => {
     return data.date;
-  }).indexOf(oneYearData);
+  }).indexOf(cutoffDate);
   return maxStockData.slice(elementPosition);
 };
 
@@ -62,7 +62,9 @@ const getStockDataForTimePeriod = state => {
   case TIME_PERIOD_MAX:
     return maxStockData;
   case TIME_PERIOD_ONE_YEAR:
-    return getStockDataOneYear(maxStockData);
+    return getStockDataForPreviousYears(maxStockData, 1);
+  case TIME_PERIOD_FIVE_YEAR:
+    return getStockDataForPreviousYears(maxStockData, 5);
   default:
     return maxStockData;
   }
