@@ -11,7 +11,7 @@ const NavBar = () => {
   return (
     <div className='navBar'>
       <span>Stock Market Search</span>
-      <ul className='nav'>
+      <ul>
         <li><Link to={ URL_HOME }>Home</Link></li>
         <li><Link to={ URL_GLOSSARY }>Glossary</Link></li>
       </ul>
