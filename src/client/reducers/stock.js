@@ -21,7 +21,7 @@ export const reducer = (
       exchange: action.exchange,
       isFetching: false,
       lastUpdated: action.receivedAt,
-      oneYearData: action.oneYearData,
+      maxStockData: action.maxStockData,
       stockData: action.stockData,
       symbol: action.symbol
     });

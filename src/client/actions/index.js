@@ -35,14 +35,14 @@ export const requestStock = symbol => ({
 export const receiveStock = ({
   companyName,
   exchange,
-  oneYearData,
+  maxStockData,
   stockData,
   symbol
 }) => ({
   type: RECEIVE_STOCK,
   companyName,
   exchange,
-  oneYearData,
+  maxStockData,
   receivedAt: Date.now(),
   stockData,
   symbol

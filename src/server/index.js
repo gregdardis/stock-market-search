@@ -171,14 +171,14 @@ app.get('/api/stocks/:symbol', (req, res) => {
       const stock = createStock(quote);
       yahooFinance.historical({
         symbol: symbol,
-        from: formatDate(calculateDateYearsInPast(1)),
+        from: formatDate(calculateDateYearsInPast(constants.MAX_YEARS)),
         period: 'd'
       }).then(
         quotes => {
           if (!quotes[0]) {
             throw new Error('Historical data was not found.');
           }
-          stock.oneYearData = getDatesAndPrices(quotes);
+          stock.maxStockData = getDatesAndPrices(quotes);
           res.send(stock);
         }
       );
