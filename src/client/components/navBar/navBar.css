@@ -19,3 +19,12 @@ a:hover {
 .navBar span {
   font-size: 1.5em;
 }
+
+ul.nav {
+  list-style: none;
+}
+
+.nav li {
+  padding: 1em;
+  display: inline;
+}
