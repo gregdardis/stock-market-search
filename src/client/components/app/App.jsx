@@ -13,7 +13,6 @@ const App = () => (
   <Router>
     <div className='app'>
       <NavBar />
-      <hr/>
       <Route exact path="/" component={ Home }/>
       <Route path="/glossary" component={ Glossary }/>
     </div>
