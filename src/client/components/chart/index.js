@@ -12,6 +12,21 @@ import {
   TIME_PERIOD_THREE_MONTH
 } from '../../../constants';
 
+const calculateDateDaysInPast = (date, days) => {
+  const currentDate = date.getDate();
+  const newDate = currentDate - days;
+  if (newDate > currentDate) {
+    const currentMonth = date.getMonth();
+    const newMonth = currentMonth - 1;
+    date.setMonth(newMonth);
+    if (newMonth > currentMonth) {
+      date.setFullYear(date.getFullYear() - 1)
+    }
+  }
+  date.setDate(newDate);
+  return date;
+};
+
 // TODO: extract this and the one in server into utils
 const calculateDateYearsInPast = years => {
   const year = new Date().getFullYear() - years;
@@ -19,6 +34,18 @@ const calculateDateYearsInPast = years => {
   date.setFullYear(year);
   return date;
 };
+
+// Only works for months between 0 and 11
+const calculateDateMonthsInPast = months => {
+  const date = new Date();
+  const currentMonth = date.getMonth();
+  const newMonth = currentMonth - months;
+  if (newMonth > currentMonth) {
+    date.setFullYear(date.getFullYear() - 1);
+  }
+  date.setMonth(newMonth);
+  return date;
+}
 
 // TODO: extract this and the one in server into utils
 const padSingleDigitWithZero = value => {
@@ -47,6 +74,23 @@ const formatDate = date => {
   return `${year}-${month}-${day}`;
 };
 
+const getStockDataForPreviousMonths = (maxStockData, months) => {
+  let unformattedCutoffDate = calculateDateMonthsInPast(months);
+  let cutoffDate = formatDate(unformattedCutoffDate);
+  let elementPosition = -1;
+  // while loop because date we are looking for needs to change 
+  // if the date we are looking for is a weekend and thus
+  // doesn't exist in our maxStockData array
+  while (elementPosition === -1) {
+    elementPosition = maxStockData.map(data => {
+      return data.date;
+    }).indexOf(cutoffDate);
+    unformattedCutoffDate = calculateDateDaysInPast(unformattedCutoffDate, 1);
+    cutoffDate = formatDate(unformattedCutoffDate);
+  }
+  return maxStockData.slice(elementPosition);
+};
+
 const getStockDataForPreviousYears = (maxStockData, years) => {
   const cutoffDate = formatDate(calculateDateYearsInPast(years));
   const elementPosition = maxStockData.map(data => {
@@ -65,6 +109,10 @@ const getStockDataForTimePeriod = state => {
     return getStockDataForPreviousYears(maxStockData, 1);
   case TIME_PERIOD_FIVE_YEAR:
     return getStockDataForPreviousYears(maxStockData, 5);
+  case TIME_PERIOD_THREE_MONTH:
+    return getStockDataForPreviousMonths(maxStockData, 3);
+  case TIME_PERIOD_ONE_MONTH:
+    return getStockDataForPreviousMonths(maxStockData, 1);
   default:
     return maxStockData;
   }
