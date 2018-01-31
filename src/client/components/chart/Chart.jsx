@@ -24,14 +24,14 @@ import {
 const Chart = ({
   data
 }) => (
-  <LineChart width={ CHART_WIDTH } height={ CHART_HEIGHT } data={ data } className='chart'>
+  <LineChart width={ CHART_WIDTH } height={ CHART_HEIGHT } data={ data } className='chart' >
     <CartesianGrid strokeDashArray='3 3' />
     <XAxis dataKey='date' tickFormatter={ date => dateFormat(date, CHART_DATE_FORMAT_X_AXIS) }
       minTickGap={ CHART_X_AXIS_MIN_TICK_GAP } />
     <YAxis dataKey='price' domain={ ['auto', 'auto'] } tickFormatter={ addCommas } />
     <Tooltip labelFormatter={ date => dateFormat(date, CHART_DATE_FORMAT_TOOLTIP) }
       formatter={ price => price.toFixed(VALUE_PRECISION_CURRENT_PRICE) } />
-    <Line type='monotone' dataKey='price' dot={ false } stroke='red' />
+    <Line type='monotone' dataKey='price' dot={ false } stroke='red' isAnimationActive={ false } />
   </LineChart>
 );
 Chart.propTypes = {

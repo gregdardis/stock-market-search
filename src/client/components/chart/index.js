@@ -95,6 +95,9 @@ const getStockDataForPreviousYears = (maxStockData, years) => {
   let unformattedCutoffDate = calculateDateYearsInPast(years);
   let cutoffDate = formatDate(unformattedCutoffDate);
   let elementPosition = -1;
+  // while loop because date we are looking for needs to change 
+  // if the date we are looking for is a weekend and thus
+  // doesn't exist in our maxStockData array
   while (elementPosition === -1) {
     elementPosition = maxStockData.map(data => {
       return data.date;
@@ -119,6 +122,9 @@ const getStockDataForTimePeriod = state => {
     return getStockDataForPreviousMonths(maxStockData, 3);
   case TIME_PERIOD_ONE_MONTH:
     return getStockDataForPreviousMonths(maxStockData, 1);
+  // TODO: get stock data for previous days.
+  // this will involve getting data from the api by hour or whatever,
+  // instead of just closing prices for each day, and only get it for 5 days
   default:
     return maxStockData;
   }
