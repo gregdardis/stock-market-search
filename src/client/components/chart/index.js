@@ -92,10 +92,16 @@ const getStockDataForPreviousMonths = (maxStockData, months) => {
 };
 
 const getStockDataForPreviousYears = (maxStockData, years) => {
-  const cutoffDate = formatDate(calculateDateYearsInPast(years));
-  const elementPosition = maxStockData.map(data => {
-    return data.date;
-  }).indexOf(cutoffDate);
+  let unformattedCutoffDate = calculateDateYearsInPast(years);
+  let cutoffDate = formatDate(unformattedCutoffDate);
+  let elementPosition = -1;
+  while (elementPosition === -1) {
+    elementPosition = maxStockData.map(data => {
+      return data.date;
+    }).indexOf(cutoffDate);
+    unformattedCutoffDate = calculateDateDaysInPast(unformattedCutoffDate, 1);
+    cutoffDate = formatDate(unformattedCutoffDate);
+  }
   return maxStockData.slice(elementPosition);
 };
 
