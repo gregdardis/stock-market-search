@@ -1,6 +1,6 @@
 .definition {
   width: 60%;
-  margin-left: 24px;
-  padding-left: 8px;
+  margin: 0 0 -1px 0;
+  padding: 6px 20px;
   border: 1px grey solid;
 }
