@@ -7,24 +7,24 @@
   color: white;
 }
 
-a {
-  text-decoration: none;
-  color: white;
-}
-
-a:hover {
-  color: #5998ff;
-}
-
 .navBar span {
   font-size: 1.5em;
 }
 
-ul.nav {
+ul .nav {
   list-style: none;
 }
 
 .nav li {
   padding: 1em;
   display: inline;
+}
+
+.nav a {
+  text-decoration: none;
+  color: white;
+}
+
+.nav a:hover {
+  color: #5998ff;
 }

@@ -1,4 +1,5 @@
 module.exports = Object.freeze({
+  APP_NAME: 'Stock Market Search',
   BLANK_FIELD: '--',
   CHART_DATE_FORMAT_TOOLTIP: 'mmm d, yyyy',
   CHART_DATE_FORMAT_X_AXIS: 'mmm d',
