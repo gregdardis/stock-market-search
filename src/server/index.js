@@ -1,8 +1,9 @@
-const constants = require('../constants');
-const config = require('./config');
-
 const express = require('express');
 const yahooFinance = require('yahoo-finance');
+
+const constants = require('../constants');
+const config = require('./config');
+const dateFormatting = require('../utils/formatting/dateFormatting');
 
 const app = express();
 
@@ -109,43 +110,6 @@ const createStock = quote => {
   };
 };
 
-const calculateDateYearsInPast = (date, years) => {
-  const currentYear = date.getFullYear();
-  const newYear = currentYear - years;
-  date.setFullYear(newYear);
-  return date;
-};
-
-const calculateDateYearsInPastFromToday = years => {
-  const todaysDate = new Date();
-  return calculateDateYearsInPast(todaysDate, years);
-};
-
-const padSingleDigitWithZero = value => {
-  let num = parseInt(value);
-  // need to check value because parseInt turns '12hello' into a number
-  if (isNaN(value) || isNaN(num)) {
-    throw new TypeError(`${padSingleDigitWithZero.name} requires a number or numeric string`);
-  }
-  return num < 10 ? '0' + num : num.toString();
-};
-
-const formatDate = date => {
-  if (!(date instanceof Date)) {
-    throw new TypeError(`${formatDate.name} requires a date`);
-  }
-
-  let day = date.getDate();
-  day = padSingleDigitWithZero(day);
-
-  // month is zero indexed
-  let month = date.getMonth() + 1;
-  month = padSingleDigitWithZero(month);
-
-  const year = date.getFullYear();
-  return `${year}-${month}-${day}`;
-};
-
 const getDatesAndPrices = quotes => {
   let datesAndPrices = [];
   quotes.forEach(({
@@ -153,7 +117,7 @@ const getDatesAndPrices = quotes => {
     close
   }) => {
     datesAndPrices.unshift({
-      date: formatDate(date),
+      date: dateFormatting.formatDate(date),
       price: close
     });
   });
@@ -176,7 +140,7 @@ app.get('/api/stocks/:symbol', (req, res) => {
       const stock = createStock(quote);
       yahooFinance.historical({
         symbol: symbol,
-        from: formatDate(calculateDateYearsInPastFromToday(constants.MAX_YEARS)),
+        from: dateFormatting.formatDate(dateFormatting.calculateDateYearsInPastFromToday(constants.MAX_YEARS)),
         period: 'd'
       }).then(
         quotes => {
@@ -201,9 +165,3 @@ if (!module.parent) {
     console.log(`app is listening on port ${port}`)
   );
 }
-
-// exports for unit testing
-module.exports = Object.freeze({
-  padSingleDigitWithZero,
-  formatDate
-});

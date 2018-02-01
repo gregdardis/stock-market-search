@@ -3,6 +3,11 @@ import { connect } from 'react-redux';
 import Chart from './Chart';
 import { getSelectedStockValueForKey } from '../../../utils/stateGetters';
 import {
+  calculateDateDaysInPast,
+  calculateDateMonthsInPast,
+  formatDate
+} from '../../../utils/formatting/dateFormatting';
+import {
   MONTHS_PER_YEAR,
   TIME_PERIOD_FIVE_DAY,
   TIME_PERIOD_FIVE_YEAR,
@@ -13,47 +18,6 @@ import {
   TIME_PERIOD_THREE_MONTH,
   VALID_DATE_NOT_FOUND
 } from '../../../constants';
-
-const calculateDateDaysInPast = (date, days) => {
-  const currentDate = date.getDate();
-  const newDate = currentDate - days;
-  date.setDate(newDate);
-  return date;
-};
-
-const calculateDateMonthsInPast = (date, months) => {
-  const currentMonth = date.getMonth();
-  const newMonth = currentMonth - months;
-  date.setMonth(newMonth);
-  return date;
-};
-
-// TODO: extract this and the one in server into utils
-const padSingleDigitWithZero = value => {
-  let num = parseInt(value);
-  // need to check value because parseInt turns '12hello' into a number
-  if (isNaN(value) || isNaN(num)) {
-    throw new TypeError(`${padSingleDigitWithZero.name} requires a number or numeric string`);
-  }
-  return num < 10 ? '0' + num : num.toString();
-};
-
-// TODO: extract this and the one in server into utils
-const formatDate = date => {
-  if (!(date instanceof Date)) {
-    throw new TypeError(`${formatDate.name} requires a date`);
-  }
-
-  let day = date.getDate();
-  day = padSingleDigitWithZero(day);
-
-  // month is zero indexed in Date
-  let month = date.getMonth() + 1;
-  month = padSingleDigitWithZero(month);
-
-  const year = date.getFullYear();
-  return `${year}-${month}-${day}`;
-};
 
 const getStockDataForPreviousMonths = (maxStockData, months) => {
   const date = new Date();

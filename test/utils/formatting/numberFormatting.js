@@ -1,6 +1,9 @@
 import { expect } from 'chai';
 
-import { addCommas } from '../../../src/utils/formatting/numberFormatting';
+import {
+  addCommas,
+  padSingleDigitWithZero
+} from '../../../src/utils/formatting/numberFormatting';
 
 export const addCommasTest = () => {
   describe('addCommas', () => {
@@ -89,6 +92,89 @@ export const addCommasTest = () => {
     it('should throw an error if given a function', () => {
       expect(() => {
         addCommas(() => console.log('function'));
+      }).to
+        .throw();
+    });
+  });
+};
+
+export const padSingleDigitWithZeroTest = () => {
+  describe('padSingleDigitWithZero', () => {
+    it('should pad 0 with a 0 and stringify', () => {
+      expect(padSingleDigitWithZero(0))
+        .to
+        .equal('00');
+    });
+    it('should pad \'0\' with a 0', () => {
+      expect(padSingleDigitWithZero('0'))
+        .to
+        .equal('00');
+    });
+    it('should pad \'1\' with a 0', () => {
+      expect(padSingleDigitWithZero('1'))
+        .to
+        .equal('01');
+    });
+    it('should pad 1 with a 0 and stringify', () => {
+      expect(padSingleDigitWithZero(1))
+        .to
+        .equal('01');
+    });
+    it('should not change 10 but stringify', () => {
+      expect(padSingleDigitWithZero(10))
+        .to
+        .equal('10');
+    });
+    it('should not change \'10\'', () => {
+      expect(padSingleDigitWithZero('10'))
+        .to
+        .equal('10');
+    });
+    it('should throw an error if given an object', () => {
+      expect(() => {
+        padSingleDigitWithZero({});
+      }).to
+        .throw();
+    });
+    it('should throw an error if given an array', () => {
+      expect(() => {
+        padSingleDigitWithZero([]);
+      }).to
+        .throw();
+    });
+    it('should throw an error if given a boolean', () => {
+      expect(() => {
+        padSingleDigitWithZero(true);
+      }).to
+        .throw();
+    });
+    it('should throw an error if given null', () => {
+      expect(() => {
+        padSingleDigitWithZero(null);
+      }).to
+        .throw();
+    });
+    it('should throw an error if given numbers followed by letters (in a string)', () => {
+      expect(() => {
+        padSingleDigitWithZero('12hello');
+      }).to
+        .throw();
+    });
+    it('should throw an error if given letters followed by numbers (in a string)', () => {
+      expect(() => {
+        padSingleDigitWithZero('hello12');
+      }).to
+        .throw();
+    });
+    it('should throw an error if given a non-numeric string', () => {
+      expect(() => {
+        padSingleDigitWithZero('hello');
+      }).to
+        .throw();
+    });
+    it('should throw an error if given a function', () => {
+      expect(() => {
+        padSingleDigitWithZero(() => console.log('function'));
       }).to
         .throw();
     });
