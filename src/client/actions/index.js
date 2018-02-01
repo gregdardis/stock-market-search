@@ -21,4 +21,4 @@ export {
   REQUEST_STOCK,
   receiveStock,
   requestStock
-} from './server';
+} from './networkRequest';
