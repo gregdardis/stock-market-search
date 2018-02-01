@@ -17,37 +17,16 @@ import {
 const calculateDateDaysInPast = (date, days) => {
   const currentDate = date.getDate();
   const newDate = currentDate - days;
-  if (newDate > currentDate) {
-    const currentMonth = date.getMonth();
-    const newMonth = currentMonth - 1;
-    date.setMonth(newMonth);
-    if (newMonth > currentMonth) {
-      date.setFullYear(date.getFullYear() - 1)
-    }
-  }
   date.setDate(newDate);
   return date;
 };
 
-// TODO: extract this and the one in server into utils
-const calculateDateYearsInPast = years => {
-  const year = new Date().getFullYear() - years;
-  const date = new Date();
-  date.setFullYear(year);
-  return date;
-};
-
-// Only works for months between 0 and 11
-const calculateDateMonthsInPast = months => {
-  const date = new Date();
+const calculateDateMonthsInPast = (date, months) => {
   const currentMonth = date.getMonth();
   const newMonth = currentMonth - months;
-  if (newMonth > currentMonth) {
-    date.setFullYear(date.getFullYear() - 1);
-  }
   date.setMonth(newMonth);
   return date;
-}
+};
 
 // TODO: extract this and the one in server into utils
 const padSingleDigitWithZero = value => {
@@ -68,7 +47,7 @@ const formatDate = date => {
   let day = date.getDate();
   day = padSingleDigitWithZero(day);
 
-  // month is zero indexed
+  // month is zero indexed in Date
   let month = date.getMonth() + 1;
   month = padSingleDigitWithZero(month);
 
@@ -77,7 +56,8 @@ const formatDate = date => {
 };
 
 const getStockDataForPreviousMonths = (maxStockData, months) => {
-  let unformattedCutoffDate = calculateDateMonthsInPast(months);
+  const date = new Date();
+  let unformattedCutoffDate = calculateDateMonthsInPast(date, months);
   let cutoffDate;
   let elementPosition = VALID_DATE_NOT_FOUND;
 

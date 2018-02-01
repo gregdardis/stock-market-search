@@ -109,11 +109,16 @@ const createStock = quote => {
   };
 };
 
-const calculateDateYearsInPast = years => {
-  const year = new Date().getFullYear() - years;
-  const date = new Date();
-  date.setFullYear(year);
+const calculateDateYearsInPast = (date, years) => {
+  const currentYear = date.getFullYear();
+  const newYear = currentYear - years;
+  date.setFullYear(newYear);
   return date;
+};
+
+const calculateDateYearsInPastFromToday = years => {
+  const todaysDate = new Date();
+  return calculateDateYearsInPast(todaysDate, years);
 };
 
 const padSingleDigitWithZero = value => {
@@ -171,7 +176,7 @@ app.get('/api/stocks/:symbol', (req, res) => {
       const stock = createStock(quote);
       yahooFinance.historical({
         symbol: symbol,
-        from: formatDate(calculateDateYearsInPast(constants.MAX_YEARS)),
+        from: formatDate(calculateDateYearsInPastFromToday(constants.MAX_YEARS)),
         period: 'd'
       }).then(
         quotes => {
