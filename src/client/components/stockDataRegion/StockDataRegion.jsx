@@ -7,7 +7,7 @@ import CompanyNameAndSymbol from '../companyNameAndSymbol';
 import PriceAndTodaysPriceChange from '../priceAndTodaysPriceChange';
 import { rowComponentsProps } from './childProps';
 import Exchange from '../exchange';
-import ChartAndButtons from '../chartAndButtons';
+import SelectableTimePeriodChart from '../selectableTimePeriodChart';
 import './stockDataRegion.css';
 
 const StockDataRegion = ({
@@ -18,7 +18,7 @@ const StockDataRegion = ({
       <CompanyNameAndSymbol />
       <Exchange />
       <PriceAndTodaysPriceChange />
-      <ChartAndButtons />
+      <SelectableTimePeriodChart />
       <Row
         componentsProps={ rowComponentsProps }
         rowKeyName='rowKey'
