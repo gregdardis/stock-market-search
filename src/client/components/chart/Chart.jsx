@@ -13,23 +13,23 @@ import dateFormat from 'dateformat';
 import { addCommas } from '../../../utils/formatting/numberFormatting';
 import './chart.css';
 import {
+  CHART_FORMAT_TOOLTIP_ONE_MONTH_OR_LONGER,
+  CHART_FORMAT_X_AXIS_FIVE_DAY,
+  CHART_FORMAT_X_AXIS_FIVE_YEAR,
+  CHART_FORMAT_X_AXIS_MAX,
+  CHART_FORMAT_X_AXIS_ONE_DAY,
+  CHART_FORMAT_X_AXIS_ONE_MONTH,
+  CHART_FORMAT_X_AXIS_ONE_YEAR,
+  CHART_FORMAT_X_AXIS_THREE_MONTH,
   CHART_HEIGHT,
   CHART_WIDTH,
-  CHART_FORMAT_TOOLTIP_ONE_MONTH_OR_LONGER,
-  CHART_FORMAT_X_AXIS_MAX,
-  CHART_FORMAT_X_AXIS_ONE_YEAR,
-  CHART_X_AXIS_MIN_TICK_GAP_MAX,
-  CHART_X_AXIS_MIN_TICK_GAP_ONE_YEAR,
-  CHART_X_AXIS_MIN_TICK_GAP_FIVE_YEAR,
-  CHART_X_AXIS_MIN_TICK_GAP_THREE_MONTH,
-  CHART_X_AXIS_MIN_TICK_GAP_ONE_MONTH,
   CHART_X_AXIS_MIN_TICK_GAP_FIVE_DAY,
-  CHART_FORMAT_X_AXIS_THREE_MONTH,
-  CHART_FORMAT_X_AXIS_ONE_MONTH,
-  CHART_FORMAT_X_AXIS_FIVE_YEAR,
+  CHART_X_AXIS_MIN_TICK_GAP_FIVE_YEAR,
+  CHART_X_AXIS_MIN_TICK_GAP_MAX,
   CHART_X_AXIS_MIN_TICK_GAP_ONE_DAY,
-  CHART_FORMAT_X_AXIS_FIVE_DAY,
-  CHART_FORMAT_X_AXIS_ONE_DAY,
+  CHART_X_AXIS_MIN_TICK_GAP_ONE_MONTH,
+  CHART_X_AXIS_MIN_TICK_GAP_ONE_YEAR,
+  CHART_X_AXIS_MIN_TICK_GAP_THREE_MONTH,
   TIME_PERIOD_FIVE_DAY,
   TIME_PERIOD_FIVE_YEAR,
   TIME_PERIOD_MAX,
@@ -46,20 +46,20 @@ const Chart = ({
 }) => {
   const getMinTickGap = () => {
     switch (chartTimePeriod) {
-    case TIME_PERIOD_MAX:
-      return CHART_X_AXIS_MIN_TICK_GAP_MAX;
-    case TIME_PERIOD_ONE_YEAR:
-      return CHART_X_AXIS_MIN_TICK_GAP_ONE_YEAR;
-    case TIME_PERIOD_FIVE_YEAR:
-      return CHART_X_AXIS_MIN_TICK_GAP_FIVE_YEAR;
-    case TIME_PERIOD_THREE_MONTH:
-      return CHART_X_AXIS_MIN_TICK_GAP_THREE_MONTH;
-    case TIME_PERIOD_ONE_MONTH:
-      return CHART_X_AXIS_MIN_TICK_GAP_ONE_MONTH;
     case TIME_PERIOD_FIVE_DAY:
       return CHART_X_AXIS_MIN_TICK_GAP_FIVE_DAY;
+    case TIME_PERIOD_FIVE_YEAR:
+      return CHART_X_AXIS_MIN_TICK_GAP_FIVE_YEAR;
+    case TIME_PERIOD_MAX:
+      return CHART_X_AXIS_MIN_TICK_GAP_MAX;
     case TIME_PERIOD_ONE_DAY:
       return CHART_X_AXIS_MIN_TICK_GAP_ONE_DAY;
+    case TIME_PERIOD_ONE_MONTH:
+      return CHART_X_AXIS_MIN_TICK_GAP_ONE_MONTH;
+    case TIME_PERIOD_ONE_YEAR:
+      return CHART_X_AXIS_MIN_TICK_GAP_ONE_YEAR;
+    case TIME_PERIOD_THREE_MONTH:
+      return CHART_X_AXIS_MIN_TICK_GAP_THREE_MONTH;
     default:
       return CHART_X_AXIS_MIN_TICK_GAP_ONE_YEAR;
     }
@@ -74,11 +74,11 @@ const Chart = ({
   // every day for 1 month and above
   const getTooltipFormat = date => {
     switch (chartTimePeriod) {
-    case TIME_PERIOD_MAX:
-    case TIME_PERIOD_ONE_YEAR:
     case TIME_PERIOD_FIVE_YEAR:
-    case TIME_PERIOD_THREE_MONTH:
+    case TIME_PERIOD_MAX:
     case TIME_PERIOD_ONE_MONTH:
+    case TIME_PERIOD_ONE_YEAR:
+    case TIME_PERIOD_THREE_MONTH:
       return getTooltipFormatOneMonthOrLonger(date);
     case TIME_PERIOD_FIVE_DAY:
     case TIME_PERIOD_ONE_DAY:
@@ -90,20 +90,20 @@ const Chart = ({
   // X axis should have what day it is for 5 day, and 2 hour intervals for 1 day
   const getXAxisFormat = date => {
     switch (chartTimePeriod) {
-    case TIME_PERIOD_MAX:
-      return dateFormat(date, CHART_FORMAT_X_AXIS_MAX);
+    case TIME_PERIOD_FIVE_DAY:
+      return dateFormat(date, CHART_FORMAT_X_AXIS_FIVE_DAY);
     case TIME_PERIOD_FIVE_YEAR:
       return dateFormat(date, CHART_FORMAT_X_AXIS_FIVE_YEAR);
+    case TIME_PERIOD_MAX:
+      return dateFormat(date, CHART_FORMAT_X_AXIS_MAX);
+    case TIME_PERIOD_ONE_DAY:
+      return dateFormat(date, CHART_FORMAT_X_AXIS_ONE_DAY);
+    case TIME_PERIOD_ONE_MONTH:
+      return dateFormat(date, CHART_FORMAT_X_AXIS_ONE_MONTH);
     case TIME_PERIOD_ONE_YEAR:
       return dateFormat(date, CHART_FORMAT_X_AXIS_ONE_YEAR);
     case TIME_PERIOD_THREE_MONTH:
       return dateFormat(date, CHART_FORMAT_X_AXIS_THREE_MONTH);
-    case TIME_PERIOD_ONE_MONTH:
-      return dateFormat(date, CHART_FORMAT_X_AXIS_ONE_MONTH);
-    case TIME_PERIOD_FIVE_DAY:
-      return dateFormat(date, CHART_FORMAT_X_AXIS_FIVE_DAY);
-    case TIME_PERIOD_ONE_DAY:
-      return dateFormat(date, CHART_FORMAT_X_AXIS_ONE_DAY);
     default:
       return dateFormat(date, CHART_FORMAT_X_AXIS_ONE_YEAR);
     }
