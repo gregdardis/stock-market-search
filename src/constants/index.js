@@ -1,7 +1,8 @@
 module.exports = Object.freeze({
   BLANK_FIELD: '--',
   CHART_FORMAT_TOOLTIP_MAX: 'mmm d, yyyy',
-  CHART_DATE_FORMAT_X_AXIS: 'mmm d',
+  CHART_FORMAT_X_AXIS_MAX: 'yyyy',
+  CHART_FORMAT_X_AXIS_ONE_YEAR: 'mmm yyyy',
   LABEL_AVERAGE: 'Avg',
   LABEL_CURRENT_PRICE: 'Current Price',
   LABEL_DIVIDEND: 'Div',
@@ -32,7 +33,8 @@ module.exports = Object.freeze({
 
   CHART_HEIGHT: 400,
   CHART_WIDTH: 1000,
-  CHART_X_AXIS_MIN_TICK_GAP: 30,
+  CHART_X_AXIS_MAX_MIN_TICK_GAP: 108,
+  CHART_X_AXIS_ONE_YEAR_MIN_TICK_GAP: 30,
   MAX_YEARS: 60,
   MONTHS_PER_YEAR: 12,
   VALID_DATE_NOT_FOUND: -1,
