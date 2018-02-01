@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Chart from './Chart';
 import { getSelectedStockValueForKey } from '../../../utils/stateGetters';
 import {
+  MONTHS_PER_YEAR,
   TIME_PERIOD_FIVE_DAY,
   TIME_PERIOD_FIVE_YEAR,
   TIME_PERIOD_MAX,
@@ -91,24 +92,8 @@ const getStockDataForPreviousMonths = (maxStockData, months) => {
   return maxStockData.slice(elementPosition);
 };
 
-// TODO: share code between this method and the one above it
-// extract everything into methods and share as much as possible
-const getStockDataForPreviousYears = (maxStockData, years) => {
-  let unformattedCutoffDate = calculateDateYearsInPast(years);
-  let cutoffDate = formatDate(unformattedCutoffDate);
-  let elementPosition = -1;
-  // while loop because date we are looking for needs to change 
-  // if the date we are looking for is a weekend and thus
-  // doesn't exist in our maxStockData array
-  while (elementPosition === -1) {
-    elementPosition = maxStockData.map(data => {
-      return data.date;
-    }).indexOf(cutoffDate);
-    unformattedCutoffDate = calculateDateDaysInPast(unformattedCutoffDate, 1);
-    cutoffDate = formatDate(unformattedCutoffDate);
-  }
-  return maxStockData.slice(elementPosition);
-};
+const getStockDataForPreviousYears = (maxStockData, years) =>
+  getStockDataForPreviousMonths(maxStockData, years * MONTHS_PER_YEAR);
 
 // TODO: pass in a prop or something to Chart.jsx to format
 // the x axis based on the time period selected in the state
@@ -120,11 +105,11 @@ const getStockDataForTimePeriod = state => {
     return maxStockData;
   case TIME_PERIOD_ONE_YEAR:
   // TODO: choose whether to use years or months here. 
-    // return getStockDataForPreviousYears(maxStockData, 1);
-    return getStockDataForPreviousMonths(maxStockData, 12);
+    return getStockDataForPreviousYears(maxStockData, 1);
+    // return getStockDataForPreviousMonths(maxStockData, 12);
   case TIME_PERIOD_FIVE_YEAR:
-    return getStockDataForPreviousMonths(maxStockData, 60);
-    // return getStockDataForPreviousYears(maxStockData, 5);
+    // return getStockDataForPreviousMonths(maxStockData, 60);
+    return getStockDataForPreviousYears(maxStockData, 5);
   case TIME_PERIOD_THREE_MONTH:
     return getStockDataForPreviousMonths(maxStockData, 3);
   case TIME_PERIOD_ONE_MONTH:
@@ -132,6 +117,8 @@ const getStockDataForTimePeriod = state => {
   // TODO: get stock data for previous days.
   // this will involve getting data from the api by hour or whatever,
   // instead of just closing prices for each day, and only get it for 5 days
+  // for 1 day, need time every 5 minutes
+  // for 5 days, need time every 30 minutes
   default:
     return maxStockData;
   }
