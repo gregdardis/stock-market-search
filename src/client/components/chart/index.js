@@ -10,7 +10,8 @@ import {
   TIME_PERIOD_ONE_DAY,
   TIME_PERIOD_ONE_MONTH,
   TIME_PERIOD_ONE_YEAR,
-  TIME_PERIOD_THREE_MONTH
+  TIME_PERIOD_THREE_MONTH,
+  VALID_DATE_NOT_FOUND
 } from '../../../constants';
 
 const calculateDateDaysInPast = (date, days) => {
@@ -77,17 +78,17 @@ const formatDate = date => {
 
 const getStockDataForPreviousMonths = (maxStockData, months) => {
   let unformattedCutoffDate = calculateDateMonthsInPast(months);
-  let cutoffDate = formatDate(unformattedCutoffDate);
-  let elementPosition = -1;
-  // while loop because date we are looking for needs to change 
-  // if the date we are looking for is a weekend and thus
-  // doesn't exist in our maxStockData array
-  while (elementPosition === -1) {
+  let cutoffDate;
+  let elementPosition = VALID_DATE_NOT_FOUND;
+
+  // If the date we are looking for is a weekend (and thus the stock has no data),
+  // keep checking one day before that until a day with stock data is found
+  while (elementPosition === VALID_DATE_NOT_FOUND) {
+    cutoffDate = formatDate(unformattedCutoffDate);
     elementPosition = maxStockData.map(data => {
       return data.date;
     }).indexOf(cutoffDate);
     unformattedCutoffDate = calculateDateDaysInPast(unformattedCutoffDate, 1);
-    cutoffDate = formatDate(unformattedCutoffDate);
   }
   return maxStockData.slice(elementPosition);
 };
@@ -104,11 +105,8 @@ const getStockDataForTimePeriod = state => {
   case TIME_PERIOD_MAX:
     return maxStockData;
   case TIME_PERIOD_ONE_YEAR:
-  // TODO: choose whether to use years or months here. 
     return getStockDataForPreviousYears(maxStockData, 1);
-    // return getStockDataForPreviousMonths(maxStockData, 12);
   case TIME_PERIOD_FIVE_YEAR:
-    // return getStockDataForPreviousMonths(maxStockData, 60);
     return getStockDataForPreviousYears(maxStockData, 5);
   case TIME_PERIOD_THREE_MONTH:
     return getStockDataForPreviousMonths(maxStockData, 3);
