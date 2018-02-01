@@ -15,11 +15,11 @@ module.exports = {
       },
       {
         title: 'High',
-        definition: 'Highest price at which a stock was traded during the trading day.'
+        definition: 'Highest price at which the security was traded during the trading day.'
       },
       {
         title: 'Low',
-        definition: 'Lowest price at which a stock was traded during the trading day.'
+        definition: 'Lowest price at which the security was traded during the trading day.'
       },
       {
         title: 'Market Cap',
