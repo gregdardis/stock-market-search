@@ -3,12 +3,3 @@
   flex-direction: column;
   align-items: center;
 }
-
-ul.nav {
-  list-style: none;
-}
-
-.nav li {
-  padding: 1em;
-  display: inline;
-}

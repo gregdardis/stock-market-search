@@ -1,0 +1,30 @@
+.navBar {
+  display: flex;
+  align-items: center;
+  padding-left: 30%;
+  width: 100%;
+  background-color: #34414D;
+  color: white;
+}
+
+.navBar span {
+  font-size: 1.5em;
+}
+
+ul .nav {
+  list-style: none;
+}
+
+.nav li {
+  padding: 1em;
+  display: inline;
+}
+
+.nav a {
+  text-decoration: none;
+  color: white;
+}
+
+.nav a:hover {
+  color: #5998ff;
+}
