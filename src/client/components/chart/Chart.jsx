@@ -87,7 +87,7 @@ const Chart = ({
     }
   };
 
-  // X axis should have what day it is for 5 day, and 2 hour intervals for 1 day
+  // TODO: X axis should have what day it is for 5 day, and 2 hour intervals for 1 day
   const getXAxisFormat = date => {
     switch (chartTimePeriod) {
     case TIME_PERIOD_FIVE_DAY:
