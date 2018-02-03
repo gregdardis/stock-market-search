@@ -2,11 +2,17 @@ const numberFormatting = require('./numberFormatting');
 
 // For some reason this file doesn't recognize import/export, but stringFormatting does.
 
+// TODO: calculateDate_InPast methods are not formatting - move them somewhere else
 const calculateDateDaysInPast = (date, days) => {
   const currentDate = date.getDate();
   const newDate = currentDate - days;
   date.setDate(newDate);
   return date;
+};
+
+const calculateDateDaysInPastFromToday = days => {
+  const todaysDate = new Date();
+  return calculateDateDaysInPast(todaysDate, days);
 };
 
 const calculateDateMonthsInPast = (date, months) => {
@@ -46,6 +52,7 @@ const formatDate = date => {
 
 module.exports = Object.freeze({
   calculateDateDaysInPast,
+  calculateDateDaysInPastFromToday,
   calculateDateMonthsInPast,
   calculateDateYearsInPast,
   calculateDateYearsInPastFromToday,

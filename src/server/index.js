@@ -1,11 +1,18 @@
 const express = require('express');
-const yahooFinance = require('yahoo-finance');
+const yahooFinanceApi1 = require('yahoo-finance');
+const YahooFinanceApi2 = require('yahoo-finance-data');
 
 const constants = require('../constants');
 const config = require('./config');
 const dateFormatting = require('../utils/formatting/dateFormatting');
+const yahooApiCredentials = require('../../apiCredentials').yahooCredentials;
 
 const app = express();
+
+const yahooFinanceApi2 = new YahooFinanceApi2({
+  key: yahooApiCredentials.key,
+  secret: yahooApiCredentials.secret
+});
 
 const convertDecimalToPercent = decimal => (
   decimal * 100
@@ -110,9 +117,9 @@ const createStock = quote => {
   };
 };
 
-const getDatesAndPrices = quotes => {
+const getDatesAndPrices = dailyData => {
   let datesAndPrices = [];
-  quotes.forEach(({
+  dailyData.forEach(({
     date,
     close
   }) => {
@@ -124,10 +131,13 @@ const getDatesAndPrices = quotes => {
   return datesAndPrices;
 };
 
+// TODO: the nesting in here is horrible, we need to refactor. 
+// We should be doing these multiple API calls in parallel somehow anyway.
+// I maybe have an idea of how.
 app.get('/api/stocks/:symbol', (req, res) => {
   const modules = ['summaryDetail', 'defaultKeyStatistics', 'financialData', 'price'];
   const symbol = req.params.symbol;
-  yahooFinance.quote({
+  yahooFinanceApi1.quote({
     symbol,
     modules
   }).then(
@@ -138,17 +148,27 @@ app.get('/api/stocks/:symbol', (req, res) => {
         }
       });
       const stock = createStock(quote);
-      yahooFinance.historical({
-        symbol: symbol,
+      yahooFinanceApi1.historical({
+        symbol,
+        // TODO: Why do we specify this? As far as I can tell it takes the max if you omit 'from' altogether
         from: dateFormatting.formatDate(dateFormatting.calculateDateYearsInPastFromToday(constants.MAX_YEARS)),
         period: 'd'
       }).then(
-        quotes => {
-          if (!quotes[0]) {
+        dailyData => {
+          if (!dailyData[0]) {
             throw new Error('Historical data was not found.');
           }
-          stock.maxStockData = getDatesAndPrices(quotes);
-          res.send(stock);
+          stock.maxStockData = getDatesAndPrices(dailyData);
+
+          yahooFinanceApi2.getIntradayChartData(symbol)
+            .then(intradayData => {
+              console.log(JSON.stringify(intradayData));
+
+              // TODO: process & send back the data
+              // API is here: https://www.npmjs.com/package/yahoo-finance-data
+
+              res.send(stock);
+            });
         }
       );
     }

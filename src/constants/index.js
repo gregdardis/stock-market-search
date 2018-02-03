@@ -1,3 +1,8 @@
+/* TODO: separate into files
+- user-facing constants
+- calculation constants
+- formatting specifiers
+*/
 module.exports = Object.freeze({
   APP_NAME: 'Stock Market Search',
 
@@ -36,6 +41,7 @@ module.exports = Object.freeze({
   LABEL_ROE: 'ROE',
   LABEL_VOLUME: 'Volume',
 
+  MAX_DAYS: 5,
   MAX_YEARS: 60,
   MONTHS_PER_YEAR: 12,
 
