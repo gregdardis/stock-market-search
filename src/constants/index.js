@@ -10,45 +10,51 @@ module.exports = Object.freeze({
 
   CHART_BUTTON_LABEL_COLOR_DEFAULT: '#000000',
   CHART_BUTTON_LABEL_COLOR_SELECTED: '#3223ff',
-  CHART_FORMAT_TOOLTIP_ONE_MONTH_OR_LONGER: 'mmm d, yyyy',
-  CHART_FORMAT_X_AXIS_FIVE_DAY: 'mmm d',
-  CHART_FORMAT_X_AXIS_FIVE_YEAR: 'mmm yyyy',
-  CHART_FORMAT_X_AXIS_MAX: 'mmm yyyy',
-  CHART_FORMAT_X_AXIS_ONE_DAY: 'mmm d',
-  CHART_FORMAT_X_AXIS_ONE_MONTH: 'mmm d',
-  CHART_FORMAT_X_AXIS_ONE_YEAR: 'mmm d ',
-  CHART_FORMAT_X_AXIS_THREE_MONTH: 'mmm d',
   CHART_HEIGHT: 400,
   CHART_WIDTH: 1000,
-  CHART_X_AXIS_MIN_TICK_GAP_FIVE_DAY: 100,
-  CHART_X_AXIS_MIN_TICK_GAP_FIVE_YEAR: 120,
-  CHART_X_AXIS_MIN_TICK_GAP_MAX: 130,
-  CHART_X_AXIS_MIN_TICK_GAP_ONE_DAY: 30,
-  CHART_X_AXIS_MIN_TICK_GAP_ONE_MONTH: 60,
-  CHART_X_AXIS_MIN_TICK_GAP_ONE_YEAR: 30,
-  CHART_X_AXIS_MIN_TICK_GAP_THREE_MONTH: 100,
 
   CHART_META_DATA: [
     {
-      label: '1 day'
+      label: '1 day',
+      xAxisMinTickGap: 30,
+      tooltipFormat: 'mmm d, yyyy', // TODO: change
+      xAxisFormat: 'mmm d'
     },
     {
-      label: '5 day'
+      label: '5 day',
+      xAxisMinTickGap: 100,
+      tooltipFormat: 'mmm d, yyyy', // TODO: change
+      xAxisFormat: 'mmm d'
     },
     {
-      label: '1 month'
+      label: '1 month',
+      xAxisMinTickGap: 60,
+      tooltipFormat: 'mmm d, yyyy',
+      xAxisFormat: 'mmm d'
     },
     {
-      label: '3 month'
+      label: '3 month',
+      xAxisMinTickGap: 100,
+      tooltipFormat: 'mmm d, yyyy',
+      xAxisFormat: 'mmm d'
     },
     {
-      label: '1 year'
+      label: '1 year',
+      xAxisMinTickGap: 30,
+      tooltipFormat: 'mmm d, yyyy',
+      xAxisFormat: 'mmm d'
     },
     {
-      label: '5 year'
+      label: '5 year',
+      xAxisMinTickGap: 120,
+      tooltipFormat: 'mmm d, yyyy',
+      xAxisFormat: 'mmm yyyy'
     },
     {
-      label: 'max'
+      label: 'max',
+      xAxisMinTickGap: 130,
+      tooltipFormat: 'mmm d, yyyy',
+      xAxisFormat: 'mmm yyyy'
     }
   ],
 
