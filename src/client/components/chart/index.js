@@ -40,8 +40,6 @@ const getStockDataForPreviousMonths = (maxStockData, months) => {
 const getStockDataForPreviousYears = (maxStockData, years) =>
   getStockDataForPreviousMonths(maxStockData, years * MONTHS_PER_YEAR);
 
-// TODO: pass in a prop or something to Chart.jsx to format
-// the x axis based on the time period selected in the state
 const getStockDataForTimePeriod = state => {
   const timePeriodIndex = state.chartTimePeriod;
   const maxStockData = getSelectedStockValueForKey(state, 'maxStockData');
