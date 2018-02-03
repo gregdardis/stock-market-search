@@ -64,6 +64,7 @@ module.exports = Object.freeze({
     }
   ],
 
+  // these need to correspond to the CHART_META_DATA indexes
   INDEX_FIVE_DAY: 1,
   INDEX_FIVE_YEAR: 5,
   INDEX_MAX: 6,
@@ -86,7 +87,6 @@ module.exports = Object.freeze({
   LABEL_VOLUME: 'Volume',
 
   MAX_DAYS: 5,
-  MAX_YEARS: 60,
   MONTHS_PER_YEAR: 12,
 
   OPTIONAL_LABEL_DIVIDEND: '%',

@@ -22,18 +22,6 @@ const calculateDateMonthsInPast = (date, months) => {
   return date;
 };
 
-const calculateDateYearsInPast = (date, years) => {
-  const currentYear = date.getFullYear();
-  const newYear = currentYear - years;
-  date.setFullYear(newYear);
-  return date;
-};
-
-const calculateDateYearsInPastFromToday = years => {
-  const todaysDate = new Date();
-  return calculateDateYearsInPast(todaysDate, years);
-};
-
 const formatDate = date => {
   if (!(date instanceof Date)) {
     throw new TypeError(`${formatDate.name} requires a date`);
@@ -54,7 +42,5 @@ module.exports = Object.freeze({
   calculateDateDaysInPast,
   calculateDateDaysInPastFromToday,
   calculateDateMonthsInPast,
-  calculateDateYearsInPast,
-  calculateDateYearsInPastFromToday,
   formatDate
 });

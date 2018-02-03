@@ -149,9 +149,8 @@ app.get('/api/stocks/:symbol', (req, res) => {
       });
       const stock = createStock(quote);
       yahooFinanceApi1.historical({
+        // gets all data because we didn't specify from/to
         symbol,
-        // TODO: Why do we specify this? As far as I can tell it takes the max if you omit 'from' altogether
-        from: dateFormatting.formatDate(dateFormatting.calculateDateYearsInPastFromToday(constants.MAX_YEARS)),
         period: 'd'
       }).then(
         dailyData => {
