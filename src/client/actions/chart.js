@@ -5,7 +5,7 @@ export const setChartToDefaultTimePeriod = () => ({
   type: SET_CHART_TO_DEFAULT_TIME_PERIOD
 });
 
-export const updateChartTimePeriod = timePeriod => ({
+export const updateChartTimePeriod = index => ({
   type: UPDATE_CHART_TIME_PERIOD,
-  timePeriod
+  index
 });

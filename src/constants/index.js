@@ -13,18 +13,24 @@ module.exports = Object.freeze({
   CHART_HEIGHT: 400,
   CHART_WIDTH: 1000,
 
+  // TODO: UPDATE tooltipFormat ONCE WE HAVE INFO BY EVERY 5 MIN
+  // every 5 minutes for 1 day
+  // every 30 minutes for 5 day
+  // every day for 1 month and above
+
+  // TODO: X axisFormat have what day it is for 5 day, and 2 hour intervals for 1 day
   CHART_META_DATA: [
     {
       label: '1 day',
       xAxisMinTickGap: 30,
       tooltipFormat: 'mmm d, yyyy', // TODO: change
-      xAxisFormat: 'mmm d'
+      xAxisFormat: 'mmm d' // TODO: change
     },
     {
       label: '5 day',
       xAxisMinTickGap: 100,
       tooltipFormat: 'mmm d, yyyy', // TODO: change
-      xAxisFormat: 'mmm d'
+      xAxisFormat: 'mmm d' // TODO: change
     },
     {
       label: '1 month',
@@ -57,6 +63,8 @@ module.exports = Object.freeze({
       xAxisFormat: 'mmm yyyy'
     }
   ],
+
+  INDEX_ONE_YEAR: 4,
 
   LABEL_AVERAGE: 'Avg',
   LABEL_CURRENT_PRICE: 'Current Price',

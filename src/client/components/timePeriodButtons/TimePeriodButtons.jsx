@@ -6,51 +6,36 @@ import './timePeriodButtons.css';
 import {
   CHART_BUTTON_LABEL_COLOR_DEFAULT,
   CHART_BUTTON_LABEL_COLOR_SELECTED,
-  TIME_PERIOD_FIVE_DAY,
-  TIME_PERIOD_FIVE_YEAR,
-  TIME_PERIOD_MAX,
-  TIME_PERIOD_ONE_DAY,
-  TIME_PERIOD_ONE_MONTH,
-  TIME_PERIOD_ONE_YEAR,
-  TIME_PERIOD_THREE_MONTH
+  CHART_META_DATA
 } from '../../../constants';
 
 const TimePeriodButtons = ({
   chartTimePeriod,
   updateChartTimePeriod
 }) => {
-  const timePeriods = [
-    TIME_PERIOD_ONE_DAY,
-    TIME_PERIOD_FIVE_DAY,
-    TIME_PERIOD_ONE_MONTH,
-    TIME_PERIOD_THREE_MONTH,
-    TIME_PERIOD_ONE_YEAR,
-    TIME_PERIOD_FIVE_YEAR,
-    TIME_PERIOD_MAX
-  ];
-  const getLabelColor = buttonLabel => {
-    if (chartTimePeriod === buttonLabel) {
+  const getLabelColor = buttonIndex => {
+    if (chartTimePeriod === buttonIndex) {
       return CHART_BUTTON_LABEL_COLOR_SELECTED;
     }
     return CHART_BUTTON_LABEL_COLOR_DEFAULT;
   };
-  const handleClick = timePeriod => {
-    updateChartTimePeriod(timePeriod);
+  const handleClick = index => {
+    updateChartTimePeriod(index);
   };
   return (
     <div className='timePeriodButtons'>
-      { timePeriods.map(timePeriod => (
+      { CHART_META_DATA.map((timePeriod, index) => (
         <RaisedButton
-          key={ timePeriod }
-          label={ timePeriod }
-          labelColor={ getLabelColor(timePeriod) }
-          onClick={ () => handleClick(timePeriod) }
+          key={ index }
+          label={ timePeriod.label }
+          labelColor={ getLabelColor(index) }
+          onClick={ () => handleClick(index) }
         />)) }
     </div>
   );
 };
 TimePeriodButtons.propTypes = {
   updateChartTimePeriod: PropTypes.func.isRequired,
-  chartTimePeriod: PropTypes.string.isRequired
+  chartTimePeriod: PropTypes.number.isRequired
 };
 export default TimePeriodButtons;

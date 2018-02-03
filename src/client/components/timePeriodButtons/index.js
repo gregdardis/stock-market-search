@@ -4,9 +4,9 @@ import TimePeriodButtons from './TimePeriodButtons';
 import { updateChartTimePeriod } from '../../actions';
 
 const mapDispatchToProps = dispatch => ({
-  updateChartTimePeriod(timePeriod) {
+  updateChartTimePeriod(index) {
     dispatch(
-      updateChartTimePeriod(timePeriod)
+      updateChartTimePeriod(index)
     );
   }
 });
