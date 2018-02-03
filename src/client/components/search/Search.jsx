@@ -35,6 +35,7 @@ const Search = ({
         onChange={ handleChange }
         onKeyDown={ handleKeyDown }
         placeholder='Stock symbol'
+        autoFocus
         required
       />
       <FontAwesome

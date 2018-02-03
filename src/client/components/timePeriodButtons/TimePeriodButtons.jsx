@@ -2,7 +2,7 @@ import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import PropTypes from 'prop-types';
 
-import './timePeriodPicker.css';
+import './timePeriodButtons.css';
 import {
   CHART_BUTTON_LABEL_COLOR_DEFAULT,
   CHART_BUTTON_LABEL_COLOR_SELECTED,
@@ -15,7 +15,7 @@ import {
   TIME_PERIOD_THREE_MONTH
 } from '../../../constants';
 
-const TimePeriodPicker = ({
+const TimePeriodButtons = ({
   chartTimePeriod,
   updateChartTimePeriod
 }) => {
@@ -38,7 +38,7 @@ const TimePeriodPicker = ({
     updateChartTimePeriod(timePeriod);
   };
   return (
-    <div className='timePeriodPicker'>
+    <div className='timePeriodButtons'>
       { timePeriods.map(timePeriod => (
         <RaisedButton
           key={ timePeriod }
@@ -49,8 +49,8 @@ const TimePeriodPicker = ({
     </div>
   );
 };
-TimePeriodPicker.propTypes = {
+TimePeriodButtons.propTypes = {
   updateChartTimePeriod: PropTypes.func.isRequired,
   chartTimePeriod: PropTypes.string.isRequired
 };
-export default TimePeriodPicker;
+export default TimePeriodButtons;
