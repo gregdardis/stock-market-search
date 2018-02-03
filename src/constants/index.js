@@ -65,6 +65,10 @@ module.exports = Object.freeze({
   ],
 
   INDEX_ONE_YEAR: 4,
+  INDEX_MAX: 6,
+  INDEX_FIVE_YEAR: 5,
+  INDEX_THREE_MONTH: 3,
+  INDEX_ONE_MONTH: 2,
 
   LABEL_AVERAGE: 'Avg',
   LABEL_CURRENT_PRICE: 'Current Price',

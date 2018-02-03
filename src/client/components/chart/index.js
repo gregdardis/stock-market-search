@@ -8,14 +8,14 @@ import {
   formatDate
 } from '../../../utils/formatting/dateFormatting';
 import {
+  INDEX_MAX,
+  INDEX_ONE_YEAR,
+  INDEX_ONE_DAY,
+  INDEX_FIVE_DAY,
+  INDEX_ONE_MONTH,
+  INDEX_THREE_MONTH,
+  INDEX_FIVE_YEAR,
   MONTHS_PER_YEAR,
-  TIME_PERIOD_FIVE_DAY,
-  TIME_PERIOD_FIVE_YEAR,
-  TIME_PERIOD_MAX,
-  TIME_PERIOD_ONE_DAY,
-  TIME_PERIOD_ONE_MONTH,
-  TIME_PERIOD_ONE_YEAR,
-  TIME_PERIOD_THREE_MONTH,
   VALID_DATE_NOT_FOUND
 } from '../../../constants';
 
@@ -43,18 +43,18 @@ const getStockDataForPreviousYears = (maxStockData, years) =>
 // TODO: pass in a prop or something to Chart.jsx to format
 // the x axis based on the time period selected in the state
 const getStockDataForTimePeriod = state => {
-  const timePeriod = state.chartTimePeriod;
+  const timePeriodIndex = state.chartTimePeriod;
   const maxStockData = getSelectedStockValueForKey(state, 'maxStockData');
-  switch (timePeriod) {
-  case TIME_PERIOD_MAX:
+  switch (timePeriodIndex) {
+  case INDEX_MAX:
     return maxStockData;
-  case TIME_PERIOD_ONE_YEAR:
+  case INDEX_ONE_YEAR:
     return getStockDataForPreviousYears(maxStockData, 1);
-  case TIME_PERIOD_FIVE_YEAR:
+  case INDEX_FIVE_YEAR:
     return getStockDataForPreviousYears(maxStockData, 5);
-  case TIME_PERIOD_THREE_MONTH:
+  case INDEX_THREE_MONTH:
     return getStockDataForPreviousMonths(maxStockData, 3);
-  case TIME_PERIOD_ONE_MONTH:
+  case INDEX_ONE_MONTH:
     return getStockDataForPreviousMonths(maxStockData, 1);
   // TODO: get stock data for previous days.
   // this will involve getting data from the api by hour or whatever,
@@ -62,7 +62,7 @@ const getStockDataForTimePeriod = state => {
   // for 1 day, need time every 5 minutes
   // for 5 days, need time every 30 minutes
   default:
-    return maxStockData;
+    return getStockDataForPreviousYears(maxStockData, 1);
   }
 };
 
