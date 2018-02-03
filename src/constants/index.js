@@ -28,6 +28,30 @@ module.exports = Object.freeze({
   CHART_X_AXIS_MIN_TICK_GAP_ONE_YEAR: 30,
   CHART_X_AXIS_MIN_TICK_GAP_THREE_MONTH: 100,
 
+  CHART_META_DATA: [
+    {
+      label: '1 day'
+    },
+    {
+      label: '5 day'
+    },
+    {
+      label: '1 month'
+    },
+    {
+      label: '3 month'
+    },
+    {
+      label: '1 year'
+    },
+    {
+      label: '5 year'
+    },
+    {
+      label: 'max'
+    }
+  ],
+
   LABEL_AVERAGE: 'Avg',
   LABEL_CURRENT_PRICE: 'Current Price',
   LABEL_DIVIDEND: 'Div',

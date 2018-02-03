@@ -109,6 +109,22 @@ const Chart = ({
     }
   };
 
+  // todo: put this in constants and use it in timeperiodpicker and here
+  // const chartMetaData = [
+  //   {
+  //     label: '5 years'
+  //     chartXAxisTickGap: 10,
+  //     tooltipFormat: something,
+  //     xAxisFormat: something
+  //   }
+  //   ...
+  // ]
+
+    // const tickGapLookup = {
+  //   TIME_PERIOD_FIVE_DAY: CHART_X_AXIS_MIN_TICK_GAP_FIVE_DAY
+  // };
+
+  // const myTickGap = tickGapLookup[chartTimePeriod];
   return (
     <LineChart width={ CHART_WIDTH } height={ CHART_HEIGHT } data={ data } className='chart' >
       <CartesianGrid strokeDashArray='3 3' />
