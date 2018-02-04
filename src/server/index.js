@@ -1,11 +1,16 @@
 const express = require('express');
-const yahooFinanceApi1 = require('yahoo-finance');
-const YahooFinanceApi2 = require('yahoo-finance-data');
 
-const constants = require('../constants');
-const config = require('./config');
-const dateFormatting = require('../utils/formatting/dateFormatting');
-const yahooApiCredentials = require('../../apiCredentials').yahooCredentials;
+import {
+  quote,
+  historical
+} from 'yahoo-finance';
+
+import YahooFinanceApi2 from 'yahoo-finance-data';
+
+import * as constants from '../constants';
+import { port } from './config';
+import { formatDate } from '../utils/dateUtils';
+import { yahooCredentials as yahooApiCredentials } from '../../apiCredentials';
 
 const app = express();
 
@@ -95,13 +100,13 @@ const processStockData = ({
   };
 };
 
-const createStock = quote => {
+const createStock = stockQuote => {
   const {
     price,
     summaryDetail,
     financialData,
     defaultKeyStatistics
-  } = quote;
+  } = stockQuote;
   return {
     companyName: price.shortName,
     symbol: price.symbol,
@@ -124,7 +129,7 @@ const getDatesAndPrices = dailyData => {
     close
   }) => {
     datesAndPrices.unshift({
-      date: dateFormatting.formatDate(date),
+      date: formatDate(date),
       price: close
     });
   });
@@ -137,18 +142,18 @@ const getDatesAndPrices = dailyData => {
 app.get('/api/stocks/:symbol', (req, res) => {
   const modules = ['summaryDetail', 'defaultKeyStatistics', 'financialData', 'price'];
   const symbol = req.params.symbol;
-  yahooFinanceApi1.quote({
+  quote({
     symbol,
     modules
   }).then(
-    quote => {
+    stockQuote => {
       modules.forEach(module => {
-        if (!quote[module]) {
+        if (!stockQuote[module]) {
           throw new Error(`Module '${module}' was not found.`);
         }
       });
-      const stock = createStock(quote);
-      yahooFinanceApi1.historical({
+      const stock = createStock(stockQuote);
+      historical({
         // gets all data because we didn't specify from/to
         symbol,
         period: 'd'
@@ -159,9 +164,9 @@ app.get('/api/stocks/:symbol', (req, res) => {
           }
           stock.maxStockData = getDatesAndPrices(dailyData);
 
-          yahooFinanceApi2.getIntradayChartData(symbol)
+          yahooFinanceApi2.getIntradayChartData(symbol, '5m')
             .then(intradayData => {
-              console.log(JSON.stringify(intradayData));
+              console.log(JSON.stringify(intradayData, null, 2));
 
               // TODO: process & send back the data
               // API is here: https://www.npmjs.com/package/yahoo-finance-data
@@ -176,7 +181,6 @@ app.get('/api/stocks/:symbol', (req, res) => {
   );
 });
 
-const port = config.port;
 // if statement stops a second server from trying to run on the same
 // port when tests are running on server functions
 if (!module.parent) {

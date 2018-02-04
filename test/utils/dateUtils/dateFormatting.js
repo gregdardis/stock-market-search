@@ -2,7 +2,7 @@ import { expect } from 'chai';
 
 import {
   formatDate
-} from '../../../src/utils/formatting/dateFormatting';
+} from '../../../src/utils/dateUtils';
 
 export const formatDateTest = () => {
   const daysInMonth = {

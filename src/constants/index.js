@@ -1,123 +1,146 @@
+import {
+  getStockDataForPreviousMonths,
+  getStockDataForPreviousYears
+} from '../utils/dateUtils';
+
 /* TODO: separate into files
 - user-facing constants
 - calculation constants
 - formatting specifiers
 */
-module.exports = Object.freeze({
-  APP_NAME: 'Stock Market Search',
 
-  BLANK_FIELD: '--',
+export const APP_NAME = 'Stock Market Search';
 
-  CHART_BUTTON_LABEL_COLOR_DEFAULT: '#000000',
-  CHART_BUTTON_LABEL_COLOR_SELECTED: '#3223ff',
-  CHART_HEIGHT: 400,
-  CHART_WIDTH: 1000,
+export const BLANK_FIELD = '--';
 
-  // TODO: UPDATE tooltipFormat ONCE WE HAVE INFO BY EVERY 5 MIN
-  // every 5 minutes for 1 day
-  // every 30 minutes for 5 day
-  // every day for 1 month and above
+export const CHART_BUTTON_LABEL_COLOR_DEFAULT = '#000000';
+export const CHART_BUTTON_LABEL_COLOR_SELECTED = '#3223ff';
+export const CHART_HEIGHT = 400;
+export const CHART_WIDTH = 1000;
 
-  // TODO: X axisFormat have what day it is for 5 day, and 2 hour intervals for 1 day
-  CHART_META_DATA: [
-    {
-      label: '1 day',
-      xAxisMinTickGap: 30,
-      tooltipFormat: 'mmm d, yyyy', // TODO: change
-      xAxisFormat: 'mmm d' // TODO: change
-    },
-    {
-      label: '5 day',
-      xAxisMinTickGap: 100,
-      tooltipFormat: 'mmm d, yyyy', // TODO: change
-      xAxisFormat: 'mmm d' // TODO: change
-    },
-    {
-      label: '1 month',
-      xAxisMinTickGap: 60,
-      tooltipFormat: 'mmm d, yyyy',
-      xAxisFormat: 'mmm d'
-    },
-    {
-      label: '3 month',
-      xAxisMinTickGap: 100,
-      tooltipFormat: 'mmm d, yyyy',
-      xAxisFormat: 'mmm d'
-    },
-    {
-      label: '1 year',
-      xAxisMinTickGap: 30,
-      tooltipFormat: 'mmm d, yyyy',
-      xAxisFormat: 'mmm d'
-    },
-    {
-      label: '5 year',
-      xAxisMinTickGap: 120,
-      tooltipFormat: 'mmm d, yyyy',
-      xAxisFormat: 'mmm yyyy'
-    },
-    {
-      label: 'max',
-      xAxisMinTickGap: 130,
-      tooltipFormat: 'mmm d, yyyy',
-      xAxisFormat: 'mmm yyyy'
+// TODO: UPDATE tooltipFormat ONCE WE HAVE INFO BY EVERY 5 MIN
+// every 5 minutes for 1 day
+// every 30 minutes for 5 day
+// every day for 1 month and above
+
+// TODO: X axisFormat have what day it is for 5 day, and 2 hour intervals for 1 day
+export const CHART_META_DATA = [
+  {
+    label: '1 day',
+    xAxisMinTickGap: 30,
+    tooltipFormat: 'mmm d, yyyy', // TODO: change
+    xAxisFormat: 'mmm d', // TODO: change
+    getStockDataForTimePeriod: maxStockData => {
+      throw new Error('Not implemented');
     }
-  ],
+  },
+  {
+    label: '5 day',
+    xAxisMinTickGap: 100,
+    tooltipFormat: 'mmm d, yyyy', // TODO: change
+    xAxisFormat: 'mmm d', // TODO: change
+    getStockDataForTimePeriod: maxStockData => {
+      throw new Error('Not implemented');
+    }
+  },
+  {
+    label: '1 month',
+    xAxisMinTickGap: 60,
+    tooltipFormat: 'mmm d, yyyy',
+    xAxisFormat: 'mmm d',
+    getStockDataForTimePeriod: maxStockData => {
+      return getStockDataForPreviousMonths(maxStockData, 1);
+    }
+  },
+  {
+    label: '3 month',
+    xAxisMinTickGap: 100,
+    tooltipFormat: 'mmm d, yyyy',
+    xAxisFormat: 'mmm d',
+    getStockDataForTimePeriod: maxStockData => {
+      return getStockDataForPreviousMonths(maxStockData, 3);
+    }
+  },
+  {
+    label: '1 year',
+    xAxisMinTickGap: 30,
+    tooltipFormat: 'mmm d, yyyy',
+    xAxisFormat: 'mmm d',
+    getStockDataForTimePeriod: maxStockData => {
+      return getStockDataForPreviousYears(maxStockData, 1);
+    }
+  },
+  {
+    label: '5 year',
+    xAxisMinTickGap: 120,
+    tooltipFormat: 'mmm d, yyyy',
+    xAxisFormat: 'mmm yyyy',
+    getStockDataForTimePeriod: maxStockData => {
+      return getStockDataForPreviousYears(maxStockData, 5);
+    }
+  },
+  {
+    label: 'max',
+    xAxisMinTickGap: 130,
+    tooltipFormat: 'mmm d, yyyy',
+    xAxisFormat: 'mmm yyyy',
+    getStockDataForTimePeriod: maxStockData => maxStockData
+  }
+];
 
-  // these need to correspond to the CHART_META_DATA indexes
-  INDEX_FIVE_DAY: 1,
-  INDEX_FIVE_YEAR: 5,
-  INDEX_MAX: 6,
-  INDEX_ONE_DAY: 0,
-  INDEX_ONE_MONTH: 2,
-  INDEX_ONE_YEAR: 4,
-  INDEX_THREE_MONTH: 3,
+// these need to correspond to the CHART_META_DATA indexes
+export const INDEX_FIVE_DAY = 1;
+export const INDEX_FIVE_YEAR = 5;
+export const INDEX_MAX = 6;
+export const INDEX_ONE_DAY = 0;
+export const INDEX_ONE_MONTH = 2;
+export const INDEX_ONE_YEAR = 4;
+export const INDEX_THREE_MONTH = 3;
 
-  LABEL_AVERAGE: 'Avg',
-  LABEL_CURRENT_PRICE: 'Current Price',
-  LABEL_DIVIDEND: 'Div',
-  LABEL_FCFY: 'FCFY',
-  LABEL_HIGH: 'High',
-  LABEL_LOW: 'Low',
-  LABEL_MARKET_CAP: 'Mkt Cap',
-  LABEL_OPEN: 'Open',
-  LABEL_PE_RATIO: 'P/E Ratio',
-  LABEL_PREVIOUS_CLOSE: 'Previous Close',
-  LABEL_ROE: 'ROE',
-  LABEL_VOLUME: 'Volume',
+export const LABEL_AVERAGE = 'Avg';
+export const LABEL_CURRENT_PRICE = 'Current Price';
+export const LABEL_DIVIDEND = 'Div';
+export const LABEL_FCFY = 'FCFY';
+export const LABEL_HIGH = 'High';
+export const LABEL_LOW = 'Low';
+export const LABEL_MARKET_CAP = 'Mkt Cap';
+export const LABEL_OPEN = 'Open';
+export const LABEL_PE_RATIO = 'P/E Ratio';
+export const LABEL_PREVIOUS_CLOSE = 'Previous Close';
+export const LABEL_ROE = 'ROE';
+export const LABEL_VOLUME = 'Volume';
 
-  MAX_DAYS: 5,
-  MONTHS_PER_YEAR: 12,
+export const MAX_DAYS = 5;
+export const MONTHS_PER_YEAR = 12;
 
-  OPTIONAL_LABEL_DIVIDEND: '%',
-  OPTIONAL_LABEL_EPS: 'EPS',
-  OPTIONAL_VALUE_SUFFIX_DIVIDEND: '%',
+export const OPTIONAL_LABEL_DIVIDEND = '%';
+export const OPTIONAL_LABEL_EPS = 'EPS';
+export const OPTIONAL_VALUE_SUFFIX_DIVIDEND = '%';
 
-  TIME_PERIOD_FIVE_DAY: '5 day',
-  TIME_PERIOD_FIVE_YEAR: '5 year',
-  TIME_PERIOD_MAX: 'max',
-  TIME_PERIOD_ONE_DAY: '1 day',
-  TIME_PERIOD_ONE_MONTH: '1 month',
-  TIME_PERIOD_ONE_YEAR: '1 year',
-  TIME_PERIOD_THREE_MONTH: '3 month',
+export const TIME_PERIOD_FIVE_DAY = '5 day';
+export const TIME_PERIOD_FIVE_YEAR = '5 year';
+export const TIME_PERIOD_MAX = 'max';
+export const TIME_PERIOD_ONE_DAY = '1 day';
+export const TIME_PERIOD_ONE_MONTH = '1 month';
+export const TIME_PERIOD_ONE_YEAR = '1 year';
+export const TIME_PERIOD_THREE_MONTH = '3 month';
 
-  URL_GLOSSARY: '/glossary',
-  URL_HOME: '/',
+export const URL_GLOSSARY = '/glossary';
+export const URL_HOME = '/';
 
-  VALID_DATE_NOT_FOUND: -1,
-  VALUE_PRECISION_CURRENT_PRICE: 2,
-  VALUE_PRECISION_DIVIDEND: 2,
-  VALUE_PRECISION_EPS: 2,
-  VALUE_PRECISION_FCFY: 1,
-  VALUE_PRECISION_HIGH: 2,
-  VALUE_PRECISION_LOW: 2,
-  VALUE_PRECISION_MARKET_CAP: 0,
-  VALUE_PRECISION_OPEN: 2,
-  VALUE_PRECISION_PE: 2,
-  VALUE_PRECISION_PRICE_CHANGE: 2,
-  VALUE_PRECISION_PRICE_CHANGE_PERCENTAGE: 2,
-  VALUE_PRECISION_ROE: 1,
-  VALUE_PRECISION_VOLUME: 0,
-  VALUE_SUFFIX_FCFY: '%',
-  VALUE_SUFFIX_ROE: '%'
-});
+export const VALID_DATE_NOT_FOUND = -1;
+export const VALUE_PRECISION_CURRENT_PRICE = 2;
+export const VALUE_PRECISION_DIVIDEND = 2;
+export const VALUE_PRECISION_EPS = 2;
+export const VALUE_PRECISION_FCFY = 1;
+export const VALUE_PRECISION_HIGH = 2;
+export const VALUE_PRECISION_LOW = 2;
+export const VALUE_PRECISION_MARKET_CAP = 0;
+export const VALUE_PRECISION_OPEN = 2;
+export const VALUE_PRECISION_PE = 2;
+export const VALUE_PRECISION_PRICE_CHANGE = 2;
+export const VALUE_PRECISION_PRICE_CHANGE_PERCENTAGE = 2;
+export const VALUE_PRECISION_ROE = 1;
+export const VALUE_PRECISION_VOLUME = 0;
+export const VALUE_SUFFIX_FCFY = '%';
+export const VALUE_SUFFIX_ROE = '%';

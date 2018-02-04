@@ -1,7 +1,9 @@
-import { formatValueFromStateAndPropsTest } from './utils/formatting/stringFormatting';
+import {
+  formatValueFromStateAndPropsTest
+} from './utils/formatting/stringFormatting';
 import {
   formatDateTest
-} from './utils/formatting/dateFormatting';
+} from './utils/dateUtils/dateFormatting';
 import {
   addCommasTest,
   padSingleDigitWithZeroTest

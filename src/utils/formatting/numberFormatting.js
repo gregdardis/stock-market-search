@@ -1,7 +1,5 @@
-// For some reason this file doesn't recognize import/export, but stringFormatting does.
-
 /* Takes a number or string */
-const addCommas = number => {
+export const addCommas = number => {
   const parsedNum = parseFloat(number);
   // need to check number because parseFloat turns '12hello' into a number
   if (isNaN(parsedNum) || isNaN(number)) {
@@ -18,12 +16,12 @@ const addCommas = number => {
   return parts.join('.');
 };
 
-const roundAndAddCommas = (value, precision) => {
+export const roundAndAddCommas = (value, precision) => {
   let result = value.toFixed(precision);
   return addCommas(result);
 };
 
-const padSingleDigitWithZero = value => {
+export const padSingleDigitWithZero = value => {
   let num = parseInt(value);
   // need to check value because parseInt turns '12hello' into a number
   if (isNaN(value) || isNaN(num)) {
@@ -31,9 +29,3 @@ const padSingleDigitWithZero = value => {
   }
   return num < 10 ? '0' + num : num.toString();
 };
-
-module.exports = Object.freeze({
-  addCommas,
-  roundAndAddCommas,
-  padSingleDigitWithZero
-});
