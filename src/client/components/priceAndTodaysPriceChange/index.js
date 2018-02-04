@@ -40,14 +40,14 @@ const getFormattedPriceChangePercentage = stockOverviewData =>
     VALUE_PRECISION_PRICE_CHANGE_PERCENTAGE
   )}%`;
 
-const getStockData = state => {
+const getStockOverviewData = state => {
   const symbol = state.selectedStock;
   const selectedStock = state.stocks[symbol];
   return selectedStock.stockOverviewData;
 };
 
 const mapStateToProps = state => {
-  const stockOverviewData = getStockData(state);
+  const stockOverviewData = getStockOverviewData(state);
   return {
     currentPrice: getFormattedCurrentPrice(stockOverviewData),
     priceChange: getFormattedPriceChange(stockOverviewData),
