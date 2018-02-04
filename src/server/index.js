@@ -4,6 +4,7 @@ import {
   historical
 } from 'yahoo-finance';
 import rp from 'request-promise';
+import dateFormat from 'dateformat';
 
 import * as constants from '../constants';
 import { port } from './config';
@@ -129,8 +130,12 @@ const getDatesAndPrices = dailyData => {
 };
 
 const getTime = (timestamp, gmtoffset) => {
-  // TODO: format the date (to show time)
-  return new Date((timestamp + gmtoffset) * constants.MILLISECONDS_PER_SECOND);
+  const adjustedTimestamp =
+    (timestamp + gmtoffset) * constants.MILLISECONDS_PER_SECOND;
+  // NOTE: this date has timezone UTC, which is incorrect but works in this
+  // case because we are just extracting the time
+  const time = new Date(adjustedTimestamp);
+  return dateFormat(time, 'h:MM TT', true);
 };
 
 const getOneDayStockData = response => {
