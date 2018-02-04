@@ -1,23 +1,15 @@
-const express = require('express');
-
+import express from 'express';
 import {
   quote,
   historical
 } from 'yahoo-finance';
-
-import YahooFinanceApi2 from 'yahoo-finance-data';
+import rp from 'request-promise';
 
 import * as constants from '../constants';
 import { port } from './config';
 import { formatDate } from '../utils/dateUtils';
-import { yahooCredentials as yahooApiCredentials } from '../../apiCredentials';
 
 const app = express();
-
-const yahooFinanceApi2 = new YahooFinanceApi2({
-  key: yahooApiCredentials.key,
-  secret: yahooApiCredentials.secret
-});
 
 const convertDecimalToPercent = decimal => (
   decimal * 100
@@ -164,18 +156,26 @@ app.get('/api/stocks/:symbol', (req, res) => {
           }
           stock.maxStockData = getDatesAndPrices(dailyData);
 
-          yahooFinanceApi2.getIntradayChartData(symbol, '5m')
-            .then(intradayData => {
-              console.log(JSON.stringify(intradayData, null, 2));
-
-              // TODO: process & send back the data
-              // API is here: https://www.npmjs.com/package/yahoo-finance-data
-
-              res.send(stock);
+          const range = '1d';
+          const interval = '5m';
+          const query = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?range=${range}&includePrePost=true&interval=${interval}&corsDomain=finance.yahoo.com&.tsrc=finance`;
+          console.log(query);
+          rp(query)
+            .then(raw => {
+              try {
+                const data = JSON.parse(raw);
+                console.log(data.chart.result);
+              } catch (e) {
+                console.log('stuff');
+              }
+            })
+            .catch(err => {
+              console.log(err);
             });
-        }
-      );
+          res.send(stock);
+        });
     }
+
   ).catch(() =>
     res.status(404).send('Stock symbol not found.')
   );
