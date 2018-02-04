@@ -128,6 +128,42 @@ const getDatesAndPrices = dailyData => {
   return datesAndPrices;
 };
 
+const getTime = (timestamp, gmtoffset) => {
+  // TODO: format the date (to show time)
+  return new Date((timestamp + gmtoffset) * constants.MILLISECONDS_PER_SECOND);
+};
+
+const getOneDayStockData = response => {
+  const intradayData = JSON.parse(response);
+  const result = intradayData.chart.result[0];
+  const {
+    indicators,
+    meta,
+    timestamp
+  } = result;
+  const {
+    start,
+    end,
+    gmtoffset
+  } = meta.currentTradingPeriod.regular;
+  const { close } = indicators.quote[0];
+
+  let timesAndPrices = [];
+  for (let i = 0; i < timestamp.length; i++) {
+    if (timestamp[i] < start) {
+      continue;
+    }
+    if (timestamp[i] > end) {
+      return timesAndPrices;
+    }
+    timesAndPrices.push({
+      time: getTime(timestamp[i], gmtoffset),
+      price: close[i]
+    });
+  }
+  return timesAndPrices;
+};
+
 // TODO: the nesting in here is horrible, we need to refactor. 
 // We should be doing these multiple API calls in parallel somehow anyway.
 // I maybe have an idea of how.
@@ -159,20 +195,11 @@ app.get('/api/stocks/:symbol', (req, res) => {
           const range = '1d';
           const interval = '5m';
           const query = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?range=${range}&includePrePost=true&interval=${interval}&corsDomain=finance.yahoo.com&.tsrc=finance`;
-          console.log(query);
           rp(query)
-            .then(raw => {
-              try {
-                const data = JSON.parse(raw);
-                console.log(data.chart.result);
-              } catch (e) {
-                console.log('stuff');
-              }
-            })
-            .catch(err => {
-              console.log(err);
+            .then(response => {
+              stock.oneDayStockData = getOneDayStockData(response);
+              res.send(stock);
             });
-          res.send(stock);
         });
     }
 

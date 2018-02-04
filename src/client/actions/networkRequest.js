@@ -7,6 +7,7 @@ export const receiveStock = ({
   companyName,
   exchange,
   maxStockData,
+  oneDayStockData,
   stockData,
   symbol
 }) => ({
@@ -14,6 +15,7 @@ export const receiveStock = ({
   companyName,
   exchange,
   maxStockData,
+  oneDayStockData,
   receivedAt: Date.now(),
   stockData,
   symbol

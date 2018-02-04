@@ -22,6 +22,7 @@ export const reducer = (
       isFetching: false,
       lastUpdated: action.receivedAt,
       maxStockData: action.maxStockData,
+      oneDayStockData: action.oneDayStockData,
       stockData: action.stockData,
       symbol: action.symbol
     });
