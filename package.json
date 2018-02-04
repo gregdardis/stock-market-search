@@ -12,7 +12,7 @@
     "dev": "webpack-dev-server",
     "dev:test": "npm-run-all --parallel dev test:watch",
     "postinstall": "cd src/client/ && npm i && cd ../server/ && npm i & cd ../../",
-    "start": "nodemon src/server",
+    "start": "babel-node src/server",
     "test": "mocha --compilers js:babel-core/register",
     "test:watch": "mocha --watch --compilers js:babel-core/register"
   },
@@ -37,5 +37,8 @@
     "style-loader": "^0.19.1",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.9.7"
+  },
+  "dependencies": {
+    "babel-cli": "^6.26.0"
   }
 }
