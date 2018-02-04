@@ -18,7 +18,7 @@ const formatValueForDisplay = (value, valueSuffix, valuePrecision) => {
 };
 
 export const formatValueFromStateAndProps = (state, ownProps) => {
-  const stockData = getSelectedStockValueForKey(state, 'stockData');
+  const stockOverviewData = getSelectedStockValueForKey(state, 'stockOverviewData');
   const dataItemLabel = ownProps.label;
 
   let {
@@ -26,7 +26,7 @@ export const formatValueFromStateAndProps = (state, ownProps) => {
     optionalValue,
     valueSuffix,
     optionalValueSuffix
-  } = stockData[dataItemLabel];
+  } = stockOverviewData[dataItemLabel];
 
   const {
     valuePrecision,

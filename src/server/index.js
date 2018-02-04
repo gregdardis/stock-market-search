@@ -103,7 +103,7 @@ const createStock = stockQuote => {
     companyName: price.shortName,
     symbol: price.symbol,
     exchange: price.exchangeName,
-    stockData: processStockData(
+    stockOverviewData: processStockData(
       Object.assign(
         {},
         summaryDetail,

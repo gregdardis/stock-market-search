@@ -6,7 +6,7 @@ export const reducer = (
     symbol: '',
     exchange: '',
     isFetching: false,
-    stockData: {}
+    stockOverviewData: {}
   },
   action
 ) => {
@@ -23,7 +23,7 @@ export const reducer = (
       lastUpdated: action.receivedAt,
       maxStockData: action.maxStockData,
       oneDayStockData: action.oneDayStockData,
-      stockData: action.stockData,
+      stockOverviewData: action.stockOverviewData,
       symbol: action.symbol
     });
   default:
