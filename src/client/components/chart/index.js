@@ -7,6 +7,11 @@ import { CHART_META_DATA } from '../../../constants';
 const getStockDataForTimePeriod = state => {
   const timePeriodIndex = state.chartTimePeriod;
   const maxStockData = getSelectedStockValueForKey(state, 'maxStockData');
+  if (timePeriodIndex < 2) {
+    return CHART_META_DATA[
+      timePeriodIndex
+    ].getStockDataForTimePeriod(state);
+  }
   return CHART_META_DATA[
     timePeriodIndex
   ].getStockDataForTimePeriod(maxStockData);

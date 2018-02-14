@@ -28,10 +28,10 @@ export const CHART_META_DATA = [
   {
     label: '1 day',
     xAxisMinTickGap: 30,
-    tooltipFormat: 'mmm d, yyyy', // TODO: change
-    xAxisFormat: 'mmm d', // TODO: change
-    getStockDataForTimePeriod: maxStockData => {
-      throw new Error('Not implemented');
+    tooltipFormat: 'h:MM TT', // TODO: change to price every 5 min HH:MM:ss
+    xAxisFormat: 'h:MM TT', // TODO: change to show every hour h:MM TT
+    getStockDataForTimePeriod: state => {
+      return state.stocks[state.selectedStock].oneDayStockData;
     }
   },
   {
@@ -39,7 +39,7 @@ export const CHART_META_DATA = [
     xAxisMinTickGap: 100,
     tooltipFormat: 'mmm d, yyyy', // TODO: change
     xAxisFormat: 'mmm d', // TODO: change
-    getStockDataForTimePeriod: maxStockData => {
+    getStockDataForTimePeriod: state => {
       throw new Error('Not implemented');
     }
   },
