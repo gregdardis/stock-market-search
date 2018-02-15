@@ -3,6 +3,8 @@ import {
   getStockDataForPreviousYears
 } from '../utils/dateUtils';
 
+import { getSelectedStockValueForKey } from '../utils/stateGetters';
+
 /* TODO: separate into files
 - user-facing constants
 - calculation constants
@@ -27,12 +29,9 @@ export const CHART_WIDTH = 1000;
 export const CHART_META_DATA = [
   {
     label: '1 day',
-    xAxisMinTickGap: 30,
-    tooltipFormat: 'h:MM TT', // TODO: change to price every 5 min HH:MM:ss
-    xAxisFormat: 'h:MM TT', // TODO: change to show every hour h:MM TT
-    getStockDataForTimePeriod: state => {
-      return state.stocks[state.selectedStock].oneDayStockData;
-    }
+    xAxisMinTickGap: 100,
+    getStockDataForTimePeriod: state =>
+      getSelectedStockValueForKey(state, 'oneDayStockData')
   },
   {
     label: '5 day',
@@ -48,36 +47,32 @@ export const CHART_META_DATA = [
     xAxisMinTickGap: 60,
     tooltipFormat: 'mmm d, yyyy',
     xAxisFormat: 'mmm d',
-    getStockDataForTimePeriod: maxStockData => {
-      return getStockDataForPreviousMonths(maxStockData, 1);
-    }
+    getStockDataForTimePeriod: maxStockData =>
+      getStockDataForPreviousMonths(maxStockData, 1)
   },
   {
     label: '3 month',
     xAxisMinTickGap: 100,
     tooltipFormat: 'mmm d, yyyy',
     xAxisFormat: 'mmm d',
-    getStockDataForTimePeriod: maxStockData => {
-      return getStockDataForPreviousMonths(maxStockData, 3);
-    }
+    getStockDataForTimePeriod: maxStockData =>
+      getStockDataForPreviousMonths(maxStockData, 3)
   },
   {
     label: '1 year',
     xAxisMinTickGap: 30,
     tooltipFormat: 'mmm d, yyyy',
     xAxisFormat: 'mmm d',
-    getStockDataForTimePeriod: maxStockData => {
-      return getStockDataForPreviousYears(maxStockData, 1);
-    }
+    getStockDataForTimePeriod: maxStockData =>
+      getStockDataForPreviousYears(maxStockData, 1)
   },
   {
     label: '5 year',
     xAxisMinTickGap: 120,
     tooltipFormat: 'mmm d, yyyy',
     xAxisFormat: 'mmm yyyy',
-    getStockDataForTimePeriod: maxStockData => {
-      return getStockDataForPreviousYears(maxStockData, 5);
-    }
+    getStockDataForTimePeriod: maxStockData =>
+      getStockDataForPreviousYears(maxStockData, 5)
   },
   {
     label: 'max',
