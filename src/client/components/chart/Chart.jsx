@@ -39,16 +39,21 @@ const Chart = ({
 // Better logic in chart/index.js for if timePeriodIndex < 2 (and use the constant there)
 // 5 day data into state
   return (
-    <LineChart width={ CHART_WIDTH } height={ CHART_HEIGHT } data={ data } className='chart' >
+    <LineChart width={ CHART_WIDTH } height={ CHART_HEIGHT } data={ data }
+      className='chart' >
       <CartesianGrid strokeDashArray='3 3' />
       <XAxis dataKey={ chartTimePeriod < INDEX_ONE_MONTH ? 'time' : 'date' }
         tickFormatter={ chartTimePeriod < INDEX_ONE_MONTH
           ? time => time : date => dateFormat(date, getXAxisFormat()) }
         minTickGap={ getMinTickGap() } />
-      <YAxis dataKey='price' domain={ ['auto', 'auto'] } tickFormatter={ addCommas } />
-      <Tooltip labelFormatter={ chartTimePeriod < INDEX_ONE_MONTH ? time => time : date => dateFormat(date, getTooltipFormat()) }
-        formatter={ price => price.toFixed(VALUE_PRECISION_CURRENT_PRICE) } />
-      <Line type='monotone' dataKey='price' dot={ false } stroke='red' isAnimationActive={ false } />
+      <YAxis dataKey='price' domain={ ['auto', 'auto'] }
+        tickFormatter={ addCommas } />
+      <Tooltip labelFormatter={ chartTimePeriod < INDEX_ONE_MONTH
+        ? time => getTooltipFormat() + time
+        : date => dateFormat(date, getTooltipFormat()) }
+      formatter={ price => price.toFixed(VALUE_PRECISION_CURRENT_PRICE) } />
+      <Line type='monotone' dataKey='price' dot={ false } stroke='red'
+        isAnimationActive={ false } />
     </LineChart>
   );
 };

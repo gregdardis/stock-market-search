@@ -20,16 +20,13 @@ export const CHART_BUTTON_LABEL_COLOR_SELECTED = '#3223ff';
 export const CHART_HEIGHT = 400;
 export const CHART_WIDTH = 1000;
 
-// TODO: UPDATE tooltipFormat ONCE WE HAVE INFO BY EVERY 5 MIN
-// every 5 minutes for 1 day
-// every 30 minutes for 5 day
-// every day for 1 month and above
-
-// TODO: X axisFormat have what day it is for 5 day, and 2 hour intervals for 1 day
+// 1 day and 5 day data don't have tooltip or x axis formats because
+// they are formatted upon getting the data from the API
 export const CHART_META_DATA = [
   {
     label: '1 day',
     xAxisMinTickGap: 100,
+    tooltipFormat: 'time: ',
     getStockDataForTimePeriod: state =>
       getSelectedStockValueForKey(state, 'oneDayStockData')
   },
