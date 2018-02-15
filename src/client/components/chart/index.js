@@ -7,18 +7,16 @@ import {
   INDEX_ONE_MONTH
 } from '../../../constants';
 
+const getStockDataKey = timePeriodIndex =>
+  timePeriodIndex < INDEX_ONE_MONTH ? 'oneDayStockData' : 'maxStockData';
+
 const getStockDataForTimePeriod = state => {
   const timePeriodIndex = state.chartTimePeriod;
-  const maxStockData = getSelectedStockValueForKey(state, 'maxStockData');
-  const oneDayStockData = getSelectedStockValueForKey(state, 'oneDayStockData')
-  if (timePeriodIndex < INDEX_ONE_MONTH) {
-    return CHART_META_DATA[
-      timePeriodIndex
-    ].getStockDataForTimePeriod(oneDayStockData);
-  }
+  const stockDataKey = getStockDataKey(timePeriodIndex);
+  const stockData = getSelectedStockValueForKey(state, stockDataKey);
   return CHART_META_DATA[
     timePeriodIndex
-  ].getStockDataForTimePeriod(maxStockData);
+  ].getStockDataForTimePeriod(stockData);
 };
 
 const mapStateToProps = state => ({

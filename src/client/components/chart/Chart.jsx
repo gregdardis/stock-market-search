@@ -32,8 +32,7 @@ const Chart = ({
 
   const getXAxisFormat = () =>
     CHART_META_DATA[chartTimePeriod].xAxisFormat;
-// Better logic in chart/index.js for if timePeriodIndex < 2 (and use the constant there)
-// TODO: 5 day data into state
+  // TODO: 5 day data into state
   return (
     <LineChart width={ CHART_WIDTH } height={ CHART_HEIGHT } data={ data }
       className='chart' >
