@@ -27,8 +27,7 @@ export const CHART_META_DATA = [
     label: '1 day',
     xAxisMinTickGap: 100,
     tooltipFormat: 'time: ',
-    getStockDataForTimePeriod: state =>
-      getSelectedStockValueForKey(state, 'oneDayStockData')
+    getStockDataForTimePeriod: oneDayStockData => oneDayStockData
   },
   {
     label: '5 day',

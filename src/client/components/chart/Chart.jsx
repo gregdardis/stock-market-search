@@ -32,19 +32,16 @@ const Chart = ({
 
   const getXAxisFormat = () =>
     CHART_META_DATA[chartTimePeriod].xAxisFormat;
-// format time on tooltip as Time: 9:30 AM
-// make getTooltipFormat and getXAxisFormat return the right things in CHART_META_DATA
-// Deal with min xAxisMinTickGap properly for 1 day
-// Figure out how to give getStockDataForTimePeriod the oneDayStockData without passing it state?
 // Better logic in chart/index.js for if timePeriodIndex < 2 (and use the constant there)
-// 5 day data into state
+// TODO: 5 day data into state
   return (
     <LineChart width={ CHART_WIDTH } height={ CHART_HEIGHT } data={ data }
       className='chart' >
       <CartesianGrid strokeDashArray='3 3' />
       <XAxis dataKey={ chartTimePeriod < INDEX_ONE_MONTH ? 'time' : 'date' }
         tickFormatter={ chartTimePeriod < INDEX_ONE_MONTH
-          ? time => time : date => dateFormat(date, getXAxisFormat()) }
+          ? time => time
+          : date => dateFormat(date, getXAxisFormat()) }
         minTickGap={ getMinTickGap() } />
       <YAxis dataKey='price' domain={ ['auto', 'auto'] }
         tickFormatter={ addCommas } />
