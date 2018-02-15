@@ -10,6 +10,11 @@ const Search = ({
   clearSearchTerm,
   performSearch
 }) => {
+  const focusEndOfInput = event => {
+    const temp = event.target.value;
+    event.target.value = '';
+    event.target.value = temp;
+  }
   const handleSearch = () => {
     if (searchTerm !== '') {
       performSearch(searchTerm);
@@ -37,6 +42,7 @@ const Search = ({
         placeholder='Stock symbol'
         autoFocus
         required
+        onFocus={ focusEndOfInput }
       />
       <FontAwesome
         className='searchButton'
