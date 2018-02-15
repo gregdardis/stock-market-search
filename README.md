@@ -4,7 +4,7 @@
 
 Stock Market Info is a web app that allows you search for stocks and view related financial information and metrics.
 
-The front end tech stack includes [React](https://github.com/facebook/react), [Redux](https://github.com/reactjs/redux), [Webpack](https://github.com/webpack/webpack), and [Babel](https://github.com/babel/babel). The server is written using [Node.js](https://github.com/nodejs/node). Stock data is retrieved from Yahoo Finance using [node-yahoo-finance](https://github.com/pilwon/node-yahoo-finance).
+The front end tech stack includes [React](https://github.com/facebook/react), [Redux](https://github.com/reactjs/redux), [Webpack](https://github.com/webpack/webpack), and [Babel](https://github.com/babel/babel). The app utilizes [Node.js](https://github.com/nodejs/node), and the server is written using [Express](https://github.com/expressjs/express). Stock data is retrieved from Yahoo Finance using [node-yahoo-finance](https://github.com/pilwon/node-yahoo-finance) and [yahoo-finance-data](https://github.com/stephanepericat/yahoo-finance).
 
 This project is a work in progress and currently most features are incomplete.
 
