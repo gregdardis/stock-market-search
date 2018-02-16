@@ -151,7 +151,8 @@ const getEndOfDayTimestampIndex = (dayIndex, timestampsPerDay) =>
 // This method might not be reliable at certain times of day.
 // Specifically if the start or end of each for loop
 // end up after 9:30 am or before 4:00 pm, respectively.
-// TODO: think about edge cases more
+// TODO: think about edge cases more. What happens if there's only
+// one timestamp for a day because it's 12:15 am?
 const getDatesAndTimesForOneDay = (
   close,
   gmtoffset,
