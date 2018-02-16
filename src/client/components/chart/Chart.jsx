@@ -24,30 +24,29 @@ const Chart = ({
   data,
   chartTimePeriod
 }) => {
+  const getTooltipLabelFormatter = () =>
+    CHART_META_DATA[chartTimePeriod].getTooltipLabelFormatter;
+
   const getMinTickGap = () =>
     CHART_META_DATA[chartTimePeriod].xAxisMinTickGap;
 
-  const getTooltipFormat = () =>
-    CHART_META_DATA[chartTimePeriod].tooltipFormat;
+  const getXAxisTickFormatter = () =>
+    CHART_META_DATA[chartTimePeriod].getXAxisTickFormatter;
 
-  const getXAxisFormat = () =>
-    CHART_META_DATA[chartTimePeriod].xAxisFormat;
-  // TODO: 5 day data into state
+  const getXAxisDataKey = () =>
+    CHART_META_DATA[chartTimePeriod].xAxisDataKey;
+
   return (
     <LineChart width={ CHART_WIDTH } height={ CHART_HEIGHT } data={ data }
       className='chart' >
       <CartesianGrid strokeDashArray='3 3' />
-      <XAxis dataKey={ chartTimePeriod < INDEX_ONE_MONTH ? 'time' : 'date' }
-        tickFormatter={ chartTimePeriod < INDEX_ONE_MONTH
-          ? time => time
-          : date => dateFormat(date, getXAxisFormat()) }
+      <XAxis dataKey={ getXAxisDataKey() }
+        tickFormatter= { getXAxisTickFormatter() }
         minTickGap={ getMinTickGap() } />
       <YAxis dataKey='price' domain={ ['auto', 'auto'] }
         tickFormatter={ addCommas } />
-      <Tooltip labelFormatter={ chartTimePeriod < INDEX_ONE_MONTH
-        ? time => getTooltipFormat() + time
-        : date => dateFormat(date, getTooltipFormat()) }
-      formatter={ price => price.toFixed(VALUE_PRECISION_CURRENT_PRICE) } />
+      <Tooltip labelFormatter = { getTooltipLabelFormatter() }
+        formatter={ price => price.toFixed(VALUE_PRECISION_CURRENT_PRICE) } />
       <Line type='monotone' dataKey='price' dot={ false } stroke='red'
         isAnimationActive={ false } />
     </LineChart>

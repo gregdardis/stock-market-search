@@ -3,6 +3,8 @@ import {
   getStockDataForPreviousYears
 } from '../utils/dateUtils';
 
+import dateFormat from 'dateformat';
+
 import { getSelectedStockValueForKey } from '../utils/stateGetters';
 
 /* TODO: separate into files
@@ -24,58 +26,67 @@ export const CHART_WIDTH = 1000;
 // they are formatted upon getting the data from the API
 export const CHART_META_DATA = [
   {
+    xAxisDataKey: 'time',
     label: '1 day',
     xAxisMinTickGap: 100,
-    tooltipFormat: 'time: ',
-    getStockDataForTimePeriod: oneDayStockData => oneDayStockData
+    getStockDataForTimePeriod: oneDayStockData => oneDayStockData,
+    getTooltipLabelFormatter: time => 'time: ' + time,
+    getXAxisTickFormatter: time => time
   },
   {
+    xAxisDataKey: 'dateAndTime',
     label: '5 day',
     xAxisMinTickGap: 100,
-    tooltipFormat: 'mmm d, yyyy', // TODO: change
     xAxisFormat: 'mmm d', // TODO: change
     getStockDataForTimePeriod: state => {
       throw new Error('Not implemented');
-    }
+    },
+    getTooltipLabelFormatter: dateAndTime => dateAndTime,
+    getXAxisTickFormatter: dateAndTime => dateAndTime // TODO: update this
   },
   {
+    xAxisDataKey: 'date',
     label: '1 month',
     xAxisMinTickGap: 60,
-    tooltipFormat: 'mmm d, yyyy',
-    xAxisFormat: 'mmm d',
     getStockDataForTimePeriod: maxStockData =>
-      getStockDataForPreviousMonths(maxStockData, 1)
+      getStockDataForPreviousMonths(maxStockData, 1),
+    getTooltipLabelFormatter: date => dateFormat(date, 'mmm d, yyyy'),
+    getXAxisTickFormatter: date => dateFormat(date, 'mmm d')
   },
   {
+    xAxisDataKey: 'date',
     label: '3 month',
     xAxisMinTickGap: 100,
-    tooltipFormat: 'mmm d, yyyy',
-    xAxisFormat: 'mmm d',
     getStockDataForTimePeriod: maxStockData =>
-      getStockDataForPreviousMonths(maxStockData, 3)
+      getStockDataForPreviousMonths(maxStockData, 3),
+    getTooltipLabelFormatter: date => dateFormat(date, 'mmm d, yyyy'),
+    getXAxisTickFormatter: date => dateFormat(date, 'mmm d')
   },
   {
+    xAxisDataKey: 'date',
     label: '1 year',
     xAxisMinTickGap: 30,
-    tooltipFormat: 'mmm d, yyyy',
-    xAxisFormat: 'mmm d',
     getStockDataForTimePeriod: maxStockData =>
-      getStockDataForPreviousYears(maxStockData, 1)
+      getStockDataForPreviousYears(maxStockData, 1),
+    getTooltipLabelFormatter: date => dateFormat(date, 'mmm d, yyyy'),
+    getXAxisTickFormatter: date => dateFormat(date, 'mmm d')
   },
   {
+    xAxisDataKey: 'date',
     label: '5 year',
     xAxisMinTickGap: 120,
-    tooltipFormat: 'mmm d, yyyy',
-    xAxisFormat: 'mmm yyyy',
     getStockDataForTimePeriod: maxStockData =>
-      getStockDataForPreviousYears(maxStockData, 5)
+      getStockDataForPreviousYears(maxStockData, 5),
+    getTooltipLabelFormatter: date => dateFormat(date, 'mmm d, yyyy'),
+    getXAxisTickFormatter: date => dateFormat(date, 'mmm yyyy')
   },
   {
+    xAxisDataKey: 'date',
     label: 'max',
     xAxisMinTickGap: 130,
-    tooltipFormat: 'mmm d, yyyy',
-    xAxisFormat: 'mmm yyyy',
-    getStockDataForTimePeriod: maxStockData => maxStockData
+    getStockDataForTimePeriod: maxStockData => maxStockData,
+    getTooltipLabelFormatter: date => dateFormat(date, 'mmm d, yyyy'),
+    getXAxisTickFormatter: date => dateFormat(date, 'mmm yyyy')
   }
 ];
 
