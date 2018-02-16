@@ -38,8 +38,8 @@ export const CHART_META_DATA = [
     stockDataKey: 'fiveDayStockData',
     xAxisMinTickGap: 110,
     getStockDataForTimePeriod: fiveDayStockData => fiveDayStockData,
-    getTooltipLabelFormatter: dateAndTime => dateAndTime,
-    getXAxisTickFormatter: dateAndTime => dateFormat(dateAndTime, 'h:MM TT mmm d')
+    getTooltipLabelFormatter: dateAndTime => dateFormat(dateAndTime, 'mmm d, h:MM TT'),
+    getXAxisTickFormatter: dateAndTime => dateFormat(dateAndTime, 'mmm d, h:MM TT')
   },
   {
     xAxisDataKey: 'date',
@@ -91,6 +91,9 @@ export const CHART_META_DATA = [
     getXAxisTickFormatter: date => dateFormat(date, 'mmm yyyy')
   }
 ];
+
+export const DATE_FORMAT_FIVE_DAY = 'dddd, mmmm dd h:MM TT';
+export const DATE_FORMAT_ONE_DAY = 'h:MM TT';
 
 export const FIVE_DAYS = 5;
 export const ONE_DAY = 1;

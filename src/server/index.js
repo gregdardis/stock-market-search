@@ -139,36 +139,38 @@ const getAdjustedDateForTimestamp = (gmtoffset, timestamp) => {
 
 const getDateAndTime = (gmtoffset, timestamp, dateAndTimeFormat) => {
   const dateAndTime = getAdjustedDateForTimestamp(gmtoffset, timestamp);
-  return dateFormat(dateAndTime, dateAndTimeFormat, true); 
+  return dateFormat(dateAndTime, dateAndTimeFormat, true);
 };
 
 // This method might not be reliable at certain times of day.
 // Specifically if the start or end of each for loop
 // end up after 9:30 am or before 4:00 pm, respectively.
 // TODO: think about edge cases more
-const getDatesAndTimesForInterval = (
+const getDatesAndTimesForOneDay = (
   close,
   gmtoffset,
-  intervalIndex,
-  numberOfIntervals,
+  dayIndex,
+  numberOfDays,
   timestamp,
   timestampIntervals
 ) => {
   let datesTimesAndPrices = [];
-  const dateAndTimeFormat = numberOfIntervals === 1 ? 'h:MM TT' : 'dddd, mmmm dd h:MM TT'; // TODO: extract string to constants
+  const dateAndTimeFormat = (numberOfDays === constants.ONE_DAY)
+    ? constants.DATE_FORMAT_ONE_DAY
+    : constants.DATE_FORMAT_FIVE_DAY;
   for (
     // TODO: extract into shorter methods?
     let i = Math.floor(
-      intervalIndex * (timestamp.length / numberOfIntervals)
+      dayIndex * (timestamp.length / numberOfDays)
     );
     i < Math.floor(
-      (intervalIndex + 1) * (timestamp.length / numberOfIntervals)
+      (dayIndex + 1) * (timestamp.length / numberOfDays)
     );
     i++) {
-    if (timestamp[i] < timestampIntervals[intervalIndex].start) {
+    if (timestamp[i] < timestampIntervals[dayIndex].start) {
       continue;
     }
-    if (timestamp[i] > timestampIntervals[intervalIndex].end) {
+    if (timestamp[i] > timestampIntervals[dayIndex].end) {
       continue;
     }
     datesTimesAndPrices.push({
@@ -207,7 +209,7 @@ const getDatesTimesAndPrices = (
 ) => {
   let datesTimesAndPrices = [];
   for (let i = 0; i < numberOfDays; i++) {
-    const intervalDatesTimesAndPrices = getDatesAndTimesForInterval(
+    const intervalDatesTimesAndPrices = getDatesAndTimesForOneDay(
       close,
       gmtoffset,
       i,
@@ -276,9 +278,9 @@ app.get('/api/stocks/:symbol', (req, res) => {
           }
           stock.maxStockData = getDatesAndPrices(dailyData);
 
-          const range = '1d';
-          const interval = '5m';
-          const queryOneDay = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?range=${range}&includePrePost=true&interval=${interval}&corsDomain=finance.yahoo.com&.tsrc=finance`;
+          const rangeOneDay = '1d';
+          const intervalOneDay = '5m';
+          const queryOneDay = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?range=${rangeOneDay}&includePrePost=true&interval=${intervalOneDay}&corsDomain=finance.yahoo.com&.tsrc=finance`;
           rp(queryOneDay)
             .then(oneDayRes => {
               stock.oneDayStockData = getIntraDayStockData(oneDayRes, constants.ONE_DAY);
