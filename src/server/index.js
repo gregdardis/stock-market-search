@@ -138,21 +138,33 @@ const getTime = (timestamp, gmtoffset) => {
   return dateFormat(time, 'h:MM TT', true);
 };
 
+const getStartForDay = (day, meta) =>
+  meta.tradingPeriods.regular[day - 1][0].start;
+
 const getFiveDayStockData = fiveDayRes => {
-  const intradayData = JSON.parse(fiveDayRes);
-  console.log(intradayData);
-  // const result = intradayData.chart.result[0];
-  // const {
-  //   indicators,
-  //   meta,
-  //   timestamp
-  // } = result;
-  // const {
-  //   start,
-  //   end,
-  //   gmtoffset
-  // } = meta.currentTradingPeriod.regular;
-  // const { close } = indicators.quote[0];
+  const fiveDayIntradayData = JSON.parse(fiveDayRes);
+  console.log(JSON.stringify(fiveDayIntradayData, null, 2));
+  const result = fiveDayIntradayData.chart.result[0];
+  const {
+    indicators,
+    meta,
+    timestamp
+  } = result;
+  const { gmtoffset } = meta;
+  // const startDayOne = meta.tradingPeriods.regular[1][0].start; 
+  const startDayOne = getStartForDay(1, meta);
+  console.log('Start day 1: ' + startDayOne + '...Expected: ' + 1518445800);
+  // const endDayOne = meta.tradingPeriods.regular[0][0].end;
+  const startDayTwo = getStartForDay(2, meta);
+  // const startDayTwo = meta.tradingPeriods.regular[0][1].start;
+  console.log('Start day 2: ' + startDayTwo + '...Expected: ' + 1518532200);
+  console.log('First: ' + getTime(timestamp[7], gmtoffset));
+  console.log('Second time: ' + getTime(timestamp[8], gmtoffset));
+  // console.log('Third time: ' + getTime(timestamp[9], gmtoffset));
+  // console.log('Start time: ' + getTime(start, gmtoffset));
+  // console.log('End time: ' + getTime(end, gmtoffset));
+  console.log('First date: ' + new Date((timestamp[0] + gmtoffset) * constants.MILLISECONDS_PER_SECOND));
+  const { close } = indicators.quote[0];
 
   let datesTimesAndPrices = [];
   // for (let i = 0; i < timestamp.length; i++) {
@@ -160,10 +172,10 @@ const getFiveDayStockData = fiveDayRes => {
   //     continue;
   //   }
   //   if (timestamp[i] > end) {
-  //     return datesTimesAndPrices;
+  //     continue;
   //   }
   //   datesTimesAndPrices.push({
-  //     time: getTime(timestamp[i], gmtoffset),
+  //     dateAndTime: getTime(timestamp[i], gmtoffset),
   //     price: close[i]
   //   });
   // }
@@ -237,7 +249,8 @@ app.get('/api/stocks/:symbol', (req, res) => {
               stock.oneDayStockData = getOneDayStockData(oneDayRes);
               
               const rangeFiveDay = '5d';
-              const intervalFiveDay = '30m';
+              // 30m interval seems to be 60m for some reason, so using 15m instead
+              const intervalFiveDay = '60m'; // TODO: change back
               const queryFiveDay = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?range=${rangeFiveDay}&includePrePost=true&interval=${intervalFiveDay}&corsDomain=finance.yahoo.com&.tsrc=finance`;
               rp(queryFiveDay)
                 .then(fiveDayRes => {
