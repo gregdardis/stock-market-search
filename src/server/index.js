@@ -178,18 +178,18 @@ const getFiveDayStockData = fiveDayRes => {
   const { close } = indicators.quote[0];
 
   let datesTimesAndPrices = [];
-  // for (let i = 0; i < timestamp.length; i++) {
-  //   if (timestamp[i] < start) {
-  //     continue;
-  //   }
-  //   if (timestamp[i] > end) {
-  //     continue;
-  //   }
-  //   datesTimesAndPrices.push({
-  //     dateAndTime: getTime(timestamp[i], gmtoffset),
-  //     price: close[i]
-  //   });
-  // }
+  for (let i = 0; i < timestamp.length / 5; i++) {
+    if (timestamp[i] < timestampIntervals[0].start) {
+      continue;
+    }
+    if (timestamp[i] > timestampIntervals[0].end) {
+      continue;
+    }
+    datesTimesAndPrices.push({
+      dateAndTime: getTime(timestamp[i], gmtoffset), // TODO: make this get the date and time, not just the time
+      price: close[i]
+    });
+  }
   return datesTimesAndPrices;
 };
 
@@ -261,7 +261,7 @@ app.get('/api/stocks/:symbol', (req, res) => {
               
               const rangeFiveDay = '5d';
               // 30m interval seems to be 60m for some reason, so using 15m instead
-              const intervalFiveDay = '60m'; // TODO: change back
+              const intervalFiveDay = '15m';
               const queryFiveDay = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?range=${rangeFiveDay}&includePrePost=true&interval=${intervalFiveDay}&corsDomain=finance.yahoo.com&.tsrc=finance`;
               rp(queryFiveDay)
                 .then(fiveDayRes => {
