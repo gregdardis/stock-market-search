@@ -129,24 +129,28 @@ const getDatesAndPrices = dailyData => {
   return datesAndPrices;
 };
 
-const getTime = (timestamp, gmtoffset) => {
+// NOTE: this date has timezone UTC, which is incorrect but works in this
+// case because we are just extracting the time
+const getAdjustedDateForTimestamp = (gmtoffset, timestamp) => {
   const adjustedTimestamp =
     (timestamp + gmtoffset) * constants.MILLISECONDS_PER_SECOND;
-  // NOTE: this date has timezone UTC, which is incorrect but works in this
-  // case because we are just extracting the time
-  const time = new Date(adjustedTimestamp);
+  return new Date(adjustedTimestamp);
+};
+
+const getTime = (timestamp, gmtoffset) => {
+  const time = getAdjustedDateForTimestamp(gmtoffset, timestamp);
   return dateFormat(time, 'h:MM TT', true); // TODO: extract string to constants
 };
 
-// TODO: share code between this method and getTime
-const getDateAndTime = (timestamp, gmtoffset) => {
-  const adjustedTimestamp =
-    (timestamp + gmtoffset) * constants.MILLISECONDS_PER_SECOND;
-
-  const dateAndTime = new Date(adjustedTimestamp); // Friday, February 16 11:00 AM
+const getDateAndTime = (gmtoffset, timestamp) => {
+  const dateAndTime = getAdjustedDateForTimestamp(gmtoffset, timestamp);
   return dateFormat(dateAndTime, 'dddd, mmmm dd h:MM TT', true); // TODO: extract string to constants
 };
 
+// This method might not be reliable at certain times of day.
+// Specifically if the start or end of each for loop
+// end up after 9:30 am or before 4:00 pm, respectively.
+// TODO: think about edge cases more
 const getDatesAndTimesForInterval = (
   close,
   gmtoffset,
@@ -172,7 +176,7 @@ const getDatesAndTimesForInterval = (
       continue;
     }
     datesTimesAndPrices.push({
-      dateAndTime: getDateAndTime(timestamp[i], gmtoffset), // TODO: make this get the date and time, not just the time
+      dateAndTime: getDateAndTime(gmtoffset, timestamp[i]),
       price: close[i]
     });
   }
