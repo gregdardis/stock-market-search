@@ -37,12 +37,11 @@ export const CHART_META_DATA = [
     xAxisDataKey: 'dateAndTime',
     label: '5 day',
     xAxisMinTickGap: 100,
-    xAxisFormat: 'mmm d', // TODO: change
     getStockDataForTimePeriod: state => {
       throw new Error('Not implemented');
     },
     getTooltipLabelFormatter: dateAndTime => dateAndTime,
-    getXAxisTickFormatter: dateAndTime => dateAndTime // TODO: update this
+    getXAxisTickFormatter: dateAndTime => dateFormat(dateAndTime, 'mmm d')
   },
   {
     xAxisDataKey: 'date',

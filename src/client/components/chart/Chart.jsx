@@ -8,7 +8,6 @@ import {
   Tooltip,
   Line
 } from 'recharts';
-import dateFormat from 'dateformat';
 
 import { addCommas } from '../../../utils/formatting/numberFormatting';
 import './chart.css';
@@ -16,7 +15,6 @@ import {
   CHART_META_DATA,
   CHART_HEIGHT,
   CHART_WIDTH,
-  INDEX_ONE_MONTH,
   VALUE_PRECISION_CURRENT_PRICE
 } from '../../../constants';
 
