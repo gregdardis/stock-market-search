@@ -142,6 +142,12 @@ const getDateAndTime = (gmtoffset, timestamp, dateAndTimeFormat) => {
   return dateFormat(dateAndTime, dateAndTimeFormat, true);
 };
 
+const getStartOfDayTimestampIndex = (dayIndex, timestampsPerDay) =>
+  Math.floor(dayIndex * timestampsPerDay);
+
+const getEndOfDayTimestampIndex = (dayIndex, timestampsPerDay) =>
+  Math.floor((dayIndex + 1) * timestampsPerDay);
+
 // This method might not be reliable at certain times of day.
 // Specifically if the start or end of each for loop
 // end up after 9:30 am or before 4:00 pm, respectively.
@@ -155,22 +161,18 @@ const getDatesAndTimesForOneDay = (
   timestampIntervals
 ) => {
   let datesTimesAndPrices = [];
+  const timestampsPerDay = timestamp.length / numberOfDays;
   const dateAndTimeFormat = (numberOfDays === constants.ONE_DAY)
     ? constants.DATE_FORMAT_ONE_DAY
     : constants.DATE_FORMAT_FIVE_DAY;
+
   for (
-    // TODO: extract into shorter methods?
-    let i = Math.floor(
-      dayIndex * (timestamp.length / numberOfDays)
-    );
-    i < Math.floor(
-      (dayIndex + 1) * (timestamp.length / numberOfDays)
-    );
-    i++) {
-    if (timestamp[i] < timestampIntervals[dayIndex].start) {
-      continue;
-    }
-    if (timestamp[i] > timestampIntervals[dayIndex].end) {
+    let i = getStartOfDayTimestampIndex(dayIndex, timestampsPerDay);
+    i < getEndOfDayTimestampIndex(dayIndex, timestampsPerDay);
+    i++
+  ) {
+    if (timestamp[i] < timestampIntervals[dayIndex].start
+      || timestamp[i] > timestampIntervals[dayIndex].end) {
       continue;
     }
     datesTimesAndPrices.push({

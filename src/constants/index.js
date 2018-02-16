@@ -92,6 +92,7 @@ export const CHART_META_DATA = [
   }
 ];
 
+// formatting dates within the state
 export const DATE_FORMAT_FIVE_DAY = 'dddd, mmmm dd h:MM TT';
 export const DATE_FORMAT_ONE_DAY = 'h:MM TT';
 
