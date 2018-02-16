@@ -138,13 +138,44 @@ const getTime = (timestamp, gmtoffset) => {
   return dateFormat(time, 'h:MM TT', true);
 };
 
-// days are 0 indexed
-const getEndForDay = (day, meta) =>
-  meta.tradingPeriods.regular[day][0].end;
+const getDatesAndTimesForInterval = (
+  close,
+  gmtoffset,
+  intervalIndex,
+  numberOfIntervals,
+  timestamp,
+  timestampIntervals
+) => {
+  let datesTimesAndPrices = [];
+  for (
+    let i = Math.floor(
+      intervalIndex * (timestamp.length / numberOfIntervals)
+    );
+    i < Math.floor(
+      (intervalIndex + 1) * (timestamp.length / numberOfIntervals)
+    );
+    i++) {
+    if (timestamp[i] < timestampIntervals[intervalIndex].start) {
+      continue;
+    }
+    if (timestamp[i] > timestampIntervals[intervalIndex].end) {
+      continue;
+    }
+    datesTimesAndPrices.push({
+      dateAndTime: getTime(timestamp[i], gmtoffset), // TODO: make this get the date and time, not just the time
+      price: close[i]
+    });
+  }
+  return datesTimesAndPrices;
+};
 
 // days are 0 indexed
-const getStartForDay = (day, meta) =>
-  meta.tradingPeriods.regular[day][0].start;
+const getEndForDay = (dayIndex, meta) =>
+  meta.tradingPeriods.regular[dayIndex][0].end;
+
+// days are 0 indexed
+const getStartForDay = (dayIndex, meta) =>
+  meta.tradingPeriods.regular[dayIndex][0].start;
 
 const getTimestampIntervals = (numberOfDays, meta) => {
   let timestampIntervals = [];
@@ -155,6 +186,29 @@ const getTimestampIntervals = (numberOfDays, meta) => {
     });
   }
   return timestampIntervals;
+};
+
+const getDatesTimesAndPrices = (
+  close,
+  gmtoffset,
+  timestamp,
+  timestampIntervals
+) => {
+  let datesTimesAndPrices = [];
+  for (let i = 0; i < constants.FIVE_DAYS; i++) {
+    const intervalDatesTimesAndPrices = getDatesAndTimesForInterval(
+      close,
+      gmtoffset,
+      i,
+      constants.FIVE_DAYS,
+      timestamp,
+      timestampIntervals
+    );
+    datesTimesAndPrices = datesTimesAndPrices.concat(
+      intervalDatesTimesAndPrices
+    );
+  }
+  return datesTimesAndPrices;
 };
 
 // TODO: generalize as method that gives dates + times for parameter number of days?
@@ -171,74 +225,11 @@ const getFiveDayStockData = fiveDayRes => {
 
   // array of objects, one for each day,
   // each containing a start timestamp and end timestamp for that day
-  const timestampIntervals = getTimestampIntervals(5, meta); // TODO: make 5 a constant
+  const timestampIntervals = getTimestampIntervals(constants.FIVE_DAYS, meta); // TODO: make 5 a constant
 
-  // console.log('Start time: ' + getTime(start, gmtoffset));
-  // console.log('End time: ' + getTime(end, gmtoffset));
   console.log('First date: ' + new Date((timestamp[0] + gmtoffset) * constants.MILLISECONDS_PER_SECOND));
   const { close } = indicators.quote[0];
-
-  let datesTimesAndPrices = [];
-  for (let i = 0; i < timestamp.length / 5; i++) {
-    if (timestamp[i] < timestampIntervals[0].start) {
-      continue;
-    }
-    if (timestamp[i] > timestampIntervals[0].end) {
-      continue;
-    }
-    datesTimesAndPrices.push({
-      dateAndTime: getTime(timestamp[i], gmtoffset), // TODO: make this get the date and time, not just the time
-      price: close[i]
-    });
-  }
-  for (let i = Math.floor(timestamp.length / 5); i < Math.floor(2 * (timestamp.length / 5)); i++) {
-    if (timestamp[i] < timestampIntervals[1].start) {
-      continue;
-    }
-    if (timestamp[i] > timestampIntervals[1].end) {
-      continue;
-    }
-    datesTimesAndPrices.push({
-      dateAndTime: getTime(timestamp[i], gmtoffset), // TODO: make this get the date and time, not just the time
-      price: close[i]
-    });
-  }
-  for (let i = Math.floor(2 * (timestamp.length / 5)); i < Math.floor(3 * (timestamp.length / 5)); i++) {
-    if (timestamp[i] < timestampIntervals[2].start) {
-      continue;
-    }
-    if (timestamp[i] > timestampIntervals[2].end) {
-      continue;
-    }
-    datesTimesAndPrices.push({
-      dateAndTime: getTime(timestamp[i], gmtoffset), // TODO: make this get the date and time, not just the time
-      price: close[i]
-    });
-  }
-  for (let i = Math.floor(3 * (timestamp.length / 5)); i < Math.floor(4 * (timestamp.length / 5)); i++) {
-    if (timestamp[i] < timestampIntervals[3].start) {
-      continue;
-    }
-    if (timestamp[i] > timestampIntervals[3].end) {
-      continue;
-    }
-    datesTimesAndPrices.push({
-      dateAndTime: getTime(timestamp[i], gmtoffset), // TODO: make this get the date and time, not just the time
-      price: close[i]
-    });
-  }
-  for (let i = Math.floor(4 * (timestamp.length / 5)); i < Math.floor(5 * (timestamp.length / 5)); i++) {
-    if (timestamp[i] < timestampIntervals[4].start) {
-      continue;
-    }
-    if (timestamp[i] > timestampIntervals[4].end) {
-      continue;
-    }
-    datesTimesAndPrices.push({
-      dateAndTime: getTime(timestamp[i], gmtoffset), // TODO: make this get the date and time, not just the time
-      price: close[i]
-    });
-  }
+  const datesTimesAndPrices = getDatesTimesAndPrices(close, gmtoffset, timestamp, timestampIntervals);
   return datesTimesAndPrices;
 };
 
@@ -260,6 +251,7 @@ const getOneDayStockData = oneDayRes => {
   const { close } = indicators.quote[0];
 
   let timesAndPrices = [];
+  // TODO: extract into methods
   for (let i = 0; i < timestamp.length; i++) {
     if (timestamp[i] < start) {
       continue;

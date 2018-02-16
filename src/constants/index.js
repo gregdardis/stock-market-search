@@ -79,6 +79,8 @@ export const CHART_META_DATA = [
   }
 ];
 
+export const FIVE_DAYS = 5;
+
 // these need to correspond to the CHART_META_DATA indexes
 export const INDEX_FIVE_DAY = 1;
 export const INDEX_FIVE_YEAR = 5;
