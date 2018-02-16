@@ -6,6 +6,7 @@ export const REQUEST_STOCK = 'REQUEST_STOCK';
 export const receiveStock = ({
   companyName,
   exchange,
+  fiveDayStockData,
   maxStockData,
   oneDayStockData,
   stockOverviewData,
@@ -14,6 +15,7 @@ export const receiveStock = ({
   type: RECEIVE_STOCK,
   companyName,
   exchange,
+  fiveDayStockData,
   maxStockData,
   oneDayStockData,
   receivedAt: Date.now(),

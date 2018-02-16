@@ -19,6 +19,7 @@ export const reducer = (
     return Object.assign({}, state, {
       companyName: action.companyName,
       exchange: action.exchange,
+      fiveDayStockData: action.fiveDayStockData,
       isFetching: false,
       lastUpdated: action.receivedAt,
       maxStockData: action.maxStockData,

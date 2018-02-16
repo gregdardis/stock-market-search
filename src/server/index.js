@@ -138,8 +138,40 @@ const getTime = (timestamp, gmtoffset) => {
   return dateFormat(time, 'h:MM TT', true);
 };
 
-const getOneDayStockData = response => {
-  const intradayData = JSON.parse(response);
+const getFiveDayStockData = fiveDayRes => {
+  const intradayData = JSON.parse(fiveDayRes);
+  console.log(intradayData);
+  // const result = intradayData.chart.result[0];
+  // const {
+  //   indicators,
+  //   meta,
+  //   timestamp
+  // } = result;
+  // const {
+  //   start,
+  //   end,
+  //   gmtoffset
+  // } = meta.currentTradingPeriod.regular;
+  // const { close } = indicators.quote[0];
+
+  let datesTimesAndPrices = [];
+  // for (let i = 0; i < timestamp.length; i++) {
+  //   if (timestamp[i] < start) {
+  //     continue;
+  //   }
+  //   if (timestamp[i] > end) {
+  //     return datesTimesAndPrices;
+  //   }
+  //   datesTimesAndPrices.push({
+  //     time: getTime(timestamp[i], gmtoffset),
+  //     price: close[i]
+  //   });
+  // }
+  return datesTimesAndPrices;
+};
+
+const getOneDayStockData = oneDayRes => {
+  const intradayData = JSON.parse(oneDayRes);
   const result = intradayData.chart.result[0];
   const {
     indicators,
@@ -199,11 +231,19 @@ app.get('/api/stocks/:symbol', (req, res) => {
 
           const range = '1d';
           const interval = '5m';
-          const query = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?range=${range}&includePrePost=true&interval=${interval}&corsDomain=finance.yahoo.com&.tsrc=finance`;
-          rp(query)
-            .then(response => {
-              stock.oneDayStockData = getOneDayStockData(response);
-              res.send(stock);
+          const queryOneDay = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?range=${range}&includePrePost=true&interval=${interval}&corsDomain=finance.yahoo.com&.tsrc=finance`;
+          rp(queryOneDay)
+            .then(oneDayRes => {
+              stock.oneDayStockData = getOneDayStockData(oneDayRes);
+              
+              const rangeFiveDay = '5d';
+              const intervalFiveDay = '30m';
+              const queryFiveDay = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?range=${rangeFiveDay}&includePrePost=true&interval=${intervalFiveDay}&corsDomain=finance.yahoo.com&.tsrc=finance`;
+              rp(queryFiveDay)
+                .then(fiveDayRes => {
+                  stock.fiveDayStockData = getFiveDayStockData(fiveDayRes);
+                  res.send(stock);
+                });
             });
         });
     }
