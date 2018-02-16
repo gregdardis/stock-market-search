@@ -135,7 +135,16 @@ const getTime = (timestamp, gmtoffset) => {
   // NOTE: this date has timezone UTC, which is incorrect but works in this
   // case because we are just extracting the time
   const time = new Date(adjustedTimestamp);
-  return dateFormat(time, 'h:MM TT', true);
+  return dateFormat(time, 'h:MM TT', true); // TODO: extract string to constants
+};
+
+// TODO: share code between this method and getTime
+const getDateAndTime = (timestamp, gmtoffset) => {
+  const adjustedTimestamp =
+    (timestamp + gmtoffset) * constants.MILLISECONDS_PER_SECOND;
+
+  const dateAndTime = new Date(adjustedTimestamp); // Friday, February 16 11:00 AM
+  return dateFormat(dateAndTime, 'dddd, mmmm dd h:MM TT', true); // TODO: extract string to constants
 };
 
 const getDatesAndTimesForInterval = (
@@ -163,7 +172,7 @@ const getDatesAndTimesForInterval = (
       continue;
     }
     datesTimesAndPrices.push({
-      dateAndTime: getTime(timestamp[i], gmtoffset), // TODO: make this get the date and time, not just the time
+      dateAndTime: getDateAndTime(timestamp[i], gmtoffset), // TODO: make this get the date and time, not just the time
       price: close[i]
     });
   }
@@ -229,7 +238,6 @@ const getMultiDayStockData = (multiDayRes, numberOfDays) => {
   // each containing a start timestamp and end timestamp for that day
   const timestampIntervals = getTimestampIntervals(numberOfDays, meta);
 
-  console.log('First date: ' + new Date((timestamp[0] + gmtoffset) * constants.MILLISECONDS_PER_SECOND));
   const { close } = indicators.quote[0];
   const datesTimesAndPrices = getDatesTimesAndPrices(
     close,
@@ -241,8 +249,6 @@ const getMultiDayStockData = (multiDayRes, numberOfDays) => {
   return datesTimesAndPrices;
 };
 
-// TODO: generalize as method that gives just times for parameter number of days?
-// maybe not because this would only be used for one day, otherwise you'd want the date + times
 const getOneDayStockData = oneDayRes => {
   const intradayData = JSON.parse(oneDayRes);
   const result = intradayData.chart.result[0];
