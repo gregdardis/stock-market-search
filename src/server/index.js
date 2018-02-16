@@ -138,8 +138,24 @@ const getTime = (timestamp, gmtoffset) => {
   return dateFormat(time, 'h:MM TT', true);
 };
 
+// days are 0 indexed
+const getEndForDay = (day, meta) =>
+  meta.tradingPeriods.regular[day][0].end;
+
+// days are 0 indexed
 const getStartForDay = (day, meta) =>
-  meta.tradingPeriods.regular[day - 1][0].start;
+  meta.tradingPeriods.regular[day][0].start;
+
+const getTimestampIntervals = (numberOfDays, meta) => {
+  let timestampIntervals = [];
+  for (let i = 0; i < numberOfDays; i++) {
+    timestampIntervals.push({
+      start: getStartForDay(i, meta),
+      end: getEndForDay(i, meta)
+    });
+  }
+  return timestampIntervals;
+};
 
 const getFiveDayStockData = fiveDayRes => {
   const fiveDayIntradayData = JSON.parse(fiveDayRes);
@@ -151,16 +167,11 @@ const getFiveDayStockData = fiveDayRes => {
     timestamp
   } = result;
   const { gmtoffset } = meta;
-  // const startDayOne = meta.tradingPeriods.regular[1][0].start; 
-  const startDayOne = getStartForDay(1, meta);
-  console.log('Start day 1: ' + startDayOne + '...Expected: ' + 1518445800);
-  // const endDayOne = meta.tradingPeriods.regular[0][0].end;
-  const startDayTwo = getStartForDay(2, meta);
-  // const startDayTwo = meta.tradingPeriods.regular[0][1].start;
-  console.log('Start day 2: ' + startDayTwo + '...Expected: ' + 1518532200);
-  console.log('First: ' + getTime(timestamp[7], gmtoffset));
-  console.log('Second time: ' + getTime(timestamp[8], gmtoffset));
-  // console.log('Third time: ' + getTime(timestamp[9], gmtoffset));
+
+  // array of objects, one for each day,
+  // each containing a start timestamp and end timestamp
+  const timestampIntervals = getTimestampIntervals(5, meta); // TODO: make 5 a constant
+
   // console.log('Start time: ' + getTime(start, gmtoffset));
   // console.log('End time: ' + getTime(end, gmtoffset));
   console.log('First date: ' + new Date((timestamp[0] + gmtoffset) * constants.MILLISECONDS_PER_SECOND));
