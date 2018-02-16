@@ -157,6 +157,7 @@ const getTimestampIntervals = (numberOfDays, meta) => {
   return timestampIntervals;
 };
 
+// TODO: generalize as method that gives dates + times for parameter number of days?
 const getFiveDayStockData = fiveDayRes => {
   const fiveDayIntradayData = JSON.parse(fiveDayRes);
   console.log(JSON.stringify(fiveDayIntradayData, null, 2));
@@ -169,7 +170,7 @@ const getFiveDayStockData = fiveDayRes => {
   const { gmtoffset } = meta;
 
   // array of objects, one for each day,
-  // each containing a start timestamp and end timestamp
+  // each containing a start timestamp and end timestamp for that day
   const timestampIntervals = getTimestampIntervals(5, meta); // TODO: make 5 a constant
 
   // console.log('Start time: ' + getTime(start, gmtoffset));
@@ -190,9 +191,59 @@ const getFiveDayStockData = fiveDayRes => {
       price: close[i]
     });
   }
+  for (let i = Math.floor(timestamp.length / 5); i < Math.floor(2 * (timestamp.length / 5)); i++) {
+    if (timestamp[i] < timestampIntervals[1].start) {
+      continue;
+    }
+    if (timestamp[i] > timestampIntervals[1].end) {
+      continue;
+    }
+    datesTimesAndPrices.push({
+      dateAndTime: getTime(timestamp[i], gmtoffset), // TODO: make this get the date and time, not just the time
+      price: close[i]
+    });
+  }
+  for (let i = Math.floor(2 * (timestamp.length / 5)); i < Math.floor(3 * (timestamp.length / 5)); i++) {
+    if (timestamp[i] < timestampIntervals[2].start) {
+      continue;
+    }
+    if (timestamp[i] > timestampIntervals[2].end) {
+      continue;
+    }
+    datesTimesAndPrices.push({
+      dateAndTime: getTime(timestamp[i], gmtoffset), // TODO: make this get the date and time, not just the time
+      price: close[i]
+    });
+  }
+  for (let i = Math.floor(3 * (timestamp.length / 5)); i < Math.floor(4 * (timestamp.length / 5)); i++) {
+    if (timestamp[i] < timestampIntervals[3].start) {
+      continue;
+    }
+    if (timestamp[i] > timestampIntervals[3].end) {
+      continue;
+    }
+    datesTimesAndPrices.push({
+      dateAndTime: getTime(timestamp[i], gmtoffset), // TODO: make this get the date and time, not just the time
+      price: close[i]
+    });
+  }
+  for (let i = Math.floor(4 * (timestamp.length / 5)); i < Math.floor(5 * (timestamp.length / 5)); i++) {
+    if (timestamp[i] < timestampIntervals[4].start) {
+      continue;
+    }
+    if (timestamp[i] > timestampIntervals[4].end) {
+      continue;
+    }
+    datesTimesAndPrices.push({
+      dateAndTime: getTime(timestamp[i], gmtoffset), // TODO: make this get the date and time, not just the time
+      price: close[i]
+    });
+  }
   return datesTimesAndPrices;
 };
 
+// TODO: generalize as method that gives just times for parameter number of days?
+// maybe not because this would only be used for one day, otherwise you'd want the date + times
 const getOneDayStockData = oneDayRes => {
   const intradayData = JSON.parse(oneDayRes);
   const result = intradayData.chart.result[0];
