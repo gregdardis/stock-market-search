@@ -137,14 +137,9 @@ const getAdjustedDateForTimestamp = (gmtoffset, timestamp) => {
   return new Date(adjustedTimestamp);
 };
 
-const getTime = (timestamp, gmtoffset) => {
-  const time = getAdjustedDateForTimestamp(gmtoffset, timestamp);
-  return dateFormat(time, 'h:MM TT', true); // TODO: extract string to constants
-};
-
-const getDateAndTime = (gmtoffset, timestamp) => {
+const getDateAndTime = (gmtoffset, timestamp, dateAndTimeFormat) => {
   const dateAndTime = getAdjustedDateForTimestamp(gmtoffset, timestamp);
-  return dateFormat(dateAndTime, 'dddd, mmmm dd h:MM TT', true); // TODO: extract string to constants
+  return dateFormat(dateAndTime, dateAndTimeFormat, true); 
 };
 
 // This method might not be reliable at certain times of day.
@@ -160,6 +155,7 @@ const getDatesAndTimesForInterval = (
   timestampIntervals
 ) => {
   let datesTimesAndPrices = [];
+  const dateAndTimeFormat = numberOfIntervals === 1 ? 'h:MM TT' : 'dddd, mmmm dd h:MM TT'; // TODO: extract string to constants
   for (
     // TODO: extract into shorter methods?
     let i = Math.floor(
@@ -176,7 +172,7 @@ const getDatesAndTimesForInterval = (
       continue;
     }
     datesTimesAndPrices.push({
-      dateAndTime: getDateAndTime(gmtoffset, timestamp[i]),
+      dateAndTime: getDateAndTime(gmtoffset, timestamp[i], dateAndTimeFormat),
       price: close[i]
     });
   }
@@ -226,11 +222,10 @@ const getDatesTimesAndPrices = (
   return datesTimesAndPrices;
 };
 
-// numberOfDays much match the range used to obtain the multiDayRes
-const getMultiDayStockData = (multiDayRes, numberOfDays) => {
-  const multiDayIntraDayData = JSON.parse(multiDayRes);
-  // console.log(JSON.stringify(multiDayIntraDayData, null, 2));
-  const result = multiDayIntraDayData.chart.result[0];
+// numberOfDays much match the range used to obtain the intraDayRes
+const getIntraDayStockData = (intraDayRes, numberOfDays) => {
+  const intraDayData = JSON.parse(intraDayRes);
+  const result = intraDayData.chart.result[0];
   const {
     indicators,
     meta,
@@ -251,38 +246,6 @@ const getMultiDayStockData = (multiDayRes, numberOfDays) => {
     timestampIntervals
   );
   return datesTimesAndPrices;
-};
-
-const getOneDayStockData = oneDayRes => {
-  const intradayData = JSON.parse(oneDayRes);
-  const result = intradayData.chart.result[0];
-  const {
-    indicators,
-    meta,
-    timestamp
-  } = result;
-  const {
-    start,
-    end,
-    gmtoffset
-  } = meta.currentTradingPeriod.regular;
-  const { close } = indicators.quote[0];
-
-  let timesAndPrices = [];
-  // TODO: extract into methods
-  for (let i = 0; i < timestamp.length; i++) {
-    if (timestamp[i] < start) {
-      continue;
-    }
-    if (timestamp[i] > end) {
-      return timesAndPrices;
-    }
-    timesAndPrices.push({
-      time: getTime(timestamp[i], gmtoffset),
-      price: close[i]
-    });
-  }
-  return timesAndPrices;
 };
 
 // TODO: the nesting in here is horrible, we need to refactor. 
@@ -318,7 +281,7 @@ app.get('/api/stocks/:symbol', (req, res) => {
           const queryOneDay = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?range=${range}&includePrePost=true&interval=${interval}&corsDomain=finance.yahoo.com&.tsrc=finance`;
           rp(queryOneDay)
             .then(oneDayRes => {
-              stock.oneDayStockData = getOneDayStockData(oneDayRes);
+              stock.oneDayStockData = getIntraDayStockData(oneDayRes, constants.ONE_DAY);
               
               const rangeFiveDay = '5d';
               // 30m interval seems to be 60m for some reason, so using 15m instead
@@ -326,7 +289,7 @@ app.get('/api/stocks/:symbol', (req, res) => {
               const queryFiveDay = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?range=${rangeFiveDay}&includePrePost=true&interval=${intervalFiveDay}&corsDomain=finance.yahoo.com&.tsrc=finance`;
               rp(queryFiveDay)
                 .then(fiveDayRes => {
-                  stock.fiveDayStockData = getMultiDayStockData(fiveDayRes, constants.FIVE_DAYS);
+                  stock.fiveDayStockData = getIntraDayStockData(fiveDayRes, constants.FIVE_DAYS);
                   res.send(stock);
                 });
             });

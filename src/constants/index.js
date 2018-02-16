@@ -24,13 +24,13 @@ export const CHART_WIDTH = 1000;
 
 export const CHART_META_DATA = [
   {
-    xAxisDataKey: 'time',
+    xAxisDataKey: 'dateAndTime',
     label: '1 day',
     stockDataKey: 'oneDayStockData',
     xAxisMinTickGap: 100,
     getStockDataForTimePeriod: oneDayStockData => oneDayStockData,
-    getTooltipLabelFormatter: time => 'time: ' + time,
-    getXAxisTickFormatter: time => time
+    getTooltipLabelFormatter: dateAndTime => 'time: ' + dateAndTime,
+    getXAxisTickFormatter: dateAndTime => dateAndTime
   },
   {
     xAxisDataKey: 'dateAndTime',
@@ -93,8 +93,9 @@ export const CHART_META_DATA = [
 ];
 
 export const FIVE_DAYS = 5;
+export const ONE_DAY = 1;
 
-// these need to correspond to the CHART_META_DATA indexes
+// these need to correspond to the CHART_META_DATA indices
 export const INDEX_FIVE_DAY = 1;
 export const INDEX_FIVE_YEAR = 5;
 export const INDEX_MAX = 6;
