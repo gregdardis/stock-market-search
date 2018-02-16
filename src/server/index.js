@@ -148,6 +148,7 @@ const getDatesAndTimesForInterval = (
 ) => {
   let datesTimesAndPrices = [];
   for (
+    // TODO: extract into shorter methods?
     let i = Math.floor(
       intervalIndex * (timestamp.length / numberOfIntervals)
     );
@@ -191,16 +192,17 @@ const getTimestampIntervals = (numberOfDays, meta) => {
 const getDatesTimesAndPrices = (
   close,
   gmtoffset,
+  numberOfDays,
   timestamp,
   timestampIntervals
 ) => {
   let datesTimesAndPrices = [];
-  for (let i = 0; i < constants.FIVE_DAYS; i++) {
+  for (let i = 0; i < numberOfDays; i++) {
     const intervalDatesTimesAndPrices = getDatesAndTimesForInterval(
       close,
       gmtoffset,
       i,
-      constants.FIVE_DAYS,
+      numberOfDays,
       timestamp,
       timestampIntervals
     );
@@ -211,11 +213,11 @@ const getDatesTimesAndPrices = (
   return datesTimesAndPrices;
 };
 
-// TODO: generalize as method that gives dates + times for parameter number of days?
-const getFiveDayStockData = fiveDayRes => {
-  const fiveDayIntradayData = JSON.parse(fiveDayRes);
-  console.log(JSON.stringify(fiveDayIntradayData, null, 2));
-  const result = fiveDayIntradayData.chart.result[0];
+// numberOfDays much match the range used to obtain the multiDayRes
+const getMultiDayStockData = (multiDayRes, numberOfDays) => {
+  const multiDayIntraDayData = JSON.parse(multiDayRes);
+  // console.log(JSON.stringify(multiDayIntraDayData, null, 2));
+  const result = multiDayIntraDayData.chart.result[0];
   const {
     indicators,
     meta,
@@ -225,11 +227,17 @@ const getFiveDayStockData = fiveDayRes => {
 
   // array of objects, one for each day,
   // each containing a start timestamp and end timestamp for that day
-  const timestampIntervals = getTimestampIntervals(constants.FIVE_DAYS, meta); // TODO: make 5 a constant
+  const timestampIntervals = getTimestampIntervals(numberOfDays, meta);
 
   console.log('First date: ' + new Date((timestamp[0] + gmtoffset) * constants.MILLISECONDS_PER_SECOND));
   const { close } = indicators.quote[0];
-  const datesTimesAndPrices = getDatesTimesAndPrices(close, gmtoffset, timestamp, timestampIntervals);
+  const datesTimesAndPrices = getDatesTimesAndPrices(
+    close,
+    gmtoffset,
+    numberOfDays,
+    timestamp,
+    timestampIntervals
+  );
   return datesTimesAndPrices;
 };
 
@@ -308,7 +316,7 @@ app.get('/api/stocks/:symbol', (req, res) => {
               const queryFiveDay = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?range=${rangeFiveDay}&includePrePost=true&interval=${intervalFiveDay}&corsDomain=finance.yahoo.com&.tsrc=finance`;
               rp(queryFiveDay)
                 .then(fiveDayRes => {
-                  stock.fiveDayStockData = getFiveDayStockData(fiveDayRes);
+                  stock.fiveDayStockData = getMultiDayStockData(fiveDayRes, constants.FIVE_DAYS);
                   res.send(stock);
                 });
             });
