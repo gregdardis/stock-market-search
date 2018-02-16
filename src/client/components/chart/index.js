@@ -3,12 +3,11 @@ import { connect } from 'react-redux';
 import Chart from './Chart';
 import { getSelectedStockValueForKey } from '../../../utils/stateGetters';
 import {
-  CHART_META_DATA,
-  INDEX_ONE_MONTH
+  CHART_META_DATA
 } from '../../../constants';
 
 const getStockDataKey = timePeriodIndex =>
-  timePeriodIndex < INDEX_ONE_MONTH ? 'oneDayStockData' : 'maxStockData';
+  CHART_META_DATA[timePeriodIndex].stockDataKey;
 
 const getStockDataForTimePeriod = state => {
   const timePeriodIndex = state.chartTimePeriod;
