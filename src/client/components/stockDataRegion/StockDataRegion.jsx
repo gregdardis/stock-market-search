@@ -3,10 +3,8 @@ import PropTypes from 'prop-types';
 
 import Column from '../column';
 import Row from '../row';
-import CompanyNameAndSymbol from '../companyNameAndSymbol';
-import PriceAndTodaysPriceChange from '../priceAndTodaysPriceChange';
+import CompanyGeneralInfo from '../companyGeneralInfo';
 import { rowComponentsProps } from './childProps';
-import Exchange from '../exchange';
 import SelectableTimePeriodChart from '../selectableTimePeriodChart';
 import './stockDataRegion.css';
 
@@ -15,9 +13,7 @@ const StockDataRegion = ({
 }) => (
   hasData ?
     <div className='stockDataRegion'>
-      <CompanyNameAndSymbol />
-      <Exchange />
-      <PriceAndTodaysPriceChange />
+      <CompanyGeneralInfo />
       <SelectableTimePeriodChart />
       <Row
         componentsProps={ rowComponentsProps }

@@ -5,8 +5,6 @@ import {
 
 import dateFormat from 'dateformat';
 
-import { getSelectedStockValueForKey } from '../utils/stateGetters';
-
 /* TODO: separate into files
 - user-facing constants
 - calculation constants
