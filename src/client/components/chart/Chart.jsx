@@ -21,20 +21,20 @@ import {
 } from '../../../constants';
 
 const Chart = ({
-  chartTimePeriod,
+  chartTimePeriodIndex,
   data
 }) => {
   const getTooltipLabelFormatter = () =>
-    CHART_META_DATA[chartTimePeriod].getTooltipLabelFormatter;
+    CHART_META_DATA[chartTimePeriodIndex].getTooltipLabelFormatter;
 
   const getXAxisDataKey = () =>
-    CHART_META_DATA[chartTimePeriod].xAxisDataKey;
+    CHART_META_DATA[chartTimePeriodIndex].xAxisDataKey;
 
   const getXAxisMinTickGap = () =>
-    CHART_META_DATA[chartTimePeriod].xAxisMinTickGap;
+    CHART_META_DATA[chartTimePeriodIndex].xAxisMinTickGap;
 
   const getXAxisTickFormatter = () =>
-    CHART_META_DATA[chartTimePeriod].getXAxisTickFormatter;
+    CHART_META_DATA[chartTimePeriodIndex].getXAxisTickFormatter;
   return (
     <LineChart width={ CHART_WIDTH } height={ CHART_HEIGHT } data={ data }
       className='chart' >
@@ -52,7 +52,7 @@ const Chart = ({
   );
 };
 Chart.propTypes = {
-  data: PropTypes.array.isRequired,
-  chartTimePeriod: PropTypes.number.isRequired
+  chartTimePeriodIndex: PropTypes.number.isRequired,
+  data: PropTypes.array.isRequired
 };
 export default Chart;

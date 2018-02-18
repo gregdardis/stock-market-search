@@ -10,7 +10,7 @@ const getStockDataKey = timePeriodIndex =>
   CHART_META_DATA[timePeriodIndex].stockDataKey;
 
 const getStockDataForTimePeriod = state => {
-  const timePeriodIndex = state.chartTimePeriod;
+  const timePeriodIndex = state.chartTimePeriodIndex;
   const stockDataKey = getStockDataKey(timePeriodIndex);
   const stockData = getSelectedStockValueForKey(state, stockDataKey);
   return CHART_META_DATA[
@@ -19,7 +19,7 @@ const getStockDataForTimePeriod = state => {
 };
 
 const mapStateToProps = state => ({
-  chartTimePeriod: state.chartTimePeriod,
+  chartTimePeriodIndex: state.chartTimePeriodIndex,
   data: getStockDataForTimePeriod(state)
 });
 

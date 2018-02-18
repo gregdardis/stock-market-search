@@ -10,17 +10,17 @@ import {
 } from '../../../constants';
 
 const TimePeriodButtons = ({
-  chartTimePeriod,
-  updateChartTimePeriod
+  chartTimePeriodIndex,
+  updateChartTimePeriodIndex
 }) => {
   const getLabelColor = buttonIndex => {
-    if (chartTimePeriod === buttonIndex) {
+    if (chartTimePeriodIndex === buttonIndex) {
       return CHART_BUTTON_LABEL_COLOR_SELECTED;
     }
     return CHART_BUTTON_LABEL_COLOR_DEFAULT;
   };
   const handleClick = index => {
-    updateChartTimePeriod(index);
+    updateChartTimePeriodIndex(index);
   };
   return (
     <div className='timePeriodButtons'>
@@ -35,7 +35,7 @@ const TimePeriodButtons = ({
   );
 };
 TimePeriodButtons.propTypes = {
-  updateChartTimePeriod: PropTypes.func.isRequired,
-  chartTimePeriod: PropTypes.number.isRequired
+  updateChartTimePeriodIndex: PropTypes.func.isRequired,
+  chartTimePeriodIndex: PropTypes.number.isRequired
 };
 export default TimePeriodButtons;

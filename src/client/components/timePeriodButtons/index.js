@@ -1,18 +1,18 @@
 import { connect } from 'react-redux';
 
 import TimePeriodButtons from './TimePeriodButtons';
-import { updateChartTimePeriod } from '../../actions';
+import { updateChartTimePeriodIndex } from '../../actions';
 
 const mapDispatchToProps = dispatch => ({
-  updateChartTimePeriod(index) {
+  updateChartTimePeriodIndex(index) {
     dispatch(
-      updateChartTimePeriod(index)
+      updateChartTimePeriodIndex(index)
     );
   }
 });
 
 const mapStateToProps = state => ({
-  chartTimePeriod: state.chartTimePeriod
+  chartTimePeriodIndex: state.chartTimePeriodIndex
 });
 
 export default connect(
