@@ -24,27 +24,29 @@ export const CHART_WIDTH = 1000;
 
 export const CHART_META_DATA = [
   {
-    xAxisDataKey: 'dateAndTime',
     label: '1 day',
     stockDataKey: 'oneDayStockData',
+    xAxisDataKey: 'dateAndTime',
     xAxisMinTickGap: 100,
     getStockDataForTimePeriod: oneDayStockData => oneDayStockData,
     getTooltipLabelFormatter: dateAndTime => 'time: ' + dateAndTime,
     getXAxisTickFormatter: dateAndTime => dateAndTime
   },
   {
-    xAxisDataKey: 'dateAndTime',
     label: '5 day',
     stockDataKey: 'fiveDayStockData',
+    xAxisDataKey: 'dateAndTime',
     xAxisMinTickGap: 110,
     getStockDataForTimePeriod: fiveDayStockData => fiveDayStockData,
-    getTooltipLabelFormatter: dateAndTime => dateFormat(dateAndTime, 'mmm d, h:MM TT'),
-    getXAxisTickFormatter: dateAndTime => dateFormat(dateAndTime, 'mmm d, h:MM TT')
+    getTooltipLabelFormatter: dateAndTime =>
+      dateFormat(dateAndTime, 'mmm d, h:MM TT'),
+    getXAxisTickFormatter: dateAndTime =>
+      dateFormat(dateAndTime, 'mmm d, h:MM TT')
   },
   {
-    xAxisDataKey: 'date',
     label: '1 month',
     stockDataKey: 'maxStockData',
+    xAxisDataKey: 'date',
     xAxisMinTickGap: 60,
     getStockDataForTimePeriod: maxStockData =>
       getStockDataForPreviousMonths(maxStockData, 1),
@@ -52,9 +54,9 @@ export const CHART_META_DATA = [
     getXAxisTickFormatter: date => dateFormat(date, 'mmm d')
   },
   {
-    xAxisDataKey: 'date',
     label: '3 month',
     stockDataKey: 'maxStockData',
+    xAxisDataKey: 'date',
     xAxisMinTickGap: 100,
     getStockDataForTimePeriod: maxStockData =>
       getStockDataForPreviousMonths(maxStockData, 3),
@@ -62,9 +64,9 @@ export const CHART_META_DATA = [
     getXAxisTickFormatter: date => dateFormat(date, 'mmm d')
   },
   {
-    xAxisDataKey: 'date',
     label: '1 year',
     stockDataKey: 'maxStockData',
+    xAxisDataKey: 'date',
     xAxisMinTickGap: 30,
     getStockDataForTimePeriod: maxStockData =>
       getStockDataForPreviousYears(maxStockData, 1),
@@ -72,9 +74,9 @@ export const CHART_META_DATA = [
     getXAxisTickFormatter: date => dateFormat(date, 'mmm d')
   },
   {
-    xAxisDataKey: 'date',
     label: '5 year',
     stockDataKey: 'maxStockData',
+    xAxisDataKey: 'date',
     xAxisMinTickGap: 120,
     getStockDataForTimePeriod: maxStockData =>
       getStockDataForPreviousYears(maxStockData, 5),
@@ -82,9 +84,9 @@ export const CHART_META_DATA = [
     getXAxisTickFormatter: date => dateFormat(date, 'mmm yyyy')
   },
   {
-    xAxisDataKey: 'date',
     label: 'max',
     stockDataKey: 'maxStockData',
+    xAxisDataKey: 'date',
     xAxisMinTickGap: 130,
     getStockDataForTimePeriod: maxStockData => maxStockData,
     getTooltipLabelFormatter: date => dateFormat(date, 'mmm d, yyyy'),

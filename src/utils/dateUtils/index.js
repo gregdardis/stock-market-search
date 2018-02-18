@@ -5,7 +5,7 @@ export {
 } from './dateCalculations';
 
 export {
-  formatDate
+  formatDateForMaxStockData
 } from './dateFormatting';
 
 export {

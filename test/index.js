@@ -2,7 +2,7 @@ import {
   formatValueFromStateAndPropsTest
 } from './utils/formatting/stringFormatting';
 import {
-  formatDateTest
+  formatDateForMaxStockDataTest
 } from './utils/dateUtils/dateFormatting';
 import {
   addCommasTest,
@@ -11,5 +11,5 @@ import {
 
 formatValueFromStateAndPropsTest();
 padSingleDigitWithZeroTest();
-formatDateTest();
+formatDateForMaxStockDataTest();
 addCommasTest();

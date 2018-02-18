@@ -8,7 +8,7 @@ import dateFormat from 'dateformat';
 
 import * as constants from '../constants';
 import { port } from './config';
-import { formatDate } from '../utils/dateUtils';
+import { formatDateForMaxStockData } from '../utils/dateUtils';
 
 const app = express();
 
@@ -115,6 +115,7 @@ const createStock = stockQuote => {
   };
 };
 
+// Used for historical() data obtained using period 'd'
 const getDatesAndPrices = dailyData => {
   let datesAndPrices = [];
   dailyData.forEach(({
@@ -122,7 +123,7 @@ const getDatesAndPrices = dailyData => {
     close
   }) => {
     datesAndPrices.unshift({
-      date: formatDate(date),
+      date: formatDateForMaxStockData(date),
       price: close
     });
   });
@@ -148,14 +149,12 @@ const getStartOfDayTimestampIndex = (dayIndex, timestampsPerDay) =>
 const getEndOfDayTimestampIndex = (dayIndex, timestampsPerDay) =>
   Math.floor((dayIndex + 1) * timestampsPerDay);
 
-// TODO: think about edge cases more. What happens if there's only
-// one timestamp for a day because it's 12:15 am?
-// Hard to say at this point without testing at certain times of day
-// because yahoo-finance-data does not clearly say how this works
+// Could be buggy depending on how the timestamps in their API are given.
+// Couldn't find info on this so will need to test at certain times of day.
 const getDatesAndTimesForOneDay = (
   close,
-  gmtoffset,
   dayIndex,
+  gmtoffset,
   numberOfDays,
   timestamp,
   timestampIntervals
@@ -184,19 +183,19 @@ const getDatesAndTimesForOneDay = (
 };
 
 // days are 0 indexed
-const getEndForDay = (dayIndex, meta) =>
+const getEndTimestampForDay = (dayIndex, meta) =>
   meta.tradingPeriods.regular[dayIndex][0].end;
 
 // days are 0 indexed
-const getStartForDay = (dayIndex, meta) =>
+const getStartTimestampForDay = (dayIndex, meta) =>
   meta.tradingPeriods.regular[dayIndex][0].start;
 
 const getTimestampIntervals = (numberOfDays, meta) => {
   let timestampIntervals = [];
-  for (let i = 0; i < numberOfDays; i++) {
+  for (let dayIndex = 0; dayIndex < numberOfDays; dayIndex++) {
     timestampIntervals.push({
-      start: getStartForDay(i, meta),
-      end: getEndForDay(i, meta)
+      start: getStartTimestampForDay(dayIndex, meta),
+      end: getEndTimestampForDay(dayIndex, meta)
     });
   }
   return timestampIntervals;
@@ -210,17 +209,17 @@ const getDatesTimesAndPrices = (
   timestampIntervals
 ) => {
   let datesTimesAndPrices = [];
-  for (let i = 0; i < numberOfDays; i++) {
-    const intervalDatesTimesAndPrices = getDatesAndTimesForOneDay(
+  for (let dayIndex = 0; dayIndex < numberOfDays; dayIndex++) {
+    const intervalOfDatesTimesAndPrices = getDatesAndTimesForOneDay(
       close,
+      dayIndex,
       gmtoffset,
-      i,
       numberOfDays,
       timestamp,
       timestampIntervals
     );
     datesTimesAndPrices = datesTimesAndPrices.concat(
-      intervalDatesTimesAndPrices
+      intervalOfDatesTimesAndPrices
     );
   }
   return datesTimesAndPrices;
@@ -237,8 +236,8 @@ const getIntradayStockData = (intradayRes, numberOfDays) => {
   } = result;
   const { gmtoffset } = meta;
 
-  // Array of objects, one for each day,
-  // each containing a start timestamp and end timestamp for that day.
+  // Array of objects, one for each day.
+  // Each contains a start timestamp and end timestamp for that trading day.
   const timestampIntervals = getTimestampIntervals(numberOfDays, meta);
 
   const { close } = indicators.quote[0];

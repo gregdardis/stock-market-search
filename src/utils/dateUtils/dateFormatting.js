@@ -1,9 +1,10 @@
-// const numberFormatting = require('./numberFormatting');
 import { padSingleDigitWithZero } from '../formatting/numberFormatting';
 
-export const formatDate = date => {
+// Reinventing the wheel here, but it was good unit testing
+// practice and the method works
+export const formatDateForMaxStockData = date => {
   if (!(date instanceof Date)) {
-    throw new TypeError(`${formatDate.name} requires a date`);
+    throw new TypeError(`${formatDateForMaxStockData.name} requires a date`);
   }
 
   let day = date.getDate();
