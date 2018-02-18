@@ -253,7 +253,10 @@ const getIntradayStockData = (intradayRes, numberOfDays) => {
 };
 
 const getQueryForIntradayData = (symbol, range, interval) => {
-  return `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?range=${range}&includePrePost=true&interval=${interval}&corsDomain=finance.yahoo.com&.tsrc=finance`;
+  // TODO: somehow extract this string to constants? Tagged template?
+  return `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}` +
+  `?range=${range}&includePrePost=true&interval=${interval}` +
+  '&corsDomain=finance.yahoo.com&.tsrc=finance';
 };
 
 // TODO: the nesting in here is horrible, we need to refactor. 
