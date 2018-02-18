@@ -17,6 +17,7 @@ export const BLANK_FIELD = '--';
 
 export const CHART_BUTTON_LABEL_COLOR_DEFAULT = '#000000';
 export const CHART_BUTTON_LABEL_COLOR_SELECTED = '#3223ff';
+export const CHART_DATA_KEY_Y_AXIS = 'price';
 export const CHART_HEIGHT = 400;
 export const CHART_WIDTH = 1000;
 
@@ -93,6 +94,8 @@ export const CHART_META_DATA = [
 // formatting dates within the state
 export const DATE_FORMAT_FIVE_DAY = 'dddd, mmmm dd h:MM TT';
 export const DATE_FORMAT_ONE_DAY = 'h:MM TT';
+
+export const ERROR_MESSAGE_STOCK_NOT_FOUND = 'Stock symbol not found.';
 
 export const FIVE_DAYS = 5;
 export const ONE_DAY = 1;

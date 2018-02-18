@@ -226,7 +226,7 @@ const getDatesTimesAndPrices = (
   return datesTimesAndPrices;
 };
 
-// numberOfDays much match the range used to obtain the intradayRes
+// numberOfDays much match the range used to obtain the intradayRes.
 const getIntradayStockData = (intradayRes, numberOfDays) => {
   const intradayData = JSON.parse(intradayRes);
   const result = intradayData.chart.result[0];
@@ -237,8 +237,8 @@ const getIntradayStockData = (intradayRes, numberOfDays) => {
   } = result;
   const { gmtoffset } = meta;
 
-  // array of objects, one for each day,
-  // each containing a start timestamp and end timestamp for that day
+  // Array of objects, one for each day,
+  // each containing a start timestamp and end timestamp for that day.
   const timestampIntervals = getTimestampIntervals(numberOfDays, meta);
 
   const { close } = indicators.quote[0];
@@ -321,7 +321,7 @@ app.get('/api/stocks/:symbol', (req, res) => {
     }
 
   ).catch(() =>
-    res.status(404).send('Stock symbol not found.')
+    res.status(404).send(constants.ERROR_MESSAGE_STOCK_NOT_FOUND)
   );
 });
 

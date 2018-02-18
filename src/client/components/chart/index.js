@@ -19,8 +19,8 @@ const getStockDataForTimePeriod = state => {
 };
 
 const mapStateToProps = state => ({
-  data: getStockDataForTimePeriod(state),
-  chartTimePeriod: state.chartTimePeriod
+  chartTimePeriod: state.chartTimePeriod,
+  data: getStockDataForTimePeriod(state)
 });
 
 export default connect(
