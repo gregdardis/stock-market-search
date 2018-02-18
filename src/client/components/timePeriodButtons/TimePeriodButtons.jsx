@@ -30,12 +30,13 @@ const TimePeriodButtons = ({
           label={ timePeriod.label }
           labelColor={ getLabelColor(index) }
           onClick={ () => handleClick(index) }
-        />)) }
+        />
+      )) }
     </div>
   );
 };
 TimePeriodButtons.propTypes = {
-  updateChartTimePeriodIndex: PropTypes.func.isRequired,
-  chartTimePeriodIndex: PropTypes.number.isRequired
+  chartTimePeriodIndex: PropTypes.number.isRequired,
+  updateChartTimePeriodIndex: PropTypes.func.isRequired
 };
 export default TimePeriodButtons;

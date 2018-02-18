@@ -9,18 +9,18 @@ import {
 const getStockDataKey = timePeriodIndex =>
   CHART_META_DATA[timePeriodIndex].stockDataKey;
 
-const getStockDataForTimePeriod = state => {
-  const timePeriodIndex = state.chartTimePeriodIndex;
-  const stockDataKey = getStockDataKey(timePeriodIndex);
+const getStockDataForSelectedTimePeriod = state => {
+  const selectedTimePeriodIndex = state.chartTimePeriodIndex;
+  const stockDataKey = getStockDataKey(selectedTimePeriodIndex);
   const stockData = getSelectedStockValueForKey(state, stockDataKey);
   return CHART_META_DATA[
-    timePeriodIndex
+    selectedTimePeriodIndex
   ].getStockDataForTimePeriod(stockData);
 };
 
 const mapStateToProps = state => ({
   chartTimePeriodIndex: state.chartTimePeriodIndex,
-  data: getStockDataForTimePeriod(state)
+  data: getStockDataForSelectedTimePeriod(state)
 });
 
 export default connect(
