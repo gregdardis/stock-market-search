@@ -13,9 +13,9 @@ import { addCommas } from '../../../utils/formatting/numberFormatting';
 import './chart.css';
 import {
   CHART_DATA_KEY_Y_AXIS,
-  CHART_META_DATA,
   CHART_HEIGHT,
   CHART_LINE_COLOR,
+  CHART_META_DATA,
   CHART_WIDTH,
   VALUE_PRECISION_CURRENT_PRICE
 } from '../../../constants';
