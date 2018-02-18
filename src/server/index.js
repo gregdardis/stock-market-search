@@ -148,11 +148,10 @@ const getStartOfDayTimestampIndex = (dayIndex, timestampsPerDay) =>
 const getEndOfDayTimestampIndex = (dayIndex, timestampsPerDay) =>
   Math.floor((dayIndex + 1) * timestampsPerDay);
 
-// This method might not be reliable at certain times of day.
-// Specifically if the start or end of each for loop
-// end up after 9:30 am or before 4:00 pm, respectively.
 // TODO: think about edge cases more. What happens if there's only
 // one timestamp for a day because it's 12:15 am?
+// Hard to say at this point without testing at certain times of day
+// because yahoo-finance-data does not clearly say how this works
 const getDatesAndTimesForOneDay = (
   close,
   gmtoffset,
@@ -227,10 +226,10 @@ const getDatesTimesAndPrices = (
   return datesTimesAndPrices;
 };
 
-// numberOfDays much match the range used to obtain the intraDayRes
-const getIntraDayStockData = (intraDayRes, numberOfDays) => {
-  const intraDayData = JSON.parse(intraDayRes);
-  const result = intraDayData.chart.result[0];
+// numberOfDays much match the range used to obtain the intradayRes
+const getIntradayStockData = (intradayRes, numberOfDays) => {
+  const intradayData = JSON.parse(intradayRes);
+  const result = intradayData.chart.result[0];
   const {
     indicators,
     meta,
@@ -253,11 +252,20 @@ const getIntraDayStockData = (intraDayRes, numberOfDays) => {
   return datesTimesAndPrices;
 };
 
+const getQueryForIntradayData = (symbol, range, interval) => {
+  return `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?range=${range}&includePrePost=true&interval=${interval}&corsDomain=finance.yahoo.com&.tsrc=finance`;
+};
+
 // TODO: the nesting in here is horrible, we need to refactor. 
 // We should be doing these multiple API calls in parallel somehow anyway.
 // I maybe have an idea of how.
 app.get('/api/stocks/:symbol', (req, res) => {
-  const modules = ['summaryDetail', 'defaultKeyStatistics', 'financialData', 'price'];
+  const modules = [
+    'summaryDetail',
+    'defaultKeyStatistics',
+    'financialData',
+    'price'
+  ];
   const symbol = req.params.symbol;
   quote({
     symbol,
@@ -281,20 +289,28 @@ app.get('/api/stocks/:symbol', (req, res) => {
           }
           stock.maxStockData = getDatesAndPrices(dailyData);
 
-          const rangeOneDay = '1d';
-          const intervalOneDay = '5m';
-          const queryOneDay = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?range=${rangeOneDay}&includePrePost=true&interval=${intervalOneDay}&corsDomain=finance.yahoo.com&.tsrc=finance`;
+          const queryOneDay = getQueryForIntradayData(
+            symbol,
+            constants.QUERY_RANGE_ONE_DAY,
+            constants.QUERY_INTERVAL_ONE_DAY
+          );
           rp(queryOneDay)
             .then(oneDayRes => {
-              stock.oneDayStockData = getIntraDayStockData(oneDayRes, constants.ONE_DAY);
-              
-              const rangeFiveDay = '5d';
-              // 30m interval seems to be 60m for some reason, so using 15m instead
-              const intervalFiveDay = '15m';
-              const queryFiveDay = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?range=${rangeFiveDay}&includePrePost=true&interval=${intervalFiveDay}&corsDomain=finance.yahoo.com&.tsrc=finance`;
+              stock.oneDayStockData = getIntradayStockData(
+                oneDayRes,
+                constants.ONE_DAY
+              );
+
+              const queryFiveDay = getQueryForIntradayData(symbol,
+                constants.QUERY_RANGE_FIVE_DAY,
+                constants.QUERY_INTERVAL_FIVE_DAY
+              );
               rp(queryFiveDay)
                 .then(fiveDayRes => {
-                  stock.fiveDayStockData = getIntraDayStockData(fiveDayRes, constants.FIVE_DAYS);
+                  stock.fiveDayStockData = getIntradayStockData(
+                    fiveDayRes,
+                    constants.FIVE_DAYS
+                  );
                   res.send(stock);
                 });
             });

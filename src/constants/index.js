@@ -127,6 +127,12 @@ export const OPTIONAL_LABEL_DIVIDEND = '%';
 export const OPTIONAL_LABEL_EPS = 'EPS';
 export const OPTIONAL_VALUE_SUFFIX_DIVIDEND = '%';
 
+// 30m interval behaves like 60m for some reason, so using 15m instead
+export const QUERY_INTERVAL_FIVE_DAY = '15m';
+export const QUERY_INTERVAL_ONE_DAY = '5m';
+export const QUERY_RANGE_FIVE_DAY = '5d';
+export const QUERY_RANGE_ONE_DAY = '1d';
+
 export const TIME_PERIOD_FIVE_DAY = '5 day';
 export const TIME_PERIOD_FIVE_YEAR = '5 year';
 export const TIME_PERIOD_MAX = 'max';
