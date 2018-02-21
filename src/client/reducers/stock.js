@@ -6,7 +6,7 @@ export const reducer = (
     symbol: '',
     exchange: '',
     isFetching: false,
-    stockData: {}
+    stockOverviewData: {}
   },
   action
 ) => {
@@ -19,10 +19,12 @@ export const reducer = (
     return Object.assign({}, state, {
       companyName: action.companyName,
       exchange: action.exchange,
+      fiveDayStockData: action.fiveDayStockData,
       isFetching: false,
       lastUpdated: action.receivedAt,
-      oneYearData: action.oneYearData,
-      stockData: action.stockData,
+      maxStockData: action.maxStockData,
+      oneDayStockData: action.oneDayStockData,
+      stockOverviewData: action.stockOverviewData,
       symbol: action.symbol
     });
   default:

@@ -1,8 +1,14 @@
-const constants = require('../constants');
-const config = require('./config');
+import express from 'express';
+import {
+  quote,
+  historical
+} from 'yahoo-finance';
+import rp from 'request-promise';
+import dateFormat from 'dateformat';
 
-const express = require('express');
-const yahooFinance = require('yahoo-finance');
+import * as constants from '../constants';
+import { port } from './config';
+import { formatDateForMaxStockData } from '../utils/dateUtils';
 
 const app = express();
 
@@ -87,18 +93,18 @@ const processStockData = ({
   };
 };
 
-const createStock = quote => {
+const createStock = stockQuote => {
   const {
     price,
     summaryDetail,
     financialData,
     defaultKeyStatistics
-  } = quote;
+  } = stockQuote;
   return {
     companyName: price.shortName,
     symbol: price.symbol,
     exchange: price.exchangeName,
-    stockData: processStockData(
+    stockOverviewData: processStockData(
       Object.assign(
         {},
         summaryDetail,
@@ -109,86 +115,213 @@ const createStock = quote => {
   };
 };
 
-const calculateDateYearsInPast = years => {
-  const year = new Date().getFullYear() - years;
-  const date = new Date();
-  date.setFullYear(year);
-  return date;
-};
-
-const padSingleDigitWithZero = value => {
-  let num = parseInt(value);
-  // need to check value because parseInt turns '12hello' into a number
-  if (isNaN(value) || isNaN(num)) {
-    throw new TypeError(`${padSingleDigitWithZero.name} requires a number or numeric string`);
-  }
-  return num < 10 ? '0' + num : num.toString();
-};
-
-const formatDate = date => {
-  if (!(date instanceof Date)) {
-    throw new TypeError(`${formatDate.name} requires a date`);
-  }
-
-  let day = date.getDate();
-  day = padSingleDigitWithZero(day);
-
-  // month is zero indexed
-  let month = date.getMonth() + 1;
-  month = padSingleDigitWithZero(month);
-
-  const year = date.getFullYear();
-  return `${year}-${month}-${day}`;
-};
-
-const getDatesAndPrices = quotes => {
+// Used for historical() data obtained using period 'd'
+const getDatesAndPrices = dailyData => {
   let datesAndPrices = [];
-  quotes.forEach(({
+  dailyData.forEach(({
     date,
     close
   }) => {
     datesAndPrices.unshift({
-      date,
+      date: formatDateForMaxStockData(date),
       price: close
     });
   });
   return datesAndPrices;
 };
 
+// NOTE: this date has timezone UTC, which is incorrect but works in this
+// case because we are just extracting the time
+const getAdjustedDateForTimestamp = (gmtoffset, timestamp) => {
+  const adjustedTimestamp =
+    (timestamp + gmtoffset) * constants.MILLISECONDS_PER_SECOND;
+  return new Date(adjustedTimestamp);
+};
+
+const getDateAndTime = (gmtoffset, timestamp, dateAndTimeFormat) => {
+  const dateAndTime = getAdjustedDateForTimestamp(gmtoffset, timestamp);
+  return dateFormat(dateAndTime, dateAndTimeFormat, true);
+};
+
+const getStartOfDayTimestampIndex = (dayIndex, timestampsPerDay) =>
+  Math.floor(dayIndex * timestampsPerDay);
+
+const getEndOfDayTimestampIndex = (dayIndex, timestampsPerDay) =>
+  Math.floor((dayIndex + 1) * timestampsPerDay);
+
+const getDatesAndTimesForOneDay = (
+  close,
+  dayIndex,
+  gmtoffset,
+  numberOfDays,
+  timestamp,
+  timestampIntervals
+) => {
+  let datesTimesAndPrices = [];
+  const timestampsPerDay = timestamp.length / numberOfDays;
+  const dateAndTimeFormat = (numberOfDays === constants.ONE_DAY)
+    ? constants.DATE_FORMAT_ONE_DAY
+    : constants.DATE_FORMAT_FIVE_DAY;
+
+  for (
+    let i = getStartOfDayTimestampIndex(dayIndex, timestampsPerDay);
+    i < getEndOfDayTimestampIndex(dayIndex, timestampsPerDay);
+    i++
+  ) {
+    if (timestamp[i] < timestampIntervals[dayIndex].start
+      || timestamp[i] > timestampIntervals[dayIndex].end) {
+      continue;
+    }
+    datesTimesAndPrices.push({
+      dateAndTime: getDateAndTime(gmtoffset, timestamp[i], dateAndTimeFormat),
+      price: close[i]
+    });
+  }
+  return datesTimesAndPrices;
+};
+
+// days are 0 indexed
+const getEndTimestampForDay = (dayIndex, meta) =>
+  // regular consists of an array of arrays, where the first array
+  // index corresponds to the day, second is always a single element array
+  meta.tradingPeriods.regular[dayIndex][0].end;
+
+// days are 0 indexed
+const getStartTimestampForDay = (dayIndex, meta) =>
+  // regular consists of an array of arrays, where the first array
+  // index corresponds to the day, second is always a single element array
+  meta.tradingPeriods.regular[dayIndex][0].start;
+
+const getTimestampIntervals = (numberOfDays, meta) => {
+  let timestampIntervals = [];
+  for (let dayIndex = 0; dayIndex < numberOfDays; dayIndex++) {
+    timestampIntervals.push({
+      start: getStartTimestampForDay(dayIndex, meta),
+      end: getEndTimestampForDay(dayIndex, meta)
+    });
+  }
+  return timestampIntervals;
+};
+
+const getDatesTimesAndPrices = (
+  close,
+  gmtoffset,
+  numberOfDays,
+  timestamp,
+  timestampIntervals
+) => {
+  let datesTimesAndPrices = [];
+  for (let dayIndex = 0; dayIndex < numberOfDays; dayIndex++) {
+    const intervalOfDatesTimesAndPrices = getDatesAndTimesForOneDay(
+      close,
+      dayIndex,
+      gmtoffset,
+      numberOfDays,
+      timestamp,
+      timestampIntervals
+    );
+    datesTimesAndPrices = datesTimesAndPrices.concat(
+      intervalOfDatesTimesAndPrices
+    );
+  }
+  return datesTimesAndPrices;
+};
+
+// numberOfDays much match the range used to obtain the intradayRes.
+const getIntradayStockData = (intradayRes, numberOfDays) => {
+  const intradayData = JSON.parse(intradayRes);
+  const result = intradayData.chart.result[0];
+  const {
+    indicators,
+    meta,
+    timestamp
+  } = result;
+  const { gmtoffset } = meta;
+
+  // Array of objects, one for each day.
+  // Each contains a start timestamp and end timestamp for that trading day.
+  const timestampIntervals = getTimestampIntervals(numberOfDays, meta);
+
+  const { close } = indicators.quote[0];
+  const datesTimesAndPrices = getDatesTimesAndPrices(
+    close,
+    gmtoffset,
+    numberOfDays,
+    timestamp,
+    timestampIntervals
+  );
+  return datesTimesAndPrices;
+};
+
+const getQueryForIntradayData = (symbol, range, interval) => {
+  return `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}` +
+  `?range=${range}&includePrePost=true&interval=${interval}` +
+  '&corsDomain=finance.yahoo.com&.tsrc=finance';
+};
+
 app.get('/api/stocks/:symbol', (req, res) => {
-  const modules = ['summaryDetail', 'defaultKeyStatistics', 'financialData', 'price'];
+  const modules = [
+    'summaryDetail',
+    'defaultKeyStatistics',
+    'financialData',
+    'price'
+  ];
   const symbol = req.params.symbol;
-  yahooFinance.quote({
+  quote({
     symbol,
     modules
   }).then(
-    quote => {
+    stockQuote => {
       modules.forEach(module => {
-        if (!quote[module]) {
+        if (!stockQuote[module]) {
           throw new Error(`Module '${module}' was not found.`);
         }
       });
-      const stock = createStock(quote);
-      yahooFinance.historical({
-        symbol: symbol,
-        from: formatDate(calculateDateYearsInPast(1)),
+      const stock = createStock(stockQuote);
+      historical({
+        // gets all data because we didn't specify from/to
+        symbol,
         period: 'd'
       }).then(
-        quotes => {
-          if (!quotes[0]) {
+        dailyData => {
+          if (!dailyData[0]) {
             throw new Error('Historical data was not found.');
           }
-          stock.oneYearData = getDatesAndPrices(quotes);
-          res.send(stock);
-        }
-      );
+          stock.maxStockData = getDatesAndPrices(dailyData);
+
+          const queryOneDay = getQueryForIntradayData(
+            symbol,
+            constants.QUERY_RANGE_ONE_DAY,
+            constants.QUERY_INTERVAL_ONE_DAY
+          );
+          rp(queryOneDay)
+            .then(oneDayRes => {
+              stock.oneDayStockData = getIntradayStockData(
+                oneDayRes,
+                constants.ONE_DAY
+              );
+
+              const queryFiveDay = getQueryForIntradayData(symbol,
+                constants.QUERY_RANGE_FIVE_DAY,
+                constants.QUERY_INTERVAL_FIVE_DAY
+              );
+              rp(queryFiveDay)
+                .then(fiveDayRes => {
+                  stock.fiveDayStockData = getIntradayStockData(
+                    fiveDayRes,
+                    constants.FIVE_DAYS
+                  );
+                  res.send(stock);
+                });
+            });
+        });
     }
+
   ).catch(() =>
-    res.status(404).send('Stock symbol not found.')
+    res.status(404).send(constants.ERROR_MESSAGE_STOCK_NOT_FOUND)
   );
 });
 
-const port = config.port;
 // if statement stops a second server from trying to run on the same
 // port when tests are running on server functions
 if (!module.parent) {
@@ -196,9 +329,3 @@ if (!module.parent) {
     console.log(`app is listening on port ${port}`)
   );
 }
-
-// exports for unit testing
-module.exports = Object.freeze({
-  padSingleDigitWithZero,
-  formatDate
-});

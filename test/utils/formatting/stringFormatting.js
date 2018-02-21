@@ -18,7 +18,7 @@ const createState = ({
   selectedStock: symbol,
   stocks: {
     MSFT: {
-      stockData: {
+      stockOverviewData: {
         [LABEL_DIVIDEND]: {
           value,
           optionalValue,

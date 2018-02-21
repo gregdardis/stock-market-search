@@ -11,47 +11,47 @@ import {
   VALUE_PRECISION_PRICE_CHANGE_PERCENTAGE
 } from '../../../constants';
 
-const getCurrentPrice = stockData =>
-  stockData[LABEL_CURRENT_PRICE].value;
+const getCurrentPrice = stockOverviewData =>
+  stockOverviewData[LABEL_CURRENT_PRICE].value;
 
-const calculatePriceChange = stockData => {
-  const previousClosePrice = stockData[LABEL_PREVIOUS_CLOSE].value;
-  return getCurrentPrice(stockData) - previousClosePrice;
+const calculatePriceChange = stockOverviewData => {
+  const previousClosePrice = stockOverviewData[LABEL_PREVIOUS_CLOSE].value;
+  return getCurrentPrice(stockOverviewData) - previousClosePrice;
 };
 
-const calculatePriceChangePercentage = stockData =>
-  calculatePriceChange(stockData) / getCurrentPrice(stockData) * 100;
+const calculatePriceChangePercentage = stockOverviewData =>
+  calculatePriceChange(stockOverviewData) / getCurrentPrice(stockOverviewData) * 100;
 
-const getFormattedCurrentPrice = stockData =>
+const getFormattedCurrentPrice = stockOverviewData =>
   roundAndAddCommas(
-    getCurrentPrice(stockData),
+    getCurrentPrice(stockOverviewData),
     VALUE_PRECISION_CURRENT_PRICE
   );
 
-const getFormattedPriceChange = stockData =>
+const getFormattedPriceChange = stockOverviewData =>
   roundAndAddCommas(
-    calculatePriceChange(stockData),
+    calculatePriceChange(stockOverviewData),
     VALUE_PRECISION_PRICE_CHANGE
   );
 
-const getFormattedPriceChangePercentage = stockData =>
+const getFormattedPriceChangePercentage = stockOverviewData =>
   `${roundAndAddCommas(
-    calculatePriceChangePercentage(stockData),
+    calculatePriceChangePercentage(stockOverviewData),
     VALUE_PRECISION_PRICE_CHANGE_PERCENTAGE
   )}%`;
 
-const getStockData = state => {
+const getStockOverviewData = state => {
   const symbol = state.selectedStock;
   const selectedStock = state.stocks[symbol];
-  return selectedStock.stockData;
+  return selectedStock.stockOverviewData;
 };
 
 const mapStateToProps = state => {
-  const stockData = getStockData(state);
+  const stockOverviewData = getStockOverviewData(state);
   return {
-    currentPrice: getFormattedCurrentPrice(stockData),
-    priceChange: getFormattedPriceChange(stockData),
-    priceChangePercentage: getFormattedPriceChangePercentage(stockData)
+    currentPrice: getFormattedCurrentPrice(stockOverviewData),
+    priceChange: getFormattedPriceChange(stockOverviewData),
+    priceChangePercentage: getFormattedPriceChangePercentage(stockOverviewData)
   };
 };
 

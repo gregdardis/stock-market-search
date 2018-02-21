@@ -8,33 +8,52 @@ import {
   Tooltip,
   Line
 } from 'recharts';
-import dateFormat from 'dateformat';
 
 import { addCommas } from '../../../utils/formatting/numberFormatting';
 import './chart.css';
 import {
+  CHART_DATA_KEY_Y_AXIS,
   CHART_HEIGHT,
+  CHART_LINE_COLOR,
+  CHART_META_DATA,
   CHART_WIDTH,
-  CHART_DATE_FORMAT_TOOLTIP,
-  CHART_DATE_FORMAT_X_AXIS,
-  CHART_X_AXIS_MIN_TICK_GAP,
   VALUE_PRECISION_CURRENT_PRICE
 } from '../../../constants';
 
 const Chart = ({
+  chartTimePeriodIndex,
   data
-}) => (
-  <LineChart width={ CHART_WIDTH } height={ CHART_HEIGHT } data={ data } className='chart'>
-    <CartesianGrid strokeDashArray='3 3' />
-    <XAxis dataKey='date' tickFormatter={ date => dateFormat(date, CHART_DATE_FORMAT_X_AXIS) }
-      minTickGap={ CHART_X_AXIS_MIN_TICK_GAP } />
-    <YAxis dataKey='price' domain={ ['auto', 'auto'] } tickFormatter={ addCommas } />
-    <Tooltip labelFormatter={ date => dateFormat(date, CHART_DATE_FORMAT_TOOLTIP) }
-      formatter={ price => price.toFixed(VALUE_PRECISION_CURRENT_PRICE) } />
-    <Line type='monotone' dataKey='price' dot={ false } stroke='red' />
-  </LineChart>
-);
+}) => {
+  const getTooltipLabelFormatter = () =>
+    CHART_META_DATA[chartTimePeriodIndex].getTooltipLabelFormatter;
+
+  const getXAxisDataKey = () =>
+    CHART_META_DATA[chartTimePeriodIndex].xAxisDataKey;
+
+  const getXAxisMinTickGap = () =>
+    CHART_META_DATA[chartTimePeriodIndex].xAxisMinTickGap;
+
+  const getXAxisTickFormatter = () =>
+    CHART_META_DATA[chartTimePeriodIndex].getXAxisTickFormatter;
+
+  return (
+    <LineChart width={ CHART_WIDTH } height={ CHART_HEIGHT } data={ data }
+      className='chart' >
+      <CartesianGrid strokeDashArray='3 3' />
+      <XAxis dataKey={ getXAxisDataKey() }
+        tickFormatter= { getXAxisTickFormatter() }
+        minTickGap={ getXAxisMinTickGap() } />
+      <YAxis dataKey={ CHART_DATA_KEY_Y_AXIS } domain={ ['auto', 'auto'] }
+        tickFormatter={ addCommas } />
+      <Tooltip labelFormatter = { getTooltipLabelFormatter() }
+        formatter={ price => price.toFixed(VALUE_PRECISION_CURRENT_PRICE) } />
+      <Line type='monotone' dataKey={ CHART_DATA_KEY_Y_AXIS } dot={ false }
+        stroke={ CHART_LINE_COLOR } isAnimationActive={ false } />
+    </LineChart>
+  );
+};
 Chart.propTypes = {
+  chartTimePeriodIndex: PropTypes.number.isRequired,
   data: PropTypes.array.isRequired
 };
 export default Chart;

@@ -20,3 +20,12 @@ export const roundAndAddCommas = (value, precision) => {
   let result = value.toFixed(precision);
   return addCommas(result);
 };
+
+export const padSingleDigitWithZero = value => {
+  let num = parseInt(value);
+  // need to check value because parseInt turns '12hello' into a number
+  if (isNaN(value) || isNaN(num)) {
+    throw new TypeError(`${padSingleDigitWithZero.name} requires a number or numeric string`);
+  }
+  return num < 10 ? '0' + num : num.toString();
+};

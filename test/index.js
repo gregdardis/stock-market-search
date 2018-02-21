@@ -1,11 +1,15 @@
-import { formatValueFromStateAndPropsTest } from './utils/formatting/stringFormatting';
 import {
-  padSingleDigitWithZeroTest,
-  formatDateTest
-} from './server';
-import { addCommasTest } from './utils/formatting/numberFormatting';
+  formatValueFromStateAndPropsTest
+} from './utils/formatting/stringFormatting';
+import {
+  formatDateForMaxStockDataTest
+} from './utils/dateUtils/dateFormatting';
+import {
+  addCommasTest,
+  padSingleDigitWithZeroTest
+} from './utils/formatting/numberFormatting';
 
 formatValueFromStateAndPropsTest();
 padSingleDigitWithZeroTest();
-formatDateTest();
+formatDateForMaxStockDataTest();
 addCommasTest();

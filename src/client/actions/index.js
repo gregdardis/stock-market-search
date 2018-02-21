@@ -1,8 +1,8 @@
 export {
   SET_CHART_TO_DEFAULT_TIME_PERIOD,
-  UPDATE_CHART_TIME_PERIOD,
+  UPDATE_CHART_TIME_PERIOD_INDEX,
   setChartToDefaultTimePeriod,
-  updateChartTimePeriod
+  updateChartTimePeriodIndex
 } from './chart';
 
 export {

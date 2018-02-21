@@ -150,6 +150,7 @@
     "func-names": 0, // require function expressions to have a name (off by default)
     "func-style": 0, // enforces use of function declarations or expressions (off by default)
     "key-spacing": [1, {"beforeColon": false, "afterColon": true}], // enforces spacing between keys and values in object literal properties
+    "max-len": [1, 80, 2], // max line length [off/warning/error, lineLength, tabSize]
     "max-nested-callbacks": [0, 3], // specify the maximum depth callbacks can be nested (off by default)
     "new-cap": [1, {newIsCap: true, capIsNew: false}], // require a capital letter for constructors
     "new-parens": 1, // disallow the omission of parentheses when invoking a constructor with no arguments
@@ -169,7 +170,7 @@
     "operator-assignment": [1, "never"], // require assignment operator shorthand where possible or prohibit it entirely (off by default)
     "padded-blocks": [1, "never"], // enforce padding within blocks (off by default)
     "quote-props": [1, "as-needed"], // require quotes around object literal property names (off by default)
-    "quotes": [0, "single"], // specify whether double or single quotes should be used
+    "quotes": [1, "single"], // specify whether double or single quotes should be used
     "semi": [1, "always"], // require or disallow use of semicolons instead of ASI
     "semi-spacing": [1, {"before": false, "after": true}], // enforce spacing before and after semicolons
     "sort-vars": 0, // sort variables within the same declaration block (off by default)
