@@ -1,8 +1,9 @@
 export const calculateDateDaysInPast = (date, days) => {
-  const currentDate = date.getDate();
-  const newDate = currentDate - days;
-  date.setDate(newDate);
-  return date;
+  const startingDate = date.getDate();
+  const newDay = startingDate - days;
+  let newDate = date;
+  newDate.setDate(newDay);
+  return newDate;
 };
 
 export const calculateDateDaysInPastFromToday = days => {
@@ -13,6 +14,7 @@ export const calculateDateDaysInPastFromToday = days => {
 export const calculateDateMonthsInPast = (date, months) => {
   const currentMonth = date.getMonth();
   const newMonth = currentMonth - months;
-  date.setMonth(newMonth);
-  return date;
+  let newDate = date;
+  newDate.setMonth(newMonth);
+  return newDate;
 };

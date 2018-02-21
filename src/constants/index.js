@@ -5,12 +5,6 @@ import {
 
 import dateFormat from 'dateformat';
 
-/* TODO: separate into files
-- user-facing constants
-- calculation constants
-- formatting specifiers
-*/
-
 export const APP_NAME = 'Stock Market Search';
 
 export const BLANK_FIELD = '--';

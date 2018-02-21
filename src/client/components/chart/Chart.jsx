@@ -35,6 +35,7 @@ const Chart = ({
 
   const getXAxisTickFormatter = () =>
     CHART_META_DATA[chartTimePeriodIndex].getXAxisTickFormatter;
+
   return (
     <LineChart width={ CHART_WIDTH } height={ CHART_HEIGHT } data={ data }
       className='chart' >

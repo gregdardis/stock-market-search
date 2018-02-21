@@ -15,13 +15,12 @@ export const getStockDataForPreviousMonths = (maxStockData, months) => {
   let cutoffDate;
   let elementPosition = VALID_DATE_NOT_FOUND;
 
-  // If the date we are looking for is a weekend (and thus the stock has no data),
-  // keep checking one day before that until a day with stock data is found
+  // If the date we are looking for is a weekend (and thus the stock
+  // has no data), keep checking one day before that until a
+  // day with stock data is found.
   while (elementPosition === VALID_DATE_NOT_FOUND) {
     cutoffDate = formatDateForMaxStockData(unformattedCutoffDate);
-    elementPosition = maxStockData.map(data => {
-      return data.date;
-    }).indexOf(cutoffDate);
+    elementPosition = maxStockData.map(data => data.date).indexOf(cutoffDate);
     unformattedCutoffDate = calculateDateDaysInPast(unformattedCutoffDate, 1);
   }
   return maxStockData.slice(elementPosition);

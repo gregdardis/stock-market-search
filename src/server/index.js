@@ -149,8 +149,6 @@ const getStartOfDayTimestampIndex = (dayIndex, timestampsPerDay) =>
 const getEndOfDayTimestampIndex = (dayIndex, timestampsPerDay) =>
   Math.floor((dayIndex + 1) * timestampsPerDay);
 
-// Could be buggy depending on how the timestamps in their API are given.
-// Couldn't find info on this so will need to test at certain times of day.
 const getDatesAndTimesForOneDay = (
   close,
   dayIndex,
@@ -184,10 +182,14 @@ const getDatesAndTimesForOneDay = (
 
 // days are 0 indexed
 const getEndTimestampForDay = (dayIndex, meta) =>
+  // regular consists of an array of arrays, where the first array
+  // index corresponds to the day, second is always a single element array
   meta.tradingPeriods.regular[dayIndex][0].end;
 
 // days are 0 indexed
 const getStartTimestampForDay = (dayIndex, meta) =>
+  // regular consists of an array of arrays, where the first array
+  // index corresponds to the day, second is always a single element array
   meta.tradingPeriods.regular[dayIndex][0].start;
 
 const getTimestampIntervals = (numberOfDays, meta) => {
@@ -252,15 +254,11 @@ const getIntradayStockData = (intradayRes, numberOfDays) => {
 };
 
 const getQueryForIntradayData = (symbol, range, interval) => {
-  // TODO: somehow extract this string to constants? Tagged template?
   return `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}` +
   `?range=${range}&includePrePost=true&interval=${interval}` +
   '&corsDomain=finance.yahoo.com&.tsrc=finance';
 };
 
-// TODO: the nesting in here is horrible, we need to refactor. 
-// We should be doing these multiple API calls in parallel somehow anyway.
-// I maybe have an idea of how.
 app.get('/api/stocks/:symbol', (req, res) => {
   const modules = [
     'summaryDetail',
