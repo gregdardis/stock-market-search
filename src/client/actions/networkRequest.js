@@ -28,7 +28,8 @@ export const requestStock = symbol => ({
   symbol
 });
 
-// Help from https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+// Help from
+// https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 export const fetchStock = symbol => (
   dispatch => {
     dispatch(requestStock(symbol));
