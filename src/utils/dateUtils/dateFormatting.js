@@ -1,4 +1,4 @@
-import { padSingleDigitWithZero } from '../formatting/numberFormatting';
+import { padSingleDigitWithZero } from '../formatting';
 
 // Reinventing the wheel here, but it was good unit testing
 // practice and the method works

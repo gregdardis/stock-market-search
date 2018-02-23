@@ -9,7 +9,7 @@ import {
   Line
 } from 'recharts';
 
-import { addCommas } from '../../../utils/formatting/numberFormatting';
+import { addCommas } from '../../../utils/formatting';
 import './chart.css';
 import {
   CHART_DATA_KEY_Y_AXIS,

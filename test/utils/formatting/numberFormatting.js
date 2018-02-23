@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import {
   addCommas,
   padSingleDigitWithZero
-} from '../../../src/utils/formatting/numberFormatting';
+} from '../../../src/utils/formatting';
 
 export const addCommasTest = () => {
   describe('addCommas', () => {

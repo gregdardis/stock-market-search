@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import DataItem from './DataItem';
-import { formatValueFromStateAndProps } from '../../../utils/formatting/stringFormatting';
+import { formatValueFromStateAndProps } from '../../../utils/formatting';
 
 const formatLabelFromProps = ownProps => {
   const label = ownProps.label;
