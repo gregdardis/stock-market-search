@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import PriceAndTodaysPriceChange from './PriceAndTodaysPriceChange';
-import { roundAndAddCommas } from '../../../utils/formatting/numberFormatting';
+import { roundAndAddCommas } from '../../../utils/formatting';
 
 import {
   LABEL_CURRENT_PRICE,

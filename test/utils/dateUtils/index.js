@@ -1,0 +1,3 @@
+export {
+  formatDateForMaxStockDataTest
+} from './dateFormatting';

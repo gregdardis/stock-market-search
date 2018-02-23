@@ -1,13 +1,13 @@
 import {
   formatValueFromStateAndPropsTest
-} from './utils/formatting/stringFormatting';
+} from './utils/formatting';
 import {
   formatDateForMaxStockDataTest
-} from './utils/dateUtils/dateFormatting';
+} from './utils/dateUtils';
 import {
   addCommasTest,
   padSingleDigitWithZeroTest
-} from './utils/formatting/numberFormatting';
+} from './utils/formatting';
 
 formatValueFromStateAndPropsTest();
 padSingleDigitWithZeroTest();
