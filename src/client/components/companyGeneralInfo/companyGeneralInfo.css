@@ -1,3 +1,9 @@
 .companyGeneralInfo {
   margin-left: 60px;
 }
+
+.companyGeneralInfo .topRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

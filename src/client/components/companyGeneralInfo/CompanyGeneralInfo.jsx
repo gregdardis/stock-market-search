@@ -7,8 +7,10 @@ import './companyGeneralInfo.css';
 
 const CompanyGeneralInfo = () => (
   <div className='companyGeneralInfo'>
-    <CompanyNameAndSymbol />
-    <Exchange />
+    <div className='topRow'>
+      <CompanyNameAndSymbol />
+      <Exchange />
+    </div>
     <PriceAndTodaysPriceChange />
   </div>
 );
