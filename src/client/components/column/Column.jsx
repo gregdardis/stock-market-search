@@ -9,12 +9,14 @@ const Column = ({
   columnCellComponent
 }) => {
   const ColumnCell = columnCellComponent;
+  const numCells = componentsProps.length;
   return (
     <div className='column'>
-      { componentsProps.map(cellProps => (
+      { componentsProps.map((cellProps, i) => (
         <ColumnCell
           key={ cellProps[columnKeyName] }
           { ...cellProps }
+          showBottomBorder={ i + 1 !== numCells }
         />
       )) }
     </div>
