@@ -12,7 +12,7 @@
     "dev": "webpack-dev-server",
     "dev:test": "npm-run-all --parallel dev test:watch",
     "postinstall": "cd src/client/ && npm i && cd ../server/ && npm i & cd ../../",
-    "start": "babel-node src/server",
+    "start": "babel-watch src/server",
     "test": "mocha --compilers js:babel-core/register",
     "test:watch": "mocha --watch --compilers js:babel-core/register"
   },
@@ -21,6 +21,7 @@
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "babel-watch": "^2.0.7",
     "chai": "^4.1.2",
     "css-loader": "^0.28.7",
     "eslint": "^4.14.0",
