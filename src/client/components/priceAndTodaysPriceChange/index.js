@@ -20,7 +20,8 @@ const calculatePriceChange = stockOverviewData => {
 };
 
 const calculatePriceChangePercentage = stockOverviewData =>
-  calculatePriceChange(stockOverviewData) / getCurrentPrice(stockOverviewData) * 100;
+  calculatePriceChange(stockOverviewData) /
+    getCurrentPrice(stockOverviewData) * 100;
 
 const getFormattedCurrentPrice = stockOverviewData =>
   roundAndAddCommas(

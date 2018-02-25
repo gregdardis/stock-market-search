@@ -14,7 +14,7 @@ const Search = ({
     const temp = event.target.value;
     event.target.value = '';
     event.target.value = temp;
-  }
+  };
   const handleSearch = () => {
     if (searchTerm !== '') {
       performSearch(searchTerm);

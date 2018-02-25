@@ -36,12 +36,20 @@ export const formatValueFromStateAndProps = (state, ownProps) => {
     optionalValuePrecision
   } = ownProps;
 
-  const formattedValue = formatValueForDisplay(value, valueSuffix, valuePrecision);
+  const formattedValue = formatValueForDisplay(
+    value,
+    valueSuffix,
+    valuePrecision
+  );
 
   if (!optionalValue) {
     return formattedValue;
   }
 
-  const formattedOptionalValue = formatValueForDisplay(optionalValue, optionalValueSuffix, optionalValuePrecision);
+  const formattedOptionalValue = formatValueForDisplay(
+    optionalValue,
+    optionalValueSuffix,
+    optionalValuePrecision
+  );
   return `${formattedValue} (${formattedOptionalValue})`;
 };
