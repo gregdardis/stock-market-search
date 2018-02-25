@@ -123,9 +123,7 @@ export const MAX_DAYS = 5;
 export const MILLISECONDS_PER_SECOND = 1000;
 export const MONTHS_PER_YEAR = 12;
 
-// export const OPTIONAL_LABEL_DIVIDEND = '%';
 export const OPTIONAL_LABEL_EPS = 'EPS';
-// export const OPTIONAL_VALUE_SUFFIX_DIVIDEND = '%';
 
 // 30m interval behaves like 60m for some reason, so using 15m instead
 export const QUERY_INTERVAL_FIVE_DAY = '15m';
@@ -145,18 +143,3 @@ export const URL_GLOSSARY = '/glossary';
 export const URL_HOME = '/';
 
 export const VALID_DATE_NOT_FOUND = -1;
-// export const VALUE_PRECISION_CURRENT_PRICE = 2;
-// export const VALUE_PRECISION_DIVIDEND = 2;
-// export const VALUE_PRECISION_EPS = 2;
-// export const VALUE_PRECISION_FCFY = 1;
-// export const VALUE_PRECISION_HIGH = 2;
-// export const VALUE_PRECISION_LOW = 2;
-// export const VALUE_PRECISION_MARKET_CAP = 0;
-// export const VALUE_PRECISION_OPEN = 2;
-// export const VALUE_PRECISION_PE = 2;
-// export const VALUE_PRECISION_PRICE_CHANGE = 2;
-// export const VALUE_PRECISION_PRICE_CHANGE_PERCENTAGE = 2;
-// export const VALUE_PRECISION_ROE = 1;
-// export const VALUE_PRECISION_VOLUME = 0;
-// export const VALUE_SUFFIX_FCFY = '%';
-// export const VALUE_SUFFIX_ROE = '%';
