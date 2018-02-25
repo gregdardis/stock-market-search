@@ -123,6 +123,8 @@ export const MAX_DAYS = 5;
 export const MILLISECONDS_PER_SECOND = 1000;
 export const MONTHS_PER_YEAR = 12;
 
+export const NUMBER_FORMAT_DEFAULT = '0,0.00';
+
 export const OPTIONAL_LABEL_EPS = 'EPS';
 
 // 30m interval behaves like 60m for some reason, so using 15m instead

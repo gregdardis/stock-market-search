@@ -1,7 +1,8 @@
 import numeral from 'numeral';
 
 import {
-  BLANK_FIELD
+  BLANK_FIELD,
+  NUMBER_FORMAT_DEFAULT
 } from '../../constants';
 import { getSelectedStockValueForKey } from '../stateGetters';
 
@@ -22,8 +23,8 @@ export const formatValueFromStateAndProps = (state, ownProps) => {
   let {
     value,
     optionalValue,
-    valueFormat = '0,0.00',
-    optionalValueFormat = '0,0.00'
+    valueFormat = NUMBER_FORMAT_DEFAULT,
+    optionalValueFormat = NUMBER_FORMAT_DEFAULT
   } = stockOverviewData[dataItemLabel];
 
   const formattedValue = formatValueForDisplay(value, valueFormat);
