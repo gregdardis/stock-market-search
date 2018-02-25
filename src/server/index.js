@@ -55,24 +55,24 @@ const processStockData = ({
     [constants.LABEL_HIGH]: createStockDataEntry(dayHigh),
     [constants.LABEL_LOW]: createStockDataEntry(dayLow),
     [constants.LABEL_DIVIDEND]: createStockDataEntry(
-      dividendYield,
+      dividendRate,
       {
-        optionalValue: dividendRate,
-        optionalValueFormat: '0.00%'
+        optionalValue: dividendYield,
+        optionalValueFormat: constants.NUMBER_FORMAT_PERCENT
       }
     ),
     [constants.LABEL_MARKET_CAP]: createStockDataEntry(
       marketCap,
       {
-        valueFormat: '0.00a'
+        valueFormat: constants.NUMBER_FORMAT_SHORT_SUFFIXED
       }
     ),
     [constants.LABEL_VOLUME]: createStockDataEntry(
       volume,
       {
-        valueFormat: '0.00a',
+        valueFormat: constants.NUMBER_FORMAT_SHORT_SUFFIXED,
         optionalValue: averageVolume,
-        optionalValueFormat: '0.00a'
+        optionalValueFormat: constants.NUMBER_FORMAT_SHORT_SUFFIXED
       }
     ),
     [constants.LABEL_PE_RATIO]: createStockDataEntry(
@@ -84,13 +84,13 @@ const processStockData = ({
     [constants.LABEL_ROE]: createStockDataEntry(
       returnOnEquity,
       {
-        valueFormat: '0.00%'
+        valueFormat: constants.NUMBER_FORMAT_PERCENT
       }
     ),
     [constants.LABEL_FCFY]: createStockDataEntry(
       calculateFcfy(freeCashflow, marketCap),
       {
-        valueFormat: '0.00%'
+        valueFormat: constants.NUMBER_FORMAT_PERCENT
       }
     )
   };

@@ -124,6 +124,10 @@ export const MILLISECONDS_PER_SECOND = 1000;
 export const MONTHS_PER_YEAR = 12;
 
 export const NUMBER_FORMAT_DEFAULT = '0,0.00';
+export const NUMBER_FORMAT_PERCENT = '0.00%';
+export const NUMBER_FORMAT_PRICE = '$0,0.00';
+export const NUMBER_FORMAT_ROUNDED = '0,0.00';
+export const NUMBER_FORMAT_SHORT_SUFFIXED = '0.00a';
 
 export const OPTIONAL_LABEL_DIVIDEND = '%';
 export const OPTIONAL_LABEL_EPS = 'EPS';

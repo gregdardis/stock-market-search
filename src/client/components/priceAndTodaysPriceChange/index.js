@@ -4,7 +4,9 @@ import numeral from 'numeral';
 import PriceAndTodaysPriceChange from './PriceAndTodaysPriceChange';
 import {
   LABEL_CURRENT_PRICE,
-  LABEL_PREVIOUS_CLOSE
+  LABEL_PREVIOUS_CLOSE,
+  NUMBER_FORMAT_PERCENT,
+  NUMBER_FORMAT_PRICE
 } from '../../../constants';
 
 const getCurrentPrice = stockOverviewData => {
@@ -16,10 +18,10 @@ const calculatePriceChange = stockOverviewData => {
   return getCurrentPrice(stockOverviewData) - previousClosePrice;
 };
 const formatAsPrice = value =>
-  numeral(value).format('$0,0.00');
+  numeral(value).format(NUMBER_FORMAT_PRICE);
 
 const getFormattedPriceChangePercentage = (priceChange, currentPrice) =>
-  numeral(priceChange / currentPrice).format('0.00%');
+  numeral(priceChange / currentPrice).format(NUMBER_FORMAT_PERCENT);
 
 const getStockOverviewData = state => {
   const symbol = state.selectedStock;

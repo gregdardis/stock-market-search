@@ -21,11 +21,6 @@ export const addCommas = number => {
   return parts.join('.');
 };
 
-export const roundAndAddCommas = (value, precision) => {
-  let result = value.toFixed(precision);
-  return addCommas(result);
-};
-
 export const padSingleDigitWithZero = value => {
   let num = parseInt(value);
   // need to check value because parseInt turns '12hello' into a number

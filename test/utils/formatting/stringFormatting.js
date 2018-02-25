@@ -7,7 +7,9 @@ import {
 import {
   BLANK_FIELD,
   LABEL_DIVIDEND,
-  NUMBER_FORMAT_DEFAULT
+  NUMBER_FORMAT_DEFAULT,
+  NUMBER_FORMAT_PERCENT,
+  NUMBER_FORMAT_ROUNDED
 } from '../../../src/constants';
 
 const createMockState = ({
@@ -33,14 +35,14 @@ const createMockState = ({
 });
 
 export const formatValueFromStateAndPropsTest = () => {
-  const valueFormat = '0,0.00';
-  const optionalValueFormat = '0.00%';
+  const valueFormat = NUMBER_FORMAT_ROUNDED;
+  const optionalValueFormat = NUMBER_FORMAT_PERCENT;
 
   const actualValue = 3.545;
   const actualOptionalValue = 0.4;
 
   // formats expected when format specifiers (valueFormat & optionalValueFormat
-  // - see above) are provided in the state,
+  // - see above) are provided in the state
   const expectedValueFormatted = numeral(actualValue)
     .format(valueFormat);
   const expectedOptionalValueFormatted = numeral(actualOptionalValue)

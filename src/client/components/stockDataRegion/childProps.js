@@ -18,15 +18,9 @@ import {
 export const rowComponentsProps = [
   {
     componentsProps: [
-      {
-        label: LABEL_OPEN
-      },
-      {
-        label: LABEL_HIGH
-      },
-      {
-        label: LABEL_LOW
-      }
+      { label: LABEL_OPEN },
+      { label: LABEL_HIGH },
+      { label: LABEL_LOW }
     ],
     columnKeyName: 'label',
     columnCellComponent: DataItem,
@@ -34,9 +28,7 @@ export const rowComponentsProps = [
   },
   {
     componentsProps: [
-      {
-        label: LABEL_MARKET_CAP
-      },
+      { label: LABEL_MARKET_CAP },
       {
         label: LABEL_VOLUME,
         optionalLabel: LABEL_AVERAGE
@@ -56,12 +48,8 @@ export const rowComponentsProps = [
         label: LABEL_PE_RATIO,
         optionalLabel: OPTIONAL_LABEL_EPS
       },
-      {
-        label: LABEL_ROE
-      },
-      {
-        label: LABEL_FCFY
-      }
+      { label: LABEL_ROE },
+      { label: LABEL_FCFY }
     ],
     columnKeyName: 'label',
     columnCellComponent: DataItem,
