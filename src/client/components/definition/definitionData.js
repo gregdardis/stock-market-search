@@ -11,7 +11,7 @@ module.exports = {
       {
         title: 'Free Cash Flow Yield (abbrev. as FCFY)',
         definition: 'A comparison between free cash flow per share and ' +
-        ' share price. Higher percentages mean the company is generating ' +
+        'share price. Higher percentages mean the company is generating ' +
         'more free cash flow per share, which is appealing. Calculated as ' +
         '(free cash flow per share / market price per share) * 100%.'
       },
@@ -30,7 +30,7 @@ module.exports = {
         definition: 'Market capitalization (market cap) is the total ' +
         'market value of a company\'s outstanding shares. To calculate ' +
         'market cap, multiply the company\'s number of outstanding shares ' +
-        'by it\'s share price.'
+        'by its share price.'
       },
       {
         title: 'Open',
