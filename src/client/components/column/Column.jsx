@@ -25,8 +25,8 @@ const Column = ({
     </div>
   );
 };
-// TODO: if we don't want them to be required, handle that case with a ternary in the jsx
-// before deleting isRequired
+// TODO: if we don't want them to be required, handle that case
+// with a ternary in the jsx before deleting isRequired
 Column.propTypes = {
   componentsProps: PropTypes.array.isRequired,
   columnKeyName: PropTypes.string.isRequired,

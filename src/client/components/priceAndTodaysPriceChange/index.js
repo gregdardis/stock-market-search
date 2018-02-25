@@ -35,7 +35,10 @@ const mapStateToProps = state => {
     currentPrice: formatAsPrice(currentPrice),
     isPositiveChange: priceChange >= 0,
     priceChange: formatAsPrice(priceChange),
-    priceChangePercentage: getFormattedPriceChangePercentage(priceChange, currentPrice)
+    priceChangePercentage: getFormattedPriceChangePercentage(
+      priceChange,
+      currentPrice
+    )
   };
 };
 

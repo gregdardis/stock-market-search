@@ -32,6 +32,10 @@ export const formatValueFromStateAndProps = (state, ownProps) => {
     return formattedValue;
   }
 
-  const formattedOptionalValue = formatValueForDisplay(optionalValue, optionalValueFormat);
+  const formattedOptionalValue = formatValueForDisplay(
+    optionalValue,
+    optionalValueFormat
+  );
+
   return `${formattedValue} (${formattedOptionalValue})`;
 };
