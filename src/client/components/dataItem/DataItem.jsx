@@ -15,7 +15,7 @@ const DataItem = ({
       <span>
         { label }
       </span>
-      <span>
+      <span className='value'>
         { value }
       </span>
     </div>

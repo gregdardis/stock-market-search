@@ -12,27 +12,24 @@ import { formatDateForMaxStockData } from '../utils/dateUtils';
 
 const app = express();
 
-const convertDecimalToPercent = decimal => (
-  decimal * 100
-);
-
 const calculateFcfy = (freeCashflow, marketCap) => {
   const freeCashflowNum = parseInt(freeCashflow);
   const marketCapNum = parseInt(marketCap);
-  return convertDecimalToPercent(freeCashflowNum / marketCapNum);
+  return freeCashflowNum / marketCapNum;
 };
 
+// TODO: move the default formats to constants
 const createStockDataEntry = (value, options = {}) => {
   const {
     optionalValue,
-    valueSuffix = '',
-    optionalValueSuffix = ''
+    valueFormat = '0,0.00',
+    optionalValueFormat = '0,0.00'
   } = options;
   return {
     value,
     optionalValue,
-    valueSuffix,
-    optionalValueSuffix
+    valueFormat,
+    optionalValueFormat
   };
 };
 
@@ -62,14 +59,21 @@ const processStockData = ({
       dividendYield,
       {
         optionalValue: dividendRate,
-        optionalValueSuffix: constants.OPTIONAL_VALUE_SUFFIX_DIVIDEND
+        optionalValueFormat: '0.00%'
       }
     ),
-    [constants.LABEL_MARKET_CAP]: createStockDataEntry(marketCap),
+    [constants.LABEL_MARKET_CAP]: createStockDataEntry(
+      marketCap,
+      {
+        valueFormat: '0.00a'
+      }
+    ),
     [constants.LABEL_VOLUME]: createStockDataEntry(
       volume,
       {
-        optionalValue: averageVolume
+        valueFormat: '0.00a',
+        optionalValue: averageVolume,
+        optionalValueFormat: '0.00a'
       }
     ),
     [constants.LABEL_PE_RATIO]: createStockDataEntry(
@@ -79,15 +83,15 @@ const processStockData = ({
       }
     ),
     [constants.LABEL_ROE]: createStockDataEntry(
-      convertDecimalToPercent(returnOnEquity),
+      returnOnEquity,
       {
-        valueSuffix: constants.VALUE_SUFFIX_ROE
+        valueFormat: '0.00%'
       }
     ),
     [constants.LABEL_FCFY]: createStockDataEntry(
       calculateFcfy(freeCashflow, marketCap),
       {
-        valueSuffix: constants.VALUE_SUFFIX_FCFY
+        valueFormat: '0.00%'
       }
     )
   };

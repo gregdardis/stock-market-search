@@ -5,10 +5,10 @@ import './PriceAndTodaysPriceChange.css';
 
 const PriceAndTodaysPriceChange = ({
   currentPrice,
+  isPositiveChange,
   priceChange,
   priceChangePercentage
 }) => {
-  const isPositiveChange = priceChange >= 0;
   return (
     <div className='priceAndTodaysPriceChange'>
       <span className='currentPrice'>{ currentPrice }</span>
@@ -21,6 +21,7 @@ const PriceAndTodaysPriceChange = ({
 };
 PriceAndTodaysPriceChange.propTypes = {
   currentPrice: PropTypes.string.isRequired,
+  isPositiveChange: PropTypes.bool.isRequired,
   priceChange: PropTypes.string.isRequired,
   priceChangePercentage: PropTypes.string.isRequired
 };

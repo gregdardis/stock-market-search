@@ -12,33 +12,20 @@ import {
   LABEL_ROE,
   LABEL_VOLUME,
   OPTIONAL_LABEL_DIVIDEND,
-  OPTIONAL_LABEL_EPS,
-  VALUE_PRECISION_DIVIDEND,
-  VALUE_PRECISION_EPS,
-  VALUE_PRECISION_FCFY,
-  VALUE_PRECISION_HIGH,
-  VALUE_PRECISION_LOW,
-  VALUE_PRECISION_MARKET_CAP,
-  VALUE_PRECISION_OPEN,
-  VALUE_PRECISION_PE,
-  VALUE_PRECISION_ROE,
-  VALUE_PRECISION_VOLUME
+  OPTIONAL_LABEL_EPS
 } from '../../../constants';
 
 export const rowComponentsProps = [
   {
     componentsProps: [
       {
-        label: LABEL_OPEN,
-        valuePrecision: VALUE_PRECISION_OPEN
+        label: LABEL_OPEN
       },
       {
-        label: LABEL_HIGH,
-        valuePrecision: VALUE_PRECISION_HIGH
+        label: LABEL_HIGH
       },
       {
-        label: LABEL_LOW,
-        valuePrecision: VALUE_PRECISION_LOW
+        label: LABEL_LOW
       }
     ],
     columnKeyName: 'label',
@@ -48,19 +35,15 @@ export const rowComponentsProps = [
   {
     componentsProps: [
       {
-        label: LABEL_MARKET_CAP,
-        valuePrecision: VALUE_PRECISION_MARKET_CAP
+        label: LABEL_MARKET_CAP
       },
       {
         label: LABEL_VOLUME,
-        optionalLabel: LABEL_AVERAGE,
-        valuePrecision: VALUE_PRECISION_VOLUME
+        optionalLabel: LABEL_AVERAGE
       },
       {
         label: LABEL_DIVIDEND,
-        optionalLabel: OPTIONAL_LABEL_DIVIDEND,
-        valuePrecision: VALUE_PRECISION_DIVIDEND,
-        optionalValuePrecision: VALUE_PRECISION_DIVIDEND
+        optionalLabel: OPTIONAL_LABEL_DIVIDEND
       }
     ],
     columnKeyName: 'label',
@@ -71,17 +54,13 @@ export const rowComponentsProps = [
     componentsProps: [
       {
         label: LABEL_PE_RATIO,
-        optionalLabel: OPTIONAL_LABEL_EPS,
-        valuePrecision: VALUE_PRECISION_PE,
-        optionalValuePrecision: VALUE_PRECISION_EPS
+        optionalLabel: OPTIONAL_LABEL_EPS
       },
       {
-        label: LABEL_ROE,
-        valuePrecision: VALUE_PRECISION_ROE
+        label: LABEL_ROE
       },
       {
-        label: LABEL_FCFY,
-        valuePrecision: VALUE_PRECISION_FCFY
+        label: LABEL_FCFY
       }
     ],
     columnKeyName: 'label',

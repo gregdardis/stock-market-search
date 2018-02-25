@@ -1,20 +1,15 @@
+import numeral from 'numeral';
+
 import {
   BLANK_FIELD
 } from '../../constants';
-import { roundAndAddCommas } from './numberFormatting';
 import { getSelectedStockValueForKey } from '../stateGetters';
 
-const convertToEmptyStringIfFalsy = str => {
-  return str ? str : '';
-};
-
-const formatValueForDisplay = (value, valueSuffix, valuePrecision) => {
+const formatValueForDisplay = (value, formatSpecifier) => {
   if (!value) {
     return BLANK_FIELD;
   }
-  const result = roundAndAddCommas(value, valuePrecision);
-  const resultSuffix = convertToEmptyStringIfFalsy(valueSuffix);
-  return `${result}${resultSuffix}`;
+  return numeral(value).format(formatSpecifier);
 };
 
 export const formatValueFromStateAndProps = (state, ownProps) => {
@@ -27,21 +22,16 @@ export const formatValueFromStateAndProps = (state, ownProps) => {
   let {
     value,
     optionalValue,
-    valueSuffix,
-    optionalValueSuffix
+    valueFormat = '0,0.00',
+    optionalValueFormat = '0,0.00'
   } = stockOverviewData[dataItemLabel];
 
-  const {
-    valuePrecision,
-    optionalValuePrecision
-  } = ownProps;
-
-  const formattedValue = formatValueForDisplay(value, valueSuffix, valuePrecision);
+  const formattedValue = formatValueForDisplay(value, valueFormat);
 
   if (!optionalValue) {
     return formattedValue;
   }
 
-  const formattedOptionalValue = formatValueForDisplay(optionalValue, optionalValueSuffix, optionalValuePrecision);
+  const formattedOptionalValue = formatValueForDisplay(optionalValue, optionalValueFormat);
   return `${formattedValue} (${formattedOptionalValue})`;
 };

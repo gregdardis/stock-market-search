@@ -28,9 +28,7 @@ const DataItemContainer = connect(
 
 DataItemContainer.propTypes = {
   label: PropTypes.string.isRequired,
-  optionalLabel: PropTypes.string,
-  valuePrecision: PropTypes.number.isRequired,
-  optionalValuePrecision: PropTypes.number
+  optionalLabel: PropTypes.string
 };
 
 export default DataItemContainer;
