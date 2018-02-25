@@ -18,12 +18,11 @@ const calculateFcfy = (freeCashflow, marketCap) => {
   return freeCashflowNum / marketCapNum;
 };
 
-// TODO: move the default formats to constants
 const createStockDataEntry = (value, options = {}) => {
   const {
     optionalValue,
-    valueFormat = '0,0.00',
-    optionalValueFormat = '0,0.00'
+    valueFormat = constants.NUMBER_FORMAT_DEFAULT,
+    optionalValueFormat = constants.NUMBER_FORMAT_DEFAULT
   } = options;
   return {
     value,

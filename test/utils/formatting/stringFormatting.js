@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import numeral from 'numeral';
 
-import { 
+import {
   formatValueFromStateAndProps
 } from '../../../src/utils/formatting/stringFormatting';
 import {
