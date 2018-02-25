@@ -15,7 +15,11 @@ import {
   OPTIONAL_LABEL_EPS
 } from '../../../constants';
 
+const cellShouldShowBottomBorder = (cellIndex, numCells) =>
+  cellIndex + 1 !== numCells;
+
 export const rowComponentsProps = [
+  // Column 1:
   {
     componentsProps: [
       { label: LABEL_OPEN },
@@ -24,8 +28,10 @@ export const rowComponentsProps = [
     ],
     columnKeyName: 'label',
     columnCellComponent: DataItem,
-    rowKey: '1'
+    rowKey: '1',
+    cellShouldShowBottomBorder
   },
+  // Column 2:
   {
     componentsProps: [
       { label: LABEL_MARKET_CAP },
@@ -40,8 +46,10 @@ export const rowComponentsProps = [
     ],
     columnKeyName: 'label',
     columnCellComponent: DataItem,
-    rowKey: '2'
+    rowKey: '2',
+    cellShouldShowBottomBorder
   },
+  // Column 3:
   {
     componentsProps: [
       {
@@ -53,6 +61,7 @@ export const rowComponentsProps = [
     ],
     columnKeyName: 'label',
     columnCellComponent: DataItem,
-    rowKey: '3'
+    rowKey: '3',
+    cellShouldShowBottomBorder
   }
 ];

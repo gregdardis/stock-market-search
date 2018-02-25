@@ -6,31 +6,34 @@ import './column.css';
 const Column = ({
   componentsProps,
   columnKeyName,
-  columnCellComponent
+  columnCellComponent,
+  // The cellShouldShowBottomBorder function allows us to optionally customize
+  // the appearance of individual cells in the column, by giving them a bottom
+  // border. We could do a similar thing for Row if the need ever arose.
+  cellShouldShowBottomBorder = () => false
 }) => {
   const ColumnCell = columnCellComponent;
-
-  const showCellBottomBorder = cellIndex =>
-    cellIndex + 1 !== componentsProps.length;
-
   return (
     <div className='column'>
       { componentsProps.map((cellProps, i) => (
         <ColumnCell
           key={ cellProps[columnKeyName] }
           { ...cellProps }
-          showBottomBorder={ showCellBottomBorder(i) }
+          showBottomBorder={
+            cellShouldShowBottomBorder(i, componentsProps.length)
+          }
         />
       )) }
     </div>
   );
 };
 // TODO: if we don't want them to be required, handle that case
-// with a ternary in the jsx before deleting isRequired
+// with a ternary or default param values in the jsx before deleting isRequired
 Column.propTypes = {
   componentsProps: PropTypes.array.isRequired,
   columnKeyName: PropTypes.string.isRequired,
-  columnCellComponent: PropTypes.func.isRequired
+  columnCellComponent: PropTypes.func.isRequired,
+  cellShouldShowBottomBorder: PropTypes.func
 };
 
 export default Column;
