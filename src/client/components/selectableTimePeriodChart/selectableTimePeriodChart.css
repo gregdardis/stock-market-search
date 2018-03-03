@@ -1,5 +1,5 @@
 .selectableTimePeriodChart {
-  align-items: center;
+  align-items: flex-end;
   display: flex;
   flex: 1;
   flex-direction: column;
