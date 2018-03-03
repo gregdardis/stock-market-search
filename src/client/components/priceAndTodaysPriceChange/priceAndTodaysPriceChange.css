@@ -1,7 +1,7 @@
 .priceAndTodaysPriceChange {
   display: flex;
-  align-items: center;
-  margin-bottom: 30px;
+  flex-direction: column;
+  margin: 24px 0;
 }
 
 .currentPrice {
@@ -10,7 +10,6 @@
 }
 
 .positive, .negative {
-  margin-left: 30px;
   font-size: 1.8em;
 }
 

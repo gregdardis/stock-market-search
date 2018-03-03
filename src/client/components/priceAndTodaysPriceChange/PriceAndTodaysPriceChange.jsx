@@ -11,14 +11,14 @@ const PriceAndTodaysPriceChange = ({
 }) => {
   return (
     <div className='priceAndTodaysPriceChange'>
-      <span className='currentPrice'>{ currentPrice }</span>
+      <div className='currentPrice'>{ currentPrice }</div>
       { isPositiveChange
-        ? <span className='positive'>
+        ? <div className='positive'>
           +{ priceChange } (+{ priceChangePercentage })
-        </span>
-        : <span className='negative'>
+        </div>
+        : <div className='negative'>
           { priceChange } ({ priceChangePercentage })
-        </span>
+        </div>
       }
     </div>
   );

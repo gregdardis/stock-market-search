@@ -12,11 +12,19 @@ const StockDataRegion = ({
 }) => (
   hasData ?
     <div className='stockDataRegion'>
-      <CompanyGeneralInfo />
+      <div style={ {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-around'
+      } }>
+        <CompanyGeneralInfo />
+        <Column { ...columnComponentsProps } />
+      </div>
       <SelectableTimePeriodChart />
-      <Column { ...columnComponentsProps } />
     </div>
-    : <p>Nothing do display - please search for a stock.</p>
+    : <p style={ { textAlign: 'center' } }>
+      Nothing to display - please search for a stock.
+    </p>
 );
 
 StockDataRegion.propTypes = {
