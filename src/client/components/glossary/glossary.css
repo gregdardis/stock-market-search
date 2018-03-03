@@ -1,6 +1,11 @@
 .glossary {
   display: flex;
+  flex: 1;
   flex-direction: column;
+  height: 100%;
   align-items: center;
-  padding-bottom: 32px;
+}
+
+.glossary .padList {
+  padding: 12px;
 }
