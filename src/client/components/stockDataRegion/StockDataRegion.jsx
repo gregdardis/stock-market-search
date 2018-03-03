@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Column from '../column';
-import Row from '../row';
 import CompanyGeneralInfo from '../companyGeneralInfo';
-import { rowComponentsProps } from './childProps';
+import { columnComponentsProps } from './childProps';
 import SelectableTimePeriodChart from '../selectableTimePeriodChart';
 import './stockDataRegion.css';
 
@@ -15,13 +14,9 @@ const StockDataRegion = ({
     <div className='stockDataRegion'>
       <CompanyGeneralInfo />
       <SelectableTimePeriodChart />
-      <Row
-        componentsProps={ rowComponentsProps }
-        rowKeyName='rowKey'
-        rowCellComponent={ Column }
-      />
+      <Column { ...columnComponentsProps } />
     </div>
-    : <p>No data to make a table with! PLACEHOLDER!!!!!</p>
+    : <p>Nothing do display - please search for a stock.</p>
 );
 
 StockDataRegion.propTypes = {

@@ -18,6 +18,49 @@ import {
 const cellShouldShowBottomBorder = (cellIndex, numCells) =>
   cellIndex + 1 !== numCells;
 
+export const columnComponentsProps = {
+  componentsProps: [
+    {
+      key: 0,
+      label: LABEL_OPEN
+    },
+    {
+      key: 1,
+      label: LABEL_HIGH
+    },
+    {
+      key: 2,
+      label: LABEL_LOW
+    },
+    {
+      key: 3,
+      label: LABEL_MARKET_CAP
+    },
+    {
+      key: 4,
+      label: LABEL_VOLUME,
+      optionalLabel: LABEL_AVERAGE
+    },
+    {
+      key: 5,
+      label: LABEL_PE_RATIO,
+      optionalLabel: OPTIONAL_LABEL_EPS
+    },
+    {
+      key: 6,
+      label: LABEL_ROE
+    },
+    {
+      key: 7,
+      label: LABEL_FCFY
+    }
+  ],
+  columnKeyName: 'label',
+  columnCellComponent: DataItem,
+  cellShouldShowBottomBorder
+};
+
+// To use if we ever want to display the data as a Row of 3 Columns
 export const rowComponentsProps = [
   // Column 1:
   {
