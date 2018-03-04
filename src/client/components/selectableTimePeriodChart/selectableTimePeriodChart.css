@@ -1,6 +1,8 @@
 .selectableTimePeriodChart {
-  align-items: flex-end;
+  align-items: center;
   display: flex;
   flex: 1;
   flex-direction: column;
+  justify-content: center;
+  padding-left: 40px;
 }

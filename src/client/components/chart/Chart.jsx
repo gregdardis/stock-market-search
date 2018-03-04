@@ -36,7 +36,7 @@ const Chart = ({
     CHART_META_DATA[chartTimePeriodIndex].getXAxisTickFormatter;
 
   return (
-    <ResponsiveContainer height='90%'>
+    <ResponsiveContainer height='65%' width='85%'>
       <LineChart data={ data }
         className='chart' >
         <CartesianGrid strokeDashArray='3 3' />

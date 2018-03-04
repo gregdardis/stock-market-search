@@ -12,11 +12,7 @@ const StockDataRegion = ({
 }) => (
   hasData ?
     <div className='stockDataRegion'>
-      <div style={ {
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-around'
-      } }>
+      <div className='textData'>
         <CompanyGeneralInfo />
         <Column { ...columnComponentsProps } />
       </div>
