@@ -18,6 +18,12 @@ import {
 const cellShouldShowBottomBorder = (cellIndex, numCells) =>
   cellIndex + 1 !== numCells;
 
+const singleColumnProps = {
+  cellShouldShowBottomBorder,
+  columnCellComponent: DataItem,
+  columnKeyName: 'label'
+};
+
 export const columnComponentsProps = {
   componentsProps: [
     {
@@ -55,9 +61,7 @@ export const columnComponentsProps = {
       label: LABEL_FCFY
     }
   ],
-  columnKeyName: 'label',
-  columnCellComponent: DataItem,
-  cellShouldShowBottomBorder
+  ...singleColumnProps
 };
 
 // To use if we ever want to display the data as a Row of 3 Columns
@@ -69,10 +73,8 @@ export const rowComponentsProps = [
       { label: LABEL_HIGH },
       { label: LABEL_LOW }
     ],
-    columnKeyName: 'label',
-    columnCellComponent: DataItem,
     rowKey: '1',
-    cellShouldShowBottomBorder
+    ...singleColumnProps
   },
   // Column 2:
   {
@@ -87,10 +89,8 @@ export const rowComponentsProps = [
         optionalLabel: OPTIONAL_LABEL_DIVIDEND
       }
     ],
-    columnKeyName: 'label',
-    columnCellComponent: DataItem,
     rowKey: '2',
-    cellShouldShowBottomBorder
+    ...singleColumnProps
   },
   // Column 3:
   {
@@ -102,9 +102,7 @@ export const rowComponentsProps = [
       { label: LABEL_ROE },
       { label: LABEL_FCFY }
     ],
-    columnKeyName: 'label',
-    columnCellComponent: DataItem,
     rowKey: '3',
-    cellShouldShowBottomBorder
+    ...singleColumnProps
   }
 ];
