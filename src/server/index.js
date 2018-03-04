@@ -6,9 +6,34 @@ import {
 import rp from 'request-promise';
 import dateFormat from 'dateformat';
 
-import * as constants from '../constants';
 import { port } from './config';
 import { formatDateForMaxStockData } from '../utils/dateUtils';
+import {
+  DATE_FORMAT_FIVE_DAY,
+  DATE_FORMAT_ONE_DAY,
+  ERROR_MESSAGE_STOCK_NOT_FOUND,
+  FIVE_DAYS,
+  LABEL_CURRENT_PRICE,
+  LABEL_DIVIDEND,
+  LABEL_FCFY,
+  LABEL_HIGH,
+  LABEL_LOW,
+  LABEL_MARKET_CAP,
+  LABEL_OPEN,
+  LABEL_PE_RATIO,
+  LABEL_PREVIOUS_CLOSE,
+  LABEL_ROE,
+  LABEL_VOLUME,
+  MILLISECONDS_PER_SECOND,
+  NUMBER_FORMAT_DEFAULT,
+  NUMBER_FORMAT_PERCENT,
+  NUMBER_FORMAT_SHORT_SUFFIXED,
+  ONE_DAY,
+  QUERY_INTERVAL_FIVE_DAY,
+  QUERY_INTERVAL_ONE_DAY,
+  QUERY_RANGE_FIVE_DAY,
+  QUERY_RANGE_ONE_DAY
+} from '../constants';
 
 const app = express();
 
@@ -21,8 +46,8 @@ const calculateFcfy = (freeCashflow, marketCap) => {
 const createStockDataEntry = (value, options = {}) => {
   const {
     optionalValue,
-    valueFormat = constants.NUMBER_FORMAT_DEFAULT,
-    optionalValueFormat = constants.NUMBER_FORMAT_DEFAULT
+    valueFormat = NUMBER_FORMAT_DEFAULT,
+    optionalValueFormat = NUMBER_FORMAT_DEFAULT
   } = options;
   return {
     value,
@@ -49,48 +74,46 @@ const processStockData = ({
   volume
 }) => {
   return {
-    [constants.LABEL_PREVIOUS_CLOSE]: createStockDataEntry(previousClose),
-    [constants.LABEL_CURRENT_PRICE]: createStockDataEntry(currentPrice),
-    [constants.LABEL_OPEN]: createStockDataEntry(open),
-    [constants.LABEL_HIGH]: createStockDataEntry(dayHigh),
-    [constants.LABEL_LOW]: createStockDataEntry(dayLow),
-    [constants.LABEL_DIVIDEND]: createStockDataEntry(
+    [LABEL_PREVIOUS_CLOSE]: createStockDataEntry(previousClose),
+    [LABEL_CURRENT_PRICE]: createStockDataEntry(currentPrice),
+    [LABEL_OPEN]: createStockDataEntry(open),
+    [LABEL_HIGH]: createStockDataEntry(dayHigh),
+    [LABEL_LOW]: createStockDataEntry(dayLow),
+    [LABEL_DIVIDEND]: createStockDataEntry(
       dividendRate,
       {
         optionalValue: dividendYield,
-        optionalValueFormat: constants.NUMBER_FORMAT_PERCENT
+        optionalValueFormat: NUMBER_FORMAT_PERCENT
       }
     ),
-    [constants.LABEL_MARKET_CAP]: createStockDataEntry(
-      marketCap,
+    [LABEL_MARKET_CAP]: createStockDataEntry(marketCap,
       {
-        valueFormat: constants.NUMBER_FORMAT_SHORT_SUFFIXED
-      }
-    ),
-    [constants.LABEL_VOLUME]: createStockDataEntry(
+        valueFormat: NUMBER_FORMAT_SHORT_SUFFIXED
+      }),
+    [LABEL_VOLUME]: createStockDataEntry(
       volume,
       {
-        valueFormat: constants.NUMBER_FORMAT_SHORT_SUFFIXED,
+        valueFormat: NUMBER_FORMAT_SHORT_SUFFIXED,
         optionalValue: averageVolume,
-        optionalValueFormat: constants.NUMBER_FORMAT_SHORT_SUFFIXED
+        optionalValueFormat: NUMBER_FORMAT_SHORT_SUFFIXED
       }
     ),
-    [constants.LABEL_PE_RATIO]: createStockDataEntry(
+    [LABEL_PE_RATIO]: createStockDataEntry(
       trailingPE,
       {
         optionalValue: trailingEps
       }
     ),
-    [constants.LABEL_ROE]: createStockDataEntry(
+    [LABEL_ROE]: createStockDataEntry(
       returnOnEquity,
       {
-        valueFormat: constants.NUMBER_FORMAT_PERCENT
+        valueFormat: NUMBER_FORMAT_PERCENT
       }
     ),
-    [constants.LABEL_FCFY]: createStockDataEntry(
+    [LABEL_FCFY]: createStockDataEntry(
       calculateFcfy(freeCashflow, marketCap),
       {
-        valueFormat: constants.NUMBER_FORMAT_PERCENT
+        valueFormat: NUMBER_FORMAT_PERCENT
       }
     )
   };
@@ -137,7 +160,7 @@ const getDatesAndPrices = dailyData => {
 // case because we are just extracting the time
 const getAdjustedDateForTimestamp = (gmtoffset, timestamp) => {
   const adjustedTimestamp =
-    (timestamp + gmtoffset) * constants.MILLISECONDS_PER_SECOND;
+    (timestamp + gmtoffset) * MILLISECONDS_PER_SECOND;
   return new Date(adjustedTimestamp);
 };
 
@@ -162,9 +185,9 @@ const getDatesAndTimesForOneDay = (
 ) => {
   let datesTimesAndPrices = [];
   const timestampsPerDay = timestamp.length / numberOfDays;
-  const dateAndTimeFormat = (numberOfDays === constants.ONE_DAY)
-    ? constants.DATE_FORMAT_ONE_DAY
-    : constants.DATE_FORMAT_FIVE_DAY;
+  const dateAndTimeFormat = (numberOfDays === ONE_DAY)
+    ? DATE_FORMAT_ONE_DAY
+    : DATE_FORMAT_FIVE_DAY;
 
   for (
     let i = getStartOfDayTimestampIndex(dayIndex, timestampsPerDay);
@@ -294,25 +317,25 @@ app.get('/api/stocks/:symbol', (req, res) => {
 
           const queryOneDay = getQueryForIntradayData(
             symbol,
-            constants.QUERY_RANGE_ONE_DAY,
-            constants.QUERY_INTERVAL_ONE_DAY
+            QUERY_RANGE_ONE_DAY,
+            QUERY_INTERVAL_ONE_DAY
           );
           rp(queryOneDay)
             .then(oneDayRes => {
               stock.oneDayStockData = getIntradayStockData(
                 oneDayRes,
-                constants.ONE_DAY
+                ONE_DAY
               );
 
               const queryFiveDay = getQueryForIntradayData(symbol,
-                constants.QUERY_RANGE_FIVE_DAY,
-                constants.QUERY_INTERVAL_FIVE_DAY
+                QUERY_RANGE_FIVE_DAY,
+                QUERY_INTERVAL_FIVE_DAY
               );
               rp(queryFiveDay)
                 .then(fiveDayRes => {
                   stock.fiveDayStockData = getIntradayStockData(
                     fiveDayRes,
-                    constants.FIVE_DAYS
+                    FIVE_DAYS
                   );
                   res.send(stock);
                 });
@@ -321,7 +344,7 @@ app.get('/api/stocks/:symbol', (req, res) => {
     }
 
   ).catch(() =>
-    res.status(404).send(constants.ERROR_MESSAGE_STOCK_NOT_FOUND)
+    res.status(404).send(ERROR_MESSAGE_STOCK_NOT_FOUND)
   );
 });
 
