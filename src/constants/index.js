@@ -12,9 +12,7 @@ export const BLANK_FIELD = '--';
 export const CHART_BUTTON_LABEL_COLOR_DEFAULT = '#000000';
 export const CHART_BUTTON_LABEL_COLOR_SELECTED = '#3223ff';
 export const CHART_DATA_KEY_Y_AXIS = 'price';
-export const CHART_HEIGHT = 400;
 export const CHART_LINE_COLOR = 'red';
-export const CHART_WIDTH = 1000;
 
 export const CHART_META_DATA = [
   {
@@ -114,7 +112,7 @@ export const LABEL_HIGH = 'High';
 export const LABEL_LOW = 'Low';
 export const LABEL_MARKET_CAP = 'Mkt Cap';
 export const LABEL_OPEN = 'Open';
-export const LABEL_PE_RATIO = 'P/E Ratio';
+export const LABEL_PE_RATIO = 'Trailing P/E';
 export const LABEL_PREVIOUS_CLOSE = 'Previous Close';
 export const LABEL_ROE = 'ROE';
 export const LABEL_VOLUME = 'Volume';
@@ -123,9 +121,14 @@ export const MAX_DAYS = 5;
 export const MILLISECONDS_PER_SECOND = 1000;
 export const MONTHS_PER_YEAR = 12;
 
+export const NUMBER_FORMAT_DEFAULT = '0,0.00';
+export const NUMBER_FORMAT_PERCENT = '0.00%';
+export const NUMBER_FORMAT_PRICE = '$0,0.00';
+export const NUMBER_FORMAT_ROUNDED = '0,0.00';
+export const NUMBER_FORMAT_SHORT_SUFFIXED = '0.00a';
+
 export const OPTIONAL_LABEL_DIVIDEND = '%';
 export const OPTIONAL_LABEL_EPS = 'EPS';
-export const OPTIONAL_VALUE_SUFFIX_DIVIDEND = '%';
 
 // 30m interval behaves like 60m for some reason, so using 15m instead
 export const QUERY_INTERVAL_FIVE_DAY = '15m';
@@ -145,18 +148,3 @@ export const URL_GLOSSARY = '/glossary';
 export const URL_HOME = '/';
 
 export const VALID_DATE_NOT_FOUND = -1;
-export const VALUE_PRECISION_CURRENT_PRICE = 2;
-export const VALUE_PRECISION_DIVIDEND = 2;
-export const VALUE_PRECISION_EPS = 2;
-export const VALUE_PRECISION_FCFY = 1;
-export const VALUE_PRECISION_HIGH = 2;
-export const VALUE_PRECISION_LOW = 2;
-export const VALUE_PRECISION_MARKET_CAP = 0;
-export const VALUE_PRECISION_OPEN = 2;
-export const VALUE_PRECISION_PE = 2;
-export const VALUE_PRECISION_PRICE_CHANGE = 2;
-export const VALUE_PRECISION_PRICE_CHANGE_PERCENTAGE = 2;
-export const VALUE_PRECISION_ROE = 1;
-export const VALUE_PRECISION_VOLUME = 0;
-export const VALUE_SUFFIX_FCFY = '%';
-export const VALUE_SUFFIX_ROE = '%';

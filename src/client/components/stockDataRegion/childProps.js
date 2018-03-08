@@ -12,80 +12,97 @@ import {
   LABEL_ROE,
   LABEL_VOLUME,
   OPTIONAL_LABEL_DIVIDEND,
-  OPTIONAL_LABEL_EPS,
-  VALUE_PRECISION_DIVIDEND,
-  VALUE_PRECISION_EPS,
-  VALUE_PRECISION_FCFY,
-  VALUE_PRECISION_HIGH,
-  VALUE_PRECISION_LOW,
-  VALUE_PRECISION_MARKET_CAP,
-  VALUE_PRECISION_OPEN,
-  VALUE_PRECISION_PE,
-  VALUE_PRECISION_ROE,
-  VALUE_PRECISION_VOLUME
+  OPTIONAL_LABEL_EPS
 } from '../../../constants';
 
+const cellShouldShowBottomBorder = (cellIndex, numCells) =>
+  cellIndex + 1 !== numCells;
+
+const singleColumnProps = {
+  cellShouldShowBottomBorder,
+  columnCellComponent: DataItem,
+  columnKeyName: 'label'
+};
+
+export const columnComponentsProps = {
+  componentsProps: [
+    {
+      key: 0,
+      label: LABEL_OPEN
+    },
+    {
+      key: 1,
+      label: LABEL_HIGH
+    },
+    {
+      key: 2,
+      label: LABEL_LOW
+    },
+    {
+      key: 3,
+      label: LABEL_MARKET_CAP
+    },
+    {
+      key: 4,
+      label: LABEL_VOLUME,
+      optionalLabel: LABEL_AVERAGE
+    },
+    {
+      key: 5,
+      label: LABEL_PE_RATIO,
+      optionalLabel: OPTIONAL_LABEL_EPS
+    },
+    {
+      key: 6,
+      label: LABEL_ROE
+    },
+    {
+      key: 7,
+      label: LABEL_FCFY
+    }
+  ],
+  ...singleColumnProps
+};
+
+// To use if we ever want to display the data as a Row of 3 Columns
 export const rowComponentsProps = [
+  // Column 1:
   {
     componentsProps: [
-      {
-        label: LABEL_OPEN,
-        valuePrecision: VALUE_PRECISION_OPEN
-      },
-      {
-        label: LABEL_HIGH,
-        valuePrecision: VALUE_PRECISION_HIGH
-      },
-      {
-        label: LABEL_LOW,
-        valuePrecision: VALUE_PRECISION_LOW
-      }
+      { label: LABEL_OPEN },
+      { label: LABEL_HIGH },
+      { label: LABEL_LOW }
     ],
-    columnKeyName: 'label',
-    columnCellComponent: DataItem,
-    rowKey: '1'
+    rowKey: '1',
+    ...singleColumnProps
   },
+  // Column 2:
   {
     componentsProps: [
-      {
-        label: LABEL_MARKET_CAP,
-        valuePrecision: VALUE_PRECISION_MARKET_CAP
-      },
+      { label: LABEL_MARKET_CAP },
       {
         label: LABEL_VOLUME,
-        optionalLabel: LABEL_AVERAGE,
-        valuePrecision: VALUE_PRECISION_VOLUME
+        optionalLabel: LABEL_AVERAGE
       },
       {
         label: LABEL_DIVIDEND,
-        optionalLabel: OPTIONAL_LABEL_DIVIDEND,
-        valuePrecision: VALUE_PRECISION_DIVIDEND,
-        optionalValuePrecision: VALUE_PRECISION_DIVIDEND
+        optionalLabel: OPTIONAL_LABEL_DIVIDEND
       }
     ],
-    columnKeyName: 'label',
-    columnCellComponent: DataItem,
-    rowKey: '2'
+    rowKey: '2',
+    ...singleColumnProps
   },
+  // Column 3:
   {
     componentsProps: [
       {
         label: LABEL_PE_RATIO,
-        optionalLabel: OPTIONAL_LABEL_EPS,
-        valuePrecision: VALUE_PRECISION_PE,
-        optionalValuePrecision: VALUE_PRECISION_EPS
+        optionalLabel: OPTIONAL_LABEL_EPS
       },
-      {
-        label: LABEL_ROE,
-        valuePrecision: VALUE_PRECISION_ROE
-      },
-      {
-        label: LABEL_FCFY,
-        valuePrecision: VALUE_PRECISION_FCFY
-      }
+      { label: LABEL_ROE },
+      { label: LABEL_FCFY }
     ],
-    columnKeyName: 'label',
-    columnCellComponent: DataItem,
-    rowKey: '3'
+    rowKey: '3',
+    ...singleColumnProps
   }
 ];

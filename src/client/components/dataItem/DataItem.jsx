@@ -5,14 +5,17 @@ import './dataItem.css';
 
 const DataItem = ({
   label,
+  showBottomBorder,
   value
 }) => {
+  const dataItemClass = 'dataItem' +
+    (showBottomBorder ? ' dataItemBorder' : '');
   return (
-    <div className='dataItem'>
+    <div className={ dataItemClass } >
       <span>
         { label }
       </span>
-      <span>
+      <span className='value'>
         { value }
       </span>
     </div>
@@ -20,6 +23,7 @@ const DataItem = ({
 };
 DataItem.propTypes = {
   label: PropTypes.string.isRequired,
+  showBottomBorder: PropTypes.bool,
   value: PropTypes.string.isRequired
 };
 export default DataItem;

@@ -25,39 +25,35 @@ import {
   LABEL_ROE,
   LABEL_VOLUME,
   MILLISECONDS_PER_SECOND,
+  NUMBER_FORMAT_DEFAULT,
+  NUMBER_FORMAT_PERCENT,
+  NUMBER_FORMAT_SHORT_SUFFIXED,
   ONE_DAY,
-  OPTIONAL_VALUE_SUFFIX_DIVIDEND,
   QUERY_INTERVAL_FIVE_DAY,
   QUERY_INTERVAL_ONE_DAY,
   QUERY_RANGE_FIVE_DAY,
-  QUERY_RANGE_ONE_DAY,
-  VALUE_SUFFIX_FCFY,
-  VALUE_SUFFIX_ROE
+  QUERY_RANGE_ONE_DAY
 } from '../constants';
 
 const app = express();
 
-const convertDecimalToPercent = decimal => (
-  decimal * 100
-);
-
 const calculateFcfy = (freeCashflow, marketCap) => {
   const freeCashflowNum = parseInt(freeCashflow);
   const marketCapNum = parseInt(marketCap);
-  return convertDecimalToPercent(freeCashflowNum / marketCapNum);
+  return freeCashflowNum / marketCapNum;
 };
 
 const createStockDataEntry = (value, options = {}) => {
   const {
     optionalValue,
-    valueSuffix = '',
-    optionalValueSuffix = ''
+    valueFormat = NUMBER_FORMAT_DEFAULT,
+    optionalValueFormat = NUMBER_FORMAT_DEFAULT
   } = options;
   return {
     value,
     optionalValue,
-    valueSuffix,
-    optionalValueSuffix
+    valueFormat,
+    optionalValueFormat
   };
 };
 
@@ -84,17 +80,22 @@ const processStockData = ({
     [LABEL_HIGH]: createStockDataEntry(dayHigh),
     [LABEL_LOW]: createStockDataEntry(dayLow),
     [LABEL_DIVIDEND]: createStockDataEntry(
-      dividendYield,
+      dividendRate,
       {
-        optionalValue: dividendRate,
-        optionalValueSuffix: OPTIONAL_VALUE_SUFFIX_DIVIDEND
+        optionalValue: dividendYield,
+        optionalValueFormat: NUMBER_FORMAT_PERCENT
       }
     ),
-    [LABEL_MARKET_CAP]: createStockDataEntry(marketCap),
+    [LABEL_MARKET_CAP]: createStockDataEntry(marketCap,
+      {
+        valueFormat: NUMBER_FORMAT_SHORT_SUFFIXED
+      }),
     [LABEL_VOLUME]: createStockDataEntry(
       volume,
       {
-        optionalValue: averageVolume
+        valueFormat: NUMBER_FORMAT_SHORT_SUFFIXED,
+        optionalValue: averageVolume,
+        optionalValueFormat: NUMBER_FORMAT_SHORT_SUFFIXED
       }
     ),
     [LABEL_PE_RATIO]: createStockDataEntry(
@@ -104,15 +105,15 @@ const processStockData = ({
       }
     ),
     [LABEL_ROE]: createStockDataEntry(
-      convertDecimalToPercent(returnOnEquity),
+      returnOnEquity,
       {
-        valueSuffix: VALUE_SUFFIX_ROE
+        valueFormat: NUMBER_FORMAT_PERCENT
       }
     ),
     [LABEL_FCFY]: createStockDataEntry(
       calculateFcfy(freeCashflow, marketCap),
       {
-        valueSuffix: VALUE_SUFFIX_FCFY
+        valueFormat: NUMBER_FORMAT_PERCENT
       }
     )
   };

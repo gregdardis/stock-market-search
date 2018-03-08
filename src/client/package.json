@@ -2,6 +2,7 @@
   "name": "client",
   "dependencies": {
     "material-ui": "^0.20.0",
+    "numeral": "^2.0.6",
     "prop-types": "^15.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

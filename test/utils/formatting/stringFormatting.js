@@ -1,19 +1,23 @@
 import { expect } from 'chai';
+import numeral from 'numeral';
 
-import { formatValueFromStateAndProps } from '../../../src/utils/formatting/stringFormatting';
+import {
+  formatValueFromStateAndProps
+} from '../../../src/utils/formatting/stringFormatting';
 import {
   BLANK_FIELD,
   LABEL_DIVIDEND,
-  VALUE_PRECISION_DIVIDEND,
-  OPTIONAL_VALUE_SUFFIX_DIVIDEND
+  NUMBER_FORMAT_DEFAULT,
+  NUMBER_FORMAT_PERCENT,
+  NUMBER_FORMAT_ROUNDED
 } from '../../../src/constants';
 
-const createState = ({
+const createMockState = ({
   symbol = 'MSFT',
   value,
   optionalValue,
-  valueSuffix,
-  optionalValueSuffix
+  valueFormat,
+  optionalValueFormat
 }) => ({
   selectedStock: symbol,
   stocks: {
@@ -22,181 +26,178 @@ const createState = ({
         [LABEL_DIVIDEND]: {
           value,
           optionalValue,
-          valueSuffix,
-          optionalValueSuffix
+          valueFormat,
+          optionalValueFormat
         }
       }
     }
   }
 });
 
-const createProps = ({
-  label,
-  valuePrecision,
-  optionalValuePrecision
-}) => ({
-  label,
-  valuePrecision,
-  optionalValuePrecision
-});
-
 export const formatValueFromStateAndPropsTest = () => {
-  const ACTUAL_VALUE = 3.545;
-  const ACTUAL_OPTIONAL_VALUE = 0.4;
+  const valueFormat = NUMBER_FORMAT_ROUNDED;
+  const optionalValueFormat = NUMBER_FORMAT_PERCENT;
 
-  /* Adding a dollar sign suffix for testing purposes.
-     Dividends shouldn't have a dollar sign after them */
-  const VALUE_SUFFIX = '$';
-  const OPTIONAL_VALUE_SUFFIX = OPTIONAL_VALUE_SUFFIX_DIVIDEND;
+  const actualValue = 3.545;
+  const actualOptionalValue = 0.4;
 
-  const ownProps = createProps({
-    label: LABEL_DIVIDEND,
-    valuePrecision: VALUE_PRECISION_DIVIDEND,
-    optionalValuePrecision: VALUE_PRECISION_DIVIDEND
-  });
-  const EXPECTED_VALUE = ACTUAL_VALUE.toFixed(ownProps.valuePrecision);
-  const EXPECTED_OPTIONAL_VALUE = ACTUAL_OPTIONAL_VALUE.toFixed(ownProps.optionalValuePrecision);
+  // formats expected when format specifiers (valueFormat & optionalValueFormat
+  // - see above) are provided in the state
+  const expectedValueFormatted = numeral(actualValue)
+    .format(valueFormat);
+  const expectedOptionalValueFormatted = numeral(actualOptionalValue)
+    .format(optionalValueFormat);
+
+  // formats expected when no format specifier provided in the state
+  const expectedValueDefaultFormat = numeral(actualValue)
+    .format(NUMBER_FORMAT_DEFAULT);
+  const expectedOptionalValueDefaultFormat = numeral(actualOptionalValue)
+    .format(NUMBER_FORMAT_DEFAULT);
+
+  const ownProps = {
+    label: LABEL_DIVIDEND
+  };
 
   describe('formatValueFromStateAndProps', () => {
     it('should properly format when ALL fields are defined', () => {
-      const state = createState({
-        value: ACTUAL_VALUE,
-        optionalValue: ACTUAL_OPTIONAL_VALUE,
-        valueSuffix: VALUE_SUFFIX,
-        optionalValueSuffix: OPTIONAL_VALUE_SUFFIX
+      const state = createMockState({
+        value: actualValue,
+        optionalValue: actualOptionalValue,
+        valueFormat,
+        optionalValueFormat
       });
       expect(formatValueFromStateAndProps(state, ownProps))
         .to
-        .equal(`${EXPECTED_VALUE}${VALUE_SUFFIX} (${EXPECTED_OPTIONAL_VALUE}${OPTIONAL_VALUE_SUFFIX})`);
+        .equal(`${expectedValueFormatted} (${expectedOptionalValueFormatted})`);
     });
     it('should properly format when value is not defined', () => {
-      const state = createState({
-        optionalValue: ACTUAL_OPTIONAL_VALUE,
-        valueSuffix: VALUE_SUFFIX,
-        optionalValueSuffix: OPTIONAL_VALUE_SUFFIX
+      const state = createMockState({
+        optionalValue: actualOptionalValue,
+        valueFormat,
+        optionalValueFormat
       });
       expect(formatValueFromStateAndProps(state, ownProps))
         .to
-        .equal(`${BLANK_FIELD} (${EXPECTED_OPTIONAL_VALUE}${OPTIONAL_VALUE_SUFFIX})`);
+        .equal(`${BLANK_FIELD} (${expectedOptionalValueFormatted})`);
     });
     it('should properly format when optionalValue is not defined', () => {
-      const state = createState({
-        value: ACTUAL_VALUE,
-        valueSuffix: VALUE_SUFFIX,
-        optionalValueSuffix: OPTIONAL_VALUE_SUFFIX
+      const state = createMockState({
+        value: actualValue,
+        valueFormat,
+        optionalValueFormat
       });
       expect(formatValueFromStateAndProps(state, ownProps))
         .to
-        .equal(`${EXPECTED_VALUE}${VALUE_SUFFIX}`);
+        .equal(`${expectedValueFormatted}`);
     });
-    it('should properly format when valueSuffix is not defined', () => {
-      const state = createState({
-        value: ACTUAL_VALUE,
-        optionalValue: ACTUAL_OPTIONAL_VALUE,
-        optionalValueSuffix: OPTIONAL_VALUE_SUFFIX
+    it('should properly format when valueFormat is not defined', () => {
+      const state = createMockState({
+        value: actualValue,
+        optionalValue: actualOptionalValue,
+        optionalValueFormat
       });
       expect(formatValueFromStateAndProps(state, ownProps))
         .to
-        .equal(`${EXPECTED_VALUE} (${EXPECTED_OPTIONAL_VALUE}${OPTIONAL_VALUE_SUFFIX})`);
+        .equal(`${expectedValueDefaultFormat} (${expectedOptionalValueFormatted})`);
     });
-    it('should properly format when optionalValueSuffix is not defined', () => {
-      const state = createState({
-        value: ACTUAL_VALUE,
-        optionalValue: ACTUAL_OPTIONAL_VALUE,
-        valueSuffix: VALUE_SUFFIX
+    it('should properly format when optionalValueFormat is not defined', () => {
+      const state = createMockState({
+        value: actualValue,
+        optionalValue: actualOptionalValue,
+        valueFormat
       });
       expect(formatValueFromStateAndProps(state, ownProps))
         .to
-        .equal(`${EXPECTED_VALUE}${VALUE_SUFFIX} (${EXPECTED_OPTIONAL_VALUE})`);
+        .equal(`${expectedValueFormatted} (${expectedOptionalValueDefaultFormat})`);
     });
-    it('should properly format when value and valueSuffix are not defined', () => {
-      const state = createState({
-        optionalValue: ACTUAL_OPTIONAL_VALUE,
-        optionalValueSuffix: OPTIONAL_VALUE_SUFFIX
+    it('should properly format when value and valueFormat are not defined', () => {
+      const state = createMockState({
+        optionalValue: actualOptionalValue,
+        optionalValueFormat
       });
       expect(formatValueFromStateAndProps(state, ownProps))
         .to
-        .equal(`${BLANK_FIELD} (${EXPECTED_OPTIONAL_VALUE}${OPTIONAL_VALUE_SUFFIX})`);
+        .equal(`${BLANK_FIELD} (${expectedOptionalValueFormatted})`);
     });
     it('should properly format when value and optionalValue are not defined', () => {
-      const state = createState({
-        valueSuffix: VALUE_SUFFIX,
-        optionalValueSuffix: OPTIONAL_VALUE_SUFFIX
+      const state = createMockState({
+        valueFormat,
+        optionalValueFormat
       });
       expect(formatValueFromStateAndProps(state, ownProps))
         .to
         .equal(BLANK_FIELD);
     });
-    it('should properly format when value and optionalValueSuffix are not defined', () => {
-      const state = createState({
-        optionalValue: ACTUAL_OPTIONAL_VALUE,
-        valueSuffix: VALUE_SUFFIX
+    it('should properly format when value and optionalValueFormat are not defined', () => {
+      const state = createMockState({
+        optionalValue: actualOptionalValue,
+        valueFormat
       });
       expect(formatValueFromStateAndProps(state, ownProps))
         .to
-        .equal(`${BLANK_FIELD} (${EXPECTED_OPTIONAL_VALUE})`);
+        .equal(`${BLANK_FIELD} (${expectedOptionalValueDefaultFormat})`);
     });
-    it('should properly format when optionalValue and valueSuffix are not defined', () => {
-      const state = createState({
-        value: ACTUAL_VALUE,
-        optionalValueSuffix: OPTIONAL_VALUE_SUFFIX
+    it('should properly format when optionalValue and valueFormat are not defined', () => {
+      const state = createMockState({
+        value: actualValue,
+        optionalValueFormat
       });
       expect(formatValueFromStateAndProps(state, ownProps))
         .to
-        .equal(EXPECTED_VALUE);
+        .equal(expectedValueDefaultFormat);
     });
-    it('should properly format when optionalValue and optionalValueSuffix are not defined', () => {
-      const state = createState({
-        value: ACTUAL_VALUE,
-        valueSuffix: VALUE_SUFFIX
+    it('should properly format when optionalValue and optionalValueFormat are not defined', () => {
+      const state = createMockState({
+        value: actualValue,
+        valueFormat
       });
       expect(formatValueFromStateAndProps(state, ownProps))
         .to
-        .equal(`${EXPECTED_VALUE}${VALUE_SUFFIX}`);
+        .equal(`${expectedValueFormatted}`);
     });
-    it('should properly format when valueSuffix and optionalValueSuffix are not defined', () => {
-      const state = createState({
-        value: ACTUAL_VALUE,
-        optionalValue: ACTUAL_OPTIONAL_VALUE
+    it('should properly format when valueFormat and optionalValueFormat are not defined', () => {
+      const state = createMockState({
+        value: actualValue,
+        optionalValue: actualOptionalValue
       });
       expect(formatValueFromStateAndProps(state, ownProps))
         .to
-        .equal(`${EXPECTED_VALUE} (${EXPECTED_OPTIONAL_VALUE})`);
+        .equal(`${expectedValueDefaultFormat} (${expectedOptionalValueDefaultFormat})`);
     });
     it('should properly format when only value is defined', () => {
-      const state = createState({
-        value: ACTUAL_VALUE
+      const state = createMockState({
+        value: actualValue
       });
       expect(formatValueFromStateAndProps(state, ownProps))
         .to
-        .equal(EXPECTED_VALUE);
+        .equal(expectedValueDefaultFormat);
     });
     it('should properly format when only optionalValue is defined', () => {
-      const state = createState({
-        optionalValue: ACTUAL_OPTIONAL_VALUE
+      const state = createMockState({
+        optionalValue: actualOptionalValue
       });
       expect(formatValueFromStateAndProps(state, ownProps))
         .to
-        .equal(`${BLANK_FIELD} (${EXPECTED_OPTIONAL_VALUE})`);
+        .equal(`${BLANK_FIELD} (${expectedOptionalValueDefaultFormat})`);
     });
-    it('should properly format when only valueSuffix is defined', () => {
-      const state = createState({
-        valueSuffix: VALUE_SUFFIX
+    it('should properly format when only valueFormat is defined', () => {
+      const state = createMockState({
+        valueFormat
       });
       expect(formatValueFromStateAndProps(state, ownProps))
         .to
         .equal(BLANK_FIELD);
     });
-    it('should properly format when only optionalValueSuffix is defined', () => {
-      const state = createState({
-        optionalValueSuffix: OPTIONAL_VALUE_SUFFIX
+    it('should properly format when only optionalValueFormat is defined', () => {
+      const state = createMockState({
+        optionalValueFormat
       });
       expect(formatValueFromStateAndProps(state, ownProps))
         .to
         .equal(BLANK_FIELD);
     });
     it('should properly format when NO fields are defined', () => {
-      const state = createState({});
+      const state = createMockState({});
       expect(formatValueFromStateAndProps(state, ownProps))
         .to
         .equal(BLANK_FIELD);

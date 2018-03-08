@@ -11,7 +11,7 @@ import './navBar.css';
 const NavBar = () => {
   return (
     <div className='navBar'>
-      <span>{ APP_NAME }</span>
+      <span className='title'>{ APP_NAME }</span>
       <ul className='nav'>
         <li><Link to={ URL_HOME }>Home</Link></li>
         <li><Link to={ URL_GLOSSARY }>Glossary</Link></li>

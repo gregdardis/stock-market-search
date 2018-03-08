@@ -1,45 +1,27 @@
 import { connect } from 'react-redux';
+import numeral from 'numeral';
 
 import PriceAndTodaysPriceChange from './PriceAndTodaysPriceChange';
-import { roundAndAddCommas } from '../../../utils/formatting/numberFormatting';
-
 import {
   LABEL_CURRENT_PRICE,
   LABEL_PREVIOUS_CLOSE,
-  VALUE_PRECISION_CURRENT_PRICE,
-  VALUE_PRECISION_PRICE_CHANGE,
-  VALUE_PRECISION_PRICE_CHANGE_PERCENTAGE
+  NUMBER_FORMAT_PERCENT,
+  NUMBER_FORMAT_PRICE
 } from '../../../constants';
 
-const getCurrentPrice = stockOverviewData =>
-  stockOverviewData[LABEL_CURRENT_PRICE].value;
+const getCurrentPrice = stockOverviewData => {
+  return stockOverviewData[LABEL_CURRENT_PRICE].value;
+};
 
 const calculatePriceChange = stockOverviewData => {
   const previousClosePrice = stockOverviewData[LABEL_PREVIOUS_CLOSE].value;
   return getCurrentPrice(stockOverviewData) - previousClosePrice;
 };
+const formatAsPrice = value =>
+  numeral(value).format(NUMBER_FORMAT_PRICE);
 
-const calculatePriceChangePercentage = stockOverviewData =>
-  calculatePriceChange(stockOverviewData) /
-    getCurrentPrice(stockOverviewData) * 100;
-
-const getFormattedCurrentPrice = stockOverviewData =>
-  roundAndAddCommas(
-    getCurrentPrice(stockOverviewData),
-    VALUE_PRECISION_CURRENT_PRICE
-  );
-
-const getFormattedPriceChange = stockOverviewData =>
-  roundAndAddCommas(
-    calculatePriceChange(stockOverviewData),
-    VALUE_PRECISION_PRICE_CHANGE
-  );
-
-const getFormattedPriceChangePercentage = stockOverviewData =>
-  `${roundAndAddCommas(
-    calculatePriceChangePercentage(stockOverviewData),
-    VALUE_PRECISION_PRICE_CHANGE_PERCENTAGE
-  )}%`;
+const getFormattedPriceChangePercentage = (priceChange, currentPrice) =>
+  numeral(priceChange / currentPrice).format(NUMBER_FORMAT_PERCENT);
 
 const getStockOverviewData = state => {
   const symbol = state.selectedStock;
@@ -49,10 +31,16 @@ const getStockOverviewData = state => {
 
 const mapStateToProps = state => {
   const stockOverviewData = getStockOverviewData(state);
+  const priceChange = calculatePriceChange(stockOverviewData);
+  const currentPrice = getCurrentPrice(stockOverviewData);
   return {
-    currentPrice: getFormattedCurrentPrice(stockOverviewData),
-    priceChange: getFormattedPriceChange(stockOverviewData),
-    priceChangePercentage: getFormattedPriceChangePercentage(stockOverviewData)
+    currentPrice: formatAsPrice(currentPrice),
+    isPositiveChange: priceChange >= 0,
+    priceChange: formatAsPrice(priceChange),
+    priceChangePercentage: getFormattedPriceChangePercentage(
+      priceChange,
+      currentPrice
+    )
   };
 };
 

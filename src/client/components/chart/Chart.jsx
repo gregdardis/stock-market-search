@@ -1,22 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  LineChart,
   CartesianGrid,
-  XAxis,
-  YAxis,
+  Line,
+  LineChart,
+  ResponsiveContainer,
   Tooltip,
-  Line
+  XAxis,
+  YAxis
 } from 'recharts';
 
 import { addCommas } from '../../../utils/formatting/numberFormatting';
 import './chart.css';
 import {
   CHART_DATA_KEY_Y_AXIS,
-  CHART_HEIGHT,
   CHART_LINE_COLOR,
   CHART_META_DATA,
-  CHART_WIDTH,
   VALUE_PRECISION_CURRENT_PRICE
 } from '../../../constants';
 
@@ -37,19 +36,21 @@ const Chart = ({
     CHART_META_DATA[chartTimePeriodIndex].getXAxisTickFormatter;
 
   return (
-    <LineChart width={ CHART_WIDTH } height={ CHART_HEIGHT } data={ data }
-      className='chart' >
-      <CartesianGrid strokeDashArray='3 3' />
-      <XAxis dataKey={ getXAxisDataKey() }
-        tickFormatter= { getXAxisTickFormatter() }
-        minTickGap={ getXAxisMinTickGap() } />
-      <YAxis dataKey={ CHART_DATA_KEY_Y_AXIS } domain={ ['auto', 'auto'] }
-        tickFormatter={ addCommas } />
-      <Tooltip labelFormatter = { getTooltipLabelFormatter() }
-        formatter={ price => price.toFixed(VALUE_PRECISION_CURRENT_PRICE) } />
-      <Line type='monotone' dataKey={ CHART_DATA_KEY_Y_AXIS } dot={ false }
-        stroke={ CHART_LINE_COLOR } isAnimationActive={ false } />
-    </LineChart>
+    <ResponsiveContainer height='65%' width='85%'>
+      <LineChart data={ data }
+        className='chart' >
+        <CartesianGrid strokeDashArray='3 3' />
+        <XAxis dataKey={ getXAxisDataKey() }
+          tickFormatter= { getXAxisTickFormatter() }
+          minTickGap={ getXAxisMinTickGap() } />
+        <YAxis dataKey={ CHART_DATA_KEY_Y_AXIS } domain={ ['auto', 'auto'] }
+          tickFormatter={ addCommas } />
+        <Tooltip labelFormatter = { getTooltipLabelFormatter() }
+          formatter={ price => price.toFixed(VALUE_PRECISION_CURRENT_PRICE) } />
+        <Line type='monotone' dataKey={ CHART_DATA_KEY_Y_AXIS } dot={ false }
+          stroke={ CHART_LINE_COLOR } isAnimationActive={ false } />
+      </LineChart>
+    </ResponsiveContainer>
   );
 };
 Chart.propTypes = {

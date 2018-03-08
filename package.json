@@ -21,6 +21,7 @@
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "babel-watch": "^2.0.7",
     "chai": "^4.1.2",
     "css-loader": "^0.28.7",
@@ -39,6 +40,8 @@
     "webpack-dev-server": "^2.9.7"
   },
   "dependencies": {
-    "dateformat": "^3.0.3"
+    "babel-cli": "^6.26.0",
+    "dateformat": "^3.0.3",
+    "numeral": "^2.0.6"
   }
 }

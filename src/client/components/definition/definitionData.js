@@ -39,16 +39,17 @@ module.exports = {
       {
         title: 'Price-Earnings Ratio (EPS)',
         definition: 'Used for valuing a company, P/E ratio the ratio of ' +
-        'a company\'s share price to it\'s earnings per share. ' +
+        'a company\'s share price to its earnings per share. ' +
         'A low P/E ratio can suggest a stock is undervalued, ' +
         'but factoring in future growth rate and other metrics can say ' +
         'otherwise. Earnings per share (abbrev. EPS) is net income per ' +
-        'outstanding share of common stock.'
+        'outstanding share of common stock. A "trailing" P/E means that the ' +
+        'P/E is measured over the last 12 months.'
       },
       {
         title: 'Return On Equity (abbrev. as ROE)',
         definition: 'How well the company generates returns on the ' +
-        'investment from it\'s shareholders. It is how much after tax ' +
+        'investment from its shareholders. It is how much after tax ' +
         'profit the company earned in comparison to total shareholder ' +
         'equity. Calculated as (net income / shareholder equity) * 100%.'
       },

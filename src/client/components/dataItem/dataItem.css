@@ -1,6 +1,13 @@
 .dataItem {
+  padding: 15px 5px;
   display: flex;
-  padding: 10px;
-  border-bottom: 1px solid grey;
   justify-content: space-between;
+}
+
+.dataItemBorder {
+  border-bottom: 1px solid grey;
+}
+
+.dataItem .value {
+  font-weight: bold;
 }

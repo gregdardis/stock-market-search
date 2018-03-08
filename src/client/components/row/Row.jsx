@@ -20,7 +20,6 @@ const Row = ({
     </div>
   );
 };
-
 Row.propTypes = {
   componentsProps: PropTypes.array.isRequired,
   rowKeyName: PropTypes.string.isRequired,

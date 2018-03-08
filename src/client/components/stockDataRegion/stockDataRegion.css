@@ -1,4 +1,14 @@
 .stockDataRegion {
   display: flex;
+  flex: 1;
+  padding-top: 0;
+  padding-bottom: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.textData {
+  display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }

@@ -1,14 +1,15 @@
 .navBar {
-  display: flex;
   align-items: center;
-  padding-left: 30%;
-  width: 100%;
   background-color: #34414D;
   color: white;
+  display: flex;
+  width: 100%;
+  padding: 0;
 }
 
-.navBar span {
+.navBar .title {
   font-size: 1.5em;
+  padding-left: 40px;
 }
 
 ul .nav {
