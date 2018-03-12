@@ -13,8 +13,14 @@ const NavBar = () => {
     <div className='navBar'>
       <span className='title'>{ APP_NAME }</span>
       <ul className='nav'>
-        <li><Link to={ URL_HOME }>Home</Link></li>
-        <li><Link to={ URL_GLOSSARY }>Glossary</Link></li>
+        <li><Link
+          to={ URL_HOME }
+          exact>Home</Link>
+        </li>
+        <li><Link
+          to={ URL_GLOSSARY }
+          exact>Glossary</Link>
+        </li>
       </ul>
     </div>
   );
