@@ -9,6 +9,7 @@ import {
   XAxis,
   YAxis
 } from 'recharts';
+import numeral from 'numeral';
 
 import { addCommas } from '../../../utils/formatting/numberFormatting';
 import './chart.css';
@@ -16,7 +17,7 @@ import {
   CHART_DATA_KEY_Y_AXIS,
   CHART_LINE_COLOR,
   CHART_META_DATA,
-  VALUE_PRECISION_CURRENT_PRICE
+  NUMBER_FORMAT_PRICE
 } from '../../../constants';
 
 const Chart = ({
@@ -35,6 +36,9 @@ const Chart = ({
   const getXAxisTickFormatter = () =>
     CHART_META_DATA[chartTimePeriodIndex].getXAxisTickFormatter;
 
+  const formatAsPrice = value =>
+    numeral(value).format(NUMBER_FORMAT_PRICE);
+
   return (
     <ResponsiveContainer height='65%' width='85%'>
       <LineChart data={ data }
@@ -46,7 +50,7 @@ const Chart = ({
         <YAxis dataKey={ CHART_DATA_KEY_Y_AXIS } domain={ ['auto', 'auto'] }
           tickFormatter={ addCommas } />
         <Tooltip labelFormatter = { getTooltipLabelFormatter() }
-          formatter={ price => price.toFixed(VALUE_PRECISION_CURRENT_PRICE) } />
+          formatter={ price => formatAsPrice(price) } />
         <Line type='monotone' dataKey={ CHART_DATA_KEY_Y_AXIS } dot={ false }
           stroke={ CHART_LINE_COLOR } isAnimationActive={ false } />
       </LineChart>
