@@ -42,6 +42,7 @@
   "dependencies": {
     "babel-cli": "^6.26.0",
     "dateformat": "^3.0.3",
-    "numeral": "^2.0.6"
+    "numeral": "^2.0.6",
+    "react-spinners": "^0.2.6"
   }
 }
