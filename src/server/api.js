@@ -285,6 +285,46 @@ const getQueryForIntradayData = (symbol, range, interval) => {
   '&corsDomain=finance.yahoo.com&.tsrc=finance';
 };
 
+const requestMaxStockData = (symbol, callback) => {
+  historical({
+    // gets all data because we didn't specify from/to
+    symbol,
+    period: 'd'
+  }).then(
+    dailyData => {
+      console.log('max');
+      if (!dailyData[0]) {
+        throw new Error('Historical data was not found.');
+      }
+      callback(null, getDatesAndPrices(dailyData));
+    });
+};
+
+const requestOneDayStockData = (symbol, callback) => {
+  const queryOneDay = getQueryForIntradayData(
+    symbol,
+    QUERY_RANGE_ONE_DAY,
+    QUERY_INTERVAL_ONE_DAY
+  );
+  rp(queryOneDay)
+    .then(oneDayRes => {
+      console.log('one');
+      callback(null, getIntradayStockData(oneDayRes, ONE_DAY));
+    });
+};
+
+const requestFiveDayStockData = (symbol, callback) => {
+  const queryFiveDay = getQueryForIntradayData(symbol,
+    QUERY_RANGE_FIVE_DAY,
+    QUERY_INTERVAL_FIVE_DAY
+  );
+  rp(queryFiveDay)
+    .then(fiveDayRes => {
+      console.log('five');
+      callback(null, getIntradayStockData(fiveDayRes, FIVE_DAYS));
+    });
+};
+
 router.get('/stocks/:symbol', (req, res) => {
   const modules = [
     'summaryDetail',
@@ -305,47 +345,22 @@ router.get('/stocks/:symbol', (req, res) => {
       });
       const stock = createStock(stockQuote);
       async.parallel({
-        maxStockData: function (callback) {
-          historical({
-            // gets all data because we didn't specify from/to
-            symbol,
-            period: 'd'
-          }).then(
-            dailyData => {
-              console.log('max');
-              if (!dailyData[0]) {
-                throw new Error('Historical data was not found.');
-              }
-              callback(null, getDatesAndPrices(dailyData));
-            });
+        maxStockData: callback => {
+          requestMaxStockData(symbol, callback);
         },
-        oneDayStockData: function (callback) {
-          const queryOneDay = getQueryForIntradayData(
-            symbol,
-            QUERY_RANGE_ONE_DAY,
-            QUERY_INTERVAL_ONE_DAY
-          );
-          rp(queryOneDay)
-            .then(oneDayRes => {
-              console.log('one');
-              callback(null, getIntradayStockData(oneDayRes, ONE_DAY));
-            });
+        oneDayStockData: callback => {
+          requestOneDayStockData(symbol, callback);
         },
-        fiveDayStockData: function (callback) {
-          const queryFiveDay = getQueryForIntradayData(symbol,
-            QUERY_RANGE_FIVE_DAY,
-            QUERY_INTERVAL_FIVE_DAY
-          );
-          rp(queryFiveDay)
-            .then(fiveDayRes => {
-              console.log('five');
-              callback(null, getIntradayStockData(fiveDayRes, FIVE_DAYS));
-            });
+        fiveDayStockData: callback => {
+          requestFiveDayStockData(symbol, callback);
         }
-      }, function (err, results) {
-        stock.oneDayStockData = results.oneDayStockData;
-        stock.fiveDayStockData = results.fiveDayStockData;
-        stock.maxStockData = results.maxStockData;
+      }, (err, results) => {
+        for (const key in results) {
+          if (!results.hasOwnProperty(key)) {
+            continue;
+          }
+          stock[key] = results[key];
+        }
         res.send(stock);
       });
     })
@@ -353,68 +368,5 @@ router.get('/stocks/:symbol', (req, res) => {
       res.status(404).send(ERROR_MESSAGE_STOCK_NOT_FOUND)
     );
 });
-
-// router.get('/stocks/:symbol', (req, res) => {
-//   const modules = [
-//     'summaryDetail',
-//     'defaultKeyStatistics',
-//     'financialData',
-//     'price'
-//   ];
-//   const symbol = req.params.symbol;
-//   quote({
-//     symbol,
-//     modules
-//   }).then(
-//     stockQuote => {
-//       modules.forEach(module => {
-//         if (!stockQuote[module]) {
-//           throw new Error(`Module '${module}' was not found.`);
-//         }
-//       });
-//       const stock = createStock(stockQuote);
-//       historical({
-//         // gets all data because we didn't specify from/to
-//         symbol,
-//         period: 'd'
-//       }).then(
-//         dailyData => {
-//           if (!dailyData[0]) {
-//             throw new Error('Historical data was not found.');
-//           }
-//           stock.maxStockData = getDatesAndPrices(dailyData);
-
-//           const queryOneDay = getQueryForIntradayData(
-//             symbol,
-//             QUERY_RANGE_ONE_DAY,
-//             QUERY_INTERVAL_ONE_DAY
-//           );
-//           rp(queryOneDay)
-//             .then(oneDayRes => {
-//               stock.oneDayStockData = getIntradayStockData(
-//                 oneDayRes,
-//                 ONE_DAY
-//               );
-
-//               const queryFiveDay = getQueryForIntradayData(symbol,
-//                 QUERY_RANGE_FIVE_DAY,
-//                 QUERY_INTERVAL_FIVE_DAY
-//               );
-//               rp(queryFiveDay)
-//                 .then(fiveDayRes => {
-//                   stock.fiveDayStockData = getIntradayStockData(
-//                     fiveDayRes,
-//                     FIVE_DAYS
-//                   );
-//                   res.send(stock);
-//                 });
-//             });
-//         });
-//     }
-
-//   ).catch(() =>
-//     res.status(404).send(ERROR_MESSAGE_STOCK_NOT_FOUND)
-//   );
-// });
 
 export default router;
