@@ -285,7 +285,6 @@ const requestMaxStockData = (symbol, callback) => {
     period: 'd'
   }).then(
     dailyData => {
-      console.log('max');
       if (!dailyData[0]) {
         throw new Error('Historical data was not found.');
       }
@@ -301,7 +300,6 @@ const requestOneDayStockData = (symbol, callback) => {
   );
   rp(queryOneDay)
     .then(oneDayRes => {
-      console.log('one');
       callback(null, getIntradayStockData(oneDayRes, ONE_DAY));
     });
 };
@@ -313,7 +311,6 @@ const requestFiveDayStockData = (symbol, callback) => {
   );
   rp(queryFiveDay)
     .then(fiveDayRes => {
-      console.log('five');
       callback(null, getIntradayStockData(fiveDayRes, FIVE_DAYS));
     });
 };
