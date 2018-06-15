@@ -6,6 +6,7 @@ import {
 import rp from 'request-promise';
 import dateFormat from 'dateformat';
 import async from 'async';
+import flatten from 'array-flatten';
 
 import { formatDateForMaxStockData } from '../utils/dateUtils';
 import {
@@ -240,11 +241,9 @@ const getDatesTimesAndPrices = (
       timestamp,
       timestampIntervals
     );
-    datesTimesAndPrices = datesTimesAndPrices.concat(
-      intervalOfDatesTimesAndPrices
-    );
+    datesTimesAndPrices.push(intervalOfDatesTimesAndPrices);
   }
-  return datesTimesAndPrices;
+  return flatten(datesTimesAndPrices);
 };
 
 // numberOfDays much match the range used to obtain the intradayRes.
