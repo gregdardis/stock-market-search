@@ -12,14 +12,13 @@ import {
 
 const router = express.Router();
 
-router.get('/stocks/:symbol', (req, res) => {
+const requestQuote = (symbol, callback) => {
   const modules = [
     'summaryDetail',
     'defaultKeyStatistics',
     'financialData',
     'price'
   ];
-  const symbol = req.params.symbol;
   quote({
     symbol,
     modules
@@ -30,30 +29,39 @@ router.get('/stocks/:symbol', (req, res) => {
           throw new Error(`Module '${module}' was not found.`);
         }
       });
-      const stock = createStock(stockQuote);
-      async.parallel({
-        maxStockData: callback => {
-          requestMaxStockData(symbol, callback);
-        },
-        oneDayStockData: callback => {
-          requestOneDayStockData(symbol, callback);
-        },
-        fiveDayStockData: callback => {
-          requestFiveDayStockData(symbol, callback);
-        }
-      }, (err, results) => {
-        for (const key in results) {
-          if (!results.hasOwnProperty(key)) {
-            continue;
-          }
-          stock[key] = results[key];
-        }
-        res.send(stock);
-      });
-    })
-    .catch(() =>
-      res.status(404).send(ERROR_MESSAGE_STOCK_NOT_FOUND)
-    );
+      callback(null, createStock(stockQuote));
+    }
+  );
+};
+
+router.get('/stocks/:symbol', (req, res) => {
+  const symbol = req.params.symbol;
+  async.parallel({
+    stock: callback => {
+      requestQuote(symbol, callback);
+    },
+    maxStockData: callback => {
+      requestMaxStockData(symbol, callback);
+    },
+    oneDayStockData: callback => {
+      requestOneDayStockData(symbol, callback);
+    },
+    fiveDayStockData: callback => {
+      requestFiveDayStockData(symbol, callback);
+    }
+  }, (err, results) => {
+    if (err) {
+      return res.status(404).send(ERROR_MESSAGE_STOCK_NOT_FOUND);
+    }
+    const stock = results.stock;
+    for (const key in results) {
+      if (!results.hasOwnProperty(key) || key === 'stock') {
+        continue;
+      }
+      stock[key] = results[key];
+    }
+    return res.send(stock);
+  });
 });
 
 export default router;
