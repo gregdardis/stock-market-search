@@ -207,23 +207,17 @@ const getDatesAndTimesForOneDay = (
 };
 
 // days are 0 indexed
-const getEndTimestampForDay = (dayIndex, meta) =>
+const getTimestampForDay = (dayIndex, meta, isStart = true) =>
   // regular consists of an array of arrays, where the first array
   // index corresponds to the day, second is always a single element array
-  meta.tradingPeriods.regular[dayIndex][0].end;
-
-// days are 0 indexed
-const getStartTimestampForDay = (dayIndex, meta) =>
-  // regular consists of an array of arrays, where the first array
-  // index corresponds to the day, second is always a single element array
-  meta.tradingPeriods.regular[dayIndex][0].start;
+  meta.tradingPeriods.regular[dayIndex][0][isStart ? 'start' : 'end'];
 
 const getTimestampIntervals = (numberOfDays, meta) => {
   let timestampIntervals = [];
   for (let dayIndex = 0; dayIndex < numberOfDays; dayIndex++) {
     timestampIntervals.push({
-      start: getStartTimestampForDay(dayIndex, meta),
-      end: getEndTimestampForDay(dayIndex, meta)
+      start: getTimestampForDay(dayIndex, meta),
+      end: getTimestampForDay(dayIndex, meta, false)
     });
   }
   return timestampIntervals;

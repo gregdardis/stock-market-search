@@ -15,11 +15,11 @@ const NavBar = () => {
       <ul className='nav'>
         <li><Link
           to={ URL_HOME }
-          exact>Home</Link>
+          exact="true">Home</Link>
         </li>
         <li><Link
           to={ URL_GLOSSARY }
-          exact>Glossary</Link>
+          exact="true">Glossary</Link>
         </li>
       </ul>
     </div>
