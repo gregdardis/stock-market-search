@@ -1,5 +1,8 @@
 import flatten from 'array-flatten';
-import { historical } from 'yahoo-finance';
+import {
+  historical,
+  quote
+} from 'yahoo-finance';
 import rp from 'request-promise';
 import dateFormat from 'dateformat';
 
@@ -112,7 +115,7 @@ const processStockData = ({
   };
 };
 
-export const createStock = stockQuote => {
+const createStock = stockQuote => {
   const {
     price,
     summaryDetail,
@@ -132,6 +135,28 @@ export const createStock = stockQuote => {
       )
     )
   };
+};
+
+export const requestQuote = (symbol, callback) => {
+  const modules = [
+    'summaryDetail',
+    'defaultKeyStatistics',
+    'financialData',
+    'price'
+  ];
+  quote({
+    symbol,
+    modules
+  }).then(
+    stockQuote => {
+      modules.forEach(module => {
+        if (!stockQuote[module]) {
+          throw new Error(`Module '${module}' was not found.`);
+        }
+      });
+      callback(null, createStock(stockQuote));
+    }
+  );
 };
 
 // Used for historical() data obtained using period 'd'

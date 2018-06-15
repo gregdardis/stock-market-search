@@ -1,38 +1,15 @@
 import express from 'express';
-import { quote } from 'yahoo-finance';
 import async from 'async';
 
 import { ERROR_MESSAGE_STOCK_NOT_FOUND } from '../constants';
 import {
-  createStock,
   requestFiveDayStockData,
   requestMaxStockData,
-  requestOneDayStockData
+  requestOneDayStockData,
+  requestQuote
 } from '../utils/apiUtils/chartData';
 
 const router = express.Router();
-
-const requestQuote = (symbol, callback) => {
-  const modules = [
-    'summaryDetail',
-    'defaultKeyStatistics',
-    'financialData',
-    'price'
-  ];
-  quote({
-    symbol,
-    modules
-  }).then(
-    stockQuote => {
-      modules.forEach(module => {
-        if (!stockQuote[module]) {
-          throw new Error(`Module '${module}' was not found.`);
-        }
-      });
-      callback(null, createStock(stockQuote));
-    }
-  );
-};
 
 router.get('/stocks/:symbol', (req, res) => {
   const symbol = req.params.symbol;
