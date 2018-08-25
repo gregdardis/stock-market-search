@@ -11,5 +11,5 @@
 }
 
 .loader.hidden {
-  display: none;
+  visibility: hidden;
 }
