@@ -9,9 +9,9 @@ import {
 } from '../../actions';
 
 const mapDispatchToProps = dispatch => ({
-  updateSearchTerm(searchTerm) {
+  updateSearchTerm(searchText) {
     dispatch(
-      updateSearchTerm(searchTerm)
+      updateSearchTerm(searchText)
     );
   },
   clearSearchError() {
@@ -24,15 +24,15 @@ const mapDispatchToProps = dispatch => ({
       clearSearchTerm()
     );
   },
-  performSearch(searchTerm) {
+  performSearch(searchText) {
     dispatch(
-      fetchStock(searchTerm)
+      fetchStock(searchText)
     );
   }
 });
 
 const mapStateToProps = state => ({
-  searchTerm: state.searchTerm
+  searchText: state.search.currentSearchText
 });
 
 export default connect(

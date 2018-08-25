@@ -13,9 +13,9 @@ export const clearSearchTerm = () => ({
   type: CLEAR_SEARCH_TERM
 });
 
-export const performSearch = searchTerm => ({
+export const performSearch = searchText => ({
   type: PERFORM_SEARCH,
-  searchTerm
+  searchText
 });
 
 export const setSearchError = errorMessage => ({
@@ -23,7 +23,7 @@ export const setSearchError = errorMessage => ({
   errorMessage
 });
 
-export const updateSearchTerm = searchTerm => ({
+export const updateSearchTerm = searchText => ({
   type: UPDATE_SEARCH_TERM,
-  searchTerm
+  searchText
 });

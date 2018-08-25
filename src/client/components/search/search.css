@@ -1,0 +1,36 @@
+.search {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 0;
+  margin-top: 24px;
+  margin-bottom: 18px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 500px;
+}
+
+.searchText {
+  font-size: 1.5em;
+  padding: 6px 2.4em 6px 10px;
+  background-color: #f4f4f4;
+  border: 1px solid #5998ff;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.searchText:focus, .searchButton:focus {
+  outline: none;
+}
+
+.searchButton {
+  position: absolute;
+  font-size: 1.4em;
+  right: 0.7em;
+  padding: 4px;
+  color: #5998ff;
+}
+
+.searchButton:hover {
+  cursor: pointer;
+}
