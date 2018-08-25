@@ -1,4 +1,5 @@
 import { setChartToDefaultTimePeriod } from '.';
+import { setError } from './search';
 
 export const RECEIVE_STOCK = 'RECEIVE_STOCK';
 export const REQUEST_STOCK = 'REQUEST_STOCK';
@@ -38,11 +39,11 @@ export const fetchStock = symbol => (
       .then(
         res => {
           if (!res.ok) {
+            let errorMessage = 'An unexpected error occurred';
             if (res.status === 404) {
-              // dispatch action changing state accordingly
-            } else {
-              // dispatch action for "an unexpected error occurred"
+              errorMessage = 'No stock with that symbol was found';
             }
+            dispatch(setError(errorMessage));
             throw new Error(`failed fetching stock - status: ${res.status}`);
           }
           return res.json();
