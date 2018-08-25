@@ -15,7 +15,7 @@ const isStockLoading = state =>
   state.isFetching;
 
 const mapStateToProps = state => ({
-  loading: isStockLoading(state),
+  isLoading: isStockLoading(state),
   searchError: state.searchError
 });
 
