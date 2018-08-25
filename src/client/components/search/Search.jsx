@@ -43,6 +43,7 @@ const Search = ({
         autoFocus
         required
         onFocus={ focusEndOfInput }
+        spellCheck="false"
       />
       <FontAwesome
         className='searchButton'
