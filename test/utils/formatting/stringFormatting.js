@@ -5,12 +5,14 @@ import {
   formatValueFromStateAndProps
 } from '../../../src/utils/formatting/stringFormatting';
 import {
-  BLANK_FIELD,
-  LABEL_DIVIDEND,
   NUMBER_FORMAT_DEFAULT,
   NUMBER_FORMAT_PERCENT,
   NUMBER_FORMAT_ROUNDED
 } from '../../../src/constants';
+import { BLANK_FIELD } from '../../../src/constants/userFacing';
+import {
+  LABEL_DIVIDEND
+} from '../../../src/constants/userFacing';
 
 const createMockState = ({
   symbol = 'MSFT',

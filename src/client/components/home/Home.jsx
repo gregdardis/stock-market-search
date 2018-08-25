@@ -9,6 +9,7 @@ import { THEME_COLOR_DARK1 } from '../../../constants';
 import './home.css';
 
 const SPINNER_SIZE = 20;
+
 // The spinner is a little taller than it should be,
 // so add 4px to its container's height
 const SEARCH_STATUS_CONTAINER_SIZE = SPINNER_SIZE + 4;

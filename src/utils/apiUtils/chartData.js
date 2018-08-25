@@ -11,17 +11,6 @@ import {
   DATE_FORMAT_FIVE_DAY,
   DATE_FORMAT_ONE_DAY,
   FIVE_DAYS,
-  LABEL_CURRENT_PRICE,
-  LABEL_DIVIDEND,
-  LABEL_FCFY,
-  LABEL_HIGH,
-  LABEL_LOW,
-  LABEL_MARKET_CAP,
-  LABEL_OPEN,
-  LABEL_PE_RATIO,
-  LABEL_PREVIOUS_CLOSE,
-  LABEL_ROE,
-  LABEL_VOLUME,
   MILLISECONDS_PER_SECOND,
   NUMBER_FORMAT_DEFAULT,
   NUMBER_FORMAT_PERCENT,
@@ -32,6 +21,20 @@ import {
   QUERY_RANGE_FIVE_DAY,
   QUERY_RANGE_ONE_DAY
 } from '../../constants';
+
+import {
+  LABEL_CURRENT_PRICE,
+  LABEL_DIVIDEND,
+  LABEL_FCFY,
+  LABEL_HIGH,
+  LABEL_LOW,
+  LABEL_MARKET_CAP,
+  LABEL_OPEN,
+  LABEL_PE_RATIO,
+  LABEL_PREVIOUS_CLOSE,
+  LABEL_ROE,
+  LABEL_VOLUME
+} from '../../constants/userFacing';
 
 const calculateFcfy = (freeCashflow, marketCap) => {
   const freeCashflowNum = parseInt(freeCashflow);
