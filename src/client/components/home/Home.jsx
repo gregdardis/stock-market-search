@@ -18,7 +18,8 @@ const Home = ({ loading }) => (
       hidden: !loading
     }) }
     style={{
-      // The spinner is a little taller than it should be, so add 4px
+      // The loader is a little taller than it should be,
+      // so add 4px to its container's height
       height: SPINNER_SIZE + 4
     }}>
       <ScaleLoader
