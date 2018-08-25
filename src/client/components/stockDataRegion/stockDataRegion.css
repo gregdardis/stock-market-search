@@ -16,3 +16,15 @@
 .noDataMessage {
   text-align: center;
 }
+
+/* Added immediately when the unmount is triggered */
+.fade-leave {
+  opacity: 1;
+}
+
+/* Added the next tick after fade-leave;
+   defines the animation we see during unmount */
+.fade-leave.fade-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms;
+}

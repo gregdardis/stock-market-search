@@ -118,7 +118,8 @@ export const LABEL_ROE = 'ROE';
 export const LABEL_VOLUME = 'Volume';
 
 export const MAX_DAYS = 5;
-export const MESSAGE_NO_DATA = 'Nothing to display - please search for a stock.';
+export const MESSAGE_NO_DATA =
+  'Nothing to display - please search for a stock.';
 export const MILLISECONDS_PER_SECOND = 1000;
 export const MONTHS_PER_YEAR = 12;
 

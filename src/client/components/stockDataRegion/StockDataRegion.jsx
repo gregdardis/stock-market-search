@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import Column from '../column';
 import CompanyGeneralInfo from '../companyGeneralInfo';
@@ -8,12 +9,18 @@ import { MESSAGE_NO_DATA } from '../../../constants/index';
 import SelectableTimePeriodChart from '../selectableTimePeriodChart';
 import './stockDataRegion.css';
 
+const Message = () => (
+  <p className='noDataMessage'>
+    { MESSAGE_NO_DATA }
+  </p>
+);
+
 const StockDataRegion = ({
   showNoDataMessage,
   showResults
-}) => {
-  if (showResults) {
-    return (
+}) => (
+  <div>
+    { showResults ? (
       <div className='stockDataRegion'>
         <div className='textData'>
           <CompanyGeneralInfo />
@@ -21,17 +28,15 @@ const StockDataRegion = ({
         </div>
         <SelectableTimePeriodChart />
       </div>
-    );
-  }
-  if (showNoDataMessage) {
-    return (
-      <p className='noDataMessage'>
-        { MESSAGE_NO_DATA }
-      </p>
-    );
-  }
-  return null;
-};
+    ) : null }
+    <ReactCSSTransitionGroup
+      transitionName='fade'
+      transitionEnterTimeout={0}
+      transitionLeaveTimeout={300}>
+      { showNoDataMessage ? <Message /> : null }
+    </ReactCSSTransitionGroup>
+  </div>
+);
 
 StockDataRegion.propTypes = {
   showNoDataMessage: PropTypes.bool.isRequired,
