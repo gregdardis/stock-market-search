@@ -5,10 +5,10 @@ import FontAwesome from 'react-fontawesome';
 import './search.css';
 
 const Search = ({
-  searchText,
-  updateSearchTerm,
   clearSearchTerm,
-  performSearch
+  performSearch,
+  searchText,
+  updateSearchTerm
 }) => {
   const focusEndOfInput = event => {
     const temp = event.target.value;
