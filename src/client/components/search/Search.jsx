@@ -5,10 +5,10 @@ import FontAwesome from 'react-fontawesome';
 import './search.css';
 
 const Search = ({
-  searchTerm,
-  updateSearchTerm,
   clearSearchTerm,
-  performSearch
+  performSearch,
+  searchText,
+  updateSearchTerm
 }) => {
   const focusEndOfInput = event => {
     const temp = event.target.value;
@@ -16,8 +16,8 @@ const Search = ({
     event.target.value = temp;
   };
   const handleSearch = () => {
-    if (searchTerm !== '') {
-      performSearch(searchTerm);
+    if (searchText !== '') {
+      performSearch(searchText);
     }
   };
   const handleChange = event => {
@@ -36,7 +36,7 @@ const Search = ({
       <input
         type='text'
         className='searchText'
-        value={ searchTerm }
+        value={ searchText }
         onChange={ handleChange }
         onKeyDown={ handleKeyDown }
         placeholder='Stock symbol'
@@ -54,7 +54,7 @@ const Search = ({
   );
 };
 Search.propTypes = {
-  searchTerm: PropTypes.string.isRequired,
+  searchText: PropTypes.string.isRequired,
   updateSearchTerm: PropTypes.func.isRequired,
   clearSearchTerm: PropTypes.func.isRequired,
   performSearch: PropTypes.func.isRequired
