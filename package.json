@@ -43,6 +43,7 @@
     "array-flatten": "^2.1.1",
     "babel-cli": "^6.26.0",
     "dateformat": "^3.0.3",
+    "lodash": "^4.17.10",
     "numeral": "^2.0.6",
     "request": "^2.88.0",
     "yahoo-finance": "^0.3.5"
