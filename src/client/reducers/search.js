@@ -15,7 +15,8 @@ export const reducer = (
   case UPDATE_SEARCH_TERM:
     return {
       ...state,
-      currentSearchText: action.searchText
+      // Only allow uppercase characters in the search bar
+      currentSearchText: action.searchText.toUpperCase()
     };
   case CLEAR_SEARCH_TERM:
     return {
