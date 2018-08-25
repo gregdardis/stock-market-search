@@ -5,10 +5,16 @@
   width: 100%;
 }
 
+.error {
+  margin: 0 auto;
+  color: red;
+  font-size: 20px;
+}
+
 .loader {
   margin: 0 auto;
 }
 
-.loader.hidden {
+.hidden {
   visibility: hidden;
 }

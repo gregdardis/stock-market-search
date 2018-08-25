@@ -1,13 +1,11 @@
 import {
   CLEAR_SEARCH_TERM,
-  REQUEST_STOCK,
   UPDATE_SEARCH_TERM
 } from '../actions';
 
 export const reducer = (
   state = {
-    currentSearchText: '',
-    lastSearch: ''
+    currentSearchText: ''
   },
   action
 ) => {
@@ -22,11 +20,6 @@ export const reducer = (
     return {
       ...state,
       currentSearchText: ''
-    };
-  case REQUEST_STOCK:
-    return {
-      ...state,
-      lastSearch: state.currentSearchText
     };
   default:
     return state;

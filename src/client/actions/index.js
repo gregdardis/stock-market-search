@@ -20,9 +20,9 @@ export {
 } from './search';
 
 export {
-  fetchStock,
   RECEIVE_STOCK,
-  REQUEST_STOCK,
-  receiveStock,
-  requestStock
+  SET_IS_FETCHING,
+  fetchStock,
+  setIsFetching,
+  receiveStock
 } from './networkRequest';
