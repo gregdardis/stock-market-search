@@ -1,12 +1,22 @@
 import { connect } from 'react-redux';
 
 import Search from './search';
-import { updateSearchTerm, clearSearchTerm, fetchStock } from '../../actions';
+import {
+  clearSearchError,
+  clearSearchTerm,
+  fetchStock,
+  updateSearchTerm
+} from '../../actions';
 
 const mapDispatchToProps = dispatch => ({
   updateSearchTerm(searchTerm) {
     dispatch(
       updateSearchTerm(searchTerm)
+    );
+  },
+  clearSearchError() {
+    dispatch(
+      clearSearchError()
     );
   },
   clearSearchTerm() {

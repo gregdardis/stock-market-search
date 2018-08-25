@@ -1,5 +1,5 @@
 import { setChartToDefaultTimePeriod } from '.';
-import { setSearchError } from './search';
+import { setSearchError } from '.';
 
 export const RECEIVE_STOCK = 'RECEIVE_STOCK';
 export const REQUEST_STOCK = 'REQUEST_STOCK';

@@ -7,6 +7,7 @@ import './search.css';
 const Search = ({
   searchTerm,
   updateSearchTerm,
+  clearSearchError,
   clearSearchTerm,
   performSearch
 }) => {
@@ -22,6 +23,7 @@ const Search = ({
   };
   const handleChange = event => {
     updateSearchTerm(event.target.value);
+    clearSearchError();
   };
   const handleKeyDown = event => {
     const keyPressed = event.key;
@@ -57,6 +59,7 @@ Search.propTypes = {
   searchTerm: PropTypes.string.isRequired,
   updateSearchTerm: PropTypes.func.isRequired,
   clearSearchTerm: PropTypes.func.isRequired,
+  clearSearchError: PropTypes.func.isRequired,
   performSearch: PropTypes.func.isRequired
 };
 export default Search;

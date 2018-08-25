@@ -12,7 +12,9 @@ export {
   PERFORM_SEARCH,
   SET_SEARCH_ERROR,
   UPDATE_SEARCH_TERM,
+  clearSearchError,
   clearSearchTerm,
+  setSearchError,
   performSearch,
   updateSearchTerm
 } from './search';
