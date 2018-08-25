@@ -6,11 +6,11 @@ export {
 } from './chart';
 
 export {
-  CLEAR_ERROR,
+  CLEAR_SEARCH_ERROR,
   CLEAR_SEARCH_TERM,
   EMPTY_SEARCH,
   PERFORM_SEARCH,
-  SET_ERROR,
+  SET_SEARCH_ERROR,
   UPDATE_SEARCH_TERM,
   clearSearchTerm,
   performSearch,

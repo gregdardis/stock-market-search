@@ -1,5 +1,5 @@
 import { setChartToDefaultTimePeriod } from '.';
-import { setError } from './search';
+import { setSearchError } from './search';
 
 export const RECEIVE_STOCK = 'RECEIVE_STOCK';
 export const REQUEST_STOCK = 'REQUEST_STOCK';
@@ -43,7 +43,7 @@ export const fetchStock = symbol => (
             if (res.status === 404) {
               errorMessage = 'No stock with that symbol was found';
             }
-            dispatch(setError(errorMessage));
+            dispatch(setSearchError(errorMessage));
             throw new Error(`failed fetching stock - status: ${res.status}`);
           }
           return res.json();
@@ -53,7 +53,6 @@ export const fetchStock = symbol => (
         dispatch(setChartToDefaultTimePeriod());
       })
       .catch(error => {
-        // TODO: dispatch an action to show an error message
         console.log(error);
       });
   }

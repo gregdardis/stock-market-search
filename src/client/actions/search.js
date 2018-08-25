@@ -1,12 +1,12 @@
-export const CLEAR_ERROR = 'CLEAR_ERROR';
+export const CLEAR_SEARCH_ERROR = 'CLEAR_SEARCH_ERROR';
 export const CLEAR_SEARCH_TERM = 'CLEAR_SEARCH_TERM';
 export const EMPTY_SEARCH = 'EMPTY_SEARCH';
 export const PERFORM_SEARCH = 'PERFORM_SEARCH';
-export const SET_ERROR = 'SET_ERROR';
+export const SET_SEARCH_ERROR = 'SET_SEARCH_ERROR';
 export const UPDATE_SEARCH_TERM = 'UPDATE_SEARCH_TERM';
 
-export const clearError = () => ({
-  type: CLEAR_ERROR
+export const clearSearchError = () => ({
+  type: CLEAR_SEARCH_ERROR
 });
 
 export const clearSearchTerm = () => ({
@@ -18,8 +18,8 @@ export const performSearch = searchTerm => ({
   searchTerm
 });
 
-export const setError = errorMessage => ({
-  type: SET_ERROR,
+export const setSearchError = errorMessage => ({
+  type: SET_SEARCH_ERROR,
   errorMessage
 });
 
