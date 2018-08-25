@@ -1,7 +1,7 @@
 import {
-  UPDATE_SEARCH_TERM,
   CLEAR_SEARCH_TERM,
-  REQUEST_STOCK
+  REQUEST_STOCK,
+  UPDATE_SEARCH_TERM
 } from '../actions';
 
 export const reducer = (
