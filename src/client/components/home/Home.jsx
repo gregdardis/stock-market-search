@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { RingLoader } from 'react-spinners';
+import { ScaleLoader } from 'react-spinners';
 
 import Search from '../search';
 import StockDataRegion from '../stockDataRegion';
+import { THEME_COLOR_DARK1 } from '../../../constants';
 import './home.css';
 
 const Home = ({ loading }) => (
@@ -11,8 +12,8 @@ const Home = ({ loading }) => (
     <Search />
     { loading ?
       <div className='loader'>
-        <RingLoader
-          color={ '#123abc' }
+        <ScaleLoader
+          color={ THEME_COLOR_DARK1 }
           loading={ true } />
       </div> :
       <StockDataRegion />
