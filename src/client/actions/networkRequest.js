@@ -5,8 +5,8 @@ import {
   ERROR_MESSAGE_UNEXPECTED
 } from '../../constants/userFacing';
 
-export const SET_IS_FETCHING = 'SET_IS_FETCHING';
 export const RECEIVE_STOCK = 'RECEIVE_STOCK';
+export const SET_IS_FETCHING = 'SET_IS_FETCHING';
 
 export const receiveStock = ({
   companyName,

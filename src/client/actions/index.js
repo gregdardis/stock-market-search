@@ -14,8 +14,8 @@ export {
   UPDATE_SEARCH_TERM,
   clearSearchError,
   clearSearchTerm,
-  setSearchError,
   performSearch,
+  setSearchError,
   updateSearchTerm
 } from './search';
 
@@ -23,6 +23,6 @@ export {
   RECEIVE_STOCK,
   SET_IS_FETCHING,
   fetchStock,
-  setIsFetching,
-  receiveStock
+  receiveStock,
+  setIsFetching
 } from './networkRequest';

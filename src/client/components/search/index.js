@@ -9,11 +9,6 @@ import {
 } from '../../actions';
 
 const mapDispatchToProps = dispatch => ({
-  updateSearchTerm(searchText) {
-    dispatch(
-      updateSearchTerm(searchText)
-    );
-  },
   clearSearchError() {
     dispatch(
       clearSearchError()
@@ -27,6 +22,11 @@ const mapDispatchToProps = dispatch => ({
   performSearch(searchText) {
     dispatch(
       fetchStock(searchText)
+    );
+  },
+  updateSearchTerm(searchText) {
+    dispatch(
+      updateSearchTerm(searchText)
     );
   }
 });
