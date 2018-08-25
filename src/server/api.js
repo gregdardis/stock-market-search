@@ -28,6 +28,7 @@ router.get('/stocks/:symbol', (req, res) => {
     }
   }, (err, results) => {
     if (err) {
+      console.log(`ERROR!!: ${err}`);
       return res.status(404).send(ERROR_MESSAGE_STOCK_NOT_FOUND);
     }
     const stock = results.stock;
