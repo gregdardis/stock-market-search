@@ -18,7 +18,7 @@ const Home = ({
   searchError
 }) => (
   <div className='home'>
-    <Search />
+    <Search hasSearchError={ searchError !== null }/>
     <div className={ classNames({
       error: true,
       hidden: searchError === null

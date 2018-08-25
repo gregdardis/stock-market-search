@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
+import classNames from 'classnames';
 
 import './search.css';
 
 const Search = ({
   clearSearchError,
   clearSearchTerm,
+  hasSearchError,
   performSearch,
   searchText,
   updateSearchTerm
@@ -37,7 +39,10 @@ const Search = ({
     <div className='search'>
       <input
         type='text'
-        className='searchText'
+        className={ classNames({
+          searchText: true,
+          searchError: hasSearchError
+        }) }
         value={ searchText }
         onChange={ handleChange }
         onKeyDown={ handleKeyDown }
@@ -56,10 +61,11 @@ const Search = ({
   );
 };
 Search.propTypes = {
-  searchText: PropTypes.string.isRequired,
-  updateSearchTerm: PropTypes.func.isRequired,
-  clearSearchTerm: PropTypes.func.isRequired,
   clearSearchError: PropTypes.func.isRequired,
-  performSearch: PropTypes.func.isRequired
+  clearSearchTerm: PropTypes.func.isRequired,
+  hasSearchError: PropTypes.bool.isRequired,
+  performSearch: PropTypes.func.isRequired,
+  searchText: PropTypes.string.isRequired,
+  updateSearchTerm: PropTypes.func.isRequired
 };
 export default Search;

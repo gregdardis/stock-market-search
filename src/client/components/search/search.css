@@ -34,3 +34,7 @@
 .searchButton:hover {
   cursor: pointer;
 }
+
+.searchError {
+  border: 1px solid red;
+}
