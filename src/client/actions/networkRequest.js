@@ -38,7 +38,12 @@ export const fetchStock = symbol => (
       .then(
         res => {
           if (!res.ok) {
-            throw new Error(`Result not ok, status code: ${res.status}`);
+            if (res.status === 404) {
+              // dispatch action changing state accordingly
+            } else {
+              // dispatch action for "an unexpected error occurred"
+            }
+            throw new Error(`failed fetching stock - status: ${res.status}`);
           }
           return res.json();
         })
@@ -48,7 +53,7 @@ export const fetchStock = symbol => (
       })
       .catch(error => {
         // TODO: dispatch an action to show an error message
-        console.log(`Error on fetchStock: ${error}`);
+        console.log(error);
       });
   }
 );
