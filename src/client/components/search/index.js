@@ -4,9 +4,9 @@ import Search from './search';
 import { updateSearchTerm, clearSearchTerm, fetchStock } from '../../actions';
 
 const mapDispatchToProps = dispatch => ({
-  updateSearchTerm(searchTerm) {
+  updateSearchTerm(searchText) {
     dispatch(
-      updateSearchTerm(searchTerm)
+      updateSearchTerm(searchText)
     );
   },
   clearSearchTerm() {
@@ -14,15 +14,15 @@ const mapDispatchToProps = dispatch => ({
       clearSearchTerm()
     );
   },
-  performSearch(searchTerm) {
+  performSearch(searchText) {
     dispatch(
-      fetchStock(searchTerm)
+      fetchStock(searchText)
     );
   }
 });
 
 const mapStateToProps = state => ({
-  searchTerm: state.searchTerm
+  searchText: state.search.currentSearchText
 });
 
 export default connect(

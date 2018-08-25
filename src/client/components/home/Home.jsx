@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classnames from 'classnames';
 import { ScaleLoader } from 'react-spinners';
 
 import Search from '../search';
@@ -10,14 +11,15 @@ import './home.css';
 const Home = ({ loading }) => (
   <div className='home'>
     <Search />
-    { loading ?
-      <div className='loader'>
-        <ScaleLoader
-          color={ THEME_COLOR_DARK1 }
-          loading={ true } />
-      </div> :
-      <StockDataRegion />
-    }
+    <div className={ classnames({
+      loader: true,
+      hidden: !loading
+    }) }>
+      <ScaleLoader
+        color={ THEME_COLOR_DARK1 }
+        loading={ loading } />
+    </div>
+    <StockDataRegion />
   </div>
 );
 Home.propTypes = {

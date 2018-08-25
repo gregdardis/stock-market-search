@@ -3,8 +3,12 @@ import { connect } from 'react-redux';
 import Home from './Home';
 
 const isStockLoading = state => {
-  const { searchTerm, stocks } = state;
-  return !!searchTerm && !!stocks[searchTerm] && stocks[searchTerm].isFetching;
+  const { search, stocks } = state;
+  const { lastSearch } = search;
+  if (lastSearch && stocks[lastSearch]) {
+    return stocks[lastSearch].isFetching;
+  }
+  return false;
 };
 
 const mapStateToProps = state => ({
