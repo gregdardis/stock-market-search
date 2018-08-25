@@ -4,27 +4,38 @@ import PropTypes from 'prop-types';
 import Column from '../column';
 import CompanyGeneralInfo from '../companyGeneralInfo';
 import { columnComponentsProps } from './childProps';
+import { MESSAGE_NO_DATA } from '../../../constants/index';
 import SelectableTimePeriodChart from '../selectableTimePeriodChart';
 import './stockDataRegion.css';
 
 const StockDataRegion = ({
-  hasData
-}) => (
-  hasData ?
-    <div className='stockDataRegion'>
-      <div className='textData'>
-        <CompanyGeneralInfo />
-        <Column { ...columnComponentsProps } />
+  showNoDataMessage,
+  showResults
+}) => {
+  if (showResults) {
+    return (
+      <div className='stockDataRegion'>
+        <div className='textData'>
+          <CompanyGeneralInfo />
+          <Column { ...columnComponentsProps } />
+        </div>
+        <SelectableTimePeriodChart />
       </div>
-      <SelectableTimePeriodChart />
-    </div>
-    : <p style={ { textAlign: 'center' } }>
-      Nothing to display - please search for a stock.
-    </p>
-);
+    );
+  }
+  if (showNoDataMessage) {
+    return (
+      <p className='noDataMessage'>
+        { MESSAGE_NO_DATA }
+      </p>
+    );
+  }
+  return null;
+};
 
 StockDataRegion.propTypes = {
-  hasData: PropTypes.bool.isRequired
+  showNoDataMessage: PropTypes.bool.isRequired,
+  showResults: PropTypes.bool.isRequired
 };
 
 export default StockDataRegion;

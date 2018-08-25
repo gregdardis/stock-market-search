@@ -12,3 +12,7 @@
   flex-direction: column;
   justify-content: space-between;
 }
+
+.noDataMessage {
+  text-align: center;
+}
