@@ -4,3 +4,11 @@
   flex-direction: column;
   width: 100%;
 }
+
+.loader {
+  margin: 0 auto;
+}
+
+.loader.hidden {
+  visibility: hidden;
+}
