@@ -136,8 +136,9 @@ export const QUERY_INTERVAL_ONE_DAY = '5m';
 export const QUERY_RANGE_FIVE_DAY = '5d';
 export const QUERY_RANGE_ONE_DAY = '1d';
 
-export const THEME_COLOR_DARK1 = '#34414D';
+export const SEARCH_STATUS_REGION_HEIGHT = 24;
 
+export const THEME_COLOR_DARK1 = '#34414D';
 export const TIME_PERIOD_FIVE_DAY = '5 day';
 export const TIME_PERIOD_FIVE_YEAR = '5 year';
 export const TIME_PERIOD_MAX = 'max';
