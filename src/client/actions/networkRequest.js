@@ -59,12 +59,11 @@ export const fetchStock = symbol => (
       .then(json => {
         if (json) {
           dispatch(receiveStock(json));
-          dispatch(setDoneFetching());
           dispatch(setChartToDefaultTimePeriod());
         }
       })
       .catch(() => {
-        // TODO: setSearchError
+        dispatch(setSearchError(ERROR_MESSAGE_UNEXPECTED));
         dispatch(setDoneFetching());
       });
   }
