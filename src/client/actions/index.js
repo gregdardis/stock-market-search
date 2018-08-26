@@ -23,6 +23,11 @@ export {
   RECEIVE_STOCK,
   SET_FETCHING,
   fetchStock,
-  receiveStock,
-  setFetching
+  setFetching,
+  receiveStock
 } from './networkRequest';
+
+export {
+  SET_STOCK_FROM_MEM_CACHE,
+  setStockFromMemCache
+} from './stock';

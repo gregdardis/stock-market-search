@@ -5,7 +5,8 @@ import {
   clearSearchError,
   clearSearchText,
   fetchStock,
-  updateSearchText
+  updateSearchText,
+  setStockFromMemCache
 } from '../../actions';
 
 const mapDispatchToProps = dispatch => ({
@@ -19,7 +20,12 @@ const mapDispatchToProps = dispatch => ({
       clearSearchText()
     );
   },
-  performSearch(searchText) {
+  performSearch(searchText, stocks) {
+    if (stocks[searchText]) {
+      dispatch(
+        setStockFromMemCache(searchText)
+      );
+    }
     dispatch(
       fetchStock(searchText)
     );
@@ -32,7 +38,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  text: state.search.currentText
+  text: state.search.currentText,
+  stocks: state.stocks
 });
 
 export default connect(

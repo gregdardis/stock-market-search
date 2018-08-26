@@ -114,6 +114,8 @@ export const QUERY_INTERVAL_ONE_DAY = '5m';
 export const QUERY_RANGE_FIVE_DAY = '5d';
 export const QUERY_RANGE_ONE_DAY = '1d';
 
+export const SEARCH_STATUS_REGION_HEIGHT = 24;
+
 export const THEME_COLOR_DARK1 = '#34414D';
 
 export const URL_GLOSSARY = '/glossary';

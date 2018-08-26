@@ -1,38 +1,33 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { ScaleLoader } from 'react-spinners';
 
 import Search from '../search';
+import SearchLoader from '../searchLoader';
 import StockDataRegion from '../stockDataRegion';
-import { THEME_COLOR_DARK1 } from '../../../constants/utilityConstants';
 import './home.css';
 
+const SEARCH_STATUS_CONTAINER_HEIGHT = 24;
+
 class Home extends Component {
-  render() {
-    const SPINNER_HEIGHT = 20;
-
-    // The spinner is a little taller than it should be,
-    // so add 4px to its container's height
-    const SEARCH_STATUS_CONTAINER_HEIGHT = SPINNER_HEIGHT + 4;
-
-    const { isLoading, searchError } = this.props;
-
-    const getSearchStatusDivClassNames = () => classNames({
-      hidden: searchError === null && !isLoading,
+  getSearchStatusDivClassNames() {
+    const { searchError, loading } = this.props;
+    return classNames({
+      hidden: !searchError && !loading,
       searchStatus: true
     });
+  }
 
+  render() {
+    const { loading, searchError } = this.props;
     return (
       <div className='home'>
-        <Search hasError={ searchError !== null }/>
-        <div className={ getSearchStatusDivClassNames() }
+        <Search hasError={ !!searchError } />
+        <div
+          className={ this.getSearchStatusDivClassNames() }
           style={ { height: SEARCH_STATUS_CONTAINER_HEIGHT } }>
-          { isLoading
-            ? <ScaleLoader
-              color={ THEME_COLOR_DARK1 }
-              height={ SPINNER_HEIGHT }
-            />
+          { loading
+            ? <SearchLoader />
             : <p className='error'>{ searchError }</p>
           }
         </div>
@@ -43,7 +38,7 @@ class Home extends Component {
 }
 
 Home.propTypes = {
-  isLoading: PropTypes.bool.isRequired,
+  loading: PropTypes.bool.isRequired,
   searchError: PropTypes.string
 };
 
