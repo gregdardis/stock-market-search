@@ -6,19 +6,24 @@ export {
 } from './chart';
 
 export {
-  CLEAR_SEARCH_TERM,
+  CLEAR_ERROR,
+  CLEAR_SEARCH_TEXT,
   EMPTY_SEARCH,
   PERFORM_SEARCH,
-  UPDATE_SEARCH_TERM,
-  clearSearchTerm,
+  SET_ERROR,
+  UPDATE_SEARCH_TEXT,
+  clearSearchError,
+  clearSearchText,
   performSearch,
-  updateSearchTerm
+  setSearchError,
+  updateSearchText
 } from './search';
 
 export {
-  fetchStock,
   RECEIVE_STOCK,
-  REQUEST_STOCK,
+  SET_DONE_FETCHING,
+  SET_FETCHING,
+  fetchStock,
   receiveStock,
-  requestStock
+  setFetching
 } from './networkRequest';

@@ -1,7 +1,7 @@
 import express from 'express';
 import async from 'async';
 
-import { ERROR_MESSAGE_STOCK_NOT_FOUND } from '../constants';
+import { errorMessageStockNotFound } from '../constants/userFacing';
 import {
   requestFiveDayStockData,
   requestMaxStockData,
@@ -28,7 +28,7 @@ router.get('/stocks/:symbol', (req, res) => {
     }
   }, (err, results) => {
     if (err) {
-      return res.status(404).send(ERROR_MESSAGE_STOCK_NOT_FOUND);
+      return res.status(404).send(errorMessageStockNotFound(symbol));
     }
     const stock = results.stock;
     for (const key in results) {

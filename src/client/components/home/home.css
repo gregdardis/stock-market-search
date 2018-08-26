@@ -5,10 +5,15 @@
   width: 100%;
 }
 
-.loader {
+.error {
+  margin: 0;
+  color: red;
+}
+
+.searchStatus {
   margin: 0 auto;
 }
 
-.loader.hidden {
+.searchStatus.hidden {
   visibility: hidden;
 }

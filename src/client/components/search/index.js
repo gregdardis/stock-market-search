@@ -1,28 +1,38 @@
 import { connect } from 'react-redux';
 
 import Search from './search';
-import { updateSearchTerm, clearSearchTerm, fetchStock } from '../../actions';
+import {
+  clearSearchError,
+  clearSearchText,
+  fetchStock,
+  updateSearchText
+} from '../../actions';
 
 const mapDispatchToProps = dispatch => ({
-  updateSearchTerm(searchText) {
+  clearError() {
     dispatch(
-      updateSearchTerm(searchText)
+      clearSearchError()
     );
   },
-  clearSearchTerm() {
+  clearText() {
     dispatch(
-      clearSearchTerm()
+      clearSearchText()
     );
   },
   performSearch(searchText) {
     dispatch(
       fetchStock(searchText)
     );
+  },
+  updateText(searchText) {
+    dispatch(
+      updateSearchText(searchText)
+    );
   }
 });
 
 const mapStateToProps = state => ({
-  searchText: state.search.currentSearchText
+  text: state.search.currentText
 });
 
 export default connect(

@@ -11,6 +11,18 @@ import {
   DATE_FORMAT_FIVE_DAY,
   DATE_FORMAT_ONE_DAY,
   FIVE_DAYS,
+  MILLISECONDS_PER_SECOND,
+  NUMBER_FORMAT_DEFAULT,
+  NUMBER_FORMAT_PERCENT,
+  NUMBER_FORMAT_SHORT_SUFFIXED,
+  ONE_DAY,
+  QUERY_INTERVAL_FIVE_DAY,
+  QUERY_INTERVAL_ONE_DAY,
+  QUERY_RANGE_FIVE_DAY,
+  QUERY_RANGE_ONE_DAY
+} from '../../constants/utilityConstants';
+
+import {
   LABEL_CURRENT_PRICE,
   LABEL_DIVIDEND,
   LABEL_FCFY,
@@ -21,17 +33,8 @@ import {
   LABEL_PE_RATIO,
   LABEL_PREVIOUS_CLOSE,
   LABEL_ROE,
-  LABEL_VOLUME,
-  MILLISECONDS_PER_SECOND,
-  NUMBER_FORMAT_DEFAULT,
-  NUMBER_FORMAT_PERCENT,
-  NUMBER_FORMAT_SHORT_SUFFIXED,
-  ONE_DAY,
-  QUERY_INTERVAL_FIVE_DAY,
-  QUERY_INTERVAL_ONE_DAY,
-  QUERY_RANGE_FIVE_DAY,
-  QUERY_RANGE_ONE_DAY
-} from '../../constants';
+  LABEL_VOLUME
+} from '../../constants/userFacing';
 
 const calculateFcfy = (freeCashflow, marketCap) => {
   const freeCashflowNum = parseInt(freeCashflow);
@@ -135,28 +138,6 @@ const createStock = stockQuote => {
       )
     )
   };
-};
-
-export const requestQuote = (symbol, callback) => {
-  const modules = [
-    'summaryDetail',
-    'defaultKeyStatistics',
-    'financialData',
-    'price'
-  ];
-  quote({
-    symbol,
-    modules
-  }).then(
-    stockQuote => {
-      modules.forEach(module => {
-        if (!stockQuote[module]) {
-          throw new Error(`Module '${module}' was not found.`);
-        }
-      });
-      callback(null, createStock(stockQuote));
-    }
-  );
 };
 
 // Used for historical() data obtained using period 'd'
@@ -295,6 +276,37 @@ const getQueryForIntradayData = (symbol, range, interval) => {
   '&corsDomain=finance.yahoo.com&.tsrc=finance';
 };
 
+function generateStockDataRequestError(functionName, err) {
+  return `Failed in ${functionName} with error: ${err}`;
+}
+
+export const requestQuote = (symbol, callback) => {
+  const modules = [
+    'summaryDetail',
+    'defaultKeyStatistics',
+    'financialData',
+    'price'
+  ];
+  quote({
+    symbol,
+    modules
+  }).then(
+    stockQuote => {
+      modules.forEach(module => {
+        if (!stockQuote[module]) {
+          callback(`Module '${module}' was not found.`);
+          return;
+        }
+      });
+      callback(null, createStock(stockQuote));
+    }
+  ).catch(err => {
+    callback(
+      generateStockDataRequestError(requestQuote.name, err)
+    );
+  });
+};
+
 export const requestMaxStockData = (symbol, callback) => {
   historical({
     // gets all data because we didn't specify from/to
@@ -303,10 +315,16 @@ export const requestMaxStockData = (symbol, callback) => {
   }).then(
     dailyData => {
       if (!dailyData[0]) {
-        throw new Error('Historical data was not found.');
+        callback('Historical data was not found.');
+        return;
       }
       callback(null, getDatesAndPrices(dailyData));
-    });
+    }
+  ).catch(err => {
+    callback(
+      generateStockDataRequestError(requestMaxStockData.name, err)
+    );
+  });
 };
 
 export const requestOneDayStockData = (symbol, callback) => {
@@ -318,6 +336,10 @@ export const requestOneDayStockData = (symbol, callback) => {
   rp(queryOneDay)
     .then(oneDayRes => {
       callback(null, getIntradayStockData(oneDayRes, ONE_DAY));
+    }).catch(err => {
+      callback(
+        generateStockDataRequestError(requestOneDayStockData.name, err)
+      );
     });
 };
 
@@ -329,5 +351,9 @@ export const requestFiveDayStockData = (symbol, callback) => {
   rp(queryFiveDay)
     .then(fiveDayRes => {
       callback(null, getIntradayStockData(fiveDayRes, FIVE_DAYS));
+    }).catch(err => {
+      callback(
+        generateStockDataRequestError(requestFiveDayStockData.name, err)
+      );
     });
 };

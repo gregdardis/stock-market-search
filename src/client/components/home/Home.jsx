@@ -1,37 +1,50 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
+import classNames from 'classnames';
 import { ScaleLoader } from 'react-spinners';
 
 import Search from '../search';
 import StockDataRegion from '../stockDataRegion';
-import { THEME_COLOR_DARK1 } from '../../../constants';
+import { THEME_COLOR_DARK1 } from '../../../constants/utilityConstants';
 import './home.css';
 
-const SPINNER_SIZE = 20;
+class Home extends Component {
+  render() {
+    const SPINNER_HEIGHT = 20;
 
-const Home = ({ loading }) => (
-  <div className='home'>
-    <Search />
-    <div className={ classnames({
-      loader: true,
-      hidden: !loading
-    }) }
-    style={{
-      // The loader is a little taller than it should be,
-      // so add 4px to its container's height
-      height: SPINNER_SIZE + 4
-    }}>
-      <ScaleLoader
-        color={ THEME_COLOR_DARK1 }
-        loading={ loading }
-        height={ SPINNER_SIZE }/>
-    </div>
-    <StockDataRegion />
-  </div>
-);
+    // The spinner is a little taller than it should be,
+    // so add 4px to its container's height
+    const SEARCH_STATUS_CONTAINER_HEIGHT = SPINNER_HEIGHT + 4;
+
+    const { isLoading, searchError } = this.props;
+
+    const getSearchStatusDivClassNames = () => classNames({
+      hidden: searchError === null && !isLoading,
+      searchStatus: true
+    });
+
+    return (
+      <div className='home'>
+        <Search hasError={ searchError !== null }/>
+        <div className={ getSearchStatusDivClassNames() }
+          style={ { height: SEARCH_STATUS_CONTAINER_HEIGHT } }>
+          { isLoading
+            ? <ScaleLoader
+              color={ THEME_COLOR_DARK1 }
+              height={ SPINNER_HEIGHT }
+            />
+            : <p className='error'>{ searchError }</p>
+          }
+        </div>
+        <StockDataRegion />
+      </div>
+    );
+  }
+}
+
 Home.propTypes = {
-  loading: PropTypes.bool.isRequired
+  isLoading: PropTypes.bool.isRequired,
+  searchError: PropTypes.string
 };
 
 export default Home;
