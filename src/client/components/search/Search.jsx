@@ -6,12 +6,12 @@ import classNames from 'classnames';
 import './search.css';
 
 const Search = ({
-  clearSearchError,
-  clearSearchText,
+  clearError,
+  clearText,
   hasError,
   performSearch,
-  searchText,
-  updateSearchText
+  text,
+  updateText
 }) => {
   const focusEndOfInput = event => {
     const temp = event.target.value;
@@ -19,20 +19,20 @@ const Search = ({
     event.target.value = temp;
   };
   const handleSearch = () => {
-    if (searchText !== '') {
-      performSearch(searchText);
+    if (text !== '') {
+      performSearch(text);
     }
   };
   const handleChange = event => {
-    updateSearchText(event.target.value);
-    clearSearchError();
+    updateText(event.target.value);
+    clearError();
   };
   const handleKeyDown = event => {
     const keyPressed = event.key;
     if (keyPressed === 'Enter') {
       handleSearch();
     } else if (keyPressed === 'Escape') {
-      clearSearchText();
+      clearText();
     }
   };
   return (
@@ -43,7 +43,7 @@ const Search = ({
           searchText: true,
           error: hasError
         }) }
-        value={ searchText }
+        value={ text }
         onChange={ handleChange }
         onKeyDown={ handleKeyDown }
         placeholder='Stock symbol'
@@ -61,11 +61,11 @@ const Search = ({
   );
 };
 Search.propTypes = {
-  clearSearchError: PropTypes.func.isRequired,
-  clearSearchText: PropTypes.func.isRequired,
+  clearError: PropTypes.func.isRequired,
+  clearText: PropTypes.func.isRequired,
   hasError: PropTypes.bool.isRequired,
   performSearch: PropTypes.func.isRequired,
-  searchText: PropTypes.string.isRequired,
-  updateSearchText: PropTypes.func.isRequired
+  text: PropTypes.string.isRequired,
+  updateText: PropTypes.func.isRequired
 };
 export default Search;

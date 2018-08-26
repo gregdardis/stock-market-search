@@ -9,12 +9,12 @@ import {
 } from '../../actions';
 
 const mapDispatchToProps = dispatch => ({
-  clearSearchError() {
+  clearError() {
     dispatch(
       clearSearchError()
     );
   },
-  clearSearchText() {
+  clearText() {
     dispatch(
       clearSearchText()
     );
@@ -24,7 +24,7 @@ const mapDispatchToProps = dispatch => ({
       fetchStock(searchText)
     );
   },
-  updateSearchText(searchText) {
+  updateText(searchText) {
     dispatch(
       updateSearchText(searchText)
     );
@@ -32,7 +32,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  searchText: state.search.currentSearchText
+  text: state.search.currentSearchText
 });
 
 export default connect(
