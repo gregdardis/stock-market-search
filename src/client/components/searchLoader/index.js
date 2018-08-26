@@ -5,7 +5,7 @@ import SearchLoader from './SearchLoader';
 function searchedStockSelected(state) {
   const { fetching, stocks } = state;
   if (fetching && stocks[fetching]) {
-    return !!stocks[fetching].symbol;
+    return stocks[fetching].symbol === state.selectedStock;
   }
   return false;
 }
