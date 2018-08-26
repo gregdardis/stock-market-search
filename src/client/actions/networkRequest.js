@@ -1,12 +1,11 @@
 import { setChartToDefaultTimePeriod } from '.';
-import { setSearchError } from '.';
+import { receiveSearchError } from '.';
 import {
   errorMessageStockNotFound,
   ERROR_MESSAGE_UNEXPECTED
 } from '../../constants/userFacing';
 
 export const RECEIVE_STOCK = 'RECEIVE_STOCK';
-export const SET_DONE_FETCHING = 'SET_DONE_FETCHING';
 export const SET_FETCHING = 'SET_FETCHING';
 
 export const receiveStock = ({
@@ -34,16 +33,11 @@ export const setFetching = stockSymbol => ({
   stockSymbol
 });
 
-export const setDoneFetching = () => ({
-  type: SET_DONE_FETCHING
-});
-
 export const fetchStock = symbol => (
   dispatch => {
     dispatch(setFetching(symbol));
     return fetch(`/api/stocks/${symbol}`)
       .then(res => {
-        dispatch(setDoneFetching());
         if (!res.ok) {
           let errorMessage;
           if (res.status === 404) {
@@ -51,7 +45,7 @@ export const fetchStock = symbol => (
           } else {
             errorMessage = ERROR_MESSAGE_UNEXPECTED;
           }
-          dispatch(setSearchError(errorMessage));
+          dispatch(receiveSearchError(errorMessage));
           return null;
         }
         return res.json();
@@ -63,7 +57,7 @@ export const fetchStock = symbol => (
         }
       })
       .catch(() => {
-        dispatch(setDoneFetching());
+        dispatch(receiveSearchError(ERROR_MESSAGE_UNEXPECTED));
       });
   }
 );
