@@ -21,8 +21,9 @@ export {
 
 export {
   RECEIVE_STOCK,
-  SET_IS_FETCHING,
+  SET_DONE_FETCHING,
+  SET_FETCHING,
   fetchStock,
   receiveStock,
-  setIsFetching
+  setFetching
 } from './networkRequest';
