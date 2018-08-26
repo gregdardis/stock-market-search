@@ -1,5 +1,9 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import {
+  NavLink as Link,
+  withRouter
+} from 'react-router-dom';
 
 import {
   THEME_COLOR_DARK1,
@@ -13,31 +17,42 @@ import './navBar.css';
 
 const menuItems = [
   {
-    to: URL_HOME,
+    url: URL_HOME,
     title: 'Home'
   },
   {
-    to: URL_GLOSSARY,
+    url: URL_GLOSSARY,
     title: 'Glossary'
   }
 ];
 
-const NavBar = () => {
-  return (
-    <div
-      className='navBar'
-      style={{ backgroundColor: THEME_COLOR_DARK1 }}>
-      <span className='title'>{ APP_NAME }</span>
-      <ul className='nav'>
-        { menuItems.map(({ to, title }) => (
-          <li>
-            <Link
-              to={ to }
-              exact="true">{ title }</Link>
-          </li>
-        )) }
-      </ul>
-    </div>
-  );
+class NavBar extends Component {
+  render() {
+    const { pathname } = this.props.location;
+    return (
+      <div
+        className='navBar'
+        style={{ backgroundColor: THEME_COLOR_DARK1 }}>
+        <span className='title'>{ APP_NAME }</span>
+        <ul className='nav'>
+          { menuItems.map(({ url, title }) => (
+            <li
+              className={
+                url === pathname ? 'selected' : ''
+              }
+              key={ url }>
+              <Link
+                className='navLink'
+                to={ url }
+                exact={ true }>{ title }</Link>
+            </li>
+          )) }
+        </ul>
+      </div>
+    );
+  }
+}
+NavBar.propTypes = {
+  location: PropTypes.object
 };
-export default NavBar;
+export default withRouter(NavBar);

@@ -1,9 +1,9 @@
 .navBar {
+  display: flex;
   align-items: center;
   color: white;
-  display: flex;
+  height: 50px;
   width: 100%;
-  padding: 0;
 }
 
 .navBar .title {
@@ -11,20 +11,26 @@
   padding-left: 40px;
 }
 
-ul .nav {
+ul.nav {
   list-style: none;
+  margin: 0;
+  align-self: stretch;
+  align-items: stretch;
+  display: flex;
 }
 
 .nav li {
-  padding: 1em;
-  display: inline;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  width: 80px;
 }
 
-.nav a {
+.navLink {
   text-decoration: none;
   color: white;
 }
 
-.nav a:hover {
-  color: #5998ff;
+li.selected {
+  background-color: red;
 }

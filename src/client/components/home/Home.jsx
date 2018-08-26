@@ -41,10 +41,8 @@ class Home extends Component {
     );
   }
 }
-
 Home.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   searchError: PropTypes.string
 };
-
 export default Home;
