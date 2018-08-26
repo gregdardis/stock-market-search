@@ -35,6 +35,6 @@
   cursor: pointer;
 }
 
-.searchError {
+.searchText.error {
   border: 1px solid red;
 }

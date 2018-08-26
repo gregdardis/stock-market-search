@@ -8,7 +8,7 @@ import './search.css';
 const Search = ({
   clearSearchError,
   clearSearchTerm,
-  hasSearchError,
+  hasError,
   performSearch,
   searchText,
   updateSearchTerm
@@ -41,7 +41,7 @@ const Search = ({
         type='text'
         className={ classNames({
           searchText: true,
-          searchError: hasSearchError
+          error: hasError
         }) }
         value={ searchText }
         onChange={ handleChange }
@@ -63,7 +63,7 @@ const Search = ({
 Search.propTypes = {
   clearSearchError: PropTypes.func.isRequired,
   clearSearchTerm: PropTypes.func.isRequired,
-  hasSearchError: PropTypes.bool.isRequired,
+  hasError: PropTypes.bool.isRequired,
   performSearch: PropTypes.func.isRequired,
   searchText: PropTypes.string.isRequired,
   updateSearchTerm: PropTypes.func.isRequired

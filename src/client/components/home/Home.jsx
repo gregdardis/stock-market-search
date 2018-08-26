@@ -19,7 +19,7 @@ const Home = ({
   searchError
 }) => (
   <div className='home'>
-    <Search hasSearchError={ searchError !== null }/>
+    <Search hasError={ searchError !== null }/>
     <div className={ classNames({
       hidden: searchError === null && !isLoading,
       searchStatus: true

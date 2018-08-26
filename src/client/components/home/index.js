@@ -7,7 +7,7 @@ const isStockLoading = state =>
 
 const mapStateToProps = state => ({
   isLoading: isStockLoading(state),
-  searchError: state.searchError
+  searchError: state.search.error
 });
 
 export default connect(mapStateToProps)(Home);
