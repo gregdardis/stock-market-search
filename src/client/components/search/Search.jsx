@@ -1,14 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
+import classNames from 'classnames';
 
 import './search.css';
 
 const Search = ({
-  clearSearchTerm,
+  clearError,
+  clearText,
+  hasError,
   performSearch,
-  searchText,
-  updateSearchTerm
+  text,
+  updateText
 }) => {
   const focusEndOfInput = event => {
     const temp = event.target.value;
@@ -16,27 +19,31 @@ const Search = ({
     event.target.value = temp;
   };
   const handleSearch = () => {
-    if (searchText !== '') {
-      performSearch(searchText);
+    if (text !== '') {
+      performSearch(text);
     }
   };
   const handleChange = event => {
-    updateSearchTerm(event.target.value);
+    updateText(event.target.value);
+    clearError();
   };
   const handleKeyDown = event => {
     const keyPressed = event.key;
     if (keyPressed === 'Enter') {
       handleSearch();
     } else if (keyPressed === 'Escape') {
-      clearSearchTerm();
+      clearText();
     }
   };
   return (
     <div className='search'>
       <input
         type='text'
-        className='searchText'
-        value={ searchText }
+        className={ classNames({
+          searchText: true,
+          error: hasError
+        }) }
+        value={ text }
         onChange={ handleChange }
         onKeyDown={ handleKeyDown }
         placeholder='Stock symbol'
@@ -54,9 +61,11 @@ const Search = ({
   );
 };
 Search.propTypes = {
-  searchText: PropTypes.string.isRequired,
-  updateSearchTerm: PropTypes.func.isRequired,
-  clearSearchTerm: PropTypes.func.isRequired,
-  performSearch: PropTypes.func.isRequired
+  clearError: PropTypes.func.isRequired,
+  clearText: PropTypes.func.isRequired,
+  hasError: PropTypes.bool.isRequired,
+  performSearch: PropTypes.func.isRequired,
+  text: PropTypes.string.isRequired,
+  updateText: PropTypes.func.isRequired
 };
 export default Search;

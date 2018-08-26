@@ -1,32 +1,38 @@
 import {
-  CLEAR_SEARCH_TERM,
-  REQUEST_STOCK,
-  UPDATE_SEARCH_TERM
+  CLEAR_ERROR,
+  CLEAR_SEARCH_TEXT,
+  SET_ERROR,
+  UPDATE_SEARCH_TEXT
 } from '../actions';
 
 export const reducer = (
   state = {
-    currentSearchText: '',
-    lastSearch: ''
+    currentText: '',
+    error: null
   },
   action
 ) => {
   switch (action.type) {
-  case UPDATE_SEARCH_TERM:
+  case CLEAR_ERROR:
+    return {
+      ...state,
+      error: null
+    };
+  case CLEAR_SEARCH_TEXT:
+    return {
+      ...state,
+      currentText: ''
+    };
+  case SET_ERROR:
+    return {
+      ...state,
+      error: action.errorMessage
+    };
+  case UPDATE_SEARCH_TEXT:
     return {
       ...state,
       // Only allow uppercase characters in the search bar
-      currentSearchText: action.searchText.toUpperCase()
-    };
-  case CLEAR_SEARCH_TERM:
-    return {
-      ...state,
-      currentSearchText: ''
-    };
-  case REQUEST_STOCK:
-    return {
-      ...state,
-      lastSearch: state.currentSearchText
+      currentText: action.searchText.toUpperCase()
     };
   default:
     return state;

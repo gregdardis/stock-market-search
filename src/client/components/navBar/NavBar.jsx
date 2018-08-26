@@ -2,11 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import {
-  APP_NAME,
   THEME_COLOR_DARK1,
   URL_GLOSSARY,
   URL_HOME
-} from '../../../constants';
+} from '../../../constants/utilityConstants';
+import {
+  APP_NAME
+} from '../../../constants/userFacing';
 import './navBar.css';
 
 const NavBar = () => {

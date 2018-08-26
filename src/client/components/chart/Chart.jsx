@@ -18,7 +18,7 @@ import {
   CHART_LINE_COLOR,
   CHART_META_DATA,
   NUMBER_FORMAT_PRICE
-} from '../../../constants';
+} from '../../../constants/utilityConstants';
 
 const Chart = ({
   chartTimePeriodIndex,
