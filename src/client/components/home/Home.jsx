@@ -8,11 +8,11 @@ import StockDataRegion from '../stockDataRegion';
 import { THEME_COLOR_DARK1 } from '../../../constants';
 import './home.css';
 
-const SPINNER_SIZE = 20;
+const SPINNER_HEIGHT = 20;
 
 // The spinner is a little taller than it should be,
 // so add 4px to its container's height
-const SEARCH_STATUS_CONTAINER_SIZE = SPINNER_SIZE + 4;
+const SEARCH_STATUS_CONTAINER_HEIGHT = SPINNER_HEIGHT + 4;
 
 const Home = ({
   isLoading,
@@ -24,11 +24,11 @@ const Home = ({
       hidden: searchError === null && !isLoading,
       searchStatus: true
     })}
-    style={ { height: SEARCH_STATUS_CONTAINER_SIZE } }>
+    style={ { height: SEARCH_STATUS_CONTAINER_HEIGHT } }>
       { isLoading
         ? <ScaleLoader
           color={ THEME_COLOR_DARK1 }
-          height={ SPINNER_SIZE }
+          height={ SPINNER_HEIGHT }
         />
         : <p className='error'>{ searchError }</p>
       }

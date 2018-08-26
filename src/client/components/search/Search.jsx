@@ -7,11 +7,11 @@ import './search.css';
 
 const Search = ({
   clearSearchError,
-  clearSearchTerm,
+  clearSearchText,
   hasError,
   performSearch,
   searchText,
-  updateSearchTerm
+  updateSearchText
 }) => {
   const focusEndOfInput = event => {
     const temp = event.target.value;
@@ -24,7 +24,7 @@ const Search = ({
     }
   };
   const handleChange = event => {
-    updateSearchTerm(event.target.value);
+    updateSearchText(event.target.value);
     clearSearchError();
   };
   const handleKeyDown = event => {
@@ -32,7 +32,7 @@ const Search = ({
     if (keyPressed === 'Enter') {
       handleSearch();
     } else if (keyPressed === 'Escape') {
-      clearSearchTerm();
+      clearSearchText();
     }
   };
   return (
@@ -62,10 +62,10 @@ const Search = ({
 };
 Search.propTypes = {
   clearSearchError: PropTypes.func.isRequired,
-  clearSearchTerm: PropTypes.func.isRequired,
+  clearSearchText: PropTypes.func.isRequired,
   hasError: PropTypes.bool.isRequired,
   performSearch: PropTypes.func.isRequired,
   searchText: PropTypes.string.isRequired,
-  updateSearchTerm: PropTypes.func.isRequired
+  updateSearchText: PropTypes.func.isRequired
 };
 export default Search;

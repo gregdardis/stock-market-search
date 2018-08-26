@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import Search from './search';
 import {
   clearSearchError,
-  clearSearchTerm,
+  clearSearchText,
   fetchStock,
-  updateSearchTerm
+  updateSearchText
 } from '../../actions';
 
 const mapDispatchToProps = dispatch => ({
@@ -14,9 +14,9 @@ const mapDispatchToProps = dispatch => ({
       clearSearchError()
     );
   },
-  clearSearchTerm() {
+  clearSearchText() {
     dispatch(
-      clearSearchTerm()
+      clearSearchText()
     );
   },
   performSearch(searchText) {
@@ -24,9 +24,9 @@ const mapDispatchToProps = dispatch => ({
       fetchStock(searchText)
     );
   },
-  updateSearchTerm(searchText) {
+  updateSearchText(searchText) {
     dispatch(
-      updateSearchTerm(searchText)
+      updateSearchText(searchText)
     );
   }
 });

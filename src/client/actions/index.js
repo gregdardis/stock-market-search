@@ -7,16 +7,16 @@ export {
 
 export {
   CLEAR_ERROR,
-  CLEAR_SEARCH_TERM,
+  CLEAR_SEARCH_TEXT,
   EMPTY_SEARCH,
   PERFORM_SEARCH,
   SET_ERROR,
-  UPDATE_SEARCH_TERM,
+  UPDATE_SEARCH_TEXT,
   clearSearchError,
-  clearSearchTerm,
+  clearSearchText,
   performSearch,
   setSearchError,
-  updateSearchTerm
+  updateSearchText
 } from './search';
 
 export {

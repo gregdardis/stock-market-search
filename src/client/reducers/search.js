@@ -1,8 +1,8 @@
 import {
   CLEAR_ERROR,
-  CLEAR_SEARCH_TERM,
+  CLEAR_SEARCH_TEXT,
   SET_ERROR,
-  UPDATE_SEARCH_TERM
+  UPDATE_SEARCH_TEXT
 } from '../actions';
 
 export const reducer = (
@@ -18,7 +18,7 @@ export const reducer = (
       ...state,
       error: null
     };
-  case CLEAR_SEARCH_TERM:
+  case CLEAR_SEARCH_TEXT:
     return {
       ...state,
       currentSearchText: ''
@@ -28,7 +28,7 @@ export const reducer = (
       ...state,
       error: action.errorMessage
     };
-  case UPDATE_SEARCH_TERM:
+  case UPDATE_SEARCH_TEXT:
     return {
       ...state,
       // Only allow uppercase characters in the search bar
