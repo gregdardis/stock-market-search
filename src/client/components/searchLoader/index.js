@@ -3,17 +3,16 @@ import { connect } from 'react-redux';
 import SearchLoader from './SearchLoader';
 
 function searchedStockSelected(state) {
-  const { search, stocks } = state;
-  const { lastSearch } = search;
-  if (lastSearch && stocks[lastSearch].symbol) {
-    return stocks[lastSearch].symbol === state.selectedStock;
+  const { fetching, stocks } = state;
+  if (fetching && stocks[fetching]) {
+    return !!stocks[fetching].symbol;
   }
   return false;
 }
 
 const mapStateToProps = state => {
   return {
-    showingCachedStock: !!state.loading && searchedStockSelected(state)
+    showingCachedStock: searchedStockSelected(state)
   };
 };
 
