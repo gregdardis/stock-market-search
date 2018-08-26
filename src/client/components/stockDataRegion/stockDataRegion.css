@@ -17,13 +17,27 @@
   text-align: center;
 }
 
+/* Added immediately when mount is triggered */
+.fade-enter {
+  opacity: 0.01;
+}
+
+/* Added the next tick after fade-enter;
+   defines the animation we see during mount.
+   Must match value of transitionEnterTimeout in StockDataRegion. */
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 500ms;
+}
+
 /* Added immediately when unmount is triggered */
 .fade-leave {
   opacity: 1;
 }
 
 /* Added the next tick after fade-leave;
-   defines the animation we see during unmount */
+   defines the animation we see during unmount.
+   Must match value of transitionLeaveTimeout in StockDataRegion. */
 .fade-leave.fade-leave-active {
   opacity: 0.01;
   transition: opacity 300ms;

@@ -32,7 +32,7 @@ const StockDataRegion = ({
     }
     <ReactCSSTransitionGroup
       transitionName='fade'
-      transitionEnterTimeout={0}
+      transitionEnterTimeout={500}
       transitionLeaveTimeout={300}>
       { showNoDataMessage ? <Message /> : null }
     </ReactCSSTransitionGroup>

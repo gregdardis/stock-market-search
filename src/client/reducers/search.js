@@ -1,7 +1,7 @@
 import {
   CLEAR_ERROR,
   CLEAR_SEARCH_TEXT,
-  SET_ERROR,
+  RECEIVE_SEARCH_ERROR,
   UPDATE_SEARCH_TEXT
 } from '../actions';
 
@@ -23,7 +23,7 @@ export const reducer = (
       ...state,
       currentText: ''
     };
-  case SET_ERROR:
+  case RECEIVE_SEARCH_ERROR:
     return {
       ...state,
       error: action.errorMessage
