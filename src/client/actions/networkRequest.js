@@ -43,7 +43,6 @@ export const fetchStock = symbol => (
     dispatch(setFetching(symbol));
     return fetch(`/api/stocks/${symbol}`)
       .then(res => {
-        dispatch(setDoneFetching());
         if (!res.ok) {
           let errorMessage;
           if (res.status === 404) {
@@ -52,6 +51,7 @@ export const fetchStock = symbol => (
             errorMessage = ERROR_MESSAGE_UNEXPECTED;
           }
           dispatch(setSearchError(errorMessage));
+          dispatch(setDoneFetching());
           return null;
         }
         return res.json();
@@ -59,10 +59,12 @@ export const fetchStock = symbol => (
       .then(json => {
         if (json) {
           dispatch(receiveStock(json));
+          dispatch(setDoneFetching());
           dispatch(setChartToDefaultTimePeriod());
         }
       })
       .catch(() => {
+        // TODO: setSearchError
         dispatch(setDoneFetching());
       });
   }

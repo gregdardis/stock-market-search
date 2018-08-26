@@ -99,8 +99,6 @@ export const INDEX_ONE_YEAR = 4;
 export const INDEX_THREE_MONTH = 3;
 
 export const MAX_DAYS = 5;
-export const MESSAGE_NO_DATA =
-  'Nothing to display - please search for a stock.';
 export const MILLISECONDS_PER_SECOND = 1000;
 export const MONTHS_PER_YEAR = 12;
 

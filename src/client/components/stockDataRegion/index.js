@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import StockDataRegion from './StockDataRegion';
 
 const mapStateToProps = state => ({
-  showNoDataMessage: !state.search.lastSearch && !state.selectedStock,
+  showNoDataMessage: !state.fetching && !state.selectedStock,
   showResults: !!state.selectedStock
 });
 

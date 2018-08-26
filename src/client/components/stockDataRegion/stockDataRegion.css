@@ -17,7 +17,7 @@
   text-align: center;
 }
 
-/* Added immediately when the unmount is triggered */
+/* Added immediately when unmount is triggered */
 .fade-leave {
   opacity: 1;
 }
