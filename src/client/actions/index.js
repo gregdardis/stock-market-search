@@ -6,22 +6,21 @@ export {
 } from './chart';
 
 export {
-  CLEAR_ERROR,
+  CLEAR_SEARCH_ERROR,
   CLEAR_SEARCH_TEXT,
   EMPTY_SEARCH,
   PERFORM_SEARCH,
-  SET_ERROR,
+  RECEIVE_SEARCH_ERROR,
   UPDATE_SEARCH_TEXT,
   clearSearchError,
   clearSearchText,
   performSearch,
-  setSearchError,
+  receiveSearchError,
   updateSearchText
 } from './search';
 
 export {
   RECEIVE_STOCK,
-  SET_DONE_FETCHING,
   SET_FETCHING,
   fetchStock,
   receiveStock,
