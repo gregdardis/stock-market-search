@@ -22,3 +22,8 @@ export {
   receiveStock,
   requestStock
 } from './networkRequest';
+
+export {
+  SET_STOCK_FROM_MEM_CACHE,
+  setStockFromMemCache
+} from './stock';

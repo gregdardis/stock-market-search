@@ -8,6 +8,7 @@ const Search = ({
   clearSearchTerm,
   performSearch,
   searchText,
+  stocks = {},
   updateSearchTerm
 }) => {
   const focusEndOfInput = event => {
@@ -17,7 +18,7 @@ const Search = ({
   };
   const handleSearch = () => {
     if (searchText !== '') {
-      performSearch(searchText);
+      performSearch(searchText, stocks);
     }
   };
   const handleChange = event => {
@@ -54,9 +55,10 @@ const Search = ({
   );
 };
 Search.propTypes = {
-  searchText: PropTypes.string.isRequired,
-  updateSearchTerm: PropTypes.func.isRequired,
   clearSearchTerm: PropTypes.func.isRequired,
-  performSearch: PropTypes.func.isRequired
+  performSearch: PropTypes.func.isRequired,
+  searchText: PropTypes.string.isRequired,
+  stocks: PropTypes.object,
+  updateSearchTerm: PropTypes.func.isRequired
 };
 export default Search;
