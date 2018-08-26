@@ -11,6 +11,17 @@ import {
 } from '../../../constants/userFacing';
 import './navBar.css';
 
+const menuItems = [
+  {
+    to: URL_HOME,
+    title: 'Home'
+  },
+  {
+    to: URL_GLOSSARY,
+    title: 'Glossary'
+  }
+];
+
 const NavBar = () => {
   return (
     <div
@@ -18,16 +29,13 @@ const NavBar = () => {
       style={{ backgroundColor: THEME_COLOR_DARK1 }}>
       <span className='title'>{ APP_NAME }</span>
       <ul className='nav'>
-        <li>
-          <Link
-            to={ URL_HOME }
-            exact="true">Home</Link>
-        </li>
-        <li>
-          <Link
-            to={ URL_GLOSSARY }
-            exact="true">Glossary</Link>
-        </li>
+        { menuItems.map(({ to, title }) => (
+          <li>
+            <Link
+              to={ to }
+              exact="true">{ title }</Link>
+          </li>
+        )) }
       </ul>
     </div>
   );
