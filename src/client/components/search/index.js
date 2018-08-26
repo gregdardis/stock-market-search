@@ -32,7 +32,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  text: state.search.currentSearchText
+  text: state.search.currentText
 });
 
 export default connect(

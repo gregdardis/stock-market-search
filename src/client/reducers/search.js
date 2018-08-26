@@ -7,7 +7,7 @@ import {
 
 export const reducer = (
   state = {
-    currentSearchText: '',
+    currentText: '',
     error: null
   },
   action
@@ -21,7 +21,7 @@ export const reducer = (
   case CLEAR_SEARCH_TEXT:
     return {
       ...state,
-      currentSearchText: ''
+      currentText: ''
     };
   case SET_ERROR:
     return {
@@ -32,7 +32,7 @@ export const reducer = (
     return {
       ...state,
       // Only allow uppercase characters in the search bar
-      currentSearchText: action.searchText.toUpperCase()
+      currentText: action.searchText.toUpperCase()
     };
   default:
     return state;
