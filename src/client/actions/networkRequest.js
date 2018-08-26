@@ -1,7 +1,12 @@
 import { setChartToDefaultTimePeriod } from '.';
+import { receiveSearchError } from '.';
+import {
+  errorMessageStockNotFound,
+  ERROR_MESSAGE_UNEXPECTED
+} from '../../constants/userFacing';
 
 export const RECEIVE_STOCK = 'RECEIVE_STOCK';
-export const REQUEST_STOCK = 'REQUEST_STOCK';
+export const SET_FETCHING = 'SET_FETCHING';
 
 export const receiveStock = ({
   companyName,
@@ -23,32 +28,36 @@ export const receiveStock = ({
   symbol
 });
 
-export const requestStock = symbol => ({
-  type: REQUEST_STOCK,
-  symbol
+export const setFetching = stockSymbol => ({
+  type: SET_FETCHING,
+  stockSymbol
 });
 
-// Help from
-// https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 export const fetchStock = symbol => (
   dispatch => {
-    dispatch(requestStock(symbol));
-
+    dispatch(setFetching(symbol));
     return fetch(`/api/stocks/${symbol}`)
-      .then(
-        res => {
-          if (!res.ok) {
-            throw new Error(`Result not ok, status code: ${res.status}`);
+      .then(res => {
+        if (!res.ok) {
+          let errorMessage;
+          if (res.status === 404) {
+            errorMessage = errorMessageStockNotFound(symbol);
+          } else {
+            errorMessage = ERROR_MESSAGE_UNEXPECTED;
           }
-          return res.json();
-        })
-      .then(json => {
-        dispatch(receiveStock(json));
-        dispatch(setChartToDefaultTimePeriod());
+          dispatch(receiveSearchError(errorMessage));
+          return null;
+        }
+        return res.json();
       })
-      .catch(error => {
-        // TODO: dispatch an action to show an error message
-        console.log(`Error on fetchStock: ${error}`);
+      .then(json => {
+        if (json) {
+          dispatch(receiveStock(json));
+          dispatch(setChartToDefaultTimePeriod());
+        }
+      })
+      .catch(() => {
+        dispatch(receiveSearchError(ERROR_MESSAGE_UNEXPECTED));
       });
   }
 );

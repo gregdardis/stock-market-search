@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 
-import { isStockLoading } from '../../../utils/stateGetters';
 import SearchLoader from './SearchLoader';
 
 function searchedStockSelected(state) {
@@ -13,9 +12,8 @@ function searchedStockSelected(state) {
 }
 
 const mapStateToProps = state => {
-  const loading = isStockLoading(state);
   return {
-    showingCachedStock: loading && searchedStockSelected(state)
+    showingCachedStock: !!state.loading && searchedStockSelected(state)
   };
 };
 

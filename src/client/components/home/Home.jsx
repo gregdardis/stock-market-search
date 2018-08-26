@@ -1,28 +1,45 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classnames from 'classnames';
+import classNames from 'classnames';
 
 import Search from '../search';
 import SearchLoader from '../searchLoader';
 import StockDataRegion from '../stockDataRegion';
-import { SEARCH_STATUS_REGION_HEIGHT } from '../../../constants';
 import './home.css';
 
-const Home = ({ loading }) => (
-  <div className='home'>
-    <Search />
-    <div className={ classnames({
-      loader: true,
-      hidden: !loading
-    }) }
-    style={{ height: SEARCH_STATUS_REGION_HEIGHT }}>
-      <SearchLoader loading={ loading }/>
-    </div>
-    <StockDataRegion />
-  </div>
-);
+const SEARCH_STATUS_CONTAINER_HEIGHT = 24;
+
+class Home extends Component {
+  getSearchStatusDivClassNames() {
+    const { searchError, loading } = this.props;
+    return classNames({
+      hidden: !searchError && !loading,
+      searchStatus: true
+    });
+  }
+
+  render() {
+    const { loading, searchError } = this.props;
+    return (
+      <div className='home'>
+        <Search hasError={ !!searchError } />
+        <div
+          className={ this.getSearchStatusDivClassNames() }
+          style={ { height: SEARCH_STATUS_CONTAINER_HEIGHT } }>
+          { loading
+            ? <SearchLoader />
+            : <p className='error'>{ searchError }</p>
+          }
+        </div>
+        <StockDataRegion />
+      </div>
+    );
+  }
+}
+
 Home.propTypes = {
-  loading: PropTypes.bool.isRequired
+  loading: PropTypes.bool.isRequired,
+  searchError: PropTypes.string
 };
 
 export default Home;

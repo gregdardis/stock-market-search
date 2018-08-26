@@ -18,7 +18,7 @@ import {
   CHART_LINE_COLOR,
   CHART_META_DATA,
   NUMBER_FORMAT_PRICE
-} from '../../../constants';
+} from '../../../constants/utilityConstants';
 
 const Chart = ({
   chartTimePeriodIndex,
@@ -50,7 +50,8 @@ const Chart = ({
         <YAxis dataKey={ CHART_DATA_KEY_Y_AXIS } domain={ ['auto', 'auto'] }
           tickFormatter={ addCommas } />
         <Tooltip labelFormatter = { getTooltipLabelFormatter() }
-          formatter={ price => formatAsPrice(price) } />
+          formatter={ price => formatAsPrice(price) }
+          separator=': ' />
         <Line type='monotone' dataKey={ CHART_DATA_KEY_Y_AXIS } dot={ false }
           stroke={ CHART_LINE_COLOR } isAnimationActive={ false } />
       </LineChart>

@@ -1,9 +1,7 @@
 import numeral from 'numeral';
 
-import {
-  BLANK_FIELD,
-  NUMBER_FORMAT_DEFAULT
-} from '../../constants';
+import { NUMBER_FORMAT_DEFAULT } from '../../constants/utilityConstants';
+import { BLANK_FIELD } from '../../constants/userFacing';
 import { getSelectedStockValueForKey } from '../stateGetters';
 
 const formatValueForDisplay = (value, formatSpecifier) => {

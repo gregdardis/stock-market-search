@@ -2,21 +2,22 @@ import { connect } from 'react-redux';
 
 import Search from './search';
 import {
-  clearSearchTerm,
+  clearSearchError,
+  clearSearchText,
   fetchStock,
-  setStockFromMemCache,
-  updateSearchTerm
+  updateSearchText,
+  setStockFromMemCache
 } from '../../actions';
 
 const mapDispatchToProps = dispatch => ({
-  updateSearchTerm(searchText) {
+  clearError() {
     dispatch(
-      updateSearchTerm(searchText)
+      clearSearchError()
     );
   },
-  clearSearchTerm() {
+  clearText() {
     dispatch(
-      clearSearchTerm()
+      clearSearchText()
     );
   },
   performSearch(searchText, stocks) {
@@ -28,11 +29,16 @@ const mapDispatchToProps = dispatch => ({
     dispatch(
       fetchStock(searchText)
     );
+  },
+  updateText(searchText) {
+    dispatch(
+      updateSearchText(searchText)
+    );
   }
 });
 
 const mapStateToProps = state => ({
-  searchText: state.search.currentSearchText,
+  text: state.search.currentText,
   stocks: state.stocks
 });
 

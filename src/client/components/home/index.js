@@ -2,12 +2,9 @@ import { connect } from 'react-redux';
 
 import Home from './Home';
 
-import { isStockLoading } from '../../../utils/stateGetters';
-
-const mapStateToProps = state => {
-  return {
-    loading: isStockLoading(state)
-  };
-};
+const mapStateToProps = state => ({
+  loading: !!state.fetching,
+  searchError: state.search.error
+});
 
 export default connect(mapStateToProps)(Home);

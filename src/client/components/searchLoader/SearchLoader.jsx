@@ -5,11 +5,10 @@ import { BeatLoader, ScaleLoader } from 'react-spinners';
 import {
   SEARCH_STATUS_REGION_HEIGHT,
   THEME_COLOR_DARK1
-} from '../../../constants';
+} from '../../../constants/utilityConstants';
 
-const SearchLoader = ({ loading, showingCachedStock }) => {
+const SearchLoader = ({ showingCachedStock }) => {
   const loaderProps = {
-    loading: loading,
     color: THEME_COLOR_DARK1
   };
   return showingCachedStock
@@ -23,7 +22,6 @@ const SearchLoader = ({ loading, showingCachedStock }) => {
       { ...loaderProps } />;
 };
 SearchLoader.propTypes = {
-  loading: PropTypes.bool.isRequired,
   showingCachedStock: PropTypes.bool
 };
 
