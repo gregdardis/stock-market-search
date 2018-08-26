@@ -7,7 +7,7 @@ import {
   CHART_BUTTON_LABEL_COLOR_DEFAULT,
   CHART_BUTTON_LABEL_COLOR_SELECTED,
   CHART_META_DATA
-} from '../../../constants';
+} from '../../../constants/utilityConstants';
 
 const TimePeriodButtons = ({
   chartTimePeriodIndex,

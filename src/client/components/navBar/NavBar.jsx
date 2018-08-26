@@ -5,7 +5,7 @@ import {
   THEME_COLOR_DARK1,
   URL_GLOSSARY,
   URL_HOME
-} from '../../../constants';
+} from '../../../constants/utilityConstants';
 import {
   APP_NAME
 } from '../../../constants/userFacing';

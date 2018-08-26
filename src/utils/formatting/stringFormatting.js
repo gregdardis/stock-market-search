@@ -1,6 +1,6 @@
 import numeral from 'numeral';
 
-import { NUMBER_FORMAT_DEFAULT } from '../../constants';
+import { NUMBER_FORMAT_DEFAULT } from '../../constants/utilityConstants';
 import { BLANK_FIELD } from '../../constants/userFacing';
 import { getSelectedStockValueForKey } from '../stateGetters';
 

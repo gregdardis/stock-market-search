@@ -5,7 +5,7 @@ import { ScaleLoader } from 'react-spinners';
 
 import Search from '../search';
 import StockDataRegion from '../stockDataRegion';
-import { THEME_COLOR_DARK1 } from '../../../constants';
+import { THEME_COLOR_DARK1 } from '../../../constants/utilityConstants';
 import './home.css';
 
 class Home extends Component {

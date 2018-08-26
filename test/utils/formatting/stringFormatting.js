@@ -8,7 +8,7 @@ import {
   NUMBER_FORMAT_DEFAULT,
   NUMBER_FORMAT_PERCENT,
   NUMBER_FORMAT_ROUNDED
-} from '../../../src/constants';
+} from '../../../src/constants/utilityConstants';
 import { BLANK_FIELD } from '../../../src/constants/userFacing';
 import {
   LABEL_DIVIDEND
