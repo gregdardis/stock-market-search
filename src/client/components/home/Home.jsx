@@ -8,10 +8,7 @@ import StockDataRegion from '../stockDataRegion';
 import { SEARCH_STATUS_REGION_HEIGHT } from '../../../constants';
 import './home.css';
 
-const Home = ({
-  loading,
-  showingCachedStock
-}) => (
+const Home = ({ loading }) => (
   <div className='home'>
     <Search />
     <div className={ classnames({
@@ -19,16 +16,13 @@ const Home = ({
       hidden: !loading
     }) }
     style={{ height: SEARCH_STATUS_REGION_HEIGHT }}>
-      <SearchLoader
-        loading={ loading }
-        showingCachedStock={ showingCachedStock }/>
+      <SearchLoader loading={ loading }/>
     </div>
     <StockDataRegion />
   </div>
 );
 Home.propTypes = {
-  loading: PropTypes.bool.isRequired,
-  showingCachedStock: PropTypes.bool
+  loading: PropTypes.bool.isRequired
 };
 
 export default Home;
