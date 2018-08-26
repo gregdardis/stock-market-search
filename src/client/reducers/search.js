@@ -1,5 +1,5 @@
 import {
-  CLEAR_ERROR,
+  CLEAR_SEARCH_ERROR,
   CLEAR_SEARCH_TEXT,
   RECEIVE_SEARCH_ERROR,
   UPDATE_SEARCH_TEXT
@@ -13,7 +13,7 @@ export const reducer = (
   action
 ) => {
   switch (action.type) {
-  case CLEAR_ERROR:
+  case CLEAR_SEARCH_ERROR:
     return {
       ...state,
       error: null

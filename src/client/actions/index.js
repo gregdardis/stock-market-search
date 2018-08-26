@@ -6,7 +6,7 @@ export {
 } from './chart';
 
 export {
-  CLEAR_ERROR,
+  CLEAR_SEARCH_ERROR,
   CLEAR_SEARCH_TEXT,
   EMPTY_SEARCH,
   PERFORM_SEARCH,
