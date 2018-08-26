@@ -45,9 +45,11 @@ export const fetchStock = symbol => (
       .then(res => {
         dispatch(setDoneFetching());
         if (!res.ok) {
-          let errorMessage = ERROR_MESSAGE_UNEXPECTED;
+          let errorMessage;
           if (res.status === 404) {
             errorMessage = errorMessageStockNotFound(symbol);
+          } else {
+            errorMessage = ERROR_MESSAGE_UNEXPECTED;
           }
           dispatch(setSearchError(errorMessage));
           return null;
