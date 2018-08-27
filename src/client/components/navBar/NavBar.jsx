@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-  NavLink as Link,
+  NavLink,
   withRouter
 } from 'react-router-dom';
 
@@ -41,10 +41,10 @@ class NavBar extends Component {
                 url === pathname ? 'selected' : ''
               }
               key={ url }>
-              <Link
+              <NavLink
                 className='navLink'
                 to={ url }
-                exact={ true }>{ title }</Link>
+                exact={ true }>{ title }</NavLink>
             </li>
           )) }
         </ul>
