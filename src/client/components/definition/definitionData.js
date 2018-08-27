@@ -6,18 +6,18 @@ module.exports = {
         definition: 'An amount of the company\'s profits which is paid to ' +
         'the holders of that company\'s stock. Dividends are paid as a ' +
         'certain amount of money per share.',
-        equation: 'dividend\\ yield\\ =' +
+        equation: 'dividend\\ yield\\ =\\ ' +
         '\\frac{dividend\\ per\\ share}{price\\ per\\ share}' +
-        '* 100\\%.'
+        '\\ *\\ 100\\%.'
       },
       {
         title: 'Free Cash Flow Yield (abbrev. as FCFY)',
         definition: 'A comparison between free cash flow per share and ' +
         'share price. Higher percentages mean the company is generating ' +
         'more free cash flow per share, which is appealing.',
-        equation: 'free\\ cash\\ flow\\ yield\\ =' +
+        equation: 'free\\ cash\\ flow\\ yield\\ =\\ ' +
         '\\frac{free\\ cash\\ flow\\ per\\ share}{price\\ per\\ share}' +
-        '* 100\\%.'
+        '\\ *\\ 100\\%.'
       },
       {
         title: 'High',
@@ -33,8 +33,8 @@ module.exports = {
         title: 'Market Cap',
         definition: 'Market capitalization (market cap) is the total ' +
         'market value of a company\'s outstanding shares.',
-        equation: 'market\\ cap\\ =' +
-        'outstanding\\ shares\\ * price\\ per\\ share'
+        equation: 'market\\ cap\\ =\\ ' +
+        'outstanding\\ shares\\ *\\ price\\ per\\ share'
       },
       {
         title: 'Open',
@@ -42,13 +42,18 @@ module.exports = {
       },
       {
         title: 'Price-Earnings Ratio (EPS)',
-        definition: 'Used for valuing a company, P/E ratio the ratio of ' +
-        'a company\'s share price to its earnings per share. ' +
+        definition: 'Used for valuing a company. ' +
         'A low P/E ratio can suggest a stock is undervalued, ' +
         'but factoring in future growth rate and other metrics can say ' +
-        'otherwise. Earnings per share (abbrev. EPS) is net income per ' +
-        'outstanding share of common stock. A "trailing" P/E means that the ' +
-        'P/E is measured over the last 12 months.'
+        'otherwise. A "trailing" P/E means that the ' +
+        'P/E is measured over the last 12 months. ' +
+        'Earnings per share (abbrev. EPS) is the inverse ' +
+        'of P/E.',
+        equation: 'P/E\\ ratio\\ =\\ ' +
+        '\\frac{price\\ per\\ share}{earnings\\ per\\ share}' +
+        '\\ \\ \\ \\ \\ \\ \\ ' +
+        'earnings\\ per\\ share\\ =\\ ' +
+        '\\frac{total\\ net\\ income}{outstanding\\ shares}'
       },
       {
         title: 'Return On Equity (abbrev. as ROE)',
