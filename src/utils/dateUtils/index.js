@@ -6,8 +6,7 @@ export {
 
 export {
   formatDateForMaxStockData,
-  formatDateIfValid,
-  isValidDate
+  formatDateIfValid
 } from './dateFormatting';
 
 export {
