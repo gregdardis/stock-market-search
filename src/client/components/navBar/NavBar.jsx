@@ -36,10 +36,7 @@ class NavBar extends Component {
         <span className='title'>{ APP_NAME }</span>
         <ul className='nav'>
           { menuItems.map(({ url, title }) => (
-            <li
-              className={
-                url === pathname ? 'selected' : ''
-              }
+            <li className={ url === pathname ? 'selected' : '' }
               key={ url }>
               <NavLink
                 className='navLink'

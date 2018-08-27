@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 
 import './timePeriodButtons.css';
 import {
-  CHART_META_DATA
+  CHART_META_DATA,
+  THEME_COLOR_MEDIUM1
 } from '../../../constants/utilityConstants';
 
 class TimePeriodButtons extends Component {
@@ -16,7 +17,7 @@ class TimePeriodButtons extends Component {
   getButtonStyle(buttonIndex) {
     const { chartTimePeriodIndex } = this.props;
     if (buttonIndex === chartTimePeriodIndex) {
-      return { backgroundColor: '#5998ff' };
+      return { backgroundColor: THEME_COLOR_MEDIUM1 };
     }
     return {};
   }

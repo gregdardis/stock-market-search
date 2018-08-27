@@ -113,6 +113,7 @@ export const QUERY_RANGE_FIVE_DAY = '5d';
 export const QUERY_RANGE_ONE_DAY = '1d';
 
 export const THEME_COLOR_DARK1 = '#34414D';
+export const THEME_COLOR_MEDIUM1 = '#5998ff';
 
 export const URL_GLOSSARY = '/glossary';
 export const URL_HOME = '/';
