@@ -5,15 +5,19 @@ module.exports = {
         title: 'Dividend (Yield %)',
         definition: 'An amount of the company\'s profits which is paid to ' +
         'the holders of that company\'s stock. Dividends are paid as a ' +
-        'certain amount of money per share. Dividend yield is a percentage, ' +
-        'calculated as (dividend per share / price per share) * 100%.'
+        'certain amount of money per share.',
+        equation: 'dividend\\ yield\\ =' +
+        '\\frac{dividend\\ per\\ share}{price\\ per\\ share}' +
+        '* 100\\%.'
       },
       {
         title: 'Free Cash Flow Yield (abbrev. as FCFY)',
         definition: 'A comparison between free cash flow per share and ' +
         'share price. Higher percentages mean the company is generating ' +
-        'more free cash flow per share, which is appealing. Calculated as ' +
-        '(free cash flow per share / market price per share) * 100%.'
+        'more free cash flow per share, which is appealing.',
+        equation: 'free\\ cash\\ flow\\ yield\\ =' +
+        '\\frac{free\\ cash\\ flow\\ per\\ share}{price\\ per\\ share}' +
+        '* 100\\%.'
       },
       {
         title: 'High',
@@ -28,9 +32,9 @@ module.exports = {
       {
         title: 'Market Cap',
         definition: 'Market capitalization (market cap) is the total ' +
-        'market value of a company\'s outstanding shares. To calculate ' +
-        'market cap, multiply the company\'s number of outstanding shares ' +
-        'by its share price.'
+        'market value of a company\'s outstanding shares.',
+        equation: 'market\\ cap\\ =' +
+        'outstanding\\ shares\\ * price\\ per\\ share'
       },
       {
         title: 'Open',

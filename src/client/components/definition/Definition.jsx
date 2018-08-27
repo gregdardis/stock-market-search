@@ -9,6 +9,9 @@ const Definition = ({
   <div className='definition'>
     <h2>{ definition.title }</h2>
     <p>{ definition.definition }</p>
+    { definition.equation
+      ? <p>$${definition.equation}$$</p>
+      : null }
   </div>
 );
 Definition.propTypes = {
