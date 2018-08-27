@@ -8,7 +8,7 @@ module.exports = {
         'certain amount of money per share.',
         equation: 'dividend\\ yield\\ =\\ ' +
         '\\frac{dividend\\ per\\ share}{price\\ per\\ share}' +
-        '\\ *\\ 100\\%.'
+        '\\ *\\ 100\\%'
       },
       {
         title: 'Free Cash Flow Yield (abbrev. as FCFY)',
@@ -17,7 +17,7 @@ module.exports = {
         'more free cash flow per share, which is appealing.',
         equation: 'free\\ cash\\ flow\\ yield\\ =\\ ' +
         '\\frac{free\\ cash\\ flow\\ per\\ share}{price\\ per\\ share}' +
-        '\\ *\\ 100\\%.'
+        '\\ *\\ 100\\%'
       },
       {
         title: 'High',
@@ -60,7 +60,10 @@ module.exports = {
         definition: 'How well the company generates returns on the ' +
         'investment from its shareholders. It is how much after tax ' +
         'profit the company earned in comparison to total shareholder ' +
-        'equity. Calculated as (net income / shareholder equity) * 100%.'
+        'equity.',
+        equation: 'return\\ on\\ equity\\ =\\ ' +
+        '\\frac{net\\ income}{shareholder\\ equity}' +
+        '\\ *\\ 100\\%'
       },
       {
         title: 'Volume (Avg)',
