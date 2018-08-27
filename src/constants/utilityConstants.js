@@ -1,5 +1,5 @@
 import {
-  formatDateIfValid,
+  tryFormatDate,
   getStockDataForPreviousMonths,
   getStockDataForPreviousYears
 } from '../utils/dateUtils';
@@ -26,9 +26,9 @@ export const CHART_META_DATA = [
     xAxisMinTickGap: 110,
     getStockDataForTimePeriod: fiveDayStockData => fiveDayStockData,
     getTooltipLabelFormatter: dateAndTime =>
-      formatDateIfValid(dateAndTime, 'mmm d, h:MM TT'),
+      tryFormatDate(dateAndTime, 'mmm d, h:MM TT'),
     getXAxisTickFormatter: dateAndTime =>
-      formatDateIfValid(dateAndTime, 'mmm d, h:MM TT')
+      tryFormatDate(dateAndTime, 'mmm d, h:MM TT')
   },
   {
     label: '1 month',
@@ -38,9 +38,9 @@ export const CHART_META_DATA = [
     getStockDataForTimePeriod: maxStockData =>
       getStockDataForPreviousMonths(maxStockData, 1),
     getTooltipLabelFormatter: date =>
-      formatDateIfValid(date, 'mmm d, yyyy'),
+      tryFormatDate(date, 'mmm d, yyyy'),
     getXAxisTickFormatter: date =>
-      formatDateIfValid(date, 'mmm d')
+      tryFormatDate(date, 'mmm d')
   },
   {
     label: '3 month',
@@ -50,9 +50,9 @@ export const CHART_META_DATA = [
     getStockDataForTimePeriod: maxStockData =>
       getStockDataForPreviousMonths(maxStockData, 3),
     getTooltipLabelFormatter: date =>
-      formatDateIfValid(date, 'mmm d, yyyy'),
+      tryFormatDate(date, 'mmm d, yyyy'),
     getXAxisTickFormatter: date =>
-      formatDateIfValid(date, 'mmm d')
+      tryFormatDate(date, 'mmm d')
   },
   {
     label: '1 year',
@@ -62,9 +62,9 @@ export const CHART_META_DATA = [
     getStockDataForTimePeriod: maxStockData =>
       getStockDataForPreviousYears(maxStockData, 1),
     getTooltipLabelFormatter: date =>
-      formatDateIfValid(date, 'mmm d, yyyy'),
+      tryFormatDate(date, 'mmm d, yyyy'),
     getXAxisTickFormatter: date =>
-      formatDateIfValid(date, 'mmm d')
+      tryFormatDate(date, 'mmm d')
   },
   {
     label: '5 year',
@@ -74,9 +74,9 @@ export const CHART_META_DATA = [
     getStockDataForTimePeriod: maxStockData =>
       getStockDataForPreviousYears(maxStockData, 5),
     getTooltipLabelFormatter: date =>
-      formatDateIfValid(date, 'mmm d, yyyy'),
+      tryFormatDate(date, 'mmm d, yyyy'),
     getXAxisTickFormatter: date =>
-      formatDateIfValid(date, 'mmm yyyy')
+      tryFormatDate(date, 'mmm yyyy')
   },
   {
     label: 'max',
@@ -85,9 +85,9 @@ export const CHART_META_DATA = [
     xAxisMinTickGap: 130,
     getStockDataForTimePeriod: maxStockData => maxStockData,
     getTooltipLabelFormatter: date =>
-      formatDateIfValid(date, 'mmm d, yyyy'),
+      tryFormatDate(date, 'mmm d, yyyy'),
     getXAxisTickFormatter: date =>
-      formatDateIfValid(date, 'mmm yyyy')
+      tryFormatDate(date, 'mmm yyyy')
   }
 ];
 

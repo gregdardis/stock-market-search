@@ -20,7 +20,7 @@ export const formatDateForMaxStockData = date => {
   return `${year}-${month}-${day}`;
 };
 
-export function formatDateIfValid(date, format) {
+export function tryFormatDate(date, format) {
   try {
     return dateFormat(date, format);
   } catch (error) {
