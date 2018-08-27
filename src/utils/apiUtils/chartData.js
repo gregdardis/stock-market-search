@@ -294,8 +294,7 @@ export const requestQuote = (symbol, callback) => {
     stockQuote => {
       modules.forEach(module => {
         if (!stockQuote[module]) {
-          callback(`Module '${module}' was not found.`);
-          return;
+          throw new Error(`Module '${module}' was not found.`);
         }
       });
       callback(null, createStock(stockQuote));
@@ -315,8 +314,7 @@ export const requestMaxStockData = (symbol, callback) => {
   }).then(
     dailyData => {
       if (!dailyData[0]) {
-        callback('Historical data was not found.');
-        return;
+        throw new Error('Historical data was not found.');
       }
       callback(null, getDatesAndPrices(dailyData));
     }
