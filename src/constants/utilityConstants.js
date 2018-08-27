@@ -5,8 +5,6 @@ import {
 
 import dateFormat from 'dateformat';
 
-export const CHART_BUTTON_LABEL_COLOR_DEFAULT = '#000000';
-export const CHART_BUTTON_LABEL_COLOR_SELECTED = '#3223ff';
 export const CHART_DATA_KEY_Y_AXIS = 'price';
 export const CHART_LINE_COLOR = 'red';
 
@@ -117,6 +115,7 @@ export const QUERY_RANGE_ONE_DAY = '1d';
 export const SEARCH_STATUS_REGION_HEIGHT = 24;
 
 export const THEME_COLOR_DARK1 = '#34414D';
+export const THEME_COLOR_MEDIUM1 = '#5998ff';
 
 export const URL_GLOSSARY = '/glossary';
 export const URL_HOME = '/';
