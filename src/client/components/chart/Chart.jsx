@@ -45,11 +45,12 @@ const Chart = ({
         className='chart' >
         <CartesianGrid strokeDashArray='3 3' />
         <XAxis dataKey={ getXAxisDataKey() }
-          tickFormatter= { getXAxisTickFormatter() }
+          tickFormatter={ getXAxisTickFormatter() }
           minTickGap={ getXAxisMinTickGap() } />
         <YAxis dataKey={ CHART_DATA_KEY_Y_AXIS } domain={ ['auto', 'auto'] }
           tickFormatter={ addCommas } />
-        <Tooltip labelFormatter = { getTooltipLabelFormatter() }
+        <Tooltip
+          labelFormatter={ getTooltipLabelFormatter() }
           formatter={ price => formatAsPrice(price) }
           separator=': ' />
         <Line type='monotone' dataKey={ CHART_DATA_KEY_Y_AXIS } dot={ false }
