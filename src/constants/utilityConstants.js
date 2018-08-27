@@ -5,8 +5,6 @@ import {
 
 import dateFormat from 'dateformat';
 
-export const CHART_BUTTON_LABEL_COLOR_DEFAULT = '#000000';
-export const CHART_BUTTON_LABEL_COLOR_SELECTED = '#3223ff';
 export const CHART_DATA_KEY_Y_AXIS = 'price';
 export const CHART_LINE_COLOR = 'red';
 
