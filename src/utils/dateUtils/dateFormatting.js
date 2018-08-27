@@ -1,3 +1,5 @@
+import dateFormat from 'dateformat';
+
 import { padSingleDigitWithZero } from '../formatting/numberFormatting';
 
 // Reinventing the wheel here, but it was good unit testing
@@ -17,3 +19,12 @@ export const formatDateForMaxStockData = date => {
   const year = date.getFullYear();
   return `${year}-${month}-${day}`;
 };
+
+export function formatDateIfValid(date, format) {
+  try {
+    return dateFormat(date, format);
+  } catch (error) {
+    console.error(error);
+  }
+  return date;
+}
