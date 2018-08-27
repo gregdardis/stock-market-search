@@ -19,6 +19,10 @@
   width: 100%;
 }
 
+input:required {
+  box-shadow: none;
+}
+
 .searchText:focus, .searchButton:focus {
   outline: none;
 }
