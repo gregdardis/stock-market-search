@@ -34,7 +34,7 @@ import {
   LABEL_PREVIOUS_CLOSE,
   LABEL_ROE,
   LABEL_VOLUME
-} from '../../constants/userFacing';
+} from '../../constants/userFacingStrings';
 
 const calculateFcfy = (freeCashflow, marketCap) => {
   const freeCashflowNum = parseInt(freeCashflow);

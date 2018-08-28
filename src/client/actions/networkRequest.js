@@ -3,7 +3,7 @@ import { receiveSearchError } from '.';
 import {
   errorMessageStockNotFound,
   ERROR_MESSAGE_UNEXPECTED
-} from '../../constants/userFacing';
+} from '../../constants/userFacingStrings';
 
 export const RECEIVE_STOCK = 'RECEIVE_STOCK';
 export const SET_FETCHING = 'SET_FETCHING';

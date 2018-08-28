@@ -5,7 +5,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import Column from '../column';
 import CompanyGeneralInfo from '../companyGeneralInfo';
 import { columnComponentsProps } from './childProps';
-import { MESSAGE_NO_DATA } from '../../../constants/userFacing';
+import { MESSAGE_NO_DATA } from '../../../constants/userFacingStrings';
 import SelectableTimePeriodChart from '../selectableTimePeriodChart';
 import './stockDataRegion.css';
 

@@ -12,7 +12,7 @@ import {
 } from '../../../constants/utilityConstants';
 import {
   APP_NAME
-} from '../../../constants/userFacing';
+} from '../../../constants/userFacingStrings';
 import './navBar.css';
 
 const menuItems = [

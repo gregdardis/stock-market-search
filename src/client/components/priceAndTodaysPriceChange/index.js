@@ -9,7 +9,7 @@ import {
 import {
   LABEL_CURRENT_PRICE,
   LABEL_PREVIOUS_CLOSE
-} from '../../../constants/userFacing';
+} from '../../../constants/userFacingStrings';
 
 const getCurrentPrice = stockOverviewData => {
   return stockOverviewData[LABEL_CURRENT_PRICE].value;
