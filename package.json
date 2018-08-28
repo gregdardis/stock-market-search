@@ -9,7 +9,7 @@
   "scripts": {
     "build": "webpack",
     "clean": "rm -r node_modules && cd src/client/ && rm -r node_modules && cd ../server/ && rm -r node_modules && cd ../../",
-    "dev": "webpack-dev-server",
+    "dev": "webpack-dev-server --env dev",
     "dev:test": "npm-run-all --parallel dev test:watch",
     "postinstall": "cd src/client/ && npm i && cd ../server/ && npm i & cd ../../",
     "start": "babel-watch src/server",
