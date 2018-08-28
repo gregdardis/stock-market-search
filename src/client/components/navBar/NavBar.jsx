@@ -8,7 +8,7 @@ import {
 import {
   URL_GLOSSARY,
   URL_HOME
-} from '../../../constants/formatting';
+} from '../../../constants/routes';
 import { THEME_COLOR_DARK1 } from '../../../constants/colors';
 import {
   APP_NAME

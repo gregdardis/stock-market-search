@@ -12,13 +12,15 @@ import {
   DATE_FORMAT_ONE_DAY,
   NUMBER_FORMAT_DEFAULT,
   NUMBER_FORMAT_PERCENT,
-  NUMBER_FORMAT_SHORT_SUFFIXED,
+  NUMBER_FORMAT_SHORT_SUFFIXED
+} from '../../constants/formatting';
+import {
+  MILLISECONDS_PER_SECOND,
   QUERY_INTERVAL_FIVE_DAY,
   QUERY_INTERVAL_ONE_DAY,
   QUERY_RANGE_FIVE_DAY,
   QUERY_RANGE_ONE_DAY
-} from '../../constants/formatting';
-import { MILLISECONDS_PER_SECOND } from '../../constants/numeric';
+} from '../../constants/numeric';
 import {
   LABEL_CURRENT_PRICE,
   LABEL_DIVIDEND,

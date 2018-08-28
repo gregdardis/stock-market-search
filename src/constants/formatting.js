@@ -106,14 +106,3 @@ export const NUMBER_FORMAT_PERCENT = '0.00%';
 export const NUMBER_FORMAT_PRICE = '$0,0.00';
 export const NUMBER_FORMAT_ROUNDED = '0,0.00';
 export const NUMBER_FORMAT_SHORT_SUFFIXED = '0.00a';
-
-// 30m interval behaves like 60m for some reason, so using 15m instead
-export const QUERY_INTERVAL_FIVE_DAY = '15m';
-export const QUERY_INTERVAL_ONE_DAY = '5m';
-export const QUERY_RANGE_FIVE_DAY = '5d';
-export const QUERY_RANGE_ONE_DAY = '1d';
-
-export const URL_GLOSSARY = '/glossary';
-export const URL_HOME = '/';
-
-export const VALID_DATE_NOT_FOUND = -1;
