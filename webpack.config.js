@@ -14,6 +14,7 @@ const paths = {
 // Webpack configuration
 module.exports = {
   entry: path.join(paths.CLIENT, 'render.js'),
+  devtool: 'inline-source-map',
   output: {
     path: paths.DIST,
     filename: 'app.bundle.js'

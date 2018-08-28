@@ -1,16 +1,17 @@
 import express from 'express';
+import chalk from 'chalk';
 
 import apiRouter from './api';
 import { port } from './config';
 
-const app = express();
+const server = express();
 
-app.use('/api', apiRouter);
+server.use('/api', apiRouter);
 
 // if statement stops a second server from trying to run on the same
 // port when tests are running on server functions
 if (!module.parent) {
-  app.listen(port, () =>
-    console.log(`app is listening on port ${port}`)
+  server.listen(port, () =>
+    console.log(chalk.green(`Server is listening on port ${port}`))
   );
 }
