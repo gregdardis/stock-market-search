@@ -1,8 +1,0 @@
-{
-  "name": "server",
-  "dependencies": {
-    "async": "^2.6.1",
-    "dateformat": "^3.0.3",
-    "express": "^4.16.3"
-  }
-}
