@@ -5,15 +5,19 @@ module.exports = {
         title: 'Dividend (Yield %)',
         definition: 'An amount of the company\'s profits which is paid to ' +
         'the holders of that company\'s stock. Dividends are paid as a ' +
-        'certain amount of money per share. Dividend yield is a percentage, ' +
-        'calculated as (dividend per share / price per share) * 100%.'
+        'certain amount of money per share.',
+        equations: ['dividend\\ yield\\ =\\ ' +
+        '\\frac{dividend\\ per\\ share}{price\\ per\\ share}' +
+        '\\ *\\ 100\\%']
       },
       {
         title: 'Free Cash Flow Yield (abbrev. as FCFY)',
         definition: 'A comparison between free cash flow per share and ' +
         'share price. Higher percentages mean the company is generating ' +
-        'more free cash flow per share, which is appealing. Calculated as ' +
-        '(free cash flow per share / market price per share) * 100%.'
+        'more free cash flow per share, which is appealing.',
+        equations: ['free\\ cash\\ flow\\ yield\\ =\\ ' +
+        '\\frac{free\\ cash\\ flow\\ per\\ share}{price\\ per\\ share}' +
+        '\\ *\\ 100\\%']
       },
       {
         title: 'High',
@@ -28,9 +32,9 @@ module.exports = {
       {
         title: 'Market Cap',
         definition: 'Market capitalization (market cap) is the total ' +
-        'market value of a company\'s outstanding shares. To calculate ' +
-        'market cap, multiply the company\'s number of outstanding shares ' +
-        'by its share price.'
+        'market value of a company\'s outstanding shares.',
+        equations: ['market\\ cap\\ =\\ ' +
+        'outstanding\\ shares\\ *\\ price\\ per\\ share']
       },
       {
         title: 'Open',
@@ -38,20 +42,27 @@ module.exports = {
       },
       {
         title: 'Price-Earnings Ratio (EPS)',
-        definition: 'Used for valuing a company, P/E ratio the ratio of ' +
-        'a company\'s share price to its earnings per share. ' +
+        definition: 'Used for valuing a company. ' +
         'A low P/E ratio can suggest a stock is undervalued, ' +
         'but factoring in future growth rate and other metrics can say ' +
-        'otherwise. Earnings per share (abbrev. EPS) is net income per ' +
-        'outstanding share of common stock. A "trailing" P/E means that the ' +
-        'P/E is measured over the last 12 months.'
+        'otherwise. A "trailing" P/E means that the ' +
+        'P/E is measured over the last 12 months. ' +
+        'Earnings per share (abbrev. EPS) is the inverse ' +
+        'of P/E.',
+        equations: ['P/E\\ ratio\\ =\\ ' +
+        '\\frac{price\\ per\\ share}{earnings\\ per\\ share}',
+        'earnings\\ per\\ share\\ =\\ ' +
+        '\\frac{total\\ net\\ income}{outstanding\\ shares}']
       },
       {
         title: 'Return On Equity (abbrev. as ROE)',
         definition: 'How well the company generates returns on the ' +
         'investment from its shareholders. It is how much after tax ' +
         'profit the company earned in comparison to total shareholder ' +
-        'equity. Calculated as (net income / shareholder equity) * 100%.'
+        'equity.',
+        equations: ['return\\ on\\ equity\\ =\\ ' +
+        '\\frac{net\\ income}{shareholder\\ equity}' +
+        '\\ *\\ 100\\%']
       },
       {
         title: 'Volume (Avg)',

@@ -14,7 +14,8 @@ const Glossary = () => {
           key={ definition.title }
           definition={ {
             title: definition.title,
-            definition: definition.definition
+            definition: definition.definition,
+            equations: definition.equations
           } }
         />
       ) }
