@@ -3,13 +3,22 @@ import {
   getStockDataForPreviousMonths,
   getStockDataForPreviousYears
 } from '../utils/dateUtils';
+import {
+  LABEL_FIVE_DAY,
+  LABEL_FIVE_YEAR,
+  LABEL_MAX,
+  LABEL_ONE_DAY,
+  LABEL_ONE_MONTH,
+  LABEL_ONE_YEAR,
+  LABEL_THREE_MONTH
+} from './userFacingStrings';
 
 export const CHART_DATA_KEY_Y_AXIS = 'price';
 export const CHART_LINE_COLOR = 'red';
 
 export const CHART_META_DATA = [
   {
-    label: '1 day',
+    label: LABEL_ONE_DAY,
     stockDataKey: 'oneDayStockData',
     xAxisDataKey: 'dateAndTime',
     xAxisMinTickGap: 100,
@@ -20,7 +29,7 @@ export const CHART_META_DATA = [
       dateAndTime
   },
   {
-    label: '5 day',
+    label: LABEL_FIVE_DAY,
     stockDataKey: 'fiveDayStockData',
     xAxisDataKey: 'dateAndTime',
     xAxisMinTickGap: 110,
@@ -31,7 +40,7 @@ export const CHART_META_DATA = [
       tryFormatDate(dateAndTime, 'mmm d, h:MM TT')
   },
   {
-    label: '1 month',
+    label: LABEL_ONE_MONTH,
     stockDataKey: 'maxStockData',
     xAxisDataKey: 'date',
     xAxisMinTickGap: 60,
@@ -43,7 +52,7 @@ export const CHART_META_DATA = [
       tryFormatDate(date, 'mmm d')
   },
   {
-    label: '3 month',
+    label: LABEL_THREE_MONTH,
     stockDataKey: 'maxStockData',
     xAxisDataKey: 'date',
     xAxisMinTickGap: 100,
@@ -55,7 +64,7 @@ export const CHART_META_DATA = [
       tryFormatDate(date, 'mmm d')
   },
   {
-    label: '1 year',
+    label: LABEL_ONE_YEAR,
     stockDataKey: 'maxStockData',
     xAxisDataKey: 'date',
     xAxisMinTickGap: 30,
@@ -67,7 +76,7 @@ export const CHART_META_DATA = [
       tryFormatDate(date, 'mmm d')
   },
   {
-    label: '5 year',
+    label: LABEL_FIVE_YEAR,
     stockDataKey: 'maxStockData',
     xAxisDataKey: 'date',
     xAxisMinTickGap: 120,
@@ -79,7 +88,7 @@ export const CHART_META_DATA = [
       tryFormatDate(date, 'mmm yyyy')
   },
   {
-    label: 'max',
+    label: LABEL_MAX,
     stockDataKey: 'maxStockData',
     xAxisDataKey: 'date',
     xAxisMinTickGap: 130,
