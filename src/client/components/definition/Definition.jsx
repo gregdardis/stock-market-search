@@ -9,9 +9,12 @@ const Definition = ({
   <div className='definition'>
     <h2>{ definition.title }</h2>
     <p>{ definition.definition }</p>
-    { definition.equation
-      ? <p>$${definition.equation}$$</p>
-      : null }
+    { definition.equations
+      ? definition.equations.map(equation => (
+        <p key={equation}>$${equation}$$</p>
+      ))
+      : null
+    }
   </div>
 );
 Definition.propTypes = {

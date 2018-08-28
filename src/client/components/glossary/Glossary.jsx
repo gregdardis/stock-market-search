@@ -15,7 +15,7 @@ const Glossary = () => {
           definition={ {
             title: definition.title,
             definition: definition.definition,
-            equation: definition.equation
+            equations: definition.equations
           } }
         />
       ) }
