@@ -2,7 +2,7 @@ import { expect } from 'chai';
 
 import {
   formatDateForMaxStockData
-} from '../../../src/utils/dateUtils';
+} from '../../../src/utils/dateUtils/dateFormatting';
 
 export const formatDateForMaxStockDataTest = () => {
   const daysInMonth = {

@@ -6,7 +6,7 @@ import {
 import rp from 'request-promise';
 import dateFormat from 'dateformat';
 
-import { formatDateForMaxStockData } from '../dateUtils';
+import { formatDateForMaxStockData } from '../dateUtils/dateFormatting';
 import {
   DATE_FORMAT_FIVE_DAY,
   DATE_FORMAT_ONE_DAY,

@@ -1,8 +1,8 @@
+import { tryFormatDate } from '../utils/dateUtils/dateFormatting';
 import {
   getStockDataForPreviousMonths,
-  getStockDataForPreviousYears,
-  tryFormatDate
-} from '../utils/dateUtils';
+  getStockDataForPreviousYears
+} from '../utils/dateUtils/historicalStockData';
 import {
   LABEL_FIVE_DAY,
   LABEL_FIVE_YEAR,
