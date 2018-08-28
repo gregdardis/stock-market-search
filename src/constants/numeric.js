@@ -1,0 +1,2 @@
+export const MILLISECONDS_PER_SECOND = 1000;
+export const MONTHS_PER_YEAR = 12;

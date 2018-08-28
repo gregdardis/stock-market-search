@@ -10,18 +10,15 @@ import { formatDateForMaxStockData } from '../dateUtils';
 import {
   DATE_FORMAT_FIVE_DAY,
   DATE_FORMAT_ONE_DAY,
-  FIVE_DAYS,
-  MILLISECONDS_PER_SECOND,
   NUMBER_FORMAT_DEFAULT,
   NUMBER_FORMAT_PERCENT,
   NUMBER_FORMAT_SHORT_SUFFIXED,
-  ONE_DAY,
   QUERY_INTERVAL_FIVE_DAY,
   QUERY_INTERVAL_ONE_DAY,
   QUERY_RANGE_FIVE_DAY,
   QUERY_RANGE_ONE_DAY
 } from '../../constants/formatting';
-
+import { MILLISECONDS_PER_SECOND } from '../../constants/numeric';
 import {
   LABEL_CURRENT_PRICE,
   LABEL_DIVIDEND,
@@ -184,7 +181,8 @@ const getDatesAndTimesForOneDay = (
 ) => {
   let datesTimesAndPrices = [];
   const timestampsPerDay = timestamp.length / numberOfDays;
-  const dateAndTimeFormat = (numberOfDays === ONE_DAY)
+  // TODO: refactor this
+  const dateAndTimeFormat = (numberOfDays === 1)
     ? DATE_FORMAT_ONE_DAY
     : DATE_FORMAT_FIVE_DAY;
 
@@ -333,7 +331,8 @@ export const requestOneDayStockData = (symbol, callback) => {
   );
   rp(queryOneDay)
     .then(oneDayRes => {
-      callback(null, getIntradayStockData(oneDayRes, ONE_DAY));
+      const numberOfDays = 1;
+      callback(null, getIntradayStockData(oneDayRes, numberOfDays));
     }).catch(err => {
       callback(
         generateStockDataRequestError(requestOneDayStockData.name, err)
@@ -348,7 +347,8 @@ export const requestFiveDayStockData = (symbol, callback) => {
   );
   rp(queryFiveDay)
     .then(fiveDayRes => {
-      callback(null, getIntradayStockData(fiveDayRes, FIVE_DAYS));
+      const numberOfDays = 5;
+      callback(null, getIntradayStockData(fiveDayRes, numberOfDays));
     }).catch(err => {
       callback(
         generateStockDataRequestError(requestFiveDayStockData.name, err)

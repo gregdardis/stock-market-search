@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { BeatLoader, ScaleLoader } from 'react-spinners';
 
-import { SEARCH_STATUS_REGION_HEIGHT } from '../../../constants/formatting';
+import { SEARCH_STATUS_REGION_HEIGHT } from '../../../constants/dimensions';
 import { THEME_COLOR_DARK1 } from '../../../constants/colors';
 
 const SearchLoader = ({ showingCachedStock }) => {
