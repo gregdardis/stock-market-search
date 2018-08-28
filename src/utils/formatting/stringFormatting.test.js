@@ -99,7 +99,9 @@ describe('formatValueFromStateAndProps', () => {
     });
     expect(formatValueFromStateAndProps(state, ownProps))
       .to
-      .equal(`${expectedValueDefaultFormat} (${expectedOptionalValueFormatted})`);
+      .equal(
+        `${expectedValueDefaultFormat} (${expectedOptionalValueFormatted})`
+      );
   });
   it('should properly format when optionalValueFormat is not defined', () => {
     const state = createMockState({
@@ -109,27 +111,32 @@ describe('formatValueFromStateAndProps', () => {
     });
     expect(formatValueFromStateAndProps(state, ownProps))
       .to
-      .equal(`${expectedValueFormatted} (${expectedOptionalValueDefaultFormat})`);
+      .equal(
+        `${expectedValueFormatted} (${expectedOptionalValueDefaultFormat})`
+      );
   });
-  it('should properly format when value and valueFormat are not defined', () => {
-    const state = createMockState({
-      optionalValue: actualOptionalValue,
-      optionalValueFormat
+  it('should properly format when value and valueFormat are not defined',
+    () => {
+      const state = createMockState({
+        optionalValue: actualOptionalValue,
+        optionalValueFormat
+      });
+      expect(formatValueFromStateAndProps(state, ownProps))
+        .to
+        .equal(`${BLANK_FIELD} (${expectedOptionalValueFormatted})`);
     });
-    expect(formatValueFromStateAndProps(state, ownProps))
-      .to
-      .equal(`${BLANK_FIELD} (${expectedOptionalValueFormatted})`);
-  });
-  it('should properly format when value and optionalValue are not defined', () => {
-    const state = createMockState({
-      valueFormat,
-      optionalValueFormat
+  it('should properly format when value and optionalValue are not defined',
+    () => {
+      const state = createMockState({
+        valueFormat,
+        optionalValueFormat
+      });
+      expect(formatValueFromStateAndProps(state, ownProps))
+        .to
+        .equal(BLANK_FIELD);
     });
-    expect(formatValueFromStateAndProps(state, ownProps))
-      .to
-      .equal(BLANK_FIELD);
-  });
-  it('should properly format when value and optionalValueFormat are not defined', () => {
+  it('should properly format when value and optionalValueFormat ' +
+     'are not defined', () => {
     const state = createMockState({
       optionalValue: actualOptionalValue,
       valueFormat
@@ -138,7 +145,8 @@ describe('formatValueFromStateAndProps', () => {
       .to
       .equal(`${BLANK_FIELD} (${expectedOptionalValueDefaultFormat})`);
   });
-  it('should properly format when optionalValue and valueFormat are not defined', () => {
+  it('should properly format when optionalValue and valueFormat ' + 
+     'are not defined', () => {
     const state = createMockState({
       value: actualValue,
       optionalValueFormat
@@ -147,7 +155,8 @@ describe('formatValueFromStateAndProps', () => {
       .to
       .equal(expectedValueDefaultFormat);
   });
-  it('should properly format when optionalValue and optionalValueFormat are not defined', () => {
+  it('should properly format when optionalValue and optionalValueFormat ' +
+     'are not defined', () => {
     const state = createMockState({
       value: actualValue,
       valueFormat
@@ -156,14 +165,17 @@ describe('formatValueFromStateAndProps', () => {
       .to
       .equal(`${expectedValueFormatted}`);
   });
-  it('should properly format when valueFormat and optionalValueFormat are not defined', () => {
+  it('should properly format when valueFormat and optionalValueFormat ' +
+     'are not defined', () => {
     const state = createMockState({
       value: actualValue,
       optionalValue: actualOptionalValue
     });
     expect(formatValueFromStateAndProps(state, ownProps))
       .to
-      .equal(`${expectedValueDefaultFormat} (${expectedOptionalValueDefaultFormat})`);
+      .equal(
+        `${expectedValueDefaultFormat} (${expectedOptionalValueDefaultFormat})`
+      );
   });
   it('should properly format when only value is defined', () => {
     const state = createMockState({

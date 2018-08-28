@@ -70,13 +70,15 @@ describe('addCommas', () => {
     }).to
       .throw();
   });
-  it('should throw an error if given numbers followed by letters (in a string)', () => {
+  it('should throw an error if given numbers followed by letters ' +
+     '(in a string)', () => {
     expect(() => {
       addCommas('12hello');
     }).to
       .throw();
   });
-  it('should throw an error if given letters followed by numbers (in a string)', () => {
+  it('should throw an error if given letters followed by numbers ' +
+     '(in a string)', () => {
     expect(() => {
       addCommas('hello12');
     }).to
@@ -95,9 +97,7 @@ describe('addCommas', () => {
       .throw();
   });
 });
-// };
 
-// export const padSingleDigitWithZeroTest = () => {
 describe('padSingleDigitWithZero', () => {
   it('should pad 0 with a 0 and stringify', () => {
     expect(padSingleDigitWithZero(0))
@@ -159,7 +159,8 @@ describe('padSingleDigitWithZero', () => {
     }).to
       .throw();
   });
-  it('should throw an error if given letters followed by numbers (in a string)', () => {
+  it('should throw an error if given letters followed by numbers ' +
+     '(in a string)', () => {
     expect(() => {
       padSingleDigitWithZero('hello12');
     }).to
