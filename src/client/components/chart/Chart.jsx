@@ -15,10 +15,10 @@ import { addCommas } from '../../../utils/formatting/numberFormatting';
 import './chart.css';
 import {
   CHART_DATA_KEY_Y_AXIS,
-  CHART_LINE_COLOR,
   CHART_META_DATA,
   NUMBER_FORMAT_PRICE
-} from '../../../constants/utilityConstants';
+} from '../../../constants/formatting';
+import { CHART_LINE_COLOR } from '../../../constants/colors';
 
 const Chart = ({
   chartTimePeriodIndex,

@@ -20,7 +20,7 @@ import {
   QUERY_INTERVAL_ONE_DAY,
   QUERY_RANGE_FIVE_DAY,
   QUERY_RANGE_ONE_DAY
-} from '../../constants/utilityConstants';
+} from '../../constants/formatting';
 
 import {
   LABEL_CURRENT_PRICE,

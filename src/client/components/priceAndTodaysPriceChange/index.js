@@ -5,7 +5,7 @@ import PriceAndTodaysPriceChange from './PriceAndTodaysPriceChange';
 import {
   NUMBER_FORMAT_PERCENT,
   NUMBER_FORMAT_PRICE
-} from '../../../constants/utilityConstants';
+} from '../../../constants/formatting';
 import {
   LABEL_CURRENT_PRICE,
   LABEL_PREVIOUS_CLOSE

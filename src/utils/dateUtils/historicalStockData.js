@@ -1,7 +1,7 @@
 import {
   MONTHS_PER_YEAR,
   VALID_DATE_NOT_FOUND
-} from '../../constants/utilityConstants';
+} from '../../constants/formatting';
 
 import {
   calculateDateDaysInPast,

@@ -6,10 +6,10 @@ import {
 } from 'react-router-dom';
 
 import {
-  THEME_COLOR_DARK1,
   URL_GLOSSARY,
   URL_HOME
-} from '../../../constants/utilityConstants';
+} from '../../../constants/formatting';
+import { THEME_COLOR_DARK1 } from '../../../constants/colors';
 import {
   APP_NAME
 } from '../../../constants/userFacingStrings';

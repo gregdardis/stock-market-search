@@ -14,7 +14,6 @@ import {
 } from './userFacingStrings';
 
 export const CHART_DATA_KEY_Y_AXIS = 'price';
-export const CHART_LINE_COLOR = 'red';
 
 export const CHART_META_DATA = [
   {
@@ -133,9 +132,6 @@ export const QUERY_RANGE_FIVE_DAY = '5d';
 export const QUERY_RANGE_ONE_DAY = '1d';
 
 export const SEARCH_STATUS_REGION_HEIGHT = 24;
-
-export const THEME_COLOR_DARK1 = '#34414D';
-export const THEME_COLOR_MEDIUM1 = '#5998ff';
 
 export const URL_GLOSSARY = '/glossary';
 export const URL_HOME = '/';
