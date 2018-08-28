@@ -178,15 +178,12 @@ const getDatesAndTimesForOneDay = (
   dayIndex,
   gmtoffset,
   numberOfDays,
+  dateAndTimeFormat,
   timestamp,
   timestampIntervals
 ) => {
   let datesTimesAndPrices = [];
   const timestampsPerDay = timestamp.length / numberOfDays;
-  // TODO: refactor this
-  const dateAndTimeFormat = (numberOfDays === 1)
-    ? DATE_FORMAT_ONE_DAY
-    : DATE_FORMAT_FIVE_DAY;
 
   for (
     let i = getStartOfDayTimestampIndex(dayIndex, timestampsPerDay);
@@ -226,6 +223,7 @@ const getDatesTimesAndPrices = (
   close,
   gmtoffset,
   numberOfDays,
+  dateAndTimeFormat,
   timestamp,
   timestampIntervals
 ) => {
@@ -236,6 +234,7 @@ const getDatesTimesAndPrices = (
       dayIndex,
       gmtoffset,
       numberOfDays,
+      dateAndTimeFormat,
       timestamp,
       timestampIntervals
     );
@@ -245,7 +244,7 @@ const getDatesTimesAndPrices = (
 };
 
 // numberOfDays much match the range used to obtain the intradayRes.
-const getIntradayStockData = (intradayRes, numberOfDays) => {
+const getIntradayStockData = (intradayRes, numberOfDays, dateAndTimeFormat) => {
   const intradayData = JSON.parse(intradayRes);
   const result = intradayData.chart.result[0];
   const {
@@ -264,6 +263,7 @@ const getIntradayStockData = (intradayRes, numberOfDays) => {
     close,
     gmtoffset,
     numberOfDays,
+    dateAndTimeFormat,
     timestamp,
     timestampIntervals
   );
@@ -333,8 +333,8 @@ export const requestOneDayStockData = (symbol, callback) => {
   );
   rp(queryOneDay)
     .then(oneDayRes => {
-      const numberOfDays = 1;
-      callback(null, getIntradayStockData(oneDayRes, numberOfDays));
+      const oneDay = 1;
+      callback(null, getIntradayStockData(oneDayRes, oneDay, DATE_FORMAT_ONE_DAY));
     }).catch(err => {
       callback(
         generateStockDataRequestError(requestOneDayStockData.name, err)
@@ -349,8 +349,8 @@ export const requestFiveDayStockData = (symbol, callback) => {
   );
   rp(queryFiveDay)
     .then(fiveDayRes => {
-      const numberOfDays = 5;
-      callback(null, getIntradayStockData(fiveDayRes, numberOfDays));
+      const fiveDays = 5;
+      callback(null, getIntradayStockData(fiveDayRes, fiveDays, DATE_FORMAT_FIVE_DAY));
     }).catch(err => {
       callback(
         generateStockDataRequestError(requestFiveDayStockData.name, err)
