@@ -1,7 +1,7 @@
 import express from 'express';
 import async from 'async';
 
-import { errorMessageStockNotFound } from '../constants/userFacing';
+import { errorMessageStockNotFound } from '../constants/userFacingStrings';
 import {
   requestFiveDayStockData,
   requestMaxStockData,

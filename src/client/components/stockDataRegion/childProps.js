@@ -13,7 +13,7 @@ import {
   LABEL_VOLUME,
   OPTIONAL_LABEL_DIVIDEND,
   OPTIONAL_LABEL_EPS
-} from '../../../constants/userFacing';
+} from '../../../constants/userFacingStrings';
 
 const cellShouldShowBottomBorder = (cellIndex, numCells) =>
   cellIndex + 1 !== numCells;

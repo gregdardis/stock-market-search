@@ -10,18 +10,17 @@ import { formatDateForMaxStockData } from '../dateUtils';
 import {
   DATE_FORMAT_FIVE_DAY,
   DATE_FORMAT_ONE_DAY,
-  FIVE_DAYS,
-  MILLISECONDS_PER_SECOND,
   NUMBER_FORMAT_DEFAULT,
   NUMBER_FORMAT_PERCENT,
-  NUMBER_FORMAT_SHORT_SUFFIXED,
-  ONE_DAY,
+  NUMBER_FORMAT_SHORT_SUFFIXED
+} from '../../constants/formatting';
+import {
+  MILLISECONDS_PER_SECOND,
   QUERY_INTERVAL_FIVE_DAY,
   QUERY_INTERVAL_ONE_DAY,
   QUERY_RANGE_FIVE_DAY,
   QUERY_RANGE_ONE_DAY
-} from '../../constants/utilityConstants';
-
+} from '../../constants/numeric';
 import {
   LABEL_CURRENT_PRICE,
   LABEL_DIVIDEND,
@@ -34,15 +33,15 @@ import {
   LABEL_PREVIOUS_CLOSE,
   LABEL_ROE,
   LABEL_VOLUME
-} from '../../constants/userFacing';
+} from '../../constants/userFacingStrings';
 
-const calculateFcfy = (freeCashflow, marketCap) => {
+function calculateFcfy(freeCashflow, marketCap) {
   const freeCashflowNum = parseInt(freeCashflow);
   const marketCapNum = parseInt(marketCap);
   return freeCashflowNum / marketCapNum;
-};
+}
 
-const createStockDataEntry = (value, options = {}) => {
+function createStockDataEntry(value, options = {}) {
   const {
     optionalValue,
     valueFormat = NUMBER_FORMAT_DEFAULT,
@@ -54,9 +53,9 @@ const createStockDataEntry = (value, options = {}) => {
     valueFormat,
     optionalValueFormat
   };
-};
+}
 
-const processStockData = ({
+function processStockData({
   averageVolume,
   currentPrice,
   dayHigh,
@@ -71,7 +70,7 @@ const processStockData = ({
   trailingEps,
   trailingPE,
   volume
-}) => {
+}) {
   return {
     [LABEL_PREVIOUS_CLOSE]: createStockDataEntry(previousClose),
     [LABEL_CURRENT_PRICE]: createStockDataEntry(currentPrice),
@@ -116,9 +115,9 @@ const processStockData = ({
       }
     )
   };
-};
+}
 
-const createStock = stockQuote => {
+function createStock(stockQuote) {
   const {
     price,
     summaryDetail,
@@ -138,10 +137,10 @@ const createStock = stockQuote => {
       )
     )
   };
-};
+}
 
 // Used for historical() data obtained using period 'd'
-const getDatesAndPrices = dailyData => {
+function getDatesAndPrices(dailyData) {
   let datesAndPrices = [];
   dailyData.forEach(({
     date,
@@ -153,40 +152,40 @@ const getDatesAndPrices = dailyData => {
     });
   });
   return datesAndPrices;
-};
+}
 
 // NOTE: this date has timezone UTC, which is incorrect but works in this
 // case because we are just extracting the time
-const getAdjustedDateForTimestamp = (gmtoffset, timestamp) => {
+function getAdjustedDateForTimestamp(gmtoffset, timestamp) {
   const adjustedTimestamp =
     (timestamp + gmtoffset) * MILLISECONDS_PER_SECOND;
   return new Date(adjustedTimestamp);
-};
+}
 
-const getDateAndTime = (gmtoffset, timestamp, dateAndTimeFormat) => {
+function getDateAndTime(gmtoffset, timestamp, dateAndTimeFormat) {
   const dateAndTime = getAdjustedDateForTimestamp(gmtoffset, timestamp);
   return dateFormat(dateAndTime, dateAndTimeFormat, true);
-};
+}
 
-const getStartOfDayTimestampIndex = (dayIndex, timestampsPerDay) =>
-  Math.floor(dayIndex * timestampsPerDay);
+function getStartOfDayTimestampIndex(dayIndex, timestampsPerDay) {
+  return Math.floor(dayIndex * timestampsPerDay);
+}
 
-const getEndOfDayTimestampIndex = (dayIndex, timestampsPerDay) =>
-  Math.floor((dayIndex + 1) * timestampsPerDay);
+function getEndOfDayTimestampIndex(dayIndex, timestampsPerDay) {
+  return Math.floor((dayIndex + 1) * timestampsPerDay);
+}
 
-const getDatesAndTimesForOneDay = (
+function getDatesAndTimesForOneDay(
   close,
   dayIndex,
   gmtoffset,
   numberOfDays,
+  dateAndTimeFormat,
   timestamp,
   timestampIntervals
-) => {
+) {
   let datesTimesAndPrices = [];
   const timestampsPerDay = timestamp.length / numberOfDays;
-  const dateAndTimeFormat = (numberOfDays === ONE_DAY)
-    ? DATE_FORMAT_ONE_DAY
-    : DATE_FORMAT_FIVE_DAY;
 
   for (
     let i = getStartOfDayTimestampIndex(dayIndex, timestampsPerDay);
@@ -203,15 +202,16 @@ const getDatesAndTimesForOneDay = (
     });
   }
   return datesTimesAndPrices;
-};
+}
 
 // days are 0 indexed
-const getTimestampForDay = (dayIndex, meta, isStart = true) =>
+function getTimestampForDay(dayIndex, meta, isStart = true) {
   // regular consists of an array of arrays, where the first array
   // index corresponds to the day, second is always a single element array
-  meta.tradingPeriods.regular[dayIndex][0][isStart ? 'start' : 'end'];
+  return meta.tradingPeriods.regular[dayIndex][0][isStart ? 'start' : 'end'];
+}
 
-const getTimestampIntervals = (numberOfDays, meta) => {
+function getTimestampIntervals(numberOfDays, meta) {
   let timestampIntervals = [];
   for (let dayIndex = 0; dayIndex < numberOfDays; dayIndex++) {
     timestampIntervals.push({
@@ -220,15 +220,16 @@ const getTimestampIntervals = (numberOfDays, meta) => {
     });
   }
   return timestampIntervals;
-};
+}
 
-const getDatesTimesAndPrices = (
+function getDatesTimesAndPrices(
   close,
   gmtoffset,
   numberOfDays,
+  dateAndTimeFormat,
   timestamp,
   timestampIntervals
-) => {
+) {
   let datesTimesAndPrices = [];
   for (let dayIndex = 0; dayIndex < numberOfDays; dayIndex++) {
     const intervalOfDatesTimesAndPrices = getDatesAndTimesForOneDay(
@@ -236,16 +237,17 @@ const getDatesTimesAndPrices = (
       dayIndex,
       gmtoffset,
       numberOfDays,
+      dateAndTimeFormat,
       timestamp,
       timestampIntervals
     );
     datesTimesAndPrices.push(intervalOfDatesTimesAndPrices);
   }
   return flatten(datesTimesAndPrices);
-};
+}
 
 // numberOfDays much match the range used to obtain the intradayRes.
-const getIntradayStockData = (intradayRes, numberOfDays) => {
+function getIntradayStockData(intradayRes, numberOfDays, dateAndTimeFormat) {
   const intradayData = JSON.parse(intradayRes);
   const result = intradayData.chart.result[0];
   const {
@@ -264,23 +266,24 @@ const getIntradayStockData = (intradayRes, numberOfDays) => {
     close,
     gmtoffset,
     numberOfDays,
+    dateAndTimeFormat,
     timestamp,
     timestampIntervals
   );
   return datesTimesAndPrices;
-};
+}
 
-const getQueryForIntradayData = (symbol, range, interval) => {
+function getQueryForIntradayData(symbol, range, interval) {
   return `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}` +
   `?range=${range}&includePrePost=true&interval=${interval}` +
   '&corsDomain=finance.yahoo.com&.tsrc=finance';
-};
+}
 
 function generateStockDataRequestError(functionName, err) {
   return `Failed in ${functionName} with error: ${err}`;
 }
 
-export const requestQuote = (symbol, callback) => {
+export function requestQuote(symbol, callback) {
   const modules = [
     'summaryDetail',
     'defaultKeyStatistics',
@@ -304,9 +307,9 @@ export const requestQuote = (symbol, callback) => {
       generateStockDataRequestError(requestQuote.name, err)
     );
   });
-};
+}
 
-export const requestMaxStockData = (symbol, callback) => {
+export function requestMaxStockData(symbol, callback) {
   historical({
     // gets all data because we didn't specify from/to
     symbol,
@@ -323,9 +326,9 @@ export const requestMaxStockData = (symbol, callback) => {
       generateStockDataRequestError(requestMaxStockData.name, err)
     );
   });
-};
+}
 
-export const requestOneDayStockData = (symbol, callback) => {
+export function requestOneDayStockData(symbol, callback) {
   const queryOneDay = getQueryForIntradayData(
     symbol,
     QUERY_RANGE_ONE_DAY,
@@ -333,25 +336,33 @@ export const requestOneDayStockData = (symbol, callback) => {
   );
   rp(queryOneDay)
     .then(oneDayRes => {
-      callback(null, getIntradayStockData(oneDayRes, ONE_DAY));
+      const oneDay = 1;
+      callback(
+        null,
+        getIntradayStockData(oneDayRes, oneDay, DATE_FORMAT_ONE_DAY)
+      );
     }).catch(err => {
       callback(
         generateStockDataRequestError(requestOneDayStockData.name, err)
       );
     });
-};
+}
 
-export const requestFiveDayStockData = (symbol, callback) => {
+export function requestFiveDayStockData(symbol, callback) {
   const queryFiveDay = getQueryForIntradayData(symbol,
     QUERY_RANGE_FIVE_DAY,
     QUERY_INTERVAL_FIVE_DAY
   );
   rp(queryFiveDay)
     .then(fiveDayRes => {
-      callback(null, getIntradayStockData(fiveDayRes, FIVE_DAYS));
+      const fiveDays = 5;
+      callback(
+        null,
+        getIntradayStockData(fiveDayRes, fiveDays, DATE_FORMAT_FIVE_DAY)
+      );
     }).catch(err => {
       callback(
         generateStockDataRequestError(requestFiveDayStockData.name, err)
       );
     });
-};
+}

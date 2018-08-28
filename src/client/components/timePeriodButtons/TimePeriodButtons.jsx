@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import PropTypes from 'prop-types';
 
+import { CHART_META_DATA } from '../../../constants/formatting';
+import { THEME_COLOR_MEDIUM1 } from '../../../constants/colors';
 import './timePeriodButtons.css';
-import {
-  CHART_META_DATA,
-  THEME_COLOR_MEDIUM1
-} from '../../../constants/utilityConstants';
 
 class TimePeriodButtons extends Component {
   constructor(props) {

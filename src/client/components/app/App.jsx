@@ -7,7 +7,7 @@ import {
 import {
   URL_GLOSSARY,
   URL_HOME
-} from '../../../constants/utilityConstants';
+} from '../../../constants/routes';
 import Home from '../home';
 import Glossary from '../glossary';
 import NavBar from '../navBar';

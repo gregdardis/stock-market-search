@@ -1,0 +1,1 @@
+export const SEARCH_STATUS_REGION_HEIGHT = 24;
