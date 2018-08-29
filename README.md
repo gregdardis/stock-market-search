@@ -8,7 +8,7 @@ The front end tech stack includes [React](https://github.com/facebook/react), [R
 
 ## How to run
 
-1. Fork this repository.  Navigate to the project root.
+1. Clone this repository.  Navigate to the project root.
 2. Install dependencies: `npm i`
 3. In one terminal window, start server: `npm run start`
 4. In another terminal window, start client: `npm run dev`
