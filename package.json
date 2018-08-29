@@ -7,9 +7,9 @@
   },
   "license": "ISC",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --config ./config/webpack.config.dev.js",
     "clean": "rm -r node_modules && cd src/client/ && rm -r node_modules && cd ../server/ && rm -r node_modules && cd ../../",
-    "dev": "webpack-dev-server --env dev",
+    "dev": "webpack-dev-server --config ./config/webpack.config.dev.js",
     "dev:test": "npm-run-all --parallel dev test:watch",
     "postinstall": "cd src/client/ && npm i && cd ../server/ && npm i & cd ../../",
     "start": "babel-watch src/server",
