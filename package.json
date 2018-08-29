@@ -9,7 +9,12 @@
     "extension": [
       "jsx"
     ],
-    "all": true
+    "exclude": [
+      "**/constants/**",
+      "**/config/**"
+    ],
+    "all": true,
+    "temp-directory": "./coverage/.nyc_output"
   },
   "license": "ISC",
   "scripts": {
