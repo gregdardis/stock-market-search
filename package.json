@@ -7,12 +7,13 @@
   },
   "license": "ISC",
   "scripts": {
-    "clean": "rm -r node_modules",
     "build": "webpack --config ./config/webpack.config.dev.js",
+    "clean": "rm -r node_modules",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
     "dev": "webpack-dev-server --config ./config/webpack.config.dev.js",
     "dev:test": "npm-run-all --parallel dev test:watch",
     "start": "babel-watch src/server",
-    "test": "nyc mocha --opts ./mocha.opts",
+    "test": "nyc --reporter=html --reporter=text mocha --opts ./mocha.opts",
     "test:watch": "npm run test -- --watch"
   },
   "devDependencies": {
@@ -25,6 +26,7 @@
     "babel-watch": "^2.0.7",
     "chai": "^4.1.2",
     "chalk": "^2.4.1",
+    "coveralls": "^3.0.2",
     "css-loader": "^0.28.11",
     "eslint": "^4.19.1",
     "eslint-loader": "^1.9.0",
