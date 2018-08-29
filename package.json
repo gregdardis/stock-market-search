@@ -7,9 +7,9 @@
   },
   "license": "ISC",
   "scripts": {
-    "build": "webpack",
     "clean": "rm -r node_modules",
-    "dev": "webpack-dev-server",
+    "build": "webpack --config ./config/webpack.config.dev.js",
+    "dev": "webpack-dev-server --config ./config/webpack.config.dev.js",
     "dev:test": "npm-run-all --parallel dev test:watch",
     "start": "babel-watch src/server",
     "test": "mocha --opts ./mocha.opts",
