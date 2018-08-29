@@ -1,5 +1,5 @@
 # Stock Market Info  
-
+[![Coverage Status](https://coveralls.io/repos/github/gregdardis/stock-market-search/badge.svg?branch=master)](https://coveralls.io/github/gregdardis/stock-market-search?branch=master) <------- IMMEDIATE GOAL: Get this over 90%
 ## Description
 
 Stock Market Info is a web app that allows you search for stocks and view related financial information and metrics.

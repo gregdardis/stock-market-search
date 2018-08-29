@@ -10,9 +10,12 @@
       "jsx"
     ],
     "exclude": [
+      "buildScripts",
       "**/constants/**",
       "**/config/**",
-      "**/node_modules/**"
+      "**/node_modules/**",
+      "**/coverage/**",
+      "**/*.test.js"
     ],
     "all": true,
     "temp-directory": "./coverage/.nyc_output"
