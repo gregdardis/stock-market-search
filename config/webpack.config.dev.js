@@ -6,9 +6,9 @@ const webpack = require('webpack');
 
 // Constant with our paths
 const paths = {
-  DIST: path.resolve(__dirname, 'dist'),
-  SRC: path.resolve(__dirname, 'src'),
-  CLIENT: path.join(__dirname, 'src', 'client')
+  DIST: path.resolve(__dirname, '..', 'dist'),
+  SRC: path.resolve(__dirname, '..', 'src'),
+  CLIENT: path.join(__dirname, '..', 'src', 'client')
 };
 
 // Webpack configuration
