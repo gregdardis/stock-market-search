@@ -11,7 +11,8 @@
     ],
     "exclude": [
       "**/constants/**",
-      "**/config/**"
+      "**/config/**",
+      "**/node_modules/**"
     ],
     "all": true,
     "temp-directory": "./coverage/.nyc_output"
@@ -19,7 +20,6 @@
   "license": "ISC",
   "scripts": {
     "build": "webpack --config ./config/webpack.config.dev.js",
-    "clean": "rm -r node_modules",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "dev": "webpack-dev-server --config ./config/webpack.config.dev.js",
     "dev:test": "npm-run-all --parallel dev test:watch",
