@@ -12,7 +12,7 @@
     "dev": "webpack-dev-server",
     "dev:test": "npm-run-all --parallel dev test:watch",
     "start": "babel-watch src/server",
-    "test": "mocha --reporter progress buildScripts/testSetup.js \"src/**/*.test.js\"",
+    "test": "mocha --opts ./mocha.opts",
     "test:watch": "npm run test -- --watch"
   },
   "devDependencies": {
