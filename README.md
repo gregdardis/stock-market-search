@@ -1,8 +1,8 @@
-# Stock Market Info  
+# Stock Market Search 
 [![Coverage Status](https://coveralls.io/repos/github/gregdardis/stock-market-search/badge.svg?branch=master)](https://coveralls.io/github/gregdardis/stock-market-search?branch=master) <------- IMMEDIATE GOAL: Get this over 90%
 ## Description
 
-Stock Market Info is a web app that allows you search for stocks and view related financial information and metrics.
+Stock Market Search is a web app that allows you to search for stocks and view related financial information and metrics.
 
 The front end tech stack includes [React](https://github.com/facebook/react), [Redux](https://github.com/reactjs/redux), [Webpack](https://github.com/webpack/webpack), and [Babel](https://github.com/babel/babel). The server is written using [Node.js](https://github.com/nodejs/node)/[Express](https://github.com/expressjs/express). Stock data is retrieved from Yahoo Finance using [node-yahoo-finance](https://github.com/pilwon/node-yahoo-finance).
 
