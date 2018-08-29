@@ -2,9 +2,10 @@ import { MONTHS_PER_YEAR } from '../../constants/numeric';
 
 import {
   calculateDateDaysInPast,
-  calculateDateMonthsInPast,
-  formatDateForMaxStockData
-} from '.';
+  calculateDateMonthsInPast
+} from './dateCalculations';
+
+import { formatDateForMaxStockData } from './dateFormatting';
 
 export const getStockDataForPreviousMonths = (maxStockData, months) => {
   const date = new Date();

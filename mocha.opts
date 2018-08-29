@@ -1,0 +1,6 @@
+--reporter progress
+
+buildScripts/testSetup.js
+
+--recursive
+src/**/*.test.js
