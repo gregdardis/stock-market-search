@@ -5,6 +5,12 @@
     "type": "git",
     "url": "https://github.com/gregdardis/stock-market-info.git"
   },
+  "nyc": {
+    "extension": [
+      "jsx"
+    ],
+    "all": true
+  },
   "license": "ISC",
   "scripts": {
     "build": "webpack --config ./config/webpack.config.dev.js",
@@ -19,6 +25,7 @@
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
+    "babel-plugin-istanbul": "^5.0.1",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
