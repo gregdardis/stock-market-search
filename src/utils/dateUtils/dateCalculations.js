@@ -11,6 +11,10 @@ export const calculateDateDaysInPastFromToday = days => {
   return calculateDateDaysInPast(todaysDate, days);
 };
 
+// export const calculateDateDaysInPastFromToday = (todaysDate, days) => {
+//   return calculateDateDaysInPast(todaysDate, days);
+// };
+
 export const calculateDateMonthsInPast = (date, months) => {
   const currentMonth = date.getMonth();
   const newMonth = currentMonth - months;
