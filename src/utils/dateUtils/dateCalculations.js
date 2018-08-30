@@ -1,4 +1,12 @@
 export const calculateDateDaysInPast = (date, days) => {
+  const parsedDays = parseInt(days);
+  // need to check isNaN(days)
+  // because parseInt turns '12hello' into a number
+  if (isNaN(parsedDays) || isNaN(days)) {
+    throw new TypeError(
+      `${calculateDateDaysInPast.name} requires a number or numeric string.`
+    );
+  }
   const startingDate = date.getDate();
   const newDay = startingDate - days;
   let newDate = date;
