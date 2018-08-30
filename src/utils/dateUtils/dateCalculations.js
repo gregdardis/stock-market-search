@@ -19,11 +19,15 @@ export const calculateDateDaysInPastFromToday = days => {
   return calculateDateDaysInPast(todaysDate, days);
 };
 
-// export const calculateDateDaysInPastFromToday = (todaysDate, days) => {
-//   return calculateDateDaysInPast(todaysDate, days);
-// };
-
 export const calculateDateMonthsInPast = (date, months) => {
+  const parsedMonths = parseInt(months);
+  // need to check isNaN(months)
+  // because parseInt turns '12hello' into a number
+  if (isNaN(parsedMonths) || isNaN(months)) {
+    throw new TypeError(
+      `${calculateDateMonthsInPast.name} requires a number or numeric string.`
+    );
+  }
   const currentMonth = date.getMonth();
   const newMonth = currentMonth - months;
   let newDate = date;

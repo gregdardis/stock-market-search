@@ -3,7 +3,8 @@ import sinon from 'sinon';
 
 import {
   calculateDateDaysInPast,
-  calculateDateDaysInPastFromToday
+  calculateDateDaysInPastFromToday,
+  calculateDateMonthsInPast
 } from './dateCalculations';
 
 import * as dateCalculations from './dateCalculations';
@@ -13,6 +14,7 @@ const PREVIOUS_YEAR = 2017;
 
 const JANUARY = 0;
 const FEBRUARY = 1;
+const APRIL = 3;
 const DECEMBER = 11;
 
 describe('calculateDateDaysInPast', () => {
@@ -186,5 +188,132 @@ describe('calculateDateDaysInPastFromToday', () => {
       .to
       .deep
       .equal(now);
+  });
+});
+
+describe('calculateDateMonthsInPast', () => {
+  it('should properly calculate months in past', () => {
+    expect(calculateDateMonthsInPast(new Date(YEAR, APRIL, 15), 3))
+      .to
+      .deep
+      .equal(new Date(YEAR, JANUARY, 15));
+  });
+  it('should properly calculate given a string for months', () => {
+    expect(calculateDateMonthsInPast(new Date(YEAR, APRIL, 15), '3'))
+      .to
+      .deep
+      .equal(new Date(YEAR, JANUARY, 15));
+  });
+  it('should throw an error if months is an object', () => {
+    expect(() => {
+      calculateDateMonthsInPast(new Date(YEAR, JANUARY, 15), {});
+    }).to
+      .throw();
+  });
+  it('should throw an error if months is a function', () => {
+    expect(() => {
+      calculateDateMonthsInPast(
+        new Date(YEAR, JANUARY, 15),
+        () => console.log('a function')
+      );
+    }).to
+      .throw();
+  });
+  it('should throw an error if months is null', () => {
+    expect(() => {
+      calculateDateMonthsInPast(new Date(YEAR, JANUARY, 15), null);
+    }).to
+      .throw();
+  });
+  it('should throw an error if months is an array', () => {
+    expect(() => {
+      calculateDateMonthsInPast(new Date(YEAR, JANUARY, 15), []);
+    }).to
+      .throw();
+  });
+  it('should throw an error if months is a boolean', () => {
+    expect(() => {
+      calculateDateMonthsInPast(new Date(YEAR, JANUARY, 15), true);
+    }).to
+      .throw();
+  });
+  it('should throw an error if months is a non-numeric string', () => {
+    expect(() => {
+      calculateDateMonthsInPast(new Date(YEAR, JANUARY, 15), 'hello');
+    }).to
+      .throw();
+  });
+  it('should throw an error if months is letters followed by numbers', () => {
+    expect(() => {
+      calculateDateMonthsInPast(new Date(YEAR, JANUARY, 15), 'h15');
+    }).to
+      .throw();
+  });
+  it('should throw an error if months is numbers followed by letters', () => {
+    expect(() => {
+      calculateDateMonthsInPast(new Date(YEAR, JANUARY, 15), '15h');
+    }).to
+      .throw();
+  });
+  it('should throw an error if date is an object', () => {
+    expect(() => {
+      calculateDateMonthsInPast({}, 5);
+    }).to
+      .throw();
+  });
+  it('should throw an error if date is a function', () => {
+    expect(() => {
+      calculateDateMonthsInPast(() => console.log('a function'), 5);
+    }).to
+      .throw();
+  });
+  it('should throw an error if date is null', () => {
+    expect(() => {
+      calculateDateMonthsInPast(null, 5);
+    }).to
+      .throw();
+  });
+  it('should throw an error if date is an array', () => {
+    expect(() => {
+      calculateDateMonthsInPast([], 5);
+    }).to
+      .throw();
+  });
+  it('should throw an error if date is a boolean', () => {
+    expect(() => {
+      calculateDateMonthsInPast(true, 5);
+    }).to
+      .throw();
+  });
+  it('should throw an error if date is a non-numeric string', () => {
+    expect(() => {
+      calculateDateMonthsInPast('hello', 5);
+    }).to
+      .throw();
+  });
+  it('should throw an error if date is letters followed by numbers', () => {
+    expect(() => {
+      calculateDateMonthsInPast('h15', 5);
+    }).to
+      .throw();
+  });
+  it('should throw an error if date is numbers followed by letters', () => {
+    expect(() => {
+      calculateDateMonthsInPast('15h', 5);
+    }).to
+      .throw();
+  });
+  it('should properly calculate months before first month of year', () => {
+    expect(calculateDateMonthsInPast(new Date(YEAR, JANUARY, 5), 1))
+      .to
+      .deep
+      .equal(new Date(PREVIOUS_YEAR, DECEMBER, 5));
+  });
+  it('should properly calculate into the future for a ' +
+  'negative number of months in the past', () => {
+    expect(calculateDateMonthsInPast(new Date(YEAR, JANUARY, 10), -3))
+      .to
+      .deep
+      .equal(new Date(YEAR, APRIL, 10));
   });
 });
