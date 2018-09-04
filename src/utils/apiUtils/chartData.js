@@ -35,13 +35,24 @@ import {
   LABEL_VOLUME
 } from '../../constants/userFacingStrings';
 
-function calculateFcfy(freeCashflow, marketCap) {
+// returns a decimal, multiply by 100 for a percentage
+export function calculateFcfy(freeCashflow, marketCap) {
   const freeCashflowNum = parseInt(freeCashflow);
   const marketCapNum = parseInt(marketCap);
-  return freeCashflowNum / marketCapNum;
+  // must check isNaN for original parameters
+  // because parseInt turns '12hello' into 12
+  if (isNaN(freeCashflowNum)
+      || isNaN(freeCashflow)
+      || isNaN(marketCapNum)
+      || isNaN(marketCap)) {
+    throw new TypeError(
+      `${calculateFcfy.name} requires a number or numeric string.`
+    );
+  }
+  return marketCapNum > 0 ? (freeCashflowNum / marketCapNum) : 0;
 }
 
-function createStockDataEntry(value, options = {}) {
+export function createStockDataEntry(value, options = {}) {
   const {
     optionalValue,
     valueFormat = NUMBER_FORMAT_DEFAULT,
