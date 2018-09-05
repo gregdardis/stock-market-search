@@ -1,9 +1,12 @@
 import { expect } from 'chai';
+import sinon from 'sinon';
 
 import {
   calculateFcfy,
   createStockDataEntry
 } from './chartData';
+
+import * as typeChecking from '../typeChecking';
 
 import {
   NUMBER_FORMAT_DEFAULT
@@ -157,6 +160,19 @@ describe('calculateFcfy', () => {
 });
 
 describe('createStockDataEntry', () => {
+  let isStringStub;
+
+  beforeEach(function () {
+    isStringStub = sinon.stub(
+      typeChecking, 'isString'
+    );
+    isStringStub.returns(true);
+  });
+
+  afterEach(function () {
+    isStringStub.restore();
+  });
+
   it('creates a data entry given only value', () => {
     expect(createStockDataEntry(15))
       .to
@@ -330,24 +346,28 @@ describe('createStockDataEntry', () => {
   });
   it('throws an error if valueFormat is an object', () => {
     expect(() => {
+      isStringStub.returns(false);
       createStockDataEntry(15, { valueFormat: {} });
     }).to
       .throw();
   });
   it('throws an error if valueFormat is an array', () => {
     expect(() => {
+      isStringStub.returns(false);
       createStockDataEntry(15, { valueFormat: [] });
     }).to
       .throw();
   });
   it('throws an error if valueFormat is a boolean', () => {
     expect(() => {
+      isStringStub.returns(false);
       createStockDataEntry(15, { valueFormat: true });
     }).to
       .throw();
   });
   it('throws an error if valueFormat is a function', () => {
     expect(() => {
+      isStringStub.returns(false);
       createStockDataEntry(
         15,
         { valueFormat: () => console.log('a function') }
@@ -357,24 +377,28 @@ describe('createStockDataEntry', () => {
   });
   it('throws an error if optionalValueFormat is an object', () => {
     expect(() => {
+      isStringStub.returns(false);
       createStockDataEntry(15, { optionalValueFormat: {} });
     }).to
       .throw();
   });
   it('throws an error if optionalValueFormat is an array', () => {
     expect(() => {
+      isStringStub.returns(false);
       createStockDataEntry(15, { optionalValueFormat: [] });
     }).to
       .throw();
   });
   it('throws an error if optionalValueFormat is a boolean', () => {
     expect(() => {
+      isStringStub.returns(false);
       createStockDataEntry(15, { optionalValueFormat: true });
     }).to
       .throw();
   });
   it('throws an error if optionalValueFormat is a function', () => {
     expect(() => {
+      isStringStub.returns(false);
       createStockDataEntry(
         15,
         { optionalValueFormat: () => console.log('a function') }
