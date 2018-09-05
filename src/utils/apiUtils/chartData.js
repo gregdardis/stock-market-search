@@ -34,6 +34,7 @@ import {
   LABEL_ROE,
   LABEL_VOLUME
 } from '../../constants/userFacingStrings';
+import { isString } from '../typeChecking';
 
 // returns a decimal, multiply by 100 for a percentage
 export function calculateFcfy(freeCashflow, marketCap) {
@@ -44,7 +45,8 @@ export function calculateFcfy(freeCashflow, marketCap) {
   if (isNaN(freeCashflowNum)
       || isNaN(freeCashflow)
       || isNaN(marketCapNum)
-      || isNaN(marketCap)) {
+      || isNaN(marketCap)
+  ) {
     throw new TypeError(
       `${calculateFcfy.name} requires a number or numeric string.`
     );
@@ -78,24 +80,20 @@ export function createStockDataEntry(value, options = {}) {
     }
   }
 
-  if (
-    typeof valueFormat !== 'string'
-    && !(valueFormat instanceof String)
-  ) {
+  if (!isString(valueFormat)) {
     throw new TypeError(
       `${createStockDataEntry.name} requires a string for ` +
       'the valueFormat option'
     );
   }
-  if (
-    typeof optionalValueFormat !== 'string'
-    && !(optionalValueFormat instanceof String)
-  ) {
+
+  if (!isString(optionalValueFormat)) {
     throw new TypeError(
       `${createStockDataEntry.name} requires a string for ` +
       'the optionalValueFormat option'
     );
   }
+
   return {
     value: parsedValue,
     optionalValue: parsedOptionalValue,
@@ -104,7 +102,8 @@ export function createStockDataEntry(value, options = {}) {
   };
 }
 
-function processStockData({
+// TODO: test. stub createStockDataEntry
+export function processStockData({
   averageVolume,
   currentPrice,
   dayHigh,
