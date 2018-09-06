@@ -206,22 +206,22 @@ export function getDatesAndPrices(dailyData) {
 
 // NOTE: this date has timezone UTC, which is incorrect but works in this
 // case because we are just extracting the time
-function getAdjustedDateForTimestamp(gmtoffset, timestamp) {
+export function getAdjustedDateForTimestamp(gmtoffset, timestamp) {
   const adjustedTimestamp =
     (timestamp + gmtoffset) * MILLISECONDS_PER_SECOND;
   return new Date(adjustedTimestamp);
 }
 
-function getDateAndTime(gmtoffset, timestamp, dateAndTimeFormat) {
+export function getDateAndTime(gmtoffset, timestamp, dateAndTimeFormat) {
   const dateAndTime = getAdjustedDateForTimestamp(gmtoffset, timestamp);
   return dateFormat(dateAndTime, dateAndTimeFormat, true);
 }
 
-function getStartOfDayTimestampIndex(dayIndex, timestampsPerDay) {
+export function getStartOfDayTimestampIndex(dayIndex, timestampsPerDay) {
   return Math.floor(dayIndex * timestampsPerDay);
 }
 
-function getEndOfDayTimestampIndex(dayIndex, timestampsPerDay) {
+export function getEndOfDayTimestampIndex(dayIndex, timestampsPerDay) {
   return Math.floor((dayIndex + 1) * timestampsPerDay);
 }
 
