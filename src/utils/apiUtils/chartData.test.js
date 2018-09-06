@@ -18,11 +18,11 @@ import {
 } from '../../constants/userFacingStrings';
 
 import * as typeChecking from '../typeChecking';
-import chartDataModule from './chartData';
 import {
   calculateFcfy,
   createStock,
   createStockDataEntry,
+  getDatesAndPrices,
   processStockData,
   __RewireAPI__ as chartDataModuleRewireAPI
 } from './chartData';
@@ -427,7 +427,6 @@ describe('createStockDataEntry', () => {
   });
 });
 
-// TODO: figure out how to stub createStockDataEntry
 describe('processStockData', () => {
   const VALUE_PREVIOUS_CLOSE = 1;
   const OPTIONAL_VALUE_PREVIOUS_CLOSE = 2;
@@ -622,4 +621,45 @@ describe('createStock', function() {
       });
     chartDataModuleRewireAPI.__ResetDependency__('processStockData');
   });
+});
+
+describe('getDatesAndPrices', function() {
+  const DAILY_DATA_1 = [
+    {
+      date: 'date1',
+      close: 'price1'
+    },
+    {
+      date: 'date2',
+      close: 'price2'
+    }
+  ];
+  it('properly gets dates and prices for dailyData with 2 entries', function() {
+    chartDataModuleRewireAPI.__Rewire__(
+      'formatDateForMaxStockData',
+      function() {
+        return 'date!!';
+      }
+    );
+    expect(getDatesAndPrices(DAILY_DATA_1))
+      .to
+      .deep
+      .equal([
+        {
+          date: 'date!!',
+          price: 'price2'
+        },
+        {
+          date: 'date!!',
+          price: 'price1'
+        }
+      ]);
+  });
+  it('returns an empty array if dailyData is null', function() {
+    expect(getDatesAndPrices(null))
+      .to
+      .deep
+      .equal([]);
+  });
+  chartDataModuleRewireAPI.__ResetDependency__('formatDateForMaxStockData');
 });

@@ -188,17 +188,19 @@ export function createStock(stockQuote) {
 }
 
 // Used for historical() data obtained using period 'd'
-function getDatesAndPrices(dailyData) {
+export function getDatesAndPrices(dailyData) {
   let datesAndPrices = [];
-  dailyData.forEach(({
-    date,
-    close
-  }) => {
-    datesAndPrices.unshift({
-      date: formatDateForMaxStockData(date),
-      price: close
+  if (dailyData) {
+    dailyData.forEach(({
+      date,
+      close
+    }) => {
+      datesAndPrices.unshift({
+        date: formatDateForMaxStockData(date),
+        price: close
+      });
     });
-  });
+  }
   return datesAndPrices;
 }
 
