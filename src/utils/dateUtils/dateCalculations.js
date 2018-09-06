@@ -1,4 +1,4 @@
-export const calculateDateDaysInPast = (date, days) => {
+export function calculateDateDaysInPast(date, days) {
   const parsedDays = parseInt(days);
   // need to check isNaN(days)
   // because parseInt turns '12hello' into a number
@@ -12,14 +12,14 @@ export const calculateDateDaysInPast = (date, days) => {
   let newDate = date;
   newDate.setDate(newDay);
   return newDate;
-};
+}
 
-export const calculateDateDaysInPastFromToday = days => {
+export function calculateDateDaysInPastFromToday(days) {
   const todaysDate = new Date();
   return calculateDateDaysInPast(todaysDate, days);
-};
+}
 
-export const calculateDateMonthsInPast = (date, months) => {
+export function calculateDateMonthsInPast(date, months) {
   const parsedMonths = parseInt(months);
   // need to check isNaN(months)
   // because parseInt turns '12hello' into a number
@@ -33,4 +33,4 @@ export const calculateDateMonthsInPast = (date, months) => {
   let newDate = date;
   newDate.setMonth(newMonth);
   return newDate;
-};
+}
