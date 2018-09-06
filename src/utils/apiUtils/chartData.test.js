@@ -428,7 +428,7 @@ describe('createStockDataEntry', () => {
 });
 
 // TODO: figure out how to stub createStockDataEntry
-// describe('processStockData', () => {
+describe('processStockData', () => {
 //   const VALUE_PREVIOUS_CLOSE = 1;
 //   const OPTIONAL_VALUE_PREVIOUS_CLOSE = 2;
 //   const VALUE_CURRENT_PRICE = 3;
@@ -594,7 +594,35 @@ describe('createStockDataEntry', () => {
 //         [LABEL_FCFY]: FCFY_STOCK_DATA_ENTRY
 //       });
 //   });
-// });
+  it('stubs inner function properly', function() {
+    // must do this for some reason even though calculateFcfy
+    // shouldn't be called because createStockDataEntry is stubbed...
+    chartDataModuleRewireAPI.__Rewire__('calculateFcfy', function() {
+      return 0;
+    });
+    chartDataModuleRewireAPI.__Rewire__('createStockDataEntry', function() {
+      return 1;
+    });
+    expect(processStockData(5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5))
+      .to
+      .deep
+      .equal({
+        [LABEL_PREVIOUS_CLOSE]: 1,
+        [LABEL_CURRENT_PRICE]: 1,
+        [LABEL_OPEN]: 1,
+        [LABEL_HIGH]: 1,
+        [LABEL_LOW]: 1,
+        [LABEL_DIVIDEND]: 1,
+        [LABEL_MARKET_CAP]: 1,
+        [LABEL_VOLUME]: 1,
+        [LABEL_PE_RATIO]: 1,
+        [LABEL_ROE]: 1,
+        [LABEL_FCFY]: 1
+      });
+    chartDataModuleRewireAPI.__ResetDependency__('createStockDataEntry');
+    chartDataModuleRewireAPI.__ResetDependency__('calculateFcfy');
+  });
+});
 
 describe('createStock', function() {
   const STOCK_QUOTE = {
