@@ -177,7 +177,7 @@
     "sort-vars": 0, // sort variables within the same declaration block (off by default)
     "keyword-spacing": [2, { "before": true }], // require a space after certain keywords (off by default)
     "space-before-blocks": [1, "always"], // require or disallow space before blocks (off by default)
-    "space-before-function-paren": [1, {"anonymous": "always", "named": "never"}], // require or disallow space before function opening parenthesis (off by default)
+    "space-before-function-paren": [0, {"anonymous": "always", "named": "never"}], // require or disallow space before function opening parenthesis (off by default)
     "object-curly-spacing": [1, "always"],
     "array-bracket-spacing": [1, "never"],
     "computed-property-spacing": [1, "never"],

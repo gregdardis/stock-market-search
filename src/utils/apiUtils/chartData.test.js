@@ -3,6 +3,7 @@ import sinon from 'sinon';
 
 import {
   calculateFcfy,
+  createStock,
   createStockDataEntry,
   processStockData
 } from './chartData';
@@ -424,6 +425,7 @@ describe('createStockDataEntry', () => {
   });
 });
 
+// TODO: figure out how to stub createStockDataEntry
 // describe('processStockData', () => {
 //   const VALUE_PREVIOUS_CLOSE = 1;
 //   const OPTIONAL_VALUE_PREVIOUS_CLOSE = 2;
@@ -590,5 +592,28 @@ describe('createStockDataEntry', () => {
 //         [LABEL_FCFY]: FCFY_STOCK_DATA_ENTRY
 //       });
 //   });
-  
 // });
+
+// describe('createStock', function() {
+//   const STOCK_QUOTE = {
+//     price: {
+//       shortName: 'stockName',
+//       symbol: 'SN',
+//       exchangeName: 'NYSE'
+//     },
+//     summaryDetail: {},
+//     financialData: {},
+//     defaultKeyStatistics: {}
+//   };
+//   it('creates a stock given expected inputs', function() {
+//     expect(createStock(STOCK_QUOTE))
+//       .to
+//       .equal({
+//         companyName: 'stockName',
+//         symbol: 'SN',
+//         exchange: 'NYSE',
+//         stockOverviewData: // TODO: stub in processStockData() return value
+//       });
+//   });
+// });
+

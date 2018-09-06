@@ -165,7 +165,7 @@ export function processStockData({
   };
 }
 
-function createStock(stockQuote) {
+export function createStock(stockQuote) {
   const {
     price,
     summaryDetail,
