@@ -4,10 +4,11 @@ import sinon from 'sinon';
 import {
   calculateDateDaysInPast,
   calculateDateDaysInPastFromToday,
-  calculateDateMonthsInPast
+  calculateDateMonthsInPast,
+  __RewireAPI__ as dateCalculationsModuleRewireAPI
 } from './dateCalculations';
 
-import * as dateCalculations from './dateCalculations';
+// import * as dateCalculations from './dateCalculations';
 
 const YEAR = 2018;
 const PREVIOUS_YEAR = 2017;
@@ -156,14 +157,17 @@ describe('calculateDateDaysInPastFromToday', () => {
 
   beforeEach(function () {
     clock = sinon.useFakeTimers(new Date());
-    calculateDateDaysInPastStub = sinon.stub(
-      dateCalculations, 'calculateDateDaysInPast'
+    calculateDateDaysInPastStub = sinon.stub();
+    dateCalculationsModuleRewireAPI.__Rewire__(
+      'calculateDateDaysInPast',
+      calculateDateDaysInPastStub
     );
   });
 
   afterEach(function () {
     clock.restore();
-    calculateDateDaysInPastStub.restore();
+    dateCalculationsModuleRewireAPI
+      .__ResetDependency__('calculateDateDaysInPast');
   });
 
   it('should properly calculate 1 day before today', () => {

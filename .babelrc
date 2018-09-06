@@ -11,6 +11,7 @@
   ],
   "plugins": [
     "react-hot-loader/babel",
-    "emotion"
+    "emotion",
+    "rewire"
   ]
 }
