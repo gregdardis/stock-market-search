@@ -1,14 +1,4 @@
-// TODO: move this to helper function file (containing isString)
-// once this branch and test-chart-data branch are merged
-// TODO: test this
-function parseIntExact(val) {
-  const parsedVal = parseInt(val);
-  // TODO: check if isNaN(parsedVal) is really required (by writing tests)
-  if (isNaN(val)) {
-    return null;
-  }
-  return parsedVal;
-}
+import { parseIntExact } from '../typeChecking';
 
 export function calculateDateDaysInPast(date, days) {
   const parsedDays = parseIntExact(days);
