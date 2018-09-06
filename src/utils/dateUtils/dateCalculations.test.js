@@ -8,8 +8,6 @@ import {
   __RewireAPI__ as dateCalculationsModuleRewireAPI
 } from './dateCalculations';
 
-// import * as dateCalculations from './dateCalculations';
-
 const YEAR = 2018;
 const PREVIOUS_YEAR = 2017;
 

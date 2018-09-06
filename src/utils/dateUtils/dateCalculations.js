@@ -2,8 +2,6 @@ import { parseIntExact } from '../typeChecking';
 
 export function calculateDateDaysInPast(date, days) {
   const parsedDays = parseIntExact(days);
-  // need to check isNaN(days)
-  // because parseInt turns '12hello' into a number
   if (!parsedDays) {
     throw new TypeError(
       `${calculateDateDaysInPast.name} requires a number or numeric string.`
@@ -22,10 +20,8 @@ export function calculateDateDaysInPastFromToday(days) {
 }
 
 export function calculateDateMonthsInPast(date, months) {
-  const parsedMonths = parseInt(months);
-  // need to check isNaN(months)
-  // because parseInt turns '12hello' into a number
-  if (isNaN(parsedMonths) || isNaN(months)) {
+  const parsedMonths = parseIntExact(months);
+  if (!parsedMonths) {
     throw new TypeError(
       `${calculateDateMonthsInPast.name} requires a number or numeric string.`
     );
