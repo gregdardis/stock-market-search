@@ -1,12 +1,7 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-import {
-  calculateFcfy,
-  createStock,
-  createStockDataEntry,
-  processStockData
-} from './chartData';
+
 
 import {
   LABEL_PREVIOUS_CLOSE,
@@ -23,7 +18,14 @@ import {
 } from '../../constants/userFacingStrings';
 
 import * as typeChecking from '../typeChecking';
-import * as chartData from './chartData';
+import chartDataModule from './chartData';
+import {
+  calculateFcfy,
+  createStock,
+  createStockDataEntry,
+  processStockData,
+  __RewireAPI__ as chartDataModuleRewireAPI
+} from './chartData';
 
 import {
   NUMBER_FORMAT_DEFAULT
@@ -594,26 +596,30 @@ describe('createStockDataEntry', () => {
 //   });
 // });
 
-// describe('createStock', function() {
-//   const STOCK_QUOTE = {
-//     price: {
-//       shortName: 'stockName',
-//       symbol: 'SN',
-//       exchangeName: 'NYSE'
-//     },
-//     summaryDetail: {},
-//     financialData: {},
-//     defaultKeyStatistics: {}
-//   };
-//   it('creates a stock given expected inputs', function() {
-//     expect(createStock(STOCK_QUOTE))
-//       .to
-//       .equal({
-//         companyName: 'stockName',
-//         symbol: 'SN',
-//         exchange: 'NYSE',
-//         stockOverviewData: // TODO: stub in processStockData() return value
-//       });
-//   });
-// });
-
+describe('createStock', function() {
+  const STOCK_QUOTE = {
+    price: {
+      shortName: 'stockName',
+      symbol: 'SN',
+      exchangeName: 'NYSE'
+    },
+    summaryDetail: {},
+    financialData: {},
+    defaultKeyStatistics: {}
+  };
+  it('creates a stock given expected inputs', function() {
+    chartDataModuleRewireAPI.__Rewire__('processStockData', function() {
+      return {};
+    });
+    expect(createStock(STOCK_QUOTE))
+      .to
+      .deep
+      .equal({
+        companyName: 'stockName',
+        symbol: 'SN',
+        exchange: 'NYSE',
+        stockOverviewData: {}
+      });
+    chartDataModuleRewireAPI.__ResetDependency__('processStockData');
+  });
+});
