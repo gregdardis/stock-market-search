@@ -159,6 +159,22 @@ describe('calculateDateDaysInPast', () => {
     }).to
       .throw();
   });
+  it('should throw an error if date is an object with getDate ' +
+     'and setDate methods', () => {
+    const trickyDate = {
+      getDate: function() {
+        console.log('getting date...')
+      },
+      setDate: function() {
+        console.log('setting date...')
+      }
+    };
+    parseIntExactStub.returns(5);
+    expect(() => {
+      calculateDateDaysInPast(trickyDate, 5);
+    }).to
+      .throw();
+  });
   it('should properly calculate days before first of month', () => {
     parseIntExactStub.returns(2);
     expect(calculateDateDaysInPast(new Date(YEAR, FEBRUARY, 1), 2))

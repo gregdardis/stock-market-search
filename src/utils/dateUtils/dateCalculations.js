@@ -4,8 +4,13 @@ export function calculateDateDaysInPast(date, days) {
   const parsedDays = parseIntExact(days);
   if (!parsedDays) {
     throw new TypeError(
-      `${calculateDateDaysInPast.name} requires a number or numeric string.`
+      `${calculateDateDaysInPast.name} requires a number or numeric string for "days" parameter.`
     );
+  }
+  if (Object.prototype.toString.call(date) !== '[object Date]') {
+    throw new TypeError(
+      `${calculateDateDaysInPast.name} requires a Date for "date" parameter.`
+    )
   }
   const startingDate = date.getDate();
   const newDay = startingDate - parsedDays;
