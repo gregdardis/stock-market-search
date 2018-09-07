@@ -10,7 +10,6 @@ import { formatDateForMaxStockData } from '../dateUtils/dateFormatting';
 import {
   DATE_FORMAT_FIVE_DAY,
   DATE_FORMAT_ONE_DAY,
-  NUMBER_FORMAT_DEFAULT,
   NUMBER_FORMAT_PERCENT,
   NUMBER_FORMAT_SHORT_SUFFIXED
 } from '../../constants/formatting';
@@ -35,69 +34,10 @@ import {
   LABEL_VOLUME
 } from '../../constants/userFacingStrings';
 import {
-  isString,
   parseIntExact
 } from '../typeChecking';
-
-// returns a decimal, multiply by 100 for a percentage
-export function calculateFcfy(freeCashflow, marketCap) {
-  const parsedFreeCashflow = parseIntExact(freeCashflow);
-  const parsedMarketCap = parseIntExact(marketCap);
-  if (parsedFreeCashflow == null || parsedMarketCap == null) {
-    throw new TypeError(
-      `${calculateFcfy.name} requires a number or numeric string.`
-    );
-  }
-  return parsedMarketCap > 0 ? (parsedFreeCashflow / parsedMarketCap) : 0;
-}
-
-export function createStockDataEntry(value, options = {}) {
-  const parsedValue = parseInt(value);
-  if (isNaN(value) || isNaN(parsedValue)) {
-    throw new TypeError(
-      `${createStockDataEntry.name} requires a number ` +
-      'for the value parameter.'
-    );
-  }
-
-  const {
-    optionalValue,
-    valueFormat = NUMBER_FORMAT_DEFAULT,
-    optionalValueFormat = NUMBER_FORMAT_DEFAULT
-  } = options;
-
-  let parsedOptionalValue;
-  if (optionalValue) {
-    parsedOptionalValue = parseInt(optionalValue);
-    if (isNaN(optionalValue) || isNaN(parsedOptionalValue)) {
-      throw new TypeError(
-        `${createStockDataEntry.name} requires a number ` +
-        'for the optionalValue option.'
-      );
-    }
-  }
-
-  if (!isString(valueFormat)) {
-    throw new TypeError(
-      `${createStockDataEntry.name} requires a string for ` +
-      'the valueFormat option'
-    );
-  }
-
-  if (!isString(optionalValueFormat)) {
-    throw new TypeError(
-      `${createStockDataEntry.name} requires a string for ` +
-      'the optionalValueFormat option'
-    );
-  }
-
-  return {
-    value: parsedValue,
-    optionalValue: parsedOptionalValue,
-    valueFormat,
-    optionalValueFormat
-  };
-}
+import { calculateFcfy } from '../stockDataUtils/calculations';
+import { createStockDataEntry } from '../stockDataUtils/dataEntryCreation';
 
 // TODO: test. stub createStockDataEntry
 export function processStockData({
