@@ -9,9 +9,7 @@ import dateFormat from 'dateformat';
 import { formatDateForMaxStockData } from '../dateUtils/dateFormatting';
 import {
   DATE_FORMAT_FIVE_DAY,
-  DATE_FORMAT_ONE_DAY,
-  NUMBER_FORMAT_PERCENT,
-  NUMBER_FORMAT_SHORT_SUFFIXED
+  DATE_FORMAT_ONE_DAY
 } from '../../constants/formatting';
 import {
   MILLISECONDS_PER_SECOND,
@@ -21,86 +19,9 @@ import {
   QUERY_RANGE_ONE_DAY
 } from '../../constants/numeric';
 import {
-  LABEL_CURRENT_PRICE,
-  LABEL_DIVIDEND,
-  LABEL_FCFY,
-  LABEL_HIGH,
-  LABEL_LOW,
-  LABEL_MARKET_CAP,
-  LABEL_OPEN,
-  LABEL_PE_RATIO,
-  LABEL_PREVIOUS_CLOSE,
-  LABEL_ROE,
-  LABEL_VOLUME
-} from '../../constants/userFacingStrings';
-import {
   parseIntExact
 } from '../typeChecking';
-import { calculateFcfy } from '../stockDataUtils/calculations';
-import { createStockDataEntry } from '../stockDataUtils/dataEntryCreation';
-
-// TODO: test. stub createStockDataEntry
-export function processStockData({
-  averageVolume,
-  currentPrice,
-  dayHigh,
-  dayLow,
-  dividendRate,
-  dividendYield,
-  freeCashflow,
-  marketCap,
-  open,
-  previousClose,
-  returnOnEquity,
-  trailingEps,
-  trailingPE,
-  volume
-}) {
-  return {
-    [LABEL_PREVIOUS_CLOSE]: createStockDataEntry(previousClose),
-    [LABEL_CURRENT_PRICE]: createStockDataEntry(currentPrice),
-    [LABEL_OPEN]: createStockDataEntry(open),
-    [LABEL_HIGH]: createStockDataEntry(dayHigh),
-    [LABEL_LOW]: createStockDataEntry(dayLow),
-    [LABEL_DIVIDEND]: createStockDataEntry(
-      dividendRate,
-      {
-        optionalValue: dividendYield,
-        optionalValueFormat: NUMBER_FORMAT_PERCENT
-      }
-    ),
-    [LABEL_MARKET_CAP]: createStockDataEntry(marketCap,
-      {
-        valueFormat: NUMBER_FORMAT_SHORT_SUFFIXED
-      }),
-    [LABEL_VOLUME]: createStockDataEntry(
-      volume,
-      {
-        valueFormat: NUMBER_FORMAT_SHORT_SUFFIXED,
-        optionalValue: averageVolume,
-        optionalValueFormat: NUMBER_FORMAT_SHORT_SUFFIXED
-      }
-    ),
-    [LABEL_PE_RATIO]: createStockDataEntry(
-      trailingPE,
-      {
-        optionalValue: trailingEps
-      }
-    ),
-    [LABEL_ROE]: createStockDataEntry(
-      returnOnEquity,
-      {
-        valueFormat: NUMBER_FORMAT_PERCENT
-      }
-    ),
-    [LABEL_FCFY]: createStockDataEntry(
-      calculateFcfy(freeCashflow, marketCap),
-      {
-        valueFormat: NUMBER_FORMAT_PERCENT
-      }
-    )
-  };
-}
+import { processStockData } from '../stockDataUtils/dataProcessing';
 
 export function createStock(stockQuote) {
   const {
