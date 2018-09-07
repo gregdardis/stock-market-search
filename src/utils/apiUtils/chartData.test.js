@@ -2,7 +2,6 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import dateFormat from 'dateformat';
 
-
 import * as typeChecking from '../typeChecking';
 import {
   getAdjustedDateForTimestamp,
@@ -13,30 +12,6 @@ import {
 } from './chartData';
 
 /* eslint-disable no-undefined */
-
-// describe('createStock', function() {
-//   const STOCK_QUOTE = {
-//     price: {
-//       shortName: 'stockName',
-//       symbol: 'SN',
-//       exchangeName: 'NYSE'
-//     },
-//     summaryDetail: {},
-//     financialData: {},
-//     defaultKeyStatistics: {}
-//   };
-//   it('creates a stock given expected inputs', function() {
-//     expect(createStock(STOCK_QUOTE))
-//       .to
-//       .deep
-//       .equal({
-//         companyName: 'stockName',
-//         symbol: 'SN',
-//         exchange: 'NYSE',
-//         stockOverviewData: {}
-//       });
-//   });
-// });
 
 // describe('getDatesAndPrices', function() {
 //   const DAILY_DATA_1 = [

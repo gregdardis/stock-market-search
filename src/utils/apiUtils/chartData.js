@@ -21,29 +21,8 @@ import {
 import {
   parseIntExact
 } from '../typeChecking';
-import { processStockData } from '../stockDataUtils/dataProcessing';
 
-export function createStock(stockQuote) {
-  const {
-    price,
-    summaryDetail,
-    financialData,
-    defaultKeyStatistics
-  } = stockQuote;
-  return {
-    companyName: price.shortName,
-    symbol: price.symbol,
-    exchange: price.exchangeName,
-    stockOverviewData: processStockData(
-      Object.assign(
-        {},
-        summaryDetail,
-        financialData,
-        defaultKeyStatistics
-      )
-    )
-  };
-}
+import { createStock } from '../stockDataUtils/stockCreation';
 
 // Used for historical() data obtained using period 'd'
 export function getDatesAndPrices(dailyData) {
