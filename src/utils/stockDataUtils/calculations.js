@@ -4,6 +4,7 @@ import { parseIntExact } from '../typeChecking';
 export function calculateFcfy(freeCashflow, marketCap) {
   const parsedFreeCashflow = parseIntExact(freeCashflow);
   const parsedMarketCap = parseIntExact(marketCap);
+  /* eslint-disable-next-line eqeqeq */
   if (parsedFreeCashflow == null || parsedMarketCap == null) {
     throw new TypeError(
       `${calculateFcfy.name} requires a number or numeric string.`

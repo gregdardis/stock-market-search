@@ -172,7 +172,7 @@ describe('processStockData', () => {
   it('processes stock data', function() {
     // parameters don't matter, every parameter given to processStockData
     // is passed to a function that is stubbed in this test
-    expect(processStockData(5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5))
+    expect(processStockData({}))
       .to
       .deep
       .equal({

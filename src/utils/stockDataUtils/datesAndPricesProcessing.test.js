@@ -29,6 +29,7 @@ describe('getDatesAndPrices', function() {
   afterEach(function() {
     formatDateForMaxStockDataStub.restore();
   });
+  
   it('properly gets dates and prices for dailyData with 2 entries', function() {
     expect(getDatesAndPrices(DAILY_DATA_1))
       .to

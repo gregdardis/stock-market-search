@@ -2,6 +2,7 @@ import { parseIntExact } from '../typeChecking';
 
 export function calculateDateDaysInPast(date, days) {
   const parsedDays = parseIntExact(days);
+  /* eslint-disable-next-line eqeqeq */
   if (parsedDays == null) {
     throw new TypeError(
       `${calculateDateDaysInPast.name} requires a number or ` +
@@ -27,6 +28,7 @@ export function calculateDateDaysInPastFromToday(days) {
 
 export function calculateDateMonthsInPast(date, months) {
   const parsedMonths = parseIntExact(months);
+  /* eslint-disable-next-line eqeqeq */
   if (parsedMonths == null) {
     throw new TypeError(
       `${calculateDateMonthsInPast.name} requires a number or numeric string.`
