@@ -9,7 +9,6 @@ import {
 } from './dateCalculations';
 
 import * as typeChecking from '../typeChecking';
-import * as dateCalculations from './dateCalculations';
 
 const YEAR = 2018;
 const PREVIOUS_YEAR = 2017;
@@ -20,10 +19,13 @@ const APRIL = 3;
 const DECEMBER = 11;
 
 describe('calculateDateDaysInPast', () => {
+
   let parseIntExactStub;
+
   beforeEach(function() {
     parseIntExactStub = sinon.stub(typeChecking, 'parseIntExact');
   });
+
   afterEach(function() {
     parseIntExactStub.restore();
   });
@@ -182,6 +184,7 @@ describe('calculateDateDaysInPast', () => {
 });
 
 describe('calculateDateDaysInPastFromToday', () => {
+
   let clock;
   let calculateDateDaysInPastStub;
 
@@ -226,25 +229,40 @@ describe('calculateDateDaysInPastFromToday', () => {
 });
 
 describe('calculateDateMonthsInPast', () => {
+
+  let parseIntExactStub;
+
+  beforeEach(function() {
+    parseIntExactStub = sinon.stub(typeChecking, 'parseIntExact');
+  });
+
+  afterEach(function() {
+    parseIntExactStub.restore();
+  });
+
   it('should properly calculate months in past', () => {
+    parseIntExactStub.returns(3);
     expect(calculateDateMonthsInPast(new Date(YEAR, APRIL, 15), 3))
       .to
       .deep
       .equal(new Date(YEAR, JANUARY, 15));
   });
   it('should properly calculate given a string for months', () => {
+    parseIntExactStub.returns(3);
     expect(calculateDateMonthsInPast(new Date(YEAR, APRIL, 15), '3'))
       .to
       .deep
       .equal(new Date(YEAR, JANUARY, 15));
   });
   it('should throw an error if months is an object', () => {
+    parseIntExactStub.returns(null);
     expect(() => {
       calculateDateMonthsInPast(new Date(YEAR, JANUARY, 15), {});
     }).to
       .throw();
   });
   it('should throw an error if months is a function', () => {
+    parseIntExactStub.returns(null);
     expect(() => {
       calculateDateMonthsInPast(
         new Date(YEAR, JANUARY, 15),
@@ -254,90 +272,105 @@ describe('calculateDateMonthsInPast', () => {
       .throw();
   });
   it('should throw an error if months is null', () => {
+    parseIntExactStub.returns(null);
     expect(() => {
       calculateDateMonthsInPast(new Date(YEAR, JANUARY, 15), null);
     }).to
       .throw();
   });
   it('should throw an error if months is an array', () => {
+    parseIntExactStub.returns(null);
     expect(() => {
       calculateDateMonthsInPast(new Date(YEAR, JANUARY, 15), []);
     }).to
       .throw();
   });
   it('should throw an error if months is a boolean', () => {
+    parseIntExactStub.returns(null);
     expect(() => {
       calculateDateMonthsInPast(new Date(YEAR, JANUARY, 15), true);
     }).to
       .throw();
   });
   it('should throw an error if months is a non-numeric string', () => {
+    parseIntExactStub.returns(null);
     expect(() => {
       calculateDateMonthsInPast(new Date(YEAR, JANUARY, 15), 'hello');
     }).to
       .throw();
   });
   it('should throw an error if months is letters followed by numbers', () => {
+    parseIntExactStub.returns(null);
     expect(() => {
       calculateDateMonthsInPast(new Date(YEAR, JANUARY, 15), 'h15');
     }).to
       .throw();
   });
   it('should throw an error if months is numbers followed by letters', () => {
+    parseIntExactStub.returns(null);
     expect(() => {
       calculateDateMonthsInPast(new Date(YEAR, JANUARY, 15), '15h');
     }).to
       .throw();
   });
   it('should throw an error if date is an object', () => {
+    parseIntExactStub.returns(5);
     expect(() => {
       calculateDateMonthsInPast({}, 5);
     }).to
       .throw();
   });
   it('should throw an error if date is a function', () => {
+    parseIntExactStub.returns(5);
     expect(() => {
       calculateDateMonthsInPast(() => console.log('a function'), 5);
     }).to
       .throw();
   });
   it('should throw an error if date is null', () => {
+    parseIntExactStub.returns(5);
     expect(() => {
       calculateDateMonthsInPast(null, 5);
     }).to
       .throw();
   });
   it('should throw an error if date is an array', () => {
+    parseIntExactStub.returns(5);
     expect(() => {
       calculateDateMonthsInPast([], 5);
     }).to
       .throw();
   });
   it('should throw an error if date is a boolean', () => {
+    parseIntExactStub.returns(5);
     expect(() => {
       calculateDateMonthsInPast(true, 5);
     }).to
       .throw();
   });
   it('should throw an error if date is a non-numeric string', () => {
+    parseIntExactStub.returns(5);
     expect(() => {
       calculateDateMonthsInPast('hello', 5);
     }).to
       .throw();
   });
   it('should throw an error if date is letters followed by numbers', () => {
+    parseIntExactStub.returns(5);
     expect(() => {
       calculateDateMonthsInPast('h15', 5);
     }).to
       .throw();
   });
   it('should throw an error if date is numbers followed by letters', () => {
+    parseIntExactStub.returns(5);
     expect(() => {
       calculateDateMonthsInPast('15h', 5);
     }).to
       .throw();
   });
   it('should properly calculate months before first month of year', () => {
+    parseIntExactStub.returns(1);
     expect(calculateDateMonthsInPast(new Date(YEAR, JANUARY, 5), 1))
       .to
       .deep
@@ -345,6 +378,7 @@ describe('calculateDateMonthsInPast', () => {
   });
   it('should properly calculate into the future for a ' +
   'negative number of months in the past', () => {
+    parseIntExactStub.returns(-3);
     expect(calculateDateMonthsInPast(new Date(YEAR, JANUARY, 10), -3))
       .to
       .deep
