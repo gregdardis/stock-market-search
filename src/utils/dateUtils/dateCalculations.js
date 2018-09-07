@@ -1,20 +1,39 @@
-export const calculateDateDaysInPast = (date, days) => {
+import { parseIntExact } from '../typeChecking';
+
+export function calculateDateDaysInPast(date, days) {
+  const parsedDays = parseIntExact(days);
+  if (!parsedDays) {
+    throw new TypeError(
+      `${calculateDateDaysInPast.name} requires a number or numeric string for "days" parameter.`
+    );
+  }
+  if (Object.prototype.toString.call(date) !== '[object Date]') {
+    throw new TypeError(
+      `${calculateDateDaysInPast.name} requires a Date for "date" parameter.`
+    )
+  }
   const startingDate = date.getDate();
-  const newDay = startingDate - days;
+  const newDay = startingDate - parsedDays;
   let newDate = date;
   newDate.setDate(newDay);
   return newDate;
-};
+}
 
-export const calculateDateDaysInPastFromToday = days => {
+export function calculateDateDaysInPastFromToday(days) {
   const todaysDate = new Date();
   return calculateDateDaysInPast(todaysDate, days);
-};
+}
 
-export const calculateDateMonthsInPast = (date, months) => {
+export function calculateDateMonthsInPast(date, months) {
+  const parsedMonths = parseIntExact(months);
+  if (!parsedMonths) {
+    throw new TypeError(
+      `${calculateDateMonthsInPast.name} requires a number or numeric string.`
+    );
+  }
   const currentMonth = date.getMonth();
-  const newMonth = currentMonth - months;
+  const newMonth = currentMonth - parsedMonths;
   let newDate = date;
   newDate.setMonth(newMonth);
   return newDate;
-};
+}
