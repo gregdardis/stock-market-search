@@ -28,7 +28,7 @@
     "dev": "webpack-dev-server --config ./config/webpack.config.dev.js",
     "dev:test": "npm-run-all --parallel dev test:watch",
     "start": "babel-watch src/server",
-    "test": "nyc --reporter=html --reporter=text cross-env NODE_ENV=test mocha --opts ./mocha.opts",
+    "test": "cross-env NODE_ENV=test nyc --reporter=html --reporter=text mocha --opts ./mocha.opts",
     "test:watch": "npm run test -- --watch",
     "teest": "mocha --opts ./mocha.opts"
   },
