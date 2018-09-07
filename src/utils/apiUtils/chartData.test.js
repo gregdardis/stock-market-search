@@ -1,11 +1,8 @@
 import { expect } from 'chai';
-import sinon from 'sinon';
 import dateFormat from 'dateformat';
 
-import * as typeChecking from '../typeChecking';
 import {
   getAdjustedDateForTimestamp,
-  getDatesAndPrices,
   getDateAndTime,
   getEndOfDayTimestampIndex,
   getStartOfDayTimestampIndex

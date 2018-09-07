@@ -18,8 +18,8 @@ import {
   QUERY_RANGE_ONE_DAY
 } from '../../constants/numeric';
 import {
-  parseIntExact
-} from '../typeChecking';
+  getDatesAndPrices
+} from '../stockDataUtils/datesAndPricesProcessing';
 
 import { createStock } from '../stockDataUtils/stockCreation';
 

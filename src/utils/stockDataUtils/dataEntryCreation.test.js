@@ -5,6 +5,8 @@ import * as typeChecking from '../typeChecking';
 import { createStockDataEntry } from './dataEntryCreation';
 import { NUMBER_FORMAT_DEFAULT } from '../../constants/formatting';
 
+/* eslint-disable no-undefined */
+
 // TODO: stub out parseIntExact in tests
 describe('createStockDataEntry', () => {
   let isStringStub;
@@ -192,29 +194,29 @@ describe('createStockDataEntry', () => {
       .throw();
   });
   it('throws an error if valueFormat is an object', () => {
+    isStringStub.returns(false);
     expect(() => {
-      isStringStub.returns(false);
       createStockDataEntry(15, { valueFormat: {} });
     }).to
       .throw();
   });
   it('throws an error if valueFormat is an array', () => {
+    isStringStub.returns(false);
     expect(() => {
-      isStringStub.returns(false);
       createStockDataEntry(15, { valueFormat: [] });
     }).to
       .throw();
   });
   it('throws an error if valueFormat is a boolean', () => {
+    isStringStub.returns(false);
     expect(() => {
-      isStringStub.returns(false);
       createStockDataEntry(15, { valueFormat: true });
     }).to
       .throw();
   });
   it('throws an error if valueFormat is a function', () => {
+    isStringStub.returns(false);
     expect(() => {
-      isStringStub.returns(false);
       createStockDataEntry(
         15,
         { valueFormat: () => console.log('a function') }
@@ -223,29 +225,29 @@ describe('createStockDataEntry', () => {
       .throw();
   });
   it('throws an error if optionalValueFormat is an object', () => {
+    isStringStub.returns(false);
     expect(() => {
-      isStringStub.returns(false);
       createStockDataEntry(15, { optionalValueFormat: {} });
     }).to
       .throw();
   });
   it('throws an error if optionalValueFormat is an array', () => {
+    isStringStub.returns(false);
     expect(() => {
-      isStringStub.returns(false);
       createStockDataEntry(15, { optionalValueFormat: [] });
     }).to
       .throw();
   });
   it('throws an error if optionalValueFormat is a boolean', () => {
+    isStringStub.returns(false);
     expect(() => {
-      isStringStub.returns(false);
       createStockDataEntry(15, { optionalValueFormat: true });
     }).to
       .throw();
   });
   it('throws an error if optionalValueFormat is a function', () => {
+    isStringStub.returns(false);
     expect(() => {
-      isStringStub.returns(false);
       createStockDataEntry(
         15,
         { optionalValueFormat: () => console.log('a function') }
