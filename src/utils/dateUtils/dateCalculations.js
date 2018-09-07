@@ -2,15 +2,16 @@ import { parseIntExact } from '../typeChecking';
 
 export function calculateDateDaysInPast(date, days) {
   const parsedDays = parseIntExact(days);
-  if (!parsedDays) {
+  if (parsedDays == null) {
     throw new TypeError(
-      `${calculateDateDaysInPast.name} requires a number or numeric string for "days" parameter.`
+      `${calculateDateDaysInPast.name} requires a number or ` +
+      'numeric string for "days" parameter.'
     );
   }
   if (Object.prototype.toString.call(date) !== '[object Date]') {
     throw new TypeError(
       `${calculateDateDaysInPast.name} requires a Date for "date" parameter.`
-    )
+    );
   }
   const startingDate = date.getDate();
   const newDay = startingDate - parsedDays;
@@ -26,7 +27,7 @@ export function calculateDateDaysInPastFromToday(days) {
 
 export function calculateDateMonthsInPast(date, months) {
   const parsedMonths = parseIntExact(months);
-  if (!parsedMonths) {
+  if (parsedMonths == null) {
     throw new TypeError(
       `${calculateDateMonthsInPast.name} requires a number or numeric string.`
     );

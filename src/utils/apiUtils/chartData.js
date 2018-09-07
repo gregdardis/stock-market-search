@@ -34,24 +34,21 @@ import {
   LABEL_ROE,
   LABEL_VOLUME
 } from '../../constants/userFacingStrings';
-import { isString } from '../typeChecking';
+import {
+  isString,
+  parseIntExact
+} from '../typeChecking';
 
 // returns a decimal, multiply by 100 for a percentage
 export function calculateFcfy(freeCashflow, marketCap) {
-  const freeCashflowNum = parseInt(freeCashflow);
-  const marketCapNum = parseInt(marketCap);
-  // must check isNaN for original parameters
-  // because parseInt turns '12hello' into 12
-  if (isNaN(freeCashflowNum)
-      || isNaN(freeCashflow)
-      || isNaN(marketCapNum)
-      || isNaN(marketCap)
-  ) {
+  const parsedFreeCashflow = parseIntExact(freeCashflow);
+  const parsedMarketCap = parseIntExact(marketCap);
+  if (parsedFreeCashflow == null || parsedMarketCap == null) {
     throw new TypeError(
       `${calculateFcfy.name} requires a number or numeric string.`
     );
   }
-  return marketCapNum > 0 ? (freeCashflowNum / marketCapNum) : 0;
+  return parsedMarketCap > 0 ? (parsedFreeCashflow / parsedMarketCap) : 0;
 }
 
 export function createStockDataEntry(value, options = {}) {
