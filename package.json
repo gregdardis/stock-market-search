@@ -15,7 +15,8 @@
       "**/config/**",
       "**/node_modules/**",
       "**/coverage/**",
-      "**/*.test.js"
+      "**/*.test.js",
+      "mocha.env.js"
     ],
     "all": true,
     "temp-directory": "./coverage/.nyc_output"
@@ -27,7 +28,7 @@
     "dev": "webpack-dev-server --config ./config/webpack.config.dev.js",
     "dev:test": "npm-run-all --parallel dev test:watch",
     "start": "babel-watch src/server",
-    "test": "nyc --reporter=html --reporter=text mocha --opts ./mocha.opts",
+    "test": "nyc --reporter=html --reporter=text cross-env NODE_ENV=test mocha --opts ./mocha.opts",
     "test:watch": "npm run test -- --watch",
     "teest": "mocha --opts ./mocha.opts"
   },
@@ -44,6 +45,7 @@
     "chai": "^4.1.2",
     "chalk": "^2.4.1",
     "coveralls": "^3.0.2",
+    "cross-env": "^5.2.0",
     "css-loader": "^0.28.11",
     "eslint": "^4.19.1",
     "eslint-loader": "^1.9.0",

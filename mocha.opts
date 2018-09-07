@@ -2,8 +2,5 @@
 
 buildScripts/testSetup.js
 
---require ./mocha.env.js
---timeout 60000
-
 --recursive
 src/**/*.test.js
