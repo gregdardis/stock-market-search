@@ -6,7 +6,6 @@ import {
 import rp from 'request-promise';
 import dateFormat from 'dateformat';
 
-import { formatDateForMaxStockData } from '../dateUtils/dateFormatting';
 import {
   DATE_FORMAT_FIVE_DAY,
   DATE_FORMAT_ONE_DAY
@@ -23,23 +22,6 @@ import {
 } from '../typeChecking';
 
 import { createStock } from '../stockDataUtils/stockCreation';
-
-// Used for historical() data obtained using period 'd'
-export function getDatesAndPrices(dailyData) {
-  let datesAndPrices = [];
-  if (dailyData) {
-    dailyData.forEach(({
-      date,
-      close
-    }) => {
-      datesAndPrices.unshift({
-        date: formatDateForMaxStockData(date),
-        price: close
-      });
-    });
-  }
-  return datesAndPrices;
-}
 
 // NOTE: this date has timezone UTC, which is incorrect but works in this
 // case because we are just extracting the time

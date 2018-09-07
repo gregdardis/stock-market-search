@@ -13,40 +13,6 @@ import {
 
 /* eslint-disable no-undefined */
 
-// describe('getDatesAndPrices', function() {
-//   const DAILY_DATA_1 = [
-//     {
-//       date: 'date1',
-//       close: 'price1'
-//     },
-//     {
-//       date: 'date2',
-//       close: 'price2'
-//     }
-//   ];
-//   it('properly gets dates and prices for dailyData with 2 entries', function() {
-//     expect(getDatesAndPrices(DAILY_DATA_1))
-//       .to
-//       .deep
-//       .equal([
-//         {
-//           date: 'date!!',
-//           price: 'price2'
-//         },
-//         {
-//           date: 'date!!',
-//           price: 'price1'
-//         }
-//       ]);
-//   });
-//   it('returns an empty array if dailyData is null', function() {
-//     expect(getDatesAndPrices(null))
-//       .to
-//       .deep
-//       .equal([]);
-//   });
-// });
-
 describe('getAdjustedDateForTimestamp', function() {
   it('returns correct date for a timestamp and gmt offset', function() {
     expect(getAdjustedDateForTimestamp(1000, 2000))
