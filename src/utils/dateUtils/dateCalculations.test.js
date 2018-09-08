@@ -4,11 +4,12 @@ import sinon from 'sinon';
 import {
   calculateDateDaysInPast,
   calculateDateDaysInPastFromToday,
-  calculateDateMonthsInPast,
-  __RewireAPI__ as dateCalculationsModuleRewireAPI
+  calculateDateMonthsInPast
 } from './dateCalculations';
 
 import * as typeChecking from '../typeChecking';
+
+/* eslint-disable no-undefined */
 
 const YEAR = 2018;
 const PREVIOUS_YEAR = 2017;
@@ -37,6 +38,13 @@ describe('calculateDateDaysInPast', () => {
       .deep
       .equal(new Date(YEAR, JANUARY, 10));
   });
+  it('should properly calculate if days is 0', () => {
+    parseIntExactStub.returns(0);
+    expect(calculateDateDaysInPast(new Date(YEAR, JANUARY, 15), 0))
+      .to
+      .deep
+      .equal(new Date(YEAR, JANUARY, 15));
+  });
   it('should properly calculate given a string for days', () => {
     parseIntExactStub.returns(5);
     expect(calculateDateDaysInPast(new Date(YEAR, JANUARY, 15), '5'))
@@ -56,7 +64,7 @@ describe('calculateDateDaysInPast', () => {
     expect(() => {
       calculateDateDaysInPast(
         new Date(YEAR, JANUARY, 15),
-        () => console.log('a function')
+        () => {}
       );
     }).to
       .throw();
@@ -113,7 +121,7 @@ describe('calculateDateDaysInPast', () => {
   it('should throw an error if date is a function', () => {
     parseIntExactStub.returns(5);
     expect(() => {
-      calculateDateDaysInPast(() => console.log('a function'), 5);
+      calculateDateDaysInPast(() => {}, 5);
     }).to
       .throw();
   });
@@ -207,16 +215,10 @@ describe('calculateDateDaysInPastFromToday', () => {
   beforeEach(function () {
     clock = sinon.useFakeTimers(new Date());
     calculateDateDaysInPastStub = sinon.stub();
-    dateCalculationsModuleRewireAPI.__Rewire__(
-      'calculateDateDaysInPast',
-      calculateDateDaysInPastStub
-    );
   });
 
   afterEach(function () {
     clock.restore();
-    dateCalculationsModuleRewireAPI
-      .__ResetDependency__('calculateDateDaysInPast');
   });
 
   it('should properly calculate 1 day before today', () => {
@@ -263,6 +265,13 @@ describe('calculateDateMonthsInPast', () => {
       .deep
       .equal(new Date(YEAR, JANUARY, 15));
   });
+  it('should properly calculate if months is 0', () => {
+    parseIntExactStub.returns(0);
+    expect(calculateDateDaysInPast(new Date(YEAR, JANUARY, 15), 0))
+      .to
+      .deep
+      .equal(new Date(YEAR, JANUARY, 15));
+  });
   it('should properly calculate given a string for months', () => {
     parseIntExactStub.returns(3);
     expect(calculateDateMonthsInPast(new Date(YEAR, APRIL, 15), '3'))
@@ -282,7 +291,7 @@ describe('calculateDateMonthsInPast', () => {
     expect(() => {
       calculateDateMonthsInPast(
         new Date(YEAR, JANUARY, 15),
-        () => console.log('a function')
+        () => {}
       );
     }).to
       .throw();
@@ -291,6 +300,13 @@ describe('calculateDateMonthsInPast', () => {
     parseIntExactStub.returns(null);
     expect(() => {
       calculateDateMonthsInPast(new Date(YEAR, JANUARY, 15), null);
+    }).to
+      .throw();
+  });
+  it('should throw an error if months is undefined', () => {
+    parseIntExactStub.returns(undefined);
+    expect(() => {
+      calculateDateMonthsInPast(new Date(YEAR, JANUARY, 15), 2);
     }).to
       .throw();
   });
@@ -339,7 +355,7 @@ describe('calculateDateMonthsInPast', () => {
   it('should throw an error if date is a function', () => {
     parseIntExactStub.returns(5);
     expect(() => {
-      calculateDateMonthsInPast(() => console.log('a function'), 5);
+      calculateDateMonthsInPast(() => {}, 5);
     }).to
       .throw();
   });

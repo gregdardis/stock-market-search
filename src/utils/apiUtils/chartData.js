@@ -6,13 +6,9 @@ import {
 import rp from 'request-promise';
 import dateFormat from 'dateformat';
 
-import { formatDateForMaxStockData } from '../dateUtils/dateFormatting';
 import {
   DATE_FORMAT_FIVE_DAY,
-  DATE_FORMAT_ONE_DAY,
-  NUMBER_FORMAT_DEFAULT,
-  NUMBER_FORMAT_PERCENT,
-  NUMBER_FORMAT_SHORT_SUFFIXED
+  DATE_FORMAT_ONE_DAY
 } from '../../constants/formatting';
 import {
   MILLISECONDS_PER_SECOND,
@@ -22,156 +18,29 @@ import {
   QUERY_RANGE_ONE_DAY
 } from '../../constants/numeric';
 import {
-  LABEL_CURRENT_PRICE,
-  LABEL_DIVIDEND,
-  LABEL_FCFY,
-  LABEL_HIGH,
-  LABEL_LOW,
-  LABEL_MARKET_CAP,
-  LABEL_OPEN,
-  LABEL_PE_RATIO,
-  LABEL_PREVIOUS_CLOSE,
-  LABEL_ROE,
-  LABEL_VOLUME
-} from '../../constants/userFacingStrings';
+  parseDailyData
+} from '../apiUtils/responseParsing';
 
-function calculateFcfy(freeCashflow, marketCap) {
-  const freeCashflowNum = parseInt(freeCashflow);
-  const marketCapNum = parseInt(marketCap);
-  return freeCashflowNum / marketCapNum;
-}
-
-function createStockDataEntry(value, options = {}) {
-  const {
-    optionalValue,
-    valueFormat = NUMBER_FORMAT_DEFAULT,
-    optionalValueFormat = NUMBER_FORMAT_DEFAULT
-  } = options;
-  return {
-    value,
-    optionalValue,
-    valueFormat,
-    optionalValueFormat
-  };
-}
-
-function processStockData({
-  averageVolume,
-  currentPrice,
-  dayHigh,
-  dayLow,
-  dividendRate,
-  dividendYield,
-  freeCashflow,
-  marketCap,
-  open,
-  previousClose,
-  returnOnEquity,
-  trailingEps,
-  trailingPE,
-  volume
-}) {
-  return {
-    [LABEL_PREVIOUS_CLOSE]: createStockDataEntry(previousClose),
-    [LABEL_CURRENT_PRICE]: createStockDataEntry(currentPrice),
-    [LABEL_OPEN]: createStockDataEntry(open),
-    [LABEL_HIGH]: createStockDataEntry(dayHigh),
-    [LABEL_LOW]: createStockDataEntry(dayLow),
-    [LABEL_DIVIDEND]: createStockDataEntry(
-      dividendRate,
-      {
-        optionalValue: dividendYield,
-        optionalValueFormat: NUMBER_FORMAT_PERCENT
-      }
-    ),
-    [LABEL_MARKET_CAP]: createStockDataEntry(marketCap,
-      {
-        valueFormat: NUMBER_FORMAT_SHORT_SUFFIXED
-      }),
-    [LABEL_VOLUME]: createStockDataEntry(
-      volume,
-      {
-        valueFormat: NUMBER_FORMAT_SHORT_SUFFIXED,
-        optionalValue: averageVolume,
-        optionalValueFormat: NUMBER_FORMAT_SHORT_SUFFIXED
-      }
-    ),
-    [LABEL_PE_RATIO]: createStockDataEntry(
-      trailingPE,
-      {
-        optionalValue: trailingEps
-      }
-    ),
-    [LABEL_ROE]: createStockDataEntry(
-      returnOnEquity,
-      {
-        valueFormat: NUMBER_FORMAT_PERCENT
-      }
-    ),
-    [LABEL_FCFY]: createStockDataEntry(
-      calculateFcfy(freeCashflow, marketCap),
-      {
-        valueFormat: NUMBER_FORMAT_PERCENT
-      }
-    )
-  };
-}
-
-function createStock(stockQuote) {
-  const {
-    price,
-    summaryDetail,
-    financialData,
-    defaultKeyStatistics
-  } = stockQuote;
-  return {
-    companyName: price.shortName,
-    symbol: price.symbol,
-    exchange: price.exchangeName,
-    stockOverviewData: processStockData(
-      Object.assign(
-        {},
-        summaryDetail,
-        financialData,
-        defaultKeyStatistics
-      )
-    )
-  };
-}
-
-// Used for historical() data obtained using period 'd'
-function getDatesAndPrices(dailyData) {
-  let datesAndPrices = [];
-  dailyData.forEach(({
-    date,
-    close
-  }) => {
-    datesAndPrices.unshift({
-      date: formatDateForMaxStockData(date),
-      price: close
-    });
-  });
-  return datesAndPrices;
-}
+import { createStock } from '../stockDataUtils/createStock';
 
 // NOTE: this date has timezone UTC, which is incorrect but works in this
 // case because we are just extracting the time
-function getAdjustedDateForTimestamp(gmtoffset, timestamp) {
+export function getAdjustedDateForTimestamp(gmtoffset, timestamp) {
   const adjustedTimestamp =
     (timestamp + gmtoffset) * MILLISECONDS_PER_SECOND;
   return new Date(adjustedTimestamp);
 }
 
-function getDateAndTime(gmtoffset, timestamp, dateAndTimeFormat) {
+export function formatAndAdjustDateForTimestamp(gmtoffset, timestamp, dateAndTimeFormat) {
   const dateAndTime = getAdjustedDateForTimestamp(gmtoffset, timestamp);
   return dateFormat(dateAndTime, dateAndTimeFormat, true);
 }
 
-function getStartOfDayTimestampIndex(dayIndex, timestampsPerDay) {
+export function getStartOfDayTimestampIndex(dayIndex, timestampsPerDay) {
   return Math.floor(dayIndex * timestampsPerDay);
 }
 
-function getEndOfDayTimestampIndex(dayIndex, timestampsPerDay) {
+export function getEndOfDayTimestampIndex(dayIndex, timestampsPerDay) {
   return Math.floor((dayIndex + 1) * timestampsPerDay);
 }
 
@@ -197,7 +66,9 @@ function getDatesAndTimesForOneDay(
       continue;
     }
     datesTimesAndPrices.push({
-      dateAndTime: getDateAndTime(gmtoffset, timestamp[i], dateAndTimeFormat),
+      dateAndTime: formatAndAdjustDateForTimestamp(
+        gmtoffset, timestamp[i], dateAndTimeFormat
+      ),
       price: close[i]
     });
   }
@@ -319,7 +190,7 @@ export function requestMaxStockData(symbol, callback) {
       if (!dailyData[0]) {
         throw new Error('Historical data was not found.');
       }
-      callback(null, getDatesAndPrices(dailyData));
+      callback(null, parseDailyData(dailyData));
     }
   ).catch(err => {
     callback(
