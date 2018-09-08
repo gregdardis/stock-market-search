@@ -3,9 +3,9 @@ import sinon from 'sinon';
 
 import * as dateFormatting from '../dateUtils/dateFormatting';
 
-import { getDatesAndPrices } from './datesAndPricesProcessing';
+import { parseDailyData } from './responseParsing';
 
-describe('getDatesAndPrices', function() {
+describe('parseDailyData', function() {
   const DAILY_DATA_1 = [
     {
       date: 'date1',
@@ -29,9 +29,9 @@ describe('getDatesAndPrices', function() {
   afterEach(function() {
     formatDateForMaxStockDataStub.restore();
   });
-  
+
   it('properly gets dates and prices for dailyData with 2 entries', function() {
-    expect(getDatesAndPrices(DAILY_DATA_1))
+    expect(parseDailyData(DAILY_DATA_1))
       .to
       .deep
       .equal([
@@ -46,7 +46,7 @@ describe('getDatesAndPrices', function() {
       ]);
   });
   it('returns an empty array if dailyData is null', function() {
-    expect(getDatesAndPrices(null))
+    expect(parseDailyData(null))
       .to
       .deep
       .equal([]);

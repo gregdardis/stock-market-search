@@ -4,7 +4,7 @@ import { formatDateForMaxStockData } from '../dateUtils/dateFormatting';
 // TODO: rename to parseDailyData (filename too)
 // or put in responseParsing.js with other response
 // parsers for the api
-export function getDatesAndPrices(dailyData) {
+export function parseDailyData(dailyData) {
   let datesAndPrices = [];
   if (dailyData) {
     dailyData.forEach(({

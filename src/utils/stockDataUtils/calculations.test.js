@@ -1,7 +1,8 @@
 import { expect } from 'chai';
-import sinon from 'sinon';
 
 import { calculateFcfy } from './calculations';
+
+/* eslint-disable no-undefined */
 
 // TODO: stub out parseIntExact
 describe('calculateFcfy', () => {

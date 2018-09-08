@@ -18,8 +18,8 @@ import {
   QUERY_RANGE_ONE_DAY
 } from '../../constants/numeric';
 import {
-  getDatesAndPrices
-} from '../stockDataUtils/datesAndPricesProcessing';
+  parseDailyData
+} from '../apiUtils/responseParsing';
 
 import { createStock } from '../stockDataUtils/createStock';
 
@@ -197,7 +197,7 @@ export function requestMaxStockData(symbol, callback) {
       if (!dailyData[0]) {
         throw new Error('Historical data was not found.');
       }
-      callback(null, getDatesAndPrices(dailyData));
+      callback(null, parseDailyData(dailyData));
     }
   ).catch(err => {
     callback(

@@ -6,8 +6,6 @@ import {
 
 // TODO: use parseIntExact in below method and stub it out
 // in tests
-// TODO: rename to createStockDataEntry and fix other names
-// in stockDataUtils
 export function createStockDataEntry(value, options = {}) {
   const parsedValue = parseInt(value);
   if (isNaN(value) || isNaN(parsedValue)) {
