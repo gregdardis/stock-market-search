@@ -4,159 +4,163 @@ import { calculateFcfy } from './calculations';
 
 /* eslint-disable no-undefined */
 
-// TODO: stub out parseIntExact
+const ROUNDING_ERROR_THRESHOLD = 0.0001;
+
 describe('calculateFcfy', () => {
+  const freeCashFlow = 10256000;
+  const marketCap = 164600000;
+  const fcfy = 0.0623;
   it('calculates fcfy given positive integer inputs', () => {
-    expect(calculateFcfy(10256000, 164600000))
+    expect(calculateFcfy(freeCashFlow, marketCap))
       .to
       .be
-      .closeTo(0.0623, 0.0001);
+      .closeTo(fcfy, ROUNDING_ERROR_THRESHOLD);
   });
   it('calculates fcfy given positive decimal inputs', () => {
     expect(calculateFcfy(150000.51, 1600000.84))
       .to
       .be
-      .closeTo(0.0937, 0.0001);
+      .closeTo(0.0937, ROUNDING_ERROR_THRESHOLD);
   });
   it('calculates fcfy given positive integer string inputs', () => {
     expect(calculateFcfy('10256000', '164600000'))
       .to
       .be
-      .closeTo(0.0623, 0.0001);
+      .closeTo(fcfy, ROUNDING_ERROR_THRESHOLD);
   });
   it('calculates fcfy given negative freeCashFlow', () => {
-    expect(calculateFcfy(-10256000, 164600000))
+    expect(calculateFcfy(-freeCashFlow, marketCap))
       .to
       .be
-      .closeTo(-0.0623, 0.0001);
+      .closeTo(-fcfy, ROUNDING_ERROR_THRESHOLD);
   });
   it('returns 0 given marketCap of 0', () => {
-    expect(calculateFcfy(10256000, 0))
+    expect(calculateFcfy(freeCashFlow, 0))
       .to
       .equal(0);
   });
   it('returns 0 given negative marketCap', () => {
-    expect(calculateFcfy(10256000, -164600000))
+    expect(calculateFcfy(freeCashFlow, -marketCap))
       .to
       .equal(0);
   });
   it('throws an error if freeCashFlow is numbers followed by letters', () => {
     expect(() => {
-      calculateFcfy('12hello', 164600000);
+      calculateFcfy('12hello', marketCap);
     }).to
       .throw();
   });
   it('throws an error if freeCashFlow is letters followed by numbers', () => {
     expect(() => {
-      calculateFcfy('hello12', 164600000);
+      calculateFcfy('hello12', marketCap);
     }).to
       .throw();
   });
   it('throws an error if freeCashFlow is a non-numeric string', () => {
     expect(() => {
-      calculateFcfy('hello', 164600000);
+      calculateFcfy('hello', marketCap);
     }).to
       .throw();
   });
   it('throws an error if marketCap is numbers followed by letters', () => {
     expect(() => {
-      calculateFcfy(10256000, '12hello');
+      calculateFcfy(freeCashFlow, '12hello');
     }).to
       .throw();
   });
   it('throws an error if marketCap is letters followed by numbers', () => {
     expect(() => {
-      calculateFcfy(10256000, 'hello12');
+      calculateFcfy(freeCashFlow, 'hello12');
     }).to
       .throw();
   });
   it('throws an error if marketCap is a non-numeric string', () => {
     expect(() => {
-      calculateFcfy(10256000, 'hello');
+      calculateFcfy(freeCashFlow, 'hello');
     }).to
       .throw();
   });
   it('throws an error if marketCap is the empty string', () => {
     expect(() => {
-      calculateFcfy(10256000, '');
+      calculateFcfy(freeCashFlow, '');
     }).to
       .throw();
   });
   it('throws an error if marketCap is an object', () => {
     expect(() => {
-      calculateFcfy(10256000, {});
+      calculateFcfy(freeCashFlow, {});
     }).to
       .throw();
   });
   it('throws an error if marketCap is an array', () => {
     expect(() => {
-      calculateFcfy(10256000, []);
+      calculateFcfy(freeCashFlow, []);
     }).to
       .throw();
   });
   it('throws an error if marketCap is a boolean', () => {
     expect(() => {
-      calculateFcfy(10256000, true);
+      calculateFcfy(freeCashFlow, true);
     }).to
       .throw();
   });
   it('throws an error if marketCap is null', () => {
     expect(() => {
-      calculateFcfy(10256000, null);
+      calculateFcfy(freeCashFlow, null);
     }).to
       .throw();
   });
   it('throws an error if marketCap is undefined', () => {
     expect(() => {
-      calculateFcfy(10256000, undefined);
+      calculateFcfy(freeCashFlow, undefined);
     }).to
       .throw();
   });
   it('throws an error if marketCap is a function', () => {
     expect(() => {
-      calculateFcfy(10256000, () => console.log('a function'));
+      calculateFcfy(freeCashFlow, () => {});
     }).to
       .throw();
   });
   it('throws an error if freeCashFlow is the empty string', () => {
     expect(() => {
-      calculateFcfy('', 164600000);
+      calculateFcfy('', marketCap);
     }).to
       .throw();
   });
   it('throws an error if freeCashFlow is an object', () => {
     expect(() => {
-      calculateFcfy({}, 164600000);
+      calculateFcfy({}, marketCap);
     }).to
       .throw();
   });
   it('throws an error if freeCashFlow is an array', () => {
     expect(() => {
-      calculateFcfy([], 164600000);
+      calculateFcfy([], marketCap);
     }).to
       .throw();
   });
   it('throws an error if freeCashFlow is a boolean', () => {
     expect(() => {
-      calculateFcfy(true, 164600000);
+      calculateFcfy(true, marketCap);
     }).to
       .throw();
   });
   it('throws an error if freeCashFlow is null', () => {
     expect(() => {
-      calculateFcfy(null, 164600000);
+      calculateFcfy(null, marketCap);
     }).to
       .throw();
   });
   it('throws an error if freeCashFlow is undefined', () => {
     expect(() => {
-      calculateFcfy(undefined, 164600000);
+      calculateFcfy(undefined, marketCap);
     }).to
       .throw();
   });
   it('throws an error if freeCashFlow is a function', () => {
     expect(() => {
-      calculateFcfy(() => console.log('a function'), 164600000);
+      calculateFcfy(() => {}, marketCap);
     }).to
       .throw();
   });

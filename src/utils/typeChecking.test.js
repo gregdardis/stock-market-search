@@ -42,7 +42,7 @@ describe('isString', () => {
       .equal(false);
   });
   it('returns false if given a function', () => {
-    expect(isString(() => console.log('a function')))
+    expect(isString(() => {}))
       .to
       .equal(false);
   });
@@ -95,7 +95,7 @@ describe('parseIntExact', function() {
       .equal(null);
   });
   it('returns null if given a function', function() {
-    expect(parseIntExact(() => console.log('a function')))
+    expect(parseIntExact(() => {}))
       .to
       .equal(null);
   });

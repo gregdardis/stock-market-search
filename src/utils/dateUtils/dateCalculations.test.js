@@ -9,6 +9,8 @@ import {
 
 import * as typeChecking from '../typeChecking';
 
+/* eslint-disable no-undefined */
+
 const YEAR = 2018;
 const PREVIOUS_YEAR = 2017;
 
@@ -62,7 +64,7 @@ describe('calculateDateDaysInPast', () => {
     expect(() => {
       calculateDateDaysInPast(
         new Date(YEAR, JANUARY, 15),
-        () => console.log('a function')
+        () => {}
       );
     }).to
       .throw();
@@ -119,7 +121,7 @@ describe('calculateDateDaysInPast', () => {
   it('should throw an error if date is a function', () => {
     parseIntExactStub.returns(5);
     expect(() => {
-      calculateDateDaysInPast(() => console.log('a function'), 5);
+      calculateDateDaysInPast(() => {}, 5);
     }).to
       .throw();
   });
@@ -289,7 +291,7 @@ describe('calculateDateMonthsInPast', () => {
     expect(() => {
       calculateDateMonthsInPast(
         new Date(YEAR, JANUARY, 15),
-        () => console.log('a function')
+        () => {}
       );
     }).to
       .throw();
@@ -353,7 +355,7 @@ describe('calculateDateMonthsInPast', () => {
   it('should throw an error if date is a function', () => {
     parseIntExactStub.returns(5);
     expect(() => {
-      calculateDateMonthsInPast(() => console.log('a function'), 5);
+      calculateDateMonthsInPast(() => {}, 5);
     }).to
       .throw();
   });

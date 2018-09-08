@@ -4,8 +4,6 @@ import {
   parseIntExact
 } from '../typeChecking';
 
-// TODO: use parseIntExact in below method and stub it out
-// in tests
 export function createStockDataEntry(value, options = {}) {
   const parsedValue = parseInt(value);
   if (isNaN(value) || isNaN(parsedValue)) {

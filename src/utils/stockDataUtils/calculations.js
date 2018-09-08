@@ -1,6 +1,6 @@
 import { parseIntExact } from '../typeChecking';
 
-// returns a decimal, multiply by 100 for a percentage
+/** Returns a decimal, multiply by 100 for a percentage */
 export function calculateFcfy(freeCashflow, marketCap) {
   const parsedFreeCashflow = parseIntExact(freeCashflow);
   const parsedMarketCap = parseIntExact(marketCap);

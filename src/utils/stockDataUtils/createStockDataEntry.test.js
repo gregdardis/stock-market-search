@@ -7,7 +7,6 @@ import { NUMBER_FORMAT_DEFAULT } from '../../constants/formatting';
 
 /* eslint-disable no-undefined */
 
-// TODO: stub out parseIntExact in tests
 describe('createStockDataEntry', () => {
   let isStringStub;
 
@@ -144,7 +143,7 @@ describe('createStockDataEntry', () => {
   });
   it('throws an error if value is a function', () => {
     expect(() => {
-      createStockDataEntry(() => console.log('a function'));
+      createStockDataEntry(() => {});
     }).to
       .throw();
   });
@@ -188,7 +187,7 @@ describe('createStockDataEntry', () => {
     expect(() => {
       createStockDataEntry(
         15,
-        { optionalValue: () => console.log('a function') }
+        { optionalValue: () => {} }
       );
     }).to
       .throw();
@@ -219,7 +218,7 @@ describe('createStockDataEntry', () => {
     expect(() => {
       createStockDataEntry(
         15,
-        { valueFormat: () => console.log('a function') }
+        { valueFormat: () => {} }
       );
     }).to
       .throw();
@@ -250,7 +249,7 @@ describe('createStockDataEntry', () => {
     expect(() => {
       createStockDataEntry(
         15,
-        { optionalValueFormat: () => console.log('a function') }
+        { optionalValueFormat: () => {} }
       );
     }).to
       .throw();
