@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 
 import * as typeChecking from '../typeChecking';
-import { createStockDataEntry } from './dataEntryCreation';
+import { createStockDataEntry } from './createStockDataEntry';
 import { NUMBER_FORMAT_DEFAULT } from '../../constants/formatting';
 
 /* eslint-disable no-undefined */

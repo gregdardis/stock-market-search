@@ -11,7 +11,7 @@ import {
   LABEL_ROE,
   LABEL_VOLUME
 } from '../../constants/userFacingStrings';
-import { createStockDataEntry } from './dataEntryCreation';
+import { createStockDataEntry } from './createStockDataEntry';
 import { calculateFcfy } from './calculations';
 import {
   NUMBER_FORMAT_PERCENT,

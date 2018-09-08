@@ -18,7 +18,7 @@ import {
   NUMBER_FORMAT_DEFAULT
 } from '../../constants/formatting';
 import * as calculations from './calculations';
-import * as dataEntryCreation from './dataEntryCreation';
+import * as createStockDataEntry from './createStockDataEntry';
 import { processStockData } from './dataProcessing';
 
 describe('processStockData', () => {
@@ -128,7 +128,7 @@ describe('processStockData', () => {
     calculateFcfyStub = sinon.stub(calculations, 'calculateFcfy');
     calculateFcfyStub.returns(0);
     createStockDataEntryStub = sinon.stub(
-      dataEntryCreation,
+      createStockDataEntry,
       'createStockDataEntry'
     );
     createStockDataEntryStub.onCall(0).returns(
