@@ -21,7 +21,7 @@ import {
   getDatesAndPrices
 } from '../stockDataUtils/datesAndPricesProcessing';
 
-import { createStock } from '../stockDataUtils/stockCreation';
+import { createStock } from '../stockDataUtils/createStock';
 
 // NOTE: this date has timezone UTC, which is incorrect but works in this
 // case because we are just extracting the time

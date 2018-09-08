@@ -2,7 +2,7 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 
 import * as processStockData from './processStockData';
-import { createStock } from './stockCreation';
+import { createStock } from './createStock';
 
 describe('createStock', function() {
   const STOCK_QUOTE = {
