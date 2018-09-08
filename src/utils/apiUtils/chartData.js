@@ -31,7 +31,7 @@ export function getAdjustedDateForTimestamp(gmtoffset, timestamp) {
   return new Date(adjustedTimestamp);
 }
 
-export function getDateAndTime(gmtoffset, timestamp, dateAndTimeFormat) {
+export function formatAndAdjustDateForTimestamp(gmtoffset, timestamp, dateAndTimeFormat) {
   const dateAndTime = getAdjustedDateForTimestamp(gmtoffset, timestamp);
   return dateFormat(dateAndTime, dateAndTimeFormat, true);
 }
@@ -44,7 +44,6 @@ export function getEndOfDayTimestampIndex(dayIndex, timestampsPerDay) {
   return Math.floor((dayIndex + 1) * timestampsPerDay);
 }
 
-// TODO: test
 function getDatesAndTimesForOneDay(
   close,
   dayIndex,
@@ -67,14 +66,15 @@ function getDatesAndTimesForOneDay(
       continue;
     }
     datesTimesAndPrices.push({
-      dateAndTime: getDateAndTime(gmtoffset, timestamp[i], dateAndTimeFormat),
+      dateAndTime: formatAndAdjustDateForTimestamp(
+        gmtoffset, timestamp[i], dateAndTimeFormat
+      ),
       price: close[i]
     });
   }
   return datesTimesAndPrices;
 }
 
-// TODO: test
 // days are 0 indexed
 function getTimestampForDay(dayIndex, meta, isStart = true) {
   // regular consists of an array of arrays, where the first array
@@ -82,7 +82,6 @@ function getTimestampForDay(dayIndex, meta, isStart = true) {
   return meta.tradingPeriods.regular[dayIndex][0][isStart ? 'start' : 'end'];
 }
 
-// TODO: test
 function getTimestampIntervals(numberOfDays, meta) {
   let timestampIntervals = [];
   for (let dayIndex = 0; dayIndex < numberOfDays; dayIndex++) {
@@ -94,7 +93,6 @@ function getTimestampIntervals(numberOfDays, meta) {
   return timestampIntervals;
 }
 
-// TODO: test
 function getDatesTimesAndPrices(
   close,
   gmtoffset,
@@ -119,7 +117,6 @@ function getDatesTimesAndPrices(
   return flatten(datesTimesAndPrices);
 }
 
-// TODO: test
 // numberOfDays much match the range used to obtain the intradayRes.
 function getIntradayStockData(intradayRes, numberOfDays, dateAndTimeFormat) {
   const intradayData = JSON.parse(intradayRes);
@@ -147,19 +144,16 @@ function getIntradayStockData(intradayRes, numberOfDays, dateAndTimeFormat) {
   return datesTimesAndPrices;
 }
 
-// TODO: test
 function getQueryForIntradayData(symbol, range, interval) {
   return `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}` +
   `?range=${range}&includePrePost=true&interval=${interval}` +
   '&corsDomain=finance.yahoo.com&.tsrc=finance';
 }
 
-// TODO: test
 function generateStockDataRequestError(functionName, err) {
   return `Failed in ${functionName} with error: ${err}`;
 }
 
-// TODO: test
 export function requestQuote(symbol, callback) {
   const modules = [
     'summaryDetail',
@@ -186,7 +180,6 @@ export function requestQuote(symbol, callback) {
   });
 }
 
-// TODO: test
 export function requestMaxStockData(symbol, callback) {
   historical({
     // gets all data because we didn't specify from/to
@@ -206,7 +199,6 @@ export function requestMaxStockData(symbol, callback) {
   });
 }
 
-// TODO: test
 export function requestOneDayStockData(symbol, callback) {
   const queryOneDay = getQueryForIntradayData(
     symbol,
@@ -227,7 +219,6 @@ export function requestOneDayStockData(symbol, callback) {
     });
 }
 
-// TODO: test
 export function requestFiveDayStockData(symbol, callback) {
   const queryFiveDay = getQueryForIntradayData(symbol,
     QUERY_RANGE_FIVE_DAY,

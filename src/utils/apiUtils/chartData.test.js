@@ -3,7 +3,7 @@ import dateFormat from 'dateformat';
 
 import {
   getAdjustedDateForTimestamp,
-  getDateAndTime,
+  formatAndAdjustDateForTimestamp,
   getEndOfDayTimestampIndex,
   getStartOfDayTimestampIndex
 } from './chartData';
@@ -19,9 +19,9 @@ describe('getAdjustedDateForTimestamp', function() {
   });
 });
 
-describe('getDateAndTime', function() {
+describe('formatAndAdjustDateForTimestamp', function() {
   it('gets date and time given proper inputs', function() {
-    expect(getDateAndTime(1000, 2000, 'h:MM TT'))
+    expect(formatAndAdjustDateForTimestamp(1000, 2000, 'h:MM TT'))
       .to
       .equal(dateFormat(new Date(3000000), 'h:MM TT', true));
   });
