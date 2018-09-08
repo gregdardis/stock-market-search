@@ -3,4 +3,4 @@
 buildScripts/testSetup.js
 
 --recursive
-src/**/*.test.js
+src/**/*.test.{js,jsx}
