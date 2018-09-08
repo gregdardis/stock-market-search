@@ -19,7 +19,7 @@ import {
 } from '../../constants/formatting';
 import * as calculations from './calculations';
 import * as createStockDataEntry from './createStockDataEntry';
-import { processStockData } from './dataProcessing';
+import { processStockData } from './processStockData';
 
 describe('processStockData', () => {
   const VALUE_PREVIOUS_CLOSE = 1;

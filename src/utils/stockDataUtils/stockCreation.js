@@ -1,4 +1,4 @@
-import { processStockData } from './dataProcessing';
+import { processStockData } from './processStockData';
 
 export function createStock(stockQuote) {
   const {

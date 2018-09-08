@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-import * as dataProcessing from './dataProcessing';
+import * as processStockData from './processStockData';
 import { createStock } from './stockCreation';
 
 describe('createStock', function() {
@@ -19,7 +19,7 @@ describe('createStock', function() {
   let processStockDataStub;
 
   beforeEach(function() {
-    processStockDataStub = sinon.stub(dataProcessing, 'processStockData');
+    processStockDataStub = sinon.stub(processStockData, 'processStockData');
     processStockDataStub.returns({});
   });
 
