@@ -9,16 +9,22 @@ import { NUMBER_FORMAT_DEFAULT } from '../../constants/formatting';
 
 describe('createStockDataEntry', () => {
   let isStringStub;
+  let parseIntExactStub;
 
   beforeEach(function () {
     isStringStub = sinon.stub(
       typeChecking, 'isString'
     );
     isStringStub.returns(true);
+    parseIntExactStub = sinon.stub(
+      typeChecking, 'parseIntExact'
+    );
+    parseIntExactStub.returns(15);
   });
 
   afterEach(function () {
     isStringStub.restore();
+    parseIntExactStub.restore();
   });
 
   it('creates a data entry given only value', () => {
@@ -100,48 +106,56 @@ describe('createStockDataEntry', () => {
       });
   });
   it('throws an error if value is letters followed by numbers', () => {
+    parseIntExactStub.returns(null);
     expect(() => {
       createStockDataEntry('hello15');
     }).to
       .throw();
   });
   it('throws an error if value is numbers followed by letters', () => {
+    parseIntExactStub.returns(null);
     expect(() => {
       createStockDataEntry('15hello');
     }).to
       .throw();
   });
   it('throws an error if value is a non-numeric string', () => {
+    parseIntExactStub.returns(null);
     expect(() => {
       createStockDataEntry('hello');
     }).to
       .throw();
   });
   it('throws an error if value is an object', () => {
+    parseIntExactStub.returns(null);
     expect(() => {
       createStockDataEntry({});
     }).to
       .throw();
   });
   it('throws an error if value is an array', () => {
+    parseIntExactStub.returns(null);
     expect(() => {
       createStockDataEntry([]);
     }).to
       .throw();
   });
   it('throws an error if value is a boolean', () => {
+    parseIntExactStub.returns(null);
     expect(() => {
       createStockDataEntry(true);
     }).to
       .throw();
   });
   it('throws an error if value is null', () => {
+    parseIntExactStub.returns(null);
     expect(() => {
       createStockDataEntry(null);
     }).to
       .throw();
   });
   it('throws an error if value is a function', () => {
+    parseIntExactStub.returns(null);
     expect(() => {
       createStockDataEntry(() => {});
     }).to
@@ -224,28 +238,28 @@ describe('createStockDataEntry', () => {
       .throw();
   });
   it('throws an error if optionalValueFormat is an object', () => {
-    isStringStub.returns(false);
+    isStringStub.onCall(1).returns(false);
     expect(() => {
       createStockDataEntry(15, { optionalValueFormat: {} });
     }).to
       .throw();
   });
   it('throws an error if optionalValueFormat is an array', () => {
-    isStringStub.returns(false);
+    isStringStub.onCall(1).returns(false);
     expect(() => {
       createStockDataEntry(15, { optionalValueFormat: [] });
     }).to
       .throw();
   });
   it('throws an error if optionalValueFormat is a boolean', () => {
-    isStringStub.returns(false);
+    isStringStub.onCall(1).returns(false);
     expect(() => {
       createStockDataEntry(15, { optionalValueFormat: true });
     }).to
       .throw();
   });
   it('throws an error if optionalValueFormat is a function', () => {
-    isStringStub.returns(false);
+    isStringStub.onCall(1).returns(false);
     expect(() => {
       createStockDataEntry(
         15,

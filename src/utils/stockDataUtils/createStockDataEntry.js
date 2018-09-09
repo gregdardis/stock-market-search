@@ -5,8 +5,9 @@ import {
 } from '../typeChecking';
 
 export function createStockDataEntry(value, options = {}) {
-  const parsedValue = parseInt(value);
-  if (isNaN(value) || isNaN(parsedValue)) {
+  const parsedValue = parseIntExact(value);
+  /* eslint-disable-next-line eqeqeq */
+  if (parsedValue == null) {
     throw new TypeError(
       `${createStockDataEntry.name} requires a number ` +
       'for the value parameter.'
