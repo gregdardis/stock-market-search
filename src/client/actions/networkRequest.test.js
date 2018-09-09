@@ -17,6 +17,16 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe('networkRequest actions (synchronous)', () => {
+  let clock;
+
+  before(() => {
+    clock = sinon.useFakeTimers(Date.now());
+  });
+
+  after(() => {
+    clock.restore();
+  });
+
   it('should create an action to set chart to receive a stock', () => {
     const stockData = {
       ...mockStockData
@@ -52,8 +62,15 @@ describe('networkRequest actions (asynchronous)', () => {
   const stockSymbol = mockStockData.symbol;
   const endpoint = `/api/stocks/${stockSymbol}`;
 
+  before(() => {
+    clock = sinon.useFakeTimers(Date.now());
+  });
+
+  after(() => {
+    clock.restore();
+  });
+
   beforeEach(() => {
-    clock = sinon.useFakeTimers(new Date());
     store = mockStore({
       chartTimePeriodIndex: 4,
       fetching: null,
@@ -64,7 +81,6 @@ describe('networkRequest actions (asynchronous)', () => {
     });
   });
   afterEach(() => {
-    clock.restore();
     fetchMock.restore();
   });
 
