@@ -11,6 +11,7 @@ import {
 describe('selectedStock reducer', () => {
   const previousStockSymbol = 'GOOG';
   const currentStockSymbol = 'MSFT';
+
   it('should return the initial state', () => {
     expect(reducer(undefined, {})).to.equal('');
   });
