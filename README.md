@@ -1,5 +1,5 @@
 # Stock Market Search 
-[![Coverage Status](https://coveralls.io/repos/github/gregdardis/stock-market-search/badge.svg?branch=master)](https://coveralls.io/github/gregdardis/stock-market-search?branch=master) <------- IMMEDIATE GOAL: Get this over 90%
+[![Coverage Status](https://coveralls.io/repos/github/gregdardis/stock-market-search/badge.svg?branch=master)](https://coveralls.io/github/gregdardis/stock-market-search?branch=master&service=github)
 ## Description
 
 Stock Market Search is a web app that allows you to search for stocks and view related financial information and metrics.
