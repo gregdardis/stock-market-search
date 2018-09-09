@@ -7,6 +7,7 @@ describe('chart actions', () => {
     const expectedAction = {
       type: chart.SET_CHART_TO_DEFAULT_TIME_PERIOD
     };
+
     expect(chart.setChartToDefaultTimePeriod())
       .to
       .deep
@@ -19,6 +20,7 @@ describe('chart actions', () => {
       type: chart.UPDATE_CHART_TIME_PERIOD_INDEX,
       index
     };
+
     expect(chart.updateChartTimePeriodIndex(index))
       .to
       .deep

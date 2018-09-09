@@ -21,7 +21,6 @@ describe('networkRequest actions (synchronous)', () => {
     const stockData = {
       ...mockStockData
     };
-
     const expectedAction = {
       type: networkRequest.RECEIVE_STOCK,
       receivedAt: Date.now(),
@@ -40,6 +39,7 @@ describe('networkRequest actions (synchronous)', () => {
       type: networkRequest.SET_FETCHING,
       stockSymbol
     };
+
     expect(networkRequest.setFetching(stockSymbol))
       .to
       .deep
@@ -78,7 +78,6 @@ describe('networkRequest actions (asynchronous)', () => {
         headers: { 'content-type': 'application/json' }
       }
     );
-
     const expectedActions = [
       { type: networkRequest.SET_FETCHING, stockSymbol },
       {
@@ -99,7 +98,6 @@ describe('networkRequest actions (asynchronous)', () => {
 
   it('creates RECEIVE_SEARCH_ERROR when fetching stock fails with 404', () => {
     fetchMock.getOnce(endpoint, 404);
-
     const errorMessage = errorMessageStockNotFound(stockSymbol);
     const expectedActions = [
       { type: networkRequest.SET_FETCHING, stockSymbol },
@@ -116,7 +114,6 @@ describe('networkRequest actions (asynchronous)', () => {
 
   it('creates RECEIVE_SEARCH_ERROR when fetching stock fails with 500', () => {
     fetchMock.getOnce(endpoint, 500);
-
     const errorMessage = ERROR_MESSAGE_UNEXPECTED;
     const expectedActions = [
       { type: networkRequest.SET_FETCHING, stockSymbol },
@@ -139,7 +136,6 @@ describe('networkRequest actions (asynchronous)', () => {
         // which causes the outer catch to execute
       }
     );
-
     const errorMessage = ERROR_MESSAGE_UNEXPECTED;
     const expectedActions = [
       { type: networkRequest.SET_FETCHING, stockSymbol },
