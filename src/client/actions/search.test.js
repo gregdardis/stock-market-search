@@ -5,7 +5,7 @@ import { mockStockData } from './testData';
 import { ERROR_MESSAGE_UNEXPECTED } from '../../constants/userFacingStrings';
 
 describe('search actions', () => {
-  it('should create an action clear a search error', () => {
+  it('should create an action to clear a search error', () => {
     const expectedAction = {
       type: search.CLEAR_SEARCH_ERROR
     };
@@ -15,7 +15,7 @@ describe('search actions', () => {
       .deep
       .equal(expectedAction);
   });
-  it('should create an action clear the search text', () => {
+  it('should create an action to clear the search text', () => {
     const expectedAction = {
       type: search.CLEAR_SEARCH_TEXT
     };
@@ -25,7 +25,7 @@ describe('search actions', () => {
       .deep
       .equal(expectedAction);
   });
-  it('should create an action perform a search', () => {
+  it('should create an action to perform a search', () => {
     const searchText = mockStockData.symbol;
     const expectedAction = {
       type: search.PERFORM_SEARCH,
@@ -37,7 +37,7 @@ describe('search actions', () => {
       .deep
       .equal(expectedAction);
   });
-  it('should create an action for receiving a search error', () => {
+  it('should create an action to receive a search error', () => {
     const errorMessage = ERROR_MESSAGE_UNEXPECTED;
     const expectedAction = {
       type: search.RECEIVE_SEARCH_ERROR,
