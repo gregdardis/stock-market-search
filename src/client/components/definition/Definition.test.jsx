@@ -6,6 +6,7 @@ import Definition from './Definition';
 
 const mockTitle = 'P/E';
 const mockDefinition = 'P/E is price-to-earnings';
+const mockEquations = ['equation1', 'equation2'];
 
 describe('<Definition />', () => {
   it('has expected className for styling', () => {
@@ -30,5 +31,12 @@ describe('<Definition />', () => {
     expect(title).to.equal(mockTitle);
     expect(definition).to.equal(mockDefinition);
   });
-  // TODO: test equation rendering
+  it('displays 2 equations properly', () => {
+    const wrapper = shallow(
+      <Definition definition={{
+        equations: mockEquations
+      }} />
+    );
+    expect(wrapper.find('p')).to.have.lengthOf(2);
+  });
 });
