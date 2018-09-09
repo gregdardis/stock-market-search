@@ -31,12 +31,21 @@ describe('<Definition />', () => {
     expect(title).to.equal(mockTitle);
     expect(definition).to.equal(mockDefinition);
   });
-  it('displays 2 equations properly', () => {
+  it('displays 2 equations', () => {
     const wrapper = shallow(
       <Definition definition={{
         equations: mockEquations
       }} />
     );
     expect(wrapper.find('p')).to.have.lengthOf(2);
+  });
+  it('displays correct text in 2 equations', () => {
+    const wrapper = shallow(
+      <Definition definition={{
+        equations: mockEquations
+      }} />
+    );
+    expect(wrapper.find('p').at(0).text()).to.equal('$$equation1$$');
+    expect(wrapper.find('p').at(1).text()).to.equal('$$equation2$$');
   });
 });
