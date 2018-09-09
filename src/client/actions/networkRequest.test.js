@@ -5,7 +5,7 @@ import thunk from 'redux-thunk';
 import fetchMock from 'fetch-mock';
 
 import * as networkRequest from './networkRequest';
-import { mockStockData } from './testData';
+import { mockStockData } from '../testData';
 import { SET_CHART_TO_DEFAULT_TIME_PERIOD } from './chart';
 import { RECEIVE_SEARCH_ERROR } from './search';
 import {
