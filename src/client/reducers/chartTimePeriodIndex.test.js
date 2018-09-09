@@ -4,7 +4,7 @@ import { reducer } from './chartTimePeriodIndex';
 import {
   SET_CHART_TO_DEFAULT_TIME_PERIOD,
   UPDATE_CHART_TIME_PERIOD_INDEX
-} from '../actions/chart';
+} from '../actions';
 import { CHART_META_DATA } from '../../constants/formatting';
 import { LABEL_ONE_YEAR } from '../../constants/userFacingStrings';
 
