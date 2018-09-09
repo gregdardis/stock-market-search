@@ -53,7 +53,7 @@ describe('networkRequest actions (asynchronous)', () => {
   const endpoint = `/api/stocks/${stockSymbol}`;
 
   beforeEach(() => {
-    clock = sinon.useFakeTimers();
+    clock = sinon.useFakeTimers(new Date());
     store = mockStore({
       chartTimePeriodIndex: 4,
       fetching: null,
