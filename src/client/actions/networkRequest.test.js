@@ -7,6 +7,8 @@ import fetchMock from 'fetch-mock';
 import * as networkRequest from './networkRequest';
 import { mockStockData } from './testData';
 import { SET_CHART_TO_DEFAULT_TIME_PERIOD } from './chart';
+import { RECEIVE_SEARCH_ERROR } from './search';
+import { errorMessageStockNotFound } from '../../constants/userFacingStrings';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -18,6 +20,7 @@ describe('networkRequest actions', () => {
   });
   afterEach(() => {
     clock.restore();
+    fetchMock.restore();
   });
 
   it('should create an action to set chart to receive a stock', () => {
@@ -80,7 +83,33 @@ describe('networkRequest actions', () => {
     });
 
     return store.dispatch(networkRequest.fetchStock(stockSymbol)).then(() => {
-      // return of async actions
+      expect(store.getActions())
+        .to
+        .deep
+        .equal(expectedActions);
+    });
+  });
+
+  it('creates RECEIVE_SEARCH_ERROR when fetching stock fails with 404', () => {
+    const stockSymbol = mockStockData.symbol;
+    fetchMock.mock(`/api/stocks/${stockSymbol}`, 404);
+
+    const errorMessage = errorMessageStockNotFound(stockSymbol);
+    const expectedActions = [
+      { type: networkRequest.SET_FETCHING, stockSymbol },
+      { type: RECEIVE_SEARCH_ERROR, errorMessage }
+    ];
+
+    const store = mockStore({
+      chartTimePeriodIndex: 4,
+      fetching: null,
+      currentText: '',
+      error: null,
+      selectedStock: '',
+      stocks: {}
+    });
+
+    return store.dispatch(networkRequest.fetchStock(stockSymbol)).then(() => {
       expect(store.getActions())
         .to
         .deep
