@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
 import * as search from './search';
-import { mockStockData } from './testData';
+import { mockStockData } from '../testData';
 import { ERROR_MESSAGE_UNEXPECTED } from '../../constants/userFacingStrings';
 
 describe('search actions', () => {

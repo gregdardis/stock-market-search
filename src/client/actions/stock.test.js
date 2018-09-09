@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
 import * as stock from './stock';
-import { mockStockData } from './testData';
+import { mockStockData } from '../testData';
 
 describe('search actions', () => {
   it('should create an action to set stock from memory cache', () => {
