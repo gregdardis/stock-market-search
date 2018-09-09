@@ -5,7 +5,6 @@ import { reducer } from './stock';
 import { RECEIVE_STOCK } from '../actions';
 import { mockStockData } from '../testData';
 
-
 /* eslint-disable no-undefined */
 
 describe('stock reducer', () => {
