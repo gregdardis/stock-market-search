@@ -13,7 +13,6 @@ describe('chart actions', () => {
       .deep
       .equal(expectedAction);
   });
-
   it('should create an action to update the chart time period index', () => {
     const index = 3;
     const expectedAction = {

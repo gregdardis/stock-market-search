@@ -32,7 +32,6 @@ describe('networkRequest actions (synchronous)', () => {
       .deep
       .equal(expectedAction);
   });
-
   it('should create an action to set fetching to true for a stock', () => {
     const stockSymbol = mockStockData.symbol;
     const expectedAction = {
@@ -95,7 +94,6 @@ describe('networkRequest actions (asynchronous)', () => {
         .equal(expectedActions);
     });
   });
-
   it('creates RECEIVE_SEARCH_ERROR when fetching stock fails with 404', () => {
     fetchMock.getOnce(endpoint, 404);
     const errorMessage = errorMessageStockNotFound(stockSymbol);
@@ -111,7 +109,6 @@ describe('networkRequest actions (asynchronous)', () => {
         .equal(expectedActions);
     });
   });
-
   it('creates RECEIVE_SEARCH_ERROR when fetching stock fails with 500', () => {
     fetchMock.getOnce(endpoint, 500);
     const errorMessage = ERROR_MESSAGE_UNEXPECTED;
@@ -127,7 +124,6 @@ describe('networkRequest actions (asynchronous)', () => {
         .equal(expectedActions);
     });
   });
-
   it('creates RECEIVE_SEARCH_ERROR when fetching stock fails with 500', () => {
     fetchMock.getOnce(
       endpoint,
