@@ -10,7 +10,6 @@ import { LABEL_ONE_YEAR } from '../../constants/userFacingStrings';
 
 /* eslint-disable no-undefined */
 
-// The index of the One Year label
 const defaultTimePeriodIndex = CHART_META_DATA.findIndex(element =>
   element.label === LABEL_ONE_YEAR
 );
