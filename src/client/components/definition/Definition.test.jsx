@@ -18,6 +18,13 @@ describe('<Definition />', () => {
     );
     expect(wrapper).to.have.className('definition');
   });
+  it('renders no paragraphs or h2\'s if given an empty object', () => {
+    const wrapper = shallow(
+      <Definition definition={{}} />
+    );
+    expect(wrapper.find('h2')).to.have.length(0);
+    expect(wrapper.find('p')).to.have.length(0);
+  });
   it('displays the provided title', () => {
     const wrapper = shallow(
       <Definition definition={{
