@@ -7,8 +7,14 @@ const Definition = ({
   definition
 }) => (
   <div className='definition'>
-    <h2>{ definition.title }</h2>
-    <p>{ definition.definition }</p>
+    { definition.title
+      ? <h2>{ definition.title }</h2>
+      : null
+    }
+    { definition.definition
+      ? <p>{ definition.definition }</p>
+      : null
+    }
     { definition.equations
       ? definition.equations.map(equation => (
         <p key={equation}>$${equation}$$</p>
