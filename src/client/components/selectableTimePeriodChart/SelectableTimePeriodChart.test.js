@@ -8,11 +8,11 @@ import Chart from '../chart';
 
 describe('<SelectableTimePeriodChart />', () => {
   let wrapper;
+
   before(() => {
-    wrapper = shallow(
-      <SelectableTimePeriodChart />
-    );
+    wrapper = shallow(<SelectableTimePeriodChart />);
   });
+
   it('has expected className for styling', () => {
     expect(wrapper).to.have.className('selectableTimePeriodChart');
   });
