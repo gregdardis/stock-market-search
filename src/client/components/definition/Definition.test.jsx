@@ -18,26 +18,24 @@ describe('<Definition />', () => {
     );
     expect(wrapper).to.have.className('definition');
   });
-  it('displays the provided title and definition', () => {
+  it('displays the provided title', () => {
     const wrapper = shallow(
       <Definition definition={{
-        title: mockTitle,
-        definition: mockDefinition
+        title: mockTitle
       }} />
     );
     const title = wrapper.find('h2').first().text();
-    const definition = wrapper.find('p').first().text();
 
     expect(title).to.equal(mockTitle);
-    expect(definition).to.equal(mockDefinition);
   });
-  it('displays 2 equations', () => {
+  it('displays the provided definition', () => {
     const wrapper = shallow(
       <Definition definition={{
-        equations: mockEquations
+        definition: mockDefinition
       }} />
     );
-    expect(wrapper.find('p')).to.have.lengthOf(2);
+    const definition = wrapper.find('p').first().text();
+    expect(definition).to.equal(mockDefinition);
   });
   it('displays correct text in 2 equations', () => {
     const wrapper = shallow(
