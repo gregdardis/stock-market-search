@@ -22,6 +22,7 @@ const Search = ({
   const handleSearch = () => {
     if (text) {
       performSearch(text, stocks);
+      clearError();
     }
   };
   const handleChange = event => {
