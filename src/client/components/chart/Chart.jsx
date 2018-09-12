@@ -20,7 +20,7 @@ import {
 } from '../../../constants/formatting';
 import { CHART_LINE_COLOR } from '../../../constants/colors';
 
-const Chart = ({
+export const Chart = ({
   chartTimePeriodIndex,
   data
 }) => {
