@@ -19,11 +19,11 @@ const mockStore = configureMockStore(middlewares);
 describe('networkRequest actions (synchronous)', () => {
   let clock;
 
-  before(() => {
+  beforeAll(() => {
     clock = sinon.useFakeTimers(Date.now());
   });
 
-  after(() => {
+  afterAll(() => {
     clock.restore();
   });
 
@@ -62,11 +62,11 @@ describe('networkRequest actions (asynchronous)', () => {
   const stockSymbol = mockStockData.symbol;
   const endpoint = `/api/stocks/${stockSymbol}`;
 
-  before(() => {
+  beforeAll(() => {
     clock = sinon.useFakeTimers(Date.now());
   });
 
-  after(() => {
+  afterAll(() => {
     clock.restore();
   });
 

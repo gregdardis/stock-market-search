@@ -9,7 +9,7 @@ import Chart from '../chart';
 describe('<SelectableTimePeriodChart />', () => {
   let wrapper;
 
-  before(() => {
+  beforeAll(() => {
     wrapper = shallow(<SelectableTimePeriodChart />);
   });
 

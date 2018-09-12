@@ -2,14 +2,15 @@
   "env": {
     "browser": true,
     "node": true,
-    "es6": true,
-    "mocha": true
+    "es6": true
   },
 
   "plugins": [
     "react",
-    "mocha"
+    "jest"
   ],
+
+  "extends": ["plugin:jest/recommended"],
 
   "parserOptions": {
       "sourceType": "module",
@@ -22,8 +23,8 @@
 
   "rules": {
 
-    // Mocha
-    "mocha/no-exclusive-tests": 2,
+    // Jest
+    "jest/valid-expect": 0,
 
     //
     //Possible Errors
