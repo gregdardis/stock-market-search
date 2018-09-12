@@ -19,14 +19,14 @@ import {
   NUMBER_FORMAT_PRICE
 } from '../../../constants/formatting';
 import { CHART_LINE_COLOR } from '../../../constants/colors';
+import {
+  getTooltipLabelFormatter
+} from '../../../utils/chartUtils';
 
 export const Chart = ({
   chartTimePeriodIndex,
   data
 }) => {
-  const getTooltipLabelFormatter = () =>
-    CHART_META_DATA[chartTimePeriodIndex].getTooltipLabelFormatter;
-
   const getXAxisDataKey = () =>
     CHART_META_DATA[chartTimePeriodIndex].xAxisDataKey;
 
@@ -50,7 +50,7 @@ export const Chart = ({
         <YAxis dataKey={ CHART_DATA_KEY_Y_AXIS } domain={ ['auto', 'auto'] }
           tickFormatter={ addCommas } />
         <Tooltip
-          labelFormatter={ getTooltipLabelFormatter() }
+          labelFormatter={ getTooltipLabelFormatter(chartTimePeriodIndex) }
           formatter={ price => formatAsPrice(price) }
           separator=': ' />
         <Line type='monotone' dataKey={ CHART_DATA_KEY_Y_AXIS } dot={ false }
