@@ -5,21 +5,6 @@
     "type": "git",
     "url": "https://github.com/gregdardis/stock-market-info.git"
   },
-  "nyc": {
-    "extension": [
-      ".jsx"
-    ],
-    "exclude": [
-      "buildScripts",
-      "**/constants/**",
-      "**/config/**",
-      "**/node_modules/**",
-      "**/coverage/**",
-      "**/*.test.js",
-      "**/*.test.jsx"
-    ],
-    "temp-directory": "./coverage/.nyc_output"
-  },
   "jest": {
     "setupTestFrameworkScriptFile": "<rootDir>/buildScripts/testSetup.js",
     "collectCoverage": true,
