@@ -8,8 +8,14 @@
   "jest": {
     "setupTestFrameworkScriptFile": "<rootDir>/buildScripts/testSetup.js",
     "collectCoverage": true,
-    "testMatch": ["**/*.test.{js,jsx}"],
-    "moduleFileExtensions": ["js", "jsx", "json"],
+    "testMatch": [
+      "**/*.test.{js,jsx}"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "json"
+    ],
     "moduleNameMapper": {
       "\\.(css|less|sass|scss)$": "<rootDir>/__mocks__/styleMock.js",
       "\\.(gif|ttf|eot|svg)$": "<rootDir>/__mocks__/fileMock.js"
