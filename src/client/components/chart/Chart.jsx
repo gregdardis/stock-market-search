@@ -32,7 +32,7 @@ export const Chart = ({
       <CartesianGrid strokeDashArray='3 3' />
       <XAxis dataKey={ getXAxisDataKey(chartTimePeriodIndex) }
         tickFormatter={ getXAxisTickFormatter(chartTimePeriodIndex) }
-        minTickGap={ 5 } />
+        minTickGap={ getXAxisMinTickGap(chartTimePeriodIndex) } />
       <YAxis dataKey={ CHART_DATA_KEY_Y_AXIS } domain={ ['auto', 'auto'] }
         tickFormatter={ addCommas } />
       <Tooltip
