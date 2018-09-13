@@ -27,7 +27,7 @@
     "dev": "webpack-dev-server --config ./config/webpack.config.dev.js",
     "dev:test": "npm-run-all --parallel dev test:watch",
     "start": "babel-watch src/server",
-    "test": "jest --coverage && cat ./coverage/lcov.info | coveralls",
+    "test": "jest --coverage",
     "test:watch": "npm run test -- --watch"
   },
   "devDependencies": {
