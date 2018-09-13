@@ -1,12 +1,15 @@
 import {
+  formatAsPrice,
   getTooltipLabelFormatter,
-  getXAxisDataKey
+  getXAxisDataKey,
+  getXAxisMinTickGap,
+  getXAxisTickFormatter
 } from './chartUtils';
 import * as dateFormatting from './dateUtils/dateFormatting';
 import { CHART_META_DATA } from '../constants/formatting';
 
 describe('getTooltipLabelFormatter', () => {
-  it('gets tooltip label formatter and ensures tryFormatDate' +
+  it('gets tooltip label formatter and calls it, ensuring tryFormatDate' +
      'was called', () => {
     const mockTryFormatDate = jest.spyOn(
       dateFormatting,
@@ -103,5 +106,115 @@ describe('getXAxisDataKey', () => {
   });
   it('returns null if chartTimePeriodIndex is a function', () => {
     expect(getXAxisDataKey(() => {})).toBeNull();
+  });
+});
+
+describe('getXAxisMinTickGap', () => {
+  it('gets xAxisDataKey from CHART_META_DATA', () => {
+    expect(getXAxisMinTickGap(0)).toBe(100);
+  });
+  it('returns null if chartTimePeriodIndex is negative', () => {
+    expect(getXAxisMinTickGap(-1)).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is too high', () => {
+    expect(getXAxisMinTickGap(CHART_META_DATA.length)).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is a string', () => {
+    expect(getXAxisMinTickGap('hello')).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is a numeric string', () => {
+    expect(getXAxisMinTickGap('5')).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is a' +
+     'number followed by letters', () => {
+    expect(getXAxisMinTickGap('5hello')).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is' +
+     'letters followed by a number', () => {
+    expect(getXAxisMinTickGap('hello5')).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is an object', () => {
+    expect(getXAxisMinTickGap({})).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is an array', () => {
+    expect(getXAxisMinTickGap([])).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is a boolean', () => {
+    expect(getXAxisMinTickGap(true)).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is null', () => {
+    expect(getXAxisMinTickGap(null)).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is undefined', () => {
+    /* eslint-disable no-undefined*/
+    expect(getXAxisMinTickGap(undefined)).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is a function', () => {
+    expect(getXAxisMinTickGap(() => {})).toBeNull();
+  });
+});
+
+describe('getXAxisTickFormatter', () => {
+  it('gets X axis tick formatter and calls it, ensuring tryFormatDate' +
+     'was called', () => {
+    const mockTryFormatDate = jest.spyOn(
+      dateFormatting,
+      'tryFormatDate'
+    );
+    const fn = getTooltipLabelFormatter(1);
+
+    fn('09-14-18');
+
+    expect(mockTryFormatDate).toHaveBeenCalledTimes(1);
+
+    mockTryFormatDate.mockReset();
+  });
+  it('returns null if chartTimePeriodIndex is negative', () => {
+    expect(getXAxisTickFormatter(-1)).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is too high', () => {
+    expect(getXAxisTickFormatter(CHART_META_DATA.length)).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is a string', () => {
+    expect(getXAxisTickFormatter('hello')).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is a numeric string', () => {
+    expect(getXAxisTickFormatter('5')).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is a' +
+     'number followed by letters', () => {
+    expect(getXAxisTickFormatter('5hello')).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is' +
+     'letters followed by a number', () => {
+    expect(getXAxisTickFormatter('hello5')).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is an object', () => {
+    expect(getXAxisTickFormatter({})).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is an array', () => {
+    expect(getXAxisTickFormatter([])).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is a boolean', () => {
+    expect(getXAxisTickFormatter(true)).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is null', () => {
+    expect(getXAxisTickFormatter(null)).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is undefined', () => {
+    /* eslint-disable no-undefined*/
+    expect(getXAxisTickFormatter(undefined)).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is a function', () => {
+    expect(getXAxisTickFormatter(() => {})).toBeNull();
+  });
+});
+
+describe('formatAsPrice', () => {
+  it('formats a number as price', () => {
+    expect(formatAsPrice(1000)).toBe('$1,000.00');
+  });
+  it('formats a number with decimal as price', () => {
+    expect(formatAsPrice(1000.513)).toBe('$1,000.51');
   });
 });
