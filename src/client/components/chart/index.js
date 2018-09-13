@@ -3,9 +3,7 @@ import { connect } from 'react-redux';
 import Chart from './Chart';
 import { getSelectedStockValueForKey } from '../../../utils/stateGetters';
 import { CHART_META_DATA } from '../../../constants/formatting';
-
-const getStockDataKey = timePeriodIndex =>
-  CHART_META_DATA[timePeriodIndex].stockDataKey;
+import { getStockDataKey } from '../../../utils/chartUtils';
 
 const getStockDataForSelectedTimePeriod = state => {
   const selectedTimePeriodIndex = state.chartTimePeriodIndex;

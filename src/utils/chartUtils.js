@@ -14,6 +14,13 @@ function isNumberAndInChartMetaDataRange(number) {
   return true;
 }
 
+export function getStockDataKey(chartTimePeriodIndex) {
+  if (!isNumberAndInChartMetaDataRange(chartTimePeriodIndex)) {
+    return null;
+  }
+  return CHART_META_DATA[chartTimePeriodIndex].stockDataKey;
+}
+
 export function getTooltipLabelFormatter(chartTimePeriodIndex) {
   if (!isNumberAndInChartMetaDataRange(chartTimePeriodIndex)) {
     return null;

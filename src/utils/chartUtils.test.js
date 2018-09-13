@@ -1,5 +1,6 @@
 import {
   formatAsPrice,
+  getStockDataKey,
   getTooltipLabelFormatter,
   getXAxisDataKey,
   getXAxisMinTickGap,
@@ -7,6 +8,51 @@ import {
 } from './chartUtils';
 import * as dateFormatting from './dateUtils/dateFormatting';
 import { CHART_META_DATA } from '../constants/formatting';
+
+describe('getStockDataKey', () => {
+  it('gets xAxisDataKey from CHART_META_DATA', () => {
+    expect(getStockDataKey(0)).toBe('oneDayStockData');
+  });
+  it('returns null if chartTimePeriodIndex is negative', () => {
+    expect(getStockDataKey(-1)).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is too high', () => {
+    expect(getStockDataKey(CHART_META_DATA.length)).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is a string', () => {
+    expect(getStockDataKey('hello')).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is a numeric string', () => {
+    expect(getStockDataKey('5')).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is a' +
+     'number followed by letters', () => {
+    expect(getStockDataKey('5hello')).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is' +
+     'letters followed by a number', () => {
+    expect(getStockDataKey('hello5')).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is an object', () => {
+    expect(getStockDataKey({})).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is an array', () => {
+    expect(getStockDataKey([])).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is a boolean', () => {
+    expect(getStockDataKey(true)).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is null', () => {
+    expect(getStockDataKey(null)).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is undefined', () => {
+    /* eslint-disable no-undefined*/
+    expect(getStockDataKey(undefined)).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is a function', () => {
+    expect(getStockDataKey(() => {})).toBeNull();
+  });
+});
 
 describe('getTooltipLabelFormatter', () => {
   it('gets tooltip label formatter and calls it, ensuring tryFormatDate' +
