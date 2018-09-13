@@ -61,7 +61,6 @@ describe('getTooltipLabelFormatter', () => {
   });
 });
 
-// TODO: check if !number
 describe('getXAxisDataKey', () => {
   it('gets xAxisDataKey from CHART_META_DATA', () => {
     expect(getXAxisDataKey(0)).toBe('dateAndTime');
@@ -71,5 +70,38 @@ describe('getXAxisDataKey', () => {
   });
   it('returns null if chartTimePeriodIndex is too high', () => {
     expect(getXAxisDataKey(CHART_META_DATA.length)).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is a string', () => {
+    expect(getXAxisDataKey('hello')).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is a numeric string', () => {
+    expect(getXAxisDataKey('5')).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is a' +
+     'number followed by letters', () => {
+    expect(getXAxisDataKey('5hello')).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is' +
+     'letters followed by a number', () => {
+    expect(getXAxisDataKey('hello5')).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is an object', () => {
+    expect(getXAxisDataKey({})).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is an array', () => {
+    expect(getXAxisDataKey([])).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is a boolean', () => {
+    expect(getXAxisDataKey(true)).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is null', () => {
+    expect(getXAxisDataKey(null)).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is undefined', () => {
+    /* eslint-disable no-undefined*/
+    expect(getXAxisDataKey(undefined)).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is a function', () => {
+    expect(getXAxisDataKey(() => {})).toBeNull();
   });
 });

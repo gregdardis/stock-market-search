@@ -15,8 +15,9 @@ export const getTooltipLabelFormatter = chartTimePeriodIndex => {
 };
 
 export const getXAxisDataKey = chartTimePeriodIndex => {
-  if (chartTimePeriodIndex < 0 ||
-      chartTimePeriodIndex >= CHART_META_DATA.length) {
+  if (typeof chartTimePeriodIndex !== 'number'
+      || chartTimePeriodIndex < 0
+      || chartTimePeriodIndex >= CHART_META_DATA.length) {
     return null;
   }
   return CHART_META_DATA[chartTimePeriodIndex].xAxisDataKey;
