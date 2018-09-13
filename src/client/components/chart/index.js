@@ -5,7 +5,7 @@ import { getSelectedStockValueForKey } from '../../../utils/stateGetters';
 import { CHART_META_DATA } from '../../../constants/formatting';
 import { getStockDataKey } from '../../../utils/chartUtils';
 
-const getStockDataForSelectedTimePeriod = state => {
+export const getStockDataForSelectedTimePeriod = state => {
   const selectedTimePeriodIndex = state.chartTimePeriodIndex;
   const stockDataKey = getStockDataKey(selectedTimePeriodIndex);
   const stockData = getSelectedStockValueForKey(state, stockDataKey);
