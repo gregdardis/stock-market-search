@@ -1,13 +1,8 @@
 import { NUMBER_FORMAT_DEFAULT } from '../../constants/formatting';
-import {
-  isString,
-  parseIntExact
-} from '../typeChecking';
+import { isString } from '../typeChecking';
 
 export function createStockDataEntry(value, options = {}) {
-  const parsedValue = parseIntExact(value);
-  /* eslint-disable-next-line eqeqeq */
-  if (parsedValue == null) {
+  if (typeof value !== 'number') {
     throw new TypeError(
       `${createStockDataEntry.name} requires a number ` +
       'for the value parameter.'
@@ -20,10 +15,8 @@ export function createStockDataEntry(value, options = {}) {
     optionalValueFormat = NUMBER_FORMAT_DEFAULT
   } = options;
 
-  let parsedOptionalValue;
   if (optionalValue) {
-    parsedOptionalValue = parseInt(optionalValue);
-    if (isNaN(optionalValue) || isNaN(parsedOptionalValue)) {
+    if (typeof optionalValue !== 'number') {
       throw new TypeError(
         `${createStockDataEntry.name} requires a number ` +
         'for the optionalValue option.'
@@ -46,8 +39,8 @@ export function createStockDataEntry(value, options = {}) {
   }
 
   return {
-    value: parsedValue,
-    optionalValue: parsedOptionalValue,
+    value,
+    optionalValue,
     valueFormat,
     optionalValueFormat
   };
