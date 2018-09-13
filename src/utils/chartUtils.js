@@ -5,9 +5,13 @@ import {
   NUMBER_FORMAT_PRICE
 } from '../constants/formatting';
 
-export const getTooltipLabelFormatter = chartTimePeriodIndex => (
-  CHART_META_DATA[chartTimePeriodIndex].getTooltipLabelFormatter
-);
+export const getTooltipLabelFormatter = chartTimePeriodIndex => {
+  if (chartTimePeriodIndex < 0
+      || chartTimePeriodIndex >= CHART_META_DATA.length) {
+    return null;
+  }
+  return CHART_META_DATA[chartTimePeriodIndex].getTooltipLabelFormatter;
+};
 
 export const getXAxisDataKey = chartTimePeriodIndex => (
   CHART_META_DATA[chartTimePeriodIndex].xAxisDataKey
