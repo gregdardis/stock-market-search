@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './dataItem.css';
 
-const DataItem = ({
+export const DataItem = ({
   label,
   showBottomBorder,
   value
@@ -15,15 +15,17 @@ const DataItem = ({
       <span>
         { label }
       </span>
-      <span className='value'>
-        { value }
-      </span>
+      { value
+        ? <span className='value'>
+          { value }
+        </span>
+        : null }
     </div>
   );
 };
 DataItem.propTypes = {
   label: PropTypes.string.isRequired,
   showBottomBorder: PropTypes.bool,
-  value: PropTypes.string.isRequired
+  value: PropTypes.string
 };
 export default DataItem;
