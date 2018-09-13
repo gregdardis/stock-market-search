@@ -52,8 +52,7 @@ describe('<Chart />', () => {
     expect(lineChartChildren.find(Line))
       .toHaveLength(1);
   });
-  it('gets tooltip formatter and calls it, ensuring formatAsPrice ' +
-     'was called', () => {
+  it('has a Tooltip with a formatter prop that calls formatAsPrice', () => {
     const mockFormatAsPrice = jest.spyOn(
       chartUtils,
       'formatAsPrice'
@@ -61,8 +60,7 @@ describe('<Chart />', () => {
     const wrapper = shallow(
       <Chart chartTimePeriodIndex={0} data={[]} />
     );
-    const formatter = wrapper.find(ResponsiveContainer).childAt(0)
-      .childAt(3).prop('formatter');
+    const formatter = wrapper.find('Tooltip').prop('formatter');
     formatter(1000);
 
     expect(mockFormatAsPrice).toHaveBeenCalledTimes(1);

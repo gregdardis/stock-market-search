@@ -46,7 +46,7 @@ describe('getStockDataKey', () => {
     expect(getStockDataKey(null)).toBeNull();
   });
   it('returns null if chartTimePeriodIndex is undefined', () => {
-    /* eslint-disable no-undefined*/
+    /* eslint-disable-next-line no-undefined*/
     expect(getStockDataKey(undefined)).toBeNull();
   });
   it('returns null if chartTimePeriodIndex is a function', () => {
@@ -102,7 +102,7 @@ describe('getTooltipLabelFormatter', () => {
     expect(getTooltipLabelFormatter(null)).toBeNull();
   });
   it('returns null if chartTimePeriodIndex is undefined', () => {
-    /* eslint-disable no-undefined*/
+    /* eslint-disable-next-line no-undefined*/
     expect(getTooltipLabelFormatter(undefined)).toBeNull();
   });
   it('returns null if chartTimePeriodIndex is a function', () => {
@@ -147,7 +147,7 @@ describe('getXAxisDataKey', () => {
     expect(getXAxisDataKey(null)).toBeNull();
   });
   it('returns null if chartTimePeriodIndex is undefined', () => {
-    /* eslint-disable no-undefined*/
+    /* eslint-disable-next-line no-undefined*/
     expect(getXAxisDataKey(undefined)).toBeNull();
   });
   it('returns null if chartTimePeriodIndex is a function', () => {
@@ -192,7 +192,7 @@ describe('getXAxisMinTickGap', () => {
     expect(getXAxisMinTickGap(null)).toBeNull();
   });
   it('returns null if chartTimePeriodIndex is undefined', () => {
-    /* eslint-disable no-undefined*/
+    /* eslint-disable-next-line no-undefined*/
     expect(getXAxisMinTickGap(undefined)).toBeNull();
   });
   it('returns null if chartTimePeriodIndex is a function', () => {
@@ -248,7 +248,7 @@ describe('getXAxisTickFormatter', () => {
     expect(getXAxisTickFormatter(null)).toBeNull();
   });
   it('returns null if chartTimePeriodIndex is undefined', () => {
-    /* eslint-disable no-undefined*/
+    /* eslint-disable-next-line no-undefined*/
     expect(getXAxisTickFormatter(undefined)).toBeNull();
   });
   it('returns null if chartTimePeriodIndex is a function', () => {

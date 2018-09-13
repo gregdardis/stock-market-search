@@ -6,16 +6,13 @@ import * as stateGetters from '../stateGetters';
 
 describe('getStockDataForSelectedTimePeriod', () => {
   it('properly gets stock data for a time period', () => {
-    const mockOneDayStockData = [
-      {
-        date: '1986-03-12',
-        price: 0.097222
-      },
-      {
-        date: '1986-03-13',
-        price: 0.100694
-      }
-    ];
+    const mockOneDayStockData = [{
+      dateAndTime: '9:30 AM',
+      price: 54.83000183105469
+    }, {
+      dateAndTime: '9:35 AM',
+      price: 54.630001068115234
+    }];
 
     const getStockDataKeyStub = jest.spyOn(
       chartUtils,
