@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { expect } from 'chai';
 
 import Column from '.';
 import { DataItem } from '../dataItem/DataItem';
@@ -9,21 +10,30 @@ import {
 } from '../../../constants/userFacingStrings';
 
 describe('<Column />', () => {
-  it('renders 2 DataItems', () => {
-    const props = {
-      columnCellComponent: DataItem,
-      columnKeyName: LABEL_OPEN,
-      componentsProps: [{
-        key: 0,
-        label: LABEL_OPEN
-      }, {
-        key: 1,
-        label: LABEL_HIGH
-      }]
-    };
-    const wrapper = shallow(
-      <Column { ...props }/>
+  const props = {
+    columnCellComponent: DataItem,
+    columnKeyName: LABEL_OPEN,
+    componentsProps: [{
+      key: 0,
+      label: LABEL_OPEN
+    }, {
+      key: 1,
+      label: LABEL_HIGH
+    }]
+  };
+
+  let wrapper;
+
+  beforeAll(() => {
+    wrapper = shallow(
+      <Column { ...props } />
     );
-    expect(wrapper.find(DataItem)).toHaveLength(2);
+  });
+
+  it('has expected className for styling', () => {
+    expect(wrapper).to.have.className('column');
+  });
+  it('renders 2 DataItems', () => {
+    expect(wrapper.find(DataItem)).to.have.length(2);
   });
 });
