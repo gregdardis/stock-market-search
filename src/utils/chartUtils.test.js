@@ -3,6 +3,7 @@ import {
   getXAxisDataKey
 } from './chartUtils';
 import * as dateFormatting from './dateUtils/dateFormatting';
+import { CHART_META_DATA } from '../constants/formatting';
 
 describe('getTooltipLabelFormatter', () => {
   it('gets tooltip label formatter and ensures tryFormatDate' +
@@ -23,13 +24,18 @@ describe('getTooltipLabelFormatter', () => {
     expect(getTooltipLabelFormatter(-1)).toBeNull();
   });
   it('returns null if chartTimePeriodIndex is too high', () => {
-    expect(getTooltipLabelFormatter(7)).toBeNull();
+    expect(getTooltipLabelFormatter(CHART_META_DATA.length)).toBeNull();
   });
 });
 
-// todo: test if index is out of range? throw exception?
 describe('getXAxisDataKey', () => {
-  it('works', () => {
+  it('gets xAxisDataKey from CHART_META_DATA', () => {
     expect(getXAxisDataKey(0)).toBe('dateAndTime');
+  });
+  it('returns null if chartTimePeriodIndex is negative', () => {
+    expect(getXAxisDataKey(-1)).toBeNull();
+  });
+  it('returns null if chartTimePeriodIndex is too high', () => {
+    expect(getXAxisDataKey(CHART_META_DATA.length)).toBeNull();
   });
 });
