@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  shallow
-} from 'enzyme';
+import { shallow } from 'enzyme';
 import {
   CartesianGrid,
   Line,
@@ -13,7 +11,7 @@ import {
 } from 'recharts';
 
 import { Chart } from './Chart';
-import * as chartUtils from '../../../utils/chartUtils'; 
+import * as chartUtils from '../../../utils/chartUtils';
 
 describe('<Chart />', () => {
   it('renders a ResponsiveContainer', () => {

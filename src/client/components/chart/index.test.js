@@ -8,9 +8,11 @@ describe('mapStateToProps', () => {
       getStockDataForSelectedTimePeriod,
       'getStockDataForSelectedTimePeriod'
     ).mockReturnValue({});
+
     const mockInputState = {
       chartTimePeriodIndex: 5
     };
+
     expect(mapStateToProps(mockInputState))
       .toEqual({
         chartTimePeriodIndex: 5,
