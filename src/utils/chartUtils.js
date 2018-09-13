@@ -6,8 +6,9 @@ import {
 } from '../constants/formatting';
 
 export const getTooltipLabelFormatter = chartTimePeriodIndex => {
-  if (chartTimePeriodIndex < 0 ||
-      chartTimePeriodIndex >= CHART_META_DATA.length) {
+  if (typeof chartTimePeriodIndex !== 'number'
+      || chartTimePeriodIndex < 0
+      || chartTimePeriodIndex >= CHART_META_DATA.length) {
     return null;
   }
   return CHART_META_DATA[chartTimePeriodIndex].getTooltipLabelFormatter;
@@ -21,6 +22,7 @@ export const getXAxisDataKey = chartTimePeriodIndex => {
   return CHART_META_DATA[chartTimePeriodIndex].xAxisDataKey;
 };
 
+// TODO: return null
 export const getXAxisMinTickGap = chartTimePeriodIndex => (
   CHART_META_DATA[chartTimePeriodIndex].xAxisMinTickGap
 );
