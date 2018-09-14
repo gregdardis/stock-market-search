@@ -25,4 +25,16 @@ describe('<DataItem />', () => {
     wrapper = shallow(<DataItem { ...bottomBorderFalseProps } />);
     expect(wrapper).to.have.className('dataItem');
   });
+  it('has the correct className for second (value) span', () => {
+    wrapper = shallow(<DataItem { ...baseProps } />);
+    expect(wrapper.find('span').at(1)).to.have.className('value');
+  });
+  it('renders first (label) span with a child of "High"', () => {
+    wrapper = shallow(<DataItem { ...baseProps } />);
+    expect(wrapper.find('span').at(0).text()).to.equal('High');
+  });
+  it('renders second (value) span with a child of "113.36"', () => {
+    wrapper = shallow(<DataItem { ...baseProps } />);
+    expect(wrapper.find('span').at(1).text()).to.equal('113.36');
+  });
 });
