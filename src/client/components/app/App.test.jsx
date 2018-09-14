@@ -14,4 +14,8 @@ describe('<App />', () => {
     const wrapper = shallow(<App />);
     expect(wrapper).to.have.className('app');
   });
+  it('should have two routes', () => {
+    const wrapper = shallow(<App />);
+    expect(wrapper.find('Route')).to.have.length(2);
+  });
 });
