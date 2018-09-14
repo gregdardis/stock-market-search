@@ -14,13 +14,11 @@ import NavBar from '../navBar';
 import './app.css';
 
 const App = () => (
-  <Router>
-    <div className='app'>
-      <NavBar />
-      <Route exact path={ URL_HOME } component={ Home }/>
-      <Route path={ URL_GLOSSARY } component={ Glossary }/>
-    </div>
-  </Router>
+  <div className='app'>
+    <NavBar />
+    <Route exact path={ URL_HOME } component={ Home }/>
+    <Route path={ URL_GLOSSARY } component={ Glossary }/>
+  </div>
 );
 
 export default App;

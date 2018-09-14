@@ -6,6 +6,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import App from './components/app';
 import { reducer } from './reducers';
@@ -21,7 +22,9 @@ const render = Component => {
     <Provider store={ store }>
       <AppContainer>
         <MuiThemeProvider>
-          <Component />
+          <Router>
+            <Component />
+          </Router>
         </MuiThemeProvider>
       </AppContainer>
     </Provider>,
