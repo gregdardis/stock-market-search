@@ -2,7 +2,6 @@ import {
   getSelectedStockValueForKey
 } from '.';
 
-// TODO: test
 export const getFormattedStockExchange = state => {
   const exchange = getSelectedStockValueForKey(state, 'exchange');
   switch (exchange) {
