@@ -2,10 +2,8 @@
   display: flex;
   flex: 1;
   flex-direction: column;
-  height: 100%;
+  overflow: auto;
   align-items: center;
-}
-
-.glossary .padList {
-  padding: 12px;
+  padding-top: 24px;
+  padding-bottom: 24px;
 }

@@ -8,7 +8,6 @@ const Glossary = () => {
   const definitions = definitionData.getDefinitionsArray();
   return (
     <div className='glossary'>
-      <div className='padList'/>
       { definitions.map(definition =>
         <Definition
           key={ definition.title }
@@ -19,7 +18,6 @@ const Glossary = () => {
           } }
         />
       ) }
-      <div className='padList'/>
     </div>
   );
 };
