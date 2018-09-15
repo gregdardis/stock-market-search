@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './exchange.css';
 
-const Exchange = ({
+export const Exchange = ({
   exchange
 }) => {
   return (
