@@ -22,7 +22,7 @@ import {
   getXAxisTickFormatter
 } from '../../../utils/chartUtils';
 
-export const Chart = ({
+const Chart = ({
   chartTimePeriodIndex,
   data
 }) => (

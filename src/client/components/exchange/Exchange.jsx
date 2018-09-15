@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './exchange.css';
 
-export const Exchange = ({
+const Exchange = ({
   exchange
 }) => (
   <div className='exchange'>

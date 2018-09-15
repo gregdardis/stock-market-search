@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
 
-import { Exchange } from './Exchange';
+import Exchange from './Exchange';
 
 describe('<Exchange />', () => {
   it('has the correct className for styling', () => {

@@ -10,7 +10,7 @@ import {
   YAxis
 } from 'recharts';
 
-import { Chart } from './Chart';
+import Chart from './Chart';
 import * as chartUtils from '../../../utils/chartUtils';
 
 describe('<Chart />', () => {
