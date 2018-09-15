@@ -1,26 +1,14 @@
 import { connect } from 'react-redux';
 
 import Exchange from './Exchange';
-import { getSelectedStockValueForKey } from '../../../utils/stateGetters';
+import {
+  getFormattedStockExchange
+} from '../../../utils/stateGetters/getFormattedStockExchange';
 
-const getFormattedStockExchange = state => {
-  const exchange = getSelectedStockValueForKey(state, 'exchange');
-  switch (exchange) {
-  case 'Toronto':
-    return 'TSX';
-  case 'NasdaqGS':
-    return 'NASDAQ';
-  default:
-    return exchange;
-  }
-};
-
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   exchange: getFormattedStockExchange(state)
 });
 
-const ExchangeContainer = connect(
+export default connect(
   mapStateToProps
 )(Exchange);
-
-export default ExchangeContainer;

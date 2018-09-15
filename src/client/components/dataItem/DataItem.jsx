@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './dataItem.css';
 
-export const DataItem = ({
+const DataItem = ({
   label,
   showBottomBorder,
   value

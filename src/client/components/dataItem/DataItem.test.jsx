@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
 
-import { DataItem } from './DataItem';
+import DataItem from './DataItem';
 
 describe('<DataItem />', () => {
   const baseProps = {
