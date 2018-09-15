@@ -15,9 +15,13 @@ import {
 
 /* eslint-disable no-undefined */
 
-let store = createStore(reducer);
-
 describe('Reducers are connected to the store as expected', () => {
+  let store;
+
+  beforeAll(() => {
+    store = createStore(reducer);
+  });
+
   test('initial state matches each reducer with empty action', () => {
     expect(store.getState().chartTimePeriodIndex)
       .toEqual(chartTimePeriodIndex(4, {}));
