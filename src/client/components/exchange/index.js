@@ -5,13 +5,10 @@ import {
   getFormattedStockExchange
 } from '../../../utils/stateGetters/getFormattedStockExchange';
 
-// TODO: test
 export const mapStateToProps = state => ({
   exchange: getFormattedStockExchange(state)
 });
 
-const ExchangeContainer = connect(
+export default connect(
   mapStateToProps
 )(Exchange);
-
-export default ExchangeContainer;
