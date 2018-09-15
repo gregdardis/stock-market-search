@@ -5,16 +5,14 @@ import './exchange.css';
 
 export const Exchange = ({
   exchange
-}) => {
-  return (
-    <div className='exchange'>
-      { exchange
-        ? <span>{ exchange }</span>
-        : <span>Unknown stock exchange</span>
-      }
-    </div>
-  );
-};
+}) => (
+  <div className='exchange'>
+    { exchange
+      ? <span>{ exchange }</span>
+      : <span>Unknown stock exchange</span>
+    }
+  </div>
+);
 Exchange.propTypes = {
   exchange: PropTypes.string
 };
