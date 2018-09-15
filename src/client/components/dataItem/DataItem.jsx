@@ -15,17 +15,15 @@ export const DataItem = ({
       <span>
         { label }
       </span>
-      { value
-        ? <span className='value'>
-          { value }
-        </span>
-        : null }
+      <span className='value'>
+        { value }
+      </span>
     </div>
   );
 };
 DataItem.propTypes = {
   label: PropTypes.string.isRequired,
   showBottomBorder: PropTypes.bool,
-  value: PropTypes.string
+  value: PropTypes.string.isRequired
 };
 export default DataItem;
