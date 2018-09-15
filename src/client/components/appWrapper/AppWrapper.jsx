@@ -1,20 +1,12 @@
 import React from 'react';
-import { createStore, applyMiddleware, compose } from 'redux';
+import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
-import thunkMiddleware from 'redux-thunk';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import App from '../app';
-import { reducer } from '../../reducers';
 
-const store = createStore(
-  reducer,
-  compose(applyMiddleware(thunkMiddleware),
-    window.devToolsExtension ? window.devToolsExtension() : f => f)
-);
-
-const AppWrapper = () => (
+const AppWrapper = ({ store }) => (
   <Provider store={ store }>
     <MuiThemeProvider>
       <Router>
@@ -23,5 +15,8 @@ const AppWrapper = () => (
     </MuiThemeProvider>
   </Provider>
 );
+AppWrapper.propTypes = {
+  store: PropTypes.object.isRequired
+};
 
 export default AppWrapper;

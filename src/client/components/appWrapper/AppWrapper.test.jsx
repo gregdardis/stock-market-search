@@ -1,13 +1,15 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import configureMockStore from 'redux-mock-store';
 
 import AppWrapper from './AppWrapper';
 
 describe('render', () => {
   let wrapper;
+  let mockStore = configureMockStore()();
 
   beforeEach(() => {
-    wrapper = shallow(<AppWrapper />);
+    wrapper = shallow(<AppWrapper store={ mockStore } />);
   });
 
   it('wraps the component in a Provider', () => {
@@ -28,5 +30,8 @@ describe('render', () => {
     const children = wrapper.find('BrowserRouter').children();
     expect(children).toHaveLength(1);
     expect(children.first().name()).toEqual('App');
+  });
+  it('passes the store to the Provider', () => {
+    expect(wrapper.props().store).toEqual(mockStore);
   });
 });
