@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import configureMockStore from 'redux-mock-store';
 
-import AppWrapper from './AppWrapper';
+import AppWrapper from '.';
 
 describe('<AppWrapper />', () => {
   let wrapper;
