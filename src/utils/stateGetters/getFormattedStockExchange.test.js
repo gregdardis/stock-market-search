@@ -5,6 +5,7 @@ import {
 
 describe('getFormattedStockExchange', () => {
   let mockGetSelectedStockValueForKey;
+
   beforeAll(() => {
     mockGetSelectedStockValueForKey = jest.spyOn(
       stateGetters,
@@ -33,5 +34,4 @@ describe('getFormattedStockExchange', () => {
     mockGetSelectedStockValueForKey.mockReturnValue('NYSE');
     expect(getFormattedStockExchange({})).toEqual('NYSE');
   });
-
 });
