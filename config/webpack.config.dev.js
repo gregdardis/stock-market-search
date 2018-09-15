@@ -25,8 +25,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(paths.CLIENT, 'index.html')
     }),
-    new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.NamedModulesPlugin()
   ],
   // Loaders configuration
   // We are telling webpack to use "babel-loader" for .js and .jsx files
@@ -61,7 +60,6 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    hot: true,
     proxy: {
       '/api/stocks/*': {
         target: 'http://localhost:3000'
