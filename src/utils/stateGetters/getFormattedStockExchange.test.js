@@ -22,16 +22,19 @@ describe('getFormattedStockExchange', () => {
     getFormattedStockExchange({});
     expect(mockGetSelectedStockValueForKey).toHaveBeenCalledTimes(1);
   });
-  it('returns TSX if given Toronto', () => {
+  it('returns TSX if state.exchange is Toronto', () => {
     mockGetSelectedStockValueForKey.mockReturnValue('Toronto');
-    expect(getFormattedStockExchange({})).toEqual('TSX');
+    expect(getFormattedStockExchange({ exchange: 'Toronto' }))
+      .toEqual('TSX');
   });
-  it('returns NASDAQ if given NasdaqGS', () => {
+  it('returns NASDAQ if state.exchange is NasdaqGS', () => {
     mockGetSelectedStockValueForKey.mockReturnValue('NasdaqGS');
-    expect(getFormattedStockExchange({})).toEqual('NASDAQ');
+    expect(getFormattedStockExchange({ exchange: 'NasdaqGS' }))
+      .toEqual('NASDAQ');
   });
-  it('returns the exchange given if anything else', () => {
+  it('returns the exchange if state.exchange is anything else', () => {
     mockGetSelectedStockValueForKey.mockReturnValue('NYSE');
-    expect(getFormattedStockExchange({})).toEqual('NYSE');
+    expect(getFormattedStockExchange({ exchange: 'Anything else' }))
+      .toEqual('NYSE');
   });
 });

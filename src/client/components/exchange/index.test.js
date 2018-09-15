@@ -9,7 +9,7 @@ describe('mapStateToProps', () => {
       'getFormattedStockExchange'
     ).mockReturnValue('TSX');
 
-    expect(mapStateToProps({}))
+    expect(mapStateToProps({ exchange: 'Toronto' }))
       .toEqual({ exchange: 'TSX' });
 
     mockGetFormattedStockExchange.mockRestore();
