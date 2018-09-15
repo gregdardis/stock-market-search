@@ -4,9 +4,9 @@ import configureMockStore from 'redux-mock-store';
 
 import AppWrapper from './AppWrapper';
 
-describe('render', () => {
+describe('<AppWrapper />', () => {
   let wrapper;
-  let mockStore = configureMockStore()();
+  const mockStore = configureMockStore()();
 
   beforeEach(() => {
     wrapper = shallow(<AppWrapper store={ mockStore } />);
@@ -16,7 +16,7 @@ describe('render', () => {
     expect(wrapper).toHaveLength(1);
     expect(wrapper.name()).toEqual('Provider');
   });
-  it('has a MuiThemeProvider as the first and only child', () => {
+  it('has a MuiThemeProvider as the first and only child of Provider', () => {
     const children = wrapper.children();
     expect(children).toHaveLength(1);
     expect(children.first().name()).toEqual('MuiThemeProvider');

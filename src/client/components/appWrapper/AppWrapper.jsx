@@ -18,5 +18,4 @@ const AppWrapper = ({ store }) => (
 AppWrapper.propTypes = {
   store: PropTypes.object.isRequired
 };
-
 export default AppWrapper;
