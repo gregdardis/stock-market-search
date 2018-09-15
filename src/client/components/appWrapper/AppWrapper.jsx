@@ -1,5 +1,3 @@
-import 'react-hot-loader/patch';
-import { AppContainer } from 'react-hot-loader';
 import React from 'react';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
@@ -18,13 +16,11 @@ const store = createStore(
 
 const AppWrapper = () => (
   <Provider store={ store }>
-    <AppContainer>
-      <MuiThemeProvider>
-        <Router>
-          <App />
-        </Router>
-      </MuiThemeProvider>
-    </AppContainer>
+    <MuiThemeProvider>
+      <Router>
+        <App />
+      </Router>
+    </MuiThemeProvider>
   </Provider>
 );
 
