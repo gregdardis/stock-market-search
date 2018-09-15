@@ -28,6 +28,8 @@ export const LABEL_VOLUME = 'Volume';
 
 export const MESSAGE_NO_DATA =
   'Nothing to display - please search for a stock.';
+export const MESSAGE_UNKNOWN_STOCK_EXCHANGE =
+  'Unknown stock exchange';
 
 export const OPTIONAL_LABEL_DIVIDEND = '%';
 export const OPTIONAL_LABEL_EPS = 'EPS';

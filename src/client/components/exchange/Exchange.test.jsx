@@ -3,6 +3,9 @@ import { shallow } from 'enzyme';
 import { expect } from 'chai';
 
 import Exchange from './Exchange';
+import {
+  MESSAGE_UNKNOWN_STOCK_EXCHANGE
+} from '../../../constants/userFacingStrings';
 
 describe('<Exchange />', () => {
   it('has the correct className for styling', () => {
@@ -19,6 +22,6 @@ describe('<Exchange />', () => {
     const wrapper = shallow(<Exchange />);
     expect(wrapper.find('span')).to.have.length(1);
     expect(wrapper.find('span').at(0).text())
-      .to.equal('Unknown stock exchange');
+      .to.equal(MESSAGE_UNKNOWN_STOCK_EXCHANGE);
   });
 });
