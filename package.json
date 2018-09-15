@@ -8,6 +8,12 @@
   "jest": {
     "setupTestFrameworkScriptFile": "<rootDir>/buildScripts/testSetup.js",
     "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!**/constants/**",
+      "!src/client/render.js",
+      "!src/server/config/index.js"
+    ],
     "testMatch": [
       "**/*.test.{js,jsx}"
     ],
