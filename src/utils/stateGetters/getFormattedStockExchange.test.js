@@ -19,7 +19,7 @@ describe('getFormattedStockExchange', () => {
 
   it('calls getSelectedStockValueForKey once', () => {
     mockGetSelectedStockValueForKey.mockReturnValue('Toronto');
-    getFormattedStockExchange({});
+    getFormattedStockExchange({ exchange: 'Toronto' });
     expect(mockGetSelectedStockValueForKey).toHaveBeenCalledTimes(1);
   });
   it('returns TSX if state.exchange is Toronto', () => {
