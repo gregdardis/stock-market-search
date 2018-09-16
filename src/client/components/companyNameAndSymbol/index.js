@@ -1,16 +1,14 @@
 import { connect } from 'react-redux';
 
 import CompanyNameAndSymbol from './CompanyNameAndSymbol';
+import {
+  companyNameSelector,
+  selectedStockSymbolSelector
+} from '../../selectors';
 
-const getCompanyName = state => {
-  const symbol = state.selectedStock;
-  const selectedStock = state.stocks[symbol];
-  return selectedStock.companyName;
-};
-
-const mapStateToProps = state => ({
-  companyName: getCompanyName(state),
-  symbol: state.selectedStock
+export const mapStateToProps = state => ({
+  companyName: companyNameSelector(state),
+  symbol: selectedStockSymbolSelector(state)
 });
 
 export default connect(
