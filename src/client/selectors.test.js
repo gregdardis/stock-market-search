@@ -27,7 +27,8 @@ const mockState = {
 
 describe('selectedStockSymbolSelector', () => {
   it('should return selectedStock from state', () => {
-    expect(selectedStockSymbolSelector(mockState)).to.deep.equal('MSFT');
+    expect(selectedStockSymbolSelector(mockState))
+      .to.deep.equal(mockState.selectedStock);
   });
 });
 
@@ -38,7 +39,7 @@ describe('stocksSelector', () => {
 });
 
 describe('selectedStockSelector', () => {
-  it('should return MSFT stock if selectedStock is MSFT', () => {
+  it('should return actual stock data for selectedStock', () => {
     const selectedStock = selectedStockSelector
       .resultFunc(mockState.selectedStock, mockState.stocks);
 
@@ -47,7 +48,7 @@ describe('selectedStockSelector', () => {
 });
 
 describe('companyNameSelector', () => {
-  it('should return MSFT company name if selectedStock is MSFT', () => {
+  it('should return company name for the given stock', () => {
     const companyName = companyNameSelector
       .resultFunc(mockStocks.MSFT);
 
