@@ -16,10 +16,13 @@ const mockState = {
 describe('mapStateToProps', () => {
   it('maps state to props as expected', () => {
     selectors.companyNameSelector = jest.fn(() => mockCompanyName);
+    selectors.selectedStockSymbolSelector = jest.fn(() => mockSymbol);
 
     expect(mapStateToProps(mockState)).to.deep.equal({
       companyName: mockCompanyName,
       symbol: mockSymbol
     });
+
+    jest.resetAllMocks();
   });
 });
