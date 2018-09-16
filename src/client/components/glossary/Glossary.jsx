@@ -1,14 +1,13 @@
 import React from 'react';
 
 import Definition from '../definition';
-import { getDefinitionsArray } from '../definition/definitionData';
+import { DEFINITIONS } from '../definition/definitionData';
 import './glossary.css';
 
 const Glossary = () => {
-  const definitions = getDefinitionsArray();
   return (
     <div className='glossary'>
-      { definitions.map(definition =>
+      { DEFINITIONS.map(definition =>
         <Definition
           key={ definition.title }
           definition={ {
