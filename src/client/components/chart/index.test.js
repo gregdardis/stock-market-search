@@ -1,3 +1,5 @@
+import { expect } from 'chai';
+
 import { mapStateToProps } from '.';
 import * as getStockDataForSelectedTimePeriod
   from '../../../utils/stockDataUtils/getStockDataForSelectedTimePeriod';
@@ -14,7 +16,7 @@ describe('mapStateToProps', () => {
     };
 
     expect(mapStateToProps(mockInputState))
-      .toEqual({
+      .to.deep.equal({
         chartTimePeriodIndex: 5,
         data: {}
       });

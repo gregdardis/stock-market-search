@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import CompanyNameAndSymbol from './CompanyNameAndSymbol';
 import { companyNameSelector } from '../../selectors';
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   companyName: companyNameSelector(state),
   symbol: state.selectedStock
 });

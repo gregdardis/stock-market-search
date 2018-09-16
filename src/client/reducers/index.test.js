@@ -1,4 +1,5 @@
 import { createStore } from 'redux';
+import { expect } from 'chai';
 
 import { reducer } from '.';
 import { reducer as chartTimePeriodIndex } from './chartTimePeriodIndex';
@@ -24,15 +25,15 @@ describe('Reducers are connected to the store as expected', () => {
 
   test('initial state matches each reducer with empty action', () => {
     expect(store.getState().chartTimePeriodIndex)
-      .toEqual(chartTimePeriodIndex(4, {}));
+      .to.deep.equal(chartTimePeriodIndex(4, {}));
     expect(store.getState().fetching)
-      .toEqual(fetching(null, {}));
+      .to.deep.equal(fetching(null, {}));
     expect(store.getState().search)
-      .toEqual(search({ currentText: '', error: null }, {}));
+      .to.deep.equal(search({ currentText: '', error: null }, {}));
     expect(store.getState().selectedStock)
-      .toEqual(selectedStock('', {}));
+      .to.deep.equal(selectedStock('', {}));
     expect(store.getState().stocks)
-      .toEqual(stocks({}, {}));
+      .to.deep.equal(stocks({}, {}));
   });
   test('chartTimePeriodIndex reducer handles an action', () => {
     const action = {
@@ -41,7 +42,7 @@ describe('Reducers are connected to the store as expected', () => {
     };
     store.dispatch(action);
     expect(store.getState().chartTimePeriodIndex)
-      .toEqual(chartTimePeriodIndex(2, {}));
+      .to.deep.equal(chartTimePeriodIndex(2, {}));
   });
   test('fetching reducer handles an action', () => {
     const action = {
@@ -50,7 +51,7 @@ describe('Reducers are connected to the store as expected', () => {
     };
     store.dispatch(action);
     expect(store.getState().fetching)
-      .toEqual(fetching('MSFT', {}));
+      .to.deep.equal(fetching('MSFT', {}));
   });
   test('search reducer handles an action', () => {
     const action = {
@@ -59,7 +60,7 @@ describe('Reducers are connected to the store as expected', () => {
     };
     store.dispatch(action);
     expect(store.getState().search)
-      .toEqual(
+      .to.deep.equal(
         search(
           { currentText: '', error: 'An error has occurred.' },
           {}
@@ -73,7 +74,7 @@ describe('Reducers are connected to the store as expected', () => {
     };
     store.dispatch(action);
     expect(store.getState().selectedStock)
-      .toEqual(selectedStock('MSFT', {}));
+      .to.deep.equal(selectedStock('MSFT', {}));
   });
   test('stocks reducer handles an action', () => {
     const action = {
@@ -94,6 +95,6 @@ describe('Reducers are connected to the store as expected', () => {
     };
     store.dispatch(action);
     expect(store.getState().stocks)
-      .toEqual(stocks(receivedStock, {}));
+      .to.deep.equal(stocks(receivedStock, {}));
   });
 });

@@ -1,3 +1,5 @@
+import { expect } from 'chai';
+
 import { mapStateToProps } from '.';
 import * as getFormattedStockExchange from
   '../../../utils/stateGetters/getFormattedStockExchange';
@@ -10,7 +12,7 @@ describe('mapStateToProps', () => {
     ).mockReturnValue('TSX');
 
     expect(mapStateToProps({ exchange: 'Toronto' }))
-      .toEqual({ exchange: 'TSX' });
+      .to.deep.equal({ exchange: 'TSX' });
 
     mockGetFormattedStockExchange.mockRestore();
   });

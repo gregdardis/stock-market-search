@@ -4,7 +4,7 @@ import { expect } from 'chai';
 
 import CompanyNameAndSymbol from './CompanyNameAndSymbol';
 
-const mockCompanyName = 'Microsoft';
+const mockCompanyName = 'Microsoft Corporation';
 const mockSymbol = 'MSFT';
 
 describe('<CompanyNameAndSymbol />', () => {
