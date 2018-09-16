@@ -3,6 +3,7 @@ import {
 } from './getStockDataForSelectedTimePeriod';
 import * as chartUtils from '../chartUtils';
 import * as stateGetters from '../stateGetters';
+import * as selectors from '../../client/selectors';
 
 describe('getStockDataForSelectedTimePeriod', () => {
   it('properly gets stock data for a time period', () => {
@@ -14,24 +15,24 @@ describe('getStockDataForSelectedTimePeriod', () => {
       price: 54.630001068115234
     }];
 
-    const getStockDataKeyStub = jest.spyOn(
-      chartUtils,
-      'getStockDataKey'
-    ).mockReturnValue('oneDayStockData');
+    chartUtils.getStockDataKey = jest.fn()
+      .mockReturnValue('oneDayStockData');
 
-    const getSelectedStockValueForKeyStub = jest.spyOn(
-      stateGetters,
-      'getSelectedStockValueForKey'
-    ).mockReturnValue(mockOneDayStockData);
+    stateGetters.getSelectedStockValueForKey = jest.fn()
+      .mockReturnValue(mockOneDayStockData);
+
+    const mockChartTimePeriodIndex = 0;
 
     const mockState = {
-      chartTimePeriodIndex: 0
+      chartTimePeriodIndex: mockChartTimePeriodIndex
     };
+
+    selectors.chartTimePeriodIndexSelector = jest.fn()
+      .mockReturnValue(mockChartTimePeriodIndex);
 
     expect(getStockDataForSelectedTimePeriod(mockState))
       .toEqual(mockOneDayStockData);
 
-    getStockDataKeyStub.mockReset();
-    getSelectedStockValueForKeyStub.mockReset();
+    jest.resetAllMocks();
   });
 });
