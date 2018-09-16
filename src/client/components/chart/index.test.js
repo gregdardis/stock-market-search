@@ -3,24 +3,28 @@ import { expect } from 'chai';
 import { mapStateToProps } from '.';
 import * as getStockDataForSelectedTimePeriod
   from '../../../utils/stockDataUtils/getStockDataForSelectedTimePeriod';
+import * as selectors from '../../selectors';
 
 describe('mapStateToProps', () => {
   it('maps state to props as expected', () => {
-    const getStockDataForSelectedTimePeriodStub = jest.spyOn(
-      getStockDataForSelectedTimePeriod,
-      'getStockDataForSelectedTimePeriod'
-    ).mockReturnValue({});
+    const mockChartTimePeriodIndex = 5;
+
+    getStockDataForSelectedTimePeriod.getStockDataForSelectedTimePeriod =
+      jest.fn().mockReturnValue({});
+
+    selectors.chartTimePeriodIndexSelector = jest.fn()
+      .mockReturnValue(mockChartTimePeriodIndex);
 
     const mockInputState = {
-      chartTimePeriodIndex: 5
+      chartTimePeriodIndex: mockChartTimePeriodIndex
     };
 
     expect(mapStateToProps(mockInputState))
       .to.deep.equal({
-        chartTimePeriodIndex: 5,
+        chartTimePeriodIndex: mockChartTimePeriodIndex,
         data: {}
       });
 
-    getStockDataForSelectedTimePeriodStub.mockReset();
+    jest.resetAllMocks();
   });
 });
