@@ -13,3 +13,5 @@ export const companyNameSelector = createSelector(
   selectedStockSelector,
   selectedStock => selectedStock.companyName
 );
+
+export const chartTimePeriodIndexSelector = state => state.chartTimePeriodIndex;
