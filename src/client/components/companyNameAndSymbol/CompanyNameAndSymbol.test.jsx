@@ -10,7 +10,7 @@ const mockSymbol = 'MSFT';
 describe('<CompanyNameAndSymbol />', () => {
   let wrapper;
 
-  beforeEach(() => {
+  beforeAll(() => {
     wrapper = shallow(
       <CompanyNameAndSymbol
         companyName={ mockCompanyName }
