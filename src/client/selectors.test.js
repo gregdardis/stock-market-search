@@ -1,6 +1,8 @@
 import { expect } from 'chai';
 
 import {
+  companyNameSelector,
+  selectedStockSelector,
   selectedStockSymbolSelector,
   stocksSelector
 } from './selectors';
@@ -32,5 +34,23 @@ describe('selectedStockSymbolSelector', () => {
 describe('stocksSelector', () => {
   it('should return stocks from state', () => {
     expect(stocksSelector(mockState)).to.deep.equal(mockStocks);
+  });
+});
+
+describe('selectedStockSelector', () => {
+  it('should return MSFT stock if selectedStock is MSFT', () => {
+    const selectedStock = selectedStockSelector
+      .resultFunc(mockState.selectedStock, mockState.stocks);
+
+    expect(selectedStock).to.deep.equal(mockStocks.MSFT);
+  });
+});
+
+describe('companyNameSelector', () => {
+  it('should return MSFT company name if selectedStock is MSFT', () => {
+    const companyName = companyNameSelector
+      .resultFunc(mockStocks.MSFT);
+
+    expect(companyName).to.deep.equal(mockStocks.MSFT.companyName);
   });
 });
