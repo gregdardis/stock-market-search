@@ -13,3 +13,16 @@ export const companyNameSelector = createSelector(
   selectedStockSelector,
   selectedStock => selectedStock.companyName
 );
+
+// This is currently unused, but should be used:
+export const stockOverviewDataSelector = createSelector(
+  selectedStockSelector,
+  selectedStock => selectedStock.stockOverviewData
+);
+
+export function selectedStockValueForKeySelector(state, key) {
+  return createSelector(
+    selectedStockSelector,
+    selectedStock => selectedStock[key]
+  )(state);
+}
