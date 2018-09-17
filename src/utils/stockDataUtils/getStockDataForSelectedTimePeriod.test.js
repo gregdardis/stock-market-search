@@ -25,8 +25,6 @@ describe('getStockDataForSelectedTimePeriod', () => {
 
     selectors.selectedStockValueForKeySelector = jest.fn()
       .mockReturnValue(mockOneDayStockData);
-    // stateGetters.getSelectedStockValueForKey = jest.fn()
-    //   .mockReturnValue(mockOneDayStockData);
 
     selectors.chartTimePeriodIndexSelector = jest.fn()
       .mockReturnValue(mockChartTimePeriodIndex);
