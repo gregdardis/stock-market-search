@@ -2,7 +2,7 @@ import numeral from 'numeral';
 
 import { NUMBER_FORMAT_DEFAULT } from '../../constants/formatting';
 import { BLANK_FIELD } from '../../constants/userFacingStrings';
-import { getSelectedStockValueForKey } from '../stateGetters';
+import { selectedStockValueForKeySelector } from '../../client/selectors';
 
 const formatValueForDisplay = (value, formatSpecifier) => {
   if (!value) {
@@ -12,10 +12,8 @@ const formatValueForDisplay = (value, formatSpecifier) => {
 };
 
 export const formatValueFromStateAndProps = (state, ownProps) => {
-  const stockOverviewData = getSelectedStockValueForKey(
-    state,
-    'stockOverviewData'
-  );
+  const stockOverviewData =
+    selectedStockValueForKeySelector(state, 'stockOverviewData');
   const dataItemLabel = ownProps.label;
 
   let {
