@@ -2,7 +2,6 @@ import {
   getStockDataForSelectedTimePeriod
 } from './getStockDataForSelectedTimePeriod';
 import * as chartUtils from '../chartUtils';
-import * as stateGetters from '../stateGetters';
 import * as selectors from '../../client/selectors';
 
 describe('getStockDataForSelectedTimePeriod', () => {
@@ -15,17 +14,19 @@ describe('getStockDataForSelectedTimePeriod', () => {
       price: 54.630001068115234
     }];
 
-    chartUtils.getStockDataKey = jest.fn()
-      .mockReturnValue('oneDayStockData');
-
-    stateGetters.getSelectedStockValueForKey = jest.fn()
-      .mockReturnValue(mockOneDayStockData);
-
     const mockChartTimePeriodIndex = 0;
 
     const mockState = {
       chartTimePeriodIndex: mockChartTimePeriodIndex
     };
+
+    chartUtils.getStockDataKey = jest.fn()
+      .mockReturnValue('oneDayStockData');
+
+    selectors.selectedStockValueForKeySelector = jest.fn()
+      .mockReturnValue(mockOneDayStockData);
+    // stateGetters.getSelectedStockValueForKey = jest.fn()
+    //   .mockReturnValue(mockOneDayStockData);
 
     selectors.chartTimePeriodIndexSelector = jest.fn()
       .mockReturnValue(mockChartTimePeriodIndex);
