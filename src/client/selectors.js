@@ -14,7 +14,6 @@ export const companyNameSelector = createSelector(
   selectedStock => selectedStock.companyName
 );
 
-<<<<<<< HEAD
 // This is currently unused, but should be used:
 export const stockOverviewDataSelector = createSelector(
   selectedStockSelector,
@@ -27,6 +26,4 @@ export function selectedStockValueForKeySelector(state, key) {
     selectedStock => selectedStock[key]
   )(state);
 }
-=======
 export const chartTimePeriodIndexSelector = state => state.chartTimePeriodIndex;
->>>>>>> implement-selectors-everywhere
