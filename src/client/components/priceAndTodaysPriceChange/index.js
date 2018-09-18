@@ -10,10 +10,7 @@ import {
   formatAsPrice
 } from '../../../utils/formatting/numberFormatting';
 
-// TODO: test this file
-// TODO: extract these methods into utils and stub in this file tests
-
-const mapStateToProps = state => {
+export const mapStateToProps = state => {
   const priceChange = calculatePriceChange(state);
   const currentPrice = currentPriceValueSelector(state);
   return {
