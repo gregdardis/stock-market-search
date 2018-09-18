@@ -3,11 +3,13 @@ import { expect } from 'chai';
 import {
   chartTimePeriodIndexSelector,
   companyNameSelector,
+  exchangeSelector,
   fetchingSelector,
   searchErrorSelector,
   searchSelector,
   selectedStockSelector,
   selectedStockSymbolSelector,
+  selectedStockValueForKeySelector,
   stockOverviewDataSelector,
   stocksSelector
 } from './selectors';
@@ -92,6 +94,10 @@ describe('companyNameSelector', () => {
   });
 });
 
+// describe('selectedStockValueForKeySelector', () => {
+//   expect(selectedStockValueForKeySelector(mockState, ))
+// });
+
 describe('chartTimePeriodIndexSelector', () => {
   it('should return chartTimePeriodIndex from state', () => {
     expect(chartTimePeriodIndexSelector(mockState))
@@ -116,5 +122,12 @@ describe('searchErrorSelector', () => {
   it('should return search error from state', () => {
     expect(searchErrorSelector(mockState))
       .to.equal(mockSearch.error);
+  });
+});
+
+describe('exchangeSelector', () => {
+  it('should get exchange for selectedStock', () => {
+    expect(exchangeSelector(mockState))
+      .to.equal(mockStocks.MSFT.exchange);
   });
 });
