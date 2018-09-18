@@ -4,6 +4,7 @@ import {
   chartTimePeriodIndexSelector,
   companyNameSelector,
   currentPriceSelector,
+  currentPriceValueSelector,
   exchangeSelector,
   fetchingSelector,
   searchErrorSelector,
@@ -105,6 +106,16 @@ describe('currentPriceSelector', () => {
 
     expect(currentPrice)
       .to.deep.equal(mockStockOverviewData[LABEL_CURRENT_PRICE]);
+  });
+});
+
+describe('currentPriceValueSelector', () => {
+  it('should return value of current price from the state', () => {
+    const currentPriceValue = currentPriceValueSelector
+      .resultFunc(mockStockOverviewData[LABEL_CURRENT_PRICE]);
+
+    expect(currentPriceValue)
+      .to.deep.equal(mockStockOverviewData[LABEL_CURRENT_PRICE].value);
   });
 });
 
