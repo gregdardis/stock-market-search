@@ -19,6 +19,7 @@ export const stockOverviewDataSelector = createSelector(
   selectedStock => selectedStock.stockOverviewData
 );
 
+// TODO: test
 export function selectedStockValueForKeySelector(state, key) {
   return createSelector(
     selectedStockSelector,
