@@ -1,12 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Definition from '../definition';
 import { DEFINITIONS } from '../definition/definitionData';
 import './glossary.css';
 
-const Glossary = () => (
+const Glossary = ({ definitions = DEFINITIONS }) => (
   <div className='glossary'>
-    { DEFINITIONS.map(definition =>
+    { definitions.map(definition =>
       <Definition
         key={ definition.title }
         definition={ {
@@ -18,4 +19,7 @@ const Glossary = () => (
     ) }
   </div>
 );
+Glossary.propTypes = {
+  definitions: PropTypes.array
+};
 export default Glossary;
