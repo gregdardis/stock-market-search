@@ -1,3 +1,7 @@
+import numeral from 'numeral';
+
+import { NUMBER_FORMAT_PRICE } from '../../constants/formatting';
+
 /* Takes a number or string */
 export const addCommas = number => {
   const parsedNum = parseFloat(number);
@@ -20,6 +24,10 @@ export const addCommas = number => {
 
   return parts.join('.');
 };
+
+export const formatAsPrice = value => (
+  numeral(value).format(NUMBER_FORMAT_PRICE)
+);
 
 export const padSingleDigitWithZero = value => {
   let num = parseInt(value);

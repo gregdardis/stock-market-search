@@ -1,4 +1,8 @@
 import { createSelector } from 'reselect';
+import {
+  LABEL_CURRENT_PRICE,
+  LABEL_PREVIOUS_CLOSE
+} from '../constants/userFacingStrings';
 
 export const selectedStockSymbolSelector = state => state.selectedStock;
 export const stocksSelector = state => state.stocks;
@@ -17,6 +21,30 @@ export const companyNameSelector = createSelector(
 export const stockOverviewDataSelector = createSelector(
   selectedStockSelector,
   selectedStock => selectedStock.stockOverviewData
+);
+
+// TODO: TEST THIS AND USE IT PROPERLY
+export const currentPriceSelector = createSelector(
+  stockOverviewDataSelector,
+  stockOverviewData => stockOverviewData[LABEL_CURRENT_PRICE]
+);
+
+// TODO: test and use properly
+export const currentPriceValueSelector = createSelector(
+  currentPriceSelector,
+  currentPrice => currentPrice.value
+);
+
+// TODO: test and use properly
+export const previousCloseSelector = createSelector(
+  stockOverviewDataSelector,
+  stockOverviewData => stockOverviewData[LABEL_PREVIOUS_CLOSE]
+);
+
+// TODO: test and use properly
+export const previousCloseValueSelector = createSelector(
+  previousCloseSelector,
+  previousClose => previousClose.value
 );
 
 export function selectedStockValueForKeySelector(state, key) {

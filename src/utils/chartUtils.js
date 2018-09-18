@@ -1,8 +1,5 @@
-import numeral from 'numeral';
-
 import {
-  CHART_META_DATA,
-  NUMBER_FORMAT_PRICE
+  CHART_META_DATA
 } from '../constants/formatting';
 
 function isNumberAndInChartMetaDataRange(number) {
@@ -48,7 +45,3 @@ export function getXAxisTickFormatter(chartTimePeriodIndex) {
   }
   return CHART_META_DATA[chartTimePeriodIndex].getXAxisTickFormatter;
 }
-
-export const formatAsPrice = value => (
-  numeral(value).format(NUMBER_FORMAT_PRICE)
-);

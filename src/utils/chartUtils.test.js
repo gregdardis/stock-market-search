@@ -1,5 +1,4 @@
 import {
-  formatAsPrice,
   getStockDataKey,
   getTooltipLabelFormatter,
   getXAxisDataKey,
@@ -253,14 +252,5 @@ describe('getXAxisTickFormatter', () => {
   });
   it('returns null if chartTimePeriodIndex is a function', () => {
     expect(getXAxisTickFormatter(() => {})).toBeNull();
-  });
-});
-
-describe('formatAsPrice', () => {
-  it('formats a number as price', () => {
-    expect(formatAsPrice(1000)).toBe('$1,000.00');
-  });
-  it('formats a number with decimal as price', () => {
-    expect(formatAsPrice(1000.513)).toBe('$1,000.51');
   });
 });

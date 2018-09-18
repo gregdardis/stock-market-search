@@ -2,6 +2,7 @@ import { expect } from 'chai';
 
 import {
   addCommas,
+  formatAsPrice,
   padSingleDigitWithZero
 } from './numberFormatting';
 
@@ -95,6 +96,15 @@ describe('addCommas', () => {
       addCommas(() => console.log('function'));
     }).to
       .throw();
+  });
+});
+
+describe('formatAsPrice', () => {
+  it('formats a number as price', () => {
+    expect(formatAsPrice(1000)).to.equal('$1,000.00');
+  });
+  it('formats a number with decimal as price', () => {
+    expect(formatAsPrice(1000.513)).to.equal('$1,000.51');
   });
 });
 

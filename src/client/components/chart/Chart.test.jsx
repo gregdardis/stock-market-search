@@ -11,7 +11,7 @@ import {
 } from 'recharts';
 
 import Chart from './Chart';
-import * as chartUtils from '../../../utils/chartUtils';
+import * as numberFormatting from '../../../utils/formatting/numberFormatting';
 
 describe('<Chart />', () => {
   it('renders a ResponsiveContainer', () => {
@@ -54,7 +54,7 @@ describe('<Chart />', () => {
   });
   it('has a Tooltip with a formatter prop that calls formatAsPrice', () => {
     const mockFormatAsPrice = jest.spyOn(
-      chartUtils,
+      numberFormatting,
       'formatAsPrice'
     );
     const wrapper = shallow(

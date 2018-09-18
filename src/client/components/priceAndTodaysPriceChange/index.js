@@ -3,38 +3,26 @@ import numeral from 'numeral';
 
 import PriceAndTodaysPriceChange from './PriceAndTodaysPriceChange';
 import {
-  NUMBER_FORMAT_PERCENT,
-  NUMBER_FORMAT_PRICE
+  NUMBER_FORMAT_PERCENT
 } from '../../../constants/formatting';
 import {
-  LABEL_CURRENT_PRICE,
-  LABEL_PREVIOUS_CLOSE
-} from '../../../constants/userFacingStrings';
+  currentPriceValueSelector,
+  previousCloseValueSelector
+} from '../../selectors';
+import { formatAsPrice } from '../../../utils/formatting/numberFormatting';
 
-const getCurrentPrice = stockOverviewData => {
-  return stockOverviewData[LABEL_CURRENT_PRICE].value;
+// TODO: test this file
+// TODO: extract these methods into utils and stub in this file tests
+const calculatePriceChange = state => {
+  return currentPriceValueSelector(state) - previousCloseValueSelector(state);
 };
-
-const calculatePriceChange = stockOverviewData => {
-  const previousClosePrice = stockOverviewData[LABEL_PREVIOUS_CLOSE].value;
-  return getCurrentPrice(stockOverviewData) - previousClosePrice;
-};
-const formatAsPrice = value =>
-  numeral(value).format(NUMBER_FORMAT_PRICE);
 
 const getFormattedPriceChangePercentage = (priceChange, currentPrice) =>
   numeral(priceChange / currentPrice).format(NUMBER_FORMAT_PERCENT);
 
-const getStockOverviewData = state => {
-  const symbol = state.selectedStock;
-  const selectedStock = state.stocks[symbol];
-  return selectedStock.stockOverviewData;
-};
-
 const mapStateToProps = state => {
-  const stockOverviewData = getStockOverviewData(state);
-  const priceChange = calculatePriceChange(stockOverviewData);
-  const currentPrice = getCurrentPrice(stockOverviewData);
+  const priceChange = calculatePriceChange(state);
+  const currentPrice = currentPriceValueSelector(state);
   return {
     currentPrice: formatAsPrice(currentPrice),
     isPositiveChange: priceChange >= 0,
@@ -46,8 +34,4 @@ const mapStateToProps = state => {
   };
 };
 
-const PriceAndTodaysPriceChangeContainer = connect(
-  mapStateToProps
-)(PriceAndTodaysPriceChange);
-
-export default PriceAndTodaysPriceChangeContainer;
+export default connect(mapStateToProps)(PriceAndTodaysPriceChange);
