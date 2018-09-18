@@ -8,6 +8,7 @@ import {
   exchangeSelector,
   fetchingSelector,
   previousCloseSelector,
+  previousCloseValueSelector,
   searchErrorSelector,
   searchSelector,
   selectedStockSelector,
@@ -127,6 +128,16 @@ describe('previousCloseSelector', () => {
 
     expect(previousClose)
       .to.deep.equal(mockStockOverviewData[LABEL_PREVIOUS_CLOSE]);
+  });
+});
+
+describe('previousCloseValueSelector', () => {
+  it('should return value of previousClose from the state', () => {
+    const previousCloseValue = previousCloseValueSelector
+      .resultFunc(mockStockOverviewData[LABEL_PREVIOUS_CLOSE]);
+
+    expect(previousCloseValue)
+      .to.deep.equal(mockStockOverviewData[LABEL_PREVIOUS_CLOSE].value);
   });
 });
 

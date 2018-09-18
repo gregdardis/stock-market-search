@@ -38,7 +38,6 @@ export const previousCloseSelector = createSelector(
   stockOverviewData => stockOverviewData[LABEL_PREVIOUS_CLOSE]
 );
 
-// TODO: test and use properly
 export const previousCloseValueSelector = createSelector(
   previousCloseSelector,
   previousClose => previousClose.value
