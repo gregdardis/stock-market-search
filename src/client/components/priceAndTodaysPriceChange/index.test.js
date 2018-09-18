@@ -23,6 +23,9 @@ describe('mapStateToProps', () => {
     numberFormatting.calculateFormattedPriceChangePercentage = jest.fn()
       .mockReturnValue('1.12%');
 
+    numberFormatting.formatAsPrice = jest.fn()
+      .mockReturnValueOnce('$113.14').mockReturnValueOnce('$1.27');
+
     expect(mapStateToProps(mockState)).to.deep.equal({
       currentPrice: '$113.14',
       isPositiveChange: true,
