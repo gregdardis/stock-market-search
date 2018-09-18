@@ -4,6 +4,7 @@ import {
   chartTimePeriodIndexSelector,
   companyNameSelector,
   fetchingSelector,
+  searchErrorSelector,
   searchSelector,
   selectedStockSelector,
   selectedStockSymbolSelector,
@@ -13,7 +14,7 @@ import {
 
 const mockSearch = {
   currentText: 'MSFTT',
-  error: null
+  error: 'No stock with symbol "MSFTT" was found.'
 };
 
 const mockStockOverviewData = {
@@ -108,5 +109,12 @@ describe('fetchingSelector', () => {
 describe('searchSelector', () => {
   it('should return search from state', () => {
     expect(searchSelector(mockState)).to.deep.equal(mockSearch);
+  });
+});
+
+describe('searchErrorSelector', () => {
+  it('should return search error from state', () => {
+    expect(searchErrorSelector(mockState))
+      .to.equal(mockSearch.error);
   });
 });

@@ -30,10 +30,8 @@ export const chartTimePeriodIndexSelector = state => state.chartTimePeriodIndex;
 
 export const fetchingSelector = state => state.fetching;
 
-// TODO: test
 export const searchSelector = state => state.search;
 
-// TODO: test
 export const searchErrorSelector = createSelector(
   searchSelector,
   search => search.error
