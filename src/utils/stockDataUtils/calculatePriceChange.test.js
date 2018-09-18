@@ -33,6 +33,12 @@ const mockState = {
 describe('calculatePriceChange', () => {
   it('properly calculates difference between current price ' +
      'and previous close for selectedStock', () => {
+    selectors.currentPriceValueSelector = jest.fn()
+      .mockReturnValue(valueCurrentPrice);
+
+    selectors.previousCloseValueSelector = jest.fn()
+      .mockReturnValue(valuePreviousClose);
+
     expect(calculatePriceChange(mockState))
       .to.equal(valueCurrentPrice - valuePreviousClose);
   });
