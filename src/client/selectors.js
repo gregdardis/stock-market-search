@@ -28,13 +28,11 @@ export const currentPriceSelector = createSelector(
   stockOverviewData => stockOverviewData[LABEL_CURRENT_PRICE]
 );
 
-// TODO: test and use properly
 export const currentPriceValueSelector = createSelector(
   currentPriceSelector,
   currentPrice => currentPrice.value
 );
 
-// TODO: test and use properly
 export const previousCloseSelector = createSelector(
   stockOverviewDataSelector,
   stockOverviewData => stockOverviewData[LABEL_PREVIOUS_CLOSE]
