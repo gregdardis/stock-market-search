@@ -3,6 +3,7 @@ import { expect } from 'chai';
 import {
   chartTimePeriodIndexSelector,
   companyNameSelector,
+  currentPriceSelector,
   exchangeSelector,
   fetchingSelector,
   searchErrorSelector,
@@ -94,6 +95,16 @@ describe('stockOverviewDataSelector', () => {
 
     expect(stockOverviewData)
       .to.deep.equal(mockStockOverviewData);
+  });
+});
+
+describe('currentPriceSelector', () => {
+  it('should return current price of selected stock from state', () => {
+    const currentPrice = currentPriceSelector
+      .resultFunc(mockStockOverviewData);
+
+    expect(currentPrice)
+      .to.deep.equal(mockStockOverviewData[LABEL_CURRENT_PRICE]);
   });
 });
 

@@ -23,7 +23,6 @@ export const stockOverviewDataSelector = createSelector(
   selectedStock => selectedStock.stockOverviewData
 );
 
-// TODO: TEST THIS AND USE IT PROPERLY
 export const currentPriceSelector = createSelector(
   stockOverviewDataSelector,
   stockOverviewData => stockOverviewData[LABEL_CURRENT_PRICE]
