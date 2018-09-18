@@ -6,16 +6,13 @@ import {
   NUMBER_FORMAT_PERCENT
 } from '../../../constants/formatting';
 import {
-  currentPriceValueSelector,
-  previousCloseValueSelector
-} from '../../selectors';
+  calculatePriceChange
+} from '../../../utils/stockDataUtils/calculatePriceChange';
+import { currentPriceValueSelector } from '../../selectors';
 import { formatAsPrice } from '../../../utils/formatting/numberFormatting';
 
 // TODO: test this file
 // TODO: extract these methods into utils and stub in this file tests
-const calculatePriceChange = state => {
-  return currentPriceValueSelector(state) - previousCloseValueSelector(state);
-};
 
 const getFormattedPriceChangePercentage = (priceChange, currentPrice) =>
   numeral(priceChange / currentPrice).format(NUMBER_FORMAT_PERCENT);

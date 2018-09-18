@@ -13,6 +13,10 @@ import {
   stockOverviewDataSelector,
   stocksSelector
 } from './selectors';
+import {
+  LABEL_CURRENT_PRICE,
+  LABEL_PREVIOUS_CLOSE
+} from '../constants/userFacingStrings';
 
 const mockSearch = {
   currentText: 'MSFTT',
@@ -20,12 +24,12 @@ const mockSearch = {
 };
 
 const mockStockOverviewData = {
-  'Previous Close': {
+  [LABEL_PREVIOUS_CLOSE]: {
     value: 112.14,
     valueFormat: '0,0.00',
     optionalValueFormat: '0,0.00'
   },
-  'Current Price': {
+  [LABEL_CURRENT_PRICE]: {
     value: 113.23,
     valueFormat: '0,0.00',
     optionalValueFormat: '0,0.00'
