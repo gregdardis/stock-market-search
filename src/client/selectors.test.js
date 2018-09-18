@@ -5,15 +5,29 @@ import {
   companyNameSelector,
   selectedStockSelector,
   selectedStockSymbolSelector,
+  stockOverviewDataSelector,
   stocksSelector
 } from './selectors';
+
+const mockStockOverviewData = {
+  'Previous Close': {
+    value: 112.14,
+    valueFormat: '0,0.00',
+    optionalValueFormat: '0,0.00'
+  },
+  'Current Price': {
+    value: 113.23,
+    valueFormat: '0,0.00',
+    optionalValueFormat: '0,0.00'
+  }
+};
 
 const mockStocks = {
   MSFT: {
     companyName: 'Microsoft Corporation',
     symbol: 'MSFT',
     exchange: 'NasdaqGS',
-    stockOverviewData: {},
+    stockOverviewData: mockStockOverviewData,
     fiveDayStockData: {},
     lastUpdated: 1537117775259,
     maxStockData: {},
@@ -46,6 +60,16 @@ describe('selectedStockSelector', () => {
       .resultFunc(mockState.selectedStock, mockState.stocks);
 
     expect(selectedStock).to.deep.equal(mockStocks.MSFT);
+  });
+});
+
+describe('stockOverviewDataSelector', () => {
+  it('should return stockOverviewData from state', () => {
+    const stockOverviewData = stockOverviewDataSelector
+      .resultFunc(mockStocks.MSFT);
+
+    expect(stockOverviewData)
+      .to.deep.equal(mockStockOverviewData);
   });
 });
 

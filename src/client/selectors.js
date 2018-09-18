@@ -14,8 +14,6 @@ export const companyNameSelector = createSelector(
   selectedStock => selectedStock.companyName
 );
 
-// This is currently unused, but should be used:
-// TODO: test
 export const stockOverviewDataSelector = createSelector(
   selectedStockSelector,
   selectedStock => selectedStock.stockOverviewData
