@@ -28,7 +28,6 @@ export function selectedStockValueForKeySelector(state, key) {
 }
 export const chartTimePeriodIndexSelector = state => state.chartTimePeriodIndex;
 
-// TODO: test
 export const fetchingSelector = state => state.fetching;
 
 // TODO: test

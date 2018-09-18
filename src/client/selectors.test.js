@@ -3,6 +3,7 @@ import { expect } from 'chai';
 import {
   chartTimePeriodIndexSelector,
   companyNameSelector,
+  fetchingSelector,
   selectedStockSelector,
   selectedStockSymbolSelector,
   stockOverviewDataSelector,
@@ -37,6 +38,7 @@ const mockStocks = {
 
 const mockState = {
   chartTimePeriodIndex: 1,
+  fetching: true,
   selectedStock: 'MSFT',
   stocks: mockStocks
 };
@@ -86,5 +88,12 @@ describe('chartTimePeriodIndexSelector', () => {
   it('should return chartTimePeriodIndex from state', () => {
     expect(chartTimePeriodIndexSelector(mockState))
       .to.equal(mockState.chartTimePeriodIndex);
+  });
+});
+
+describe('fetchingSelector', () => {
+  it('should return fetching from state', () => {
+    expect(fetchingSelector(mockState))
+      .to.equal(true);
   });
 });
