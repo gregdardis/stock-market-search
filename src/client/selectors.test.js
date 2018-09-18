@@ -4,11 +4,17 @@ import {
   chartTimePeriodIndexSelector,
   companyNameSelector,
   fetchingSelector,
+  searchSelector,
   selectedStockSelector,
   selectedStockSymbolSelector,
   stockOverviewDataSelector,
   stocksSelector
 } from './selectors';
+
+const mockSearch = {
+  currentText: 'MSFTT',
+  error: null
+};
 
 const mockStockOverviewData = {
   'Previous Close': {
@@ -39,6 +45,7 @@ const mockStocks = {
 const mockState = {
   chartTimePeriodIndex: 1,
   fetching: true,
+  search: mockSearch,
   selectedStock: 'MSFT',
   stocks: mockStocks
 };
@@ -95,5 +102,11 @@ describe('fetchingSelector', () => {
   it('should return fetching from state', () => {
     expect(fetchingSelector(mockState))
       .to.equal(true);
+  });
+});
+
+describe('searchSelector', () => {
+  it('should return search from state', () => {
+    expect(searchSelector(mockState)).to.deep.equal(mockSearch);
   });
 });
