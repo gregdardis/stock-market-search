@@ -4,7 +4,7 @@ import * as selectors from '../../selectors';
 import { mapStateToProps } from '.';
 
 const mockStateFetching = {
-  loading: true,
+  fetching: 'MSFT',
   search: {
     currentText: 'MSFT',
     error: null
@@ -12,6 +12,7 @@ const mockStateFetching = {
 };
 
 const mockStateNotFetching = {
+  fetching: null,
   search: {
     currentText: 'MSFTT',
     error: 'No stock with symbol "MSFTT" was found.'
@@ -21,7 +22,7 @@ const mockStateNotFetching = {
 describe('mapStateToProps', () => {
   it('properly maps state to props while fetching', () => {
     selectors.fetchingSelector = jest.fn()
-      .mockReturnValue('MSFT');
+      .mockReturnValue(mockStateFetching.fetching);
 
     selectors.searchErrorSelector = jest.fn()
       .mockReturnValue(mockStateFetching.search.error);
@@ -30,6 +31,19 @@ describe('mapStateToProps', () => {
       .to.deep.equal({
         loading: true,
         searchError: null
+      });
+  });
+  it('properly maps state to props while not fetching', () => {
+    selectors.fetchingSelector = jest.fn()
+      .mockReturnValue(null);
+
+    selectors.searchErrorSelector = jest.fn()
+      .mockReturnValue(mockStateNotFetching.search.error);
+
+    expect(mapStateToProps(mockStateNotFetching))
+      .to.deep.equal({
+        loading: false,
+        searchError: mockStateNotFetching.search.error
       });
   });
 });
