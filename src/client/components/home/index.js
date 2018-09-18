@@ -6,7 +6,7 @@ import {
   searchErrorSelector
 } from '../../selectors';
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   loading: !!fetchingSelector(state),
   searchError: searchErrorSelector(state)
 });
