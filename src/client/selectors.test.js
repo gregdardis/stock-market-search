@@ -32,6 +32,14 @@ const mockStockOverviewData = {
   }
 };
 
+const mockOneDayStockData = [{
+  dateAndTime: '9:30 AM',
+  price: 112.99500274658203
+}, {
+  dateAndTime: '9:35 AM',
+  price: 113.06999969482422
+}];
+
 const mockStocks = {
   MSFT: {
     companyName: 'Microsoft Corporation',
@@ -41,7 +49,7 @@ const mockStocks = {
     fiveDayStockData: {},
     lastUpdated: 1537117775259,
     maxStockData: {},
-    oneDayStockData: {}
+    oneDayStockData: mockOneDayStockData
   }
 };
 
@@ -94,9 +102,10 @@ describe('companyNameSelector', () => {
   });
 });
 
-// describe('selectedStockValueForKeySelector', () => {
-//   expect(selectedStockValueForKeySelector(mockState, ))
-// });
+describe('selectedStockValueForKeySelector', () => {
+  expect(selectedStockValueForKeySelector(mockState, 'oneDayStockData'))
+    .to.deep.equal(mockOneDayStockData);
+});
 
 describe('chartTimePeriodIndexSelector', () => {
   it('should return chartTimePeriodIndex from state', () => {
