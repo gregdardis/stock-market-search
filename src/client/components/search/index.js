@@ -5,8 +5,8 @@ import {
   clearSearchError,
   clearSearchText,
   fetchStock,
-  updateSearchText,
-  setStockFromMemCache
+  setStockFromMemCache,
+  updateSearchText
 } from '../../actions';
 import {
   searchCurrentTextSelector,
@@ -41,7 +41,7 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   text: searchCurrentTextSelector(state),
   stocks: stocksSelector(state)
 });
