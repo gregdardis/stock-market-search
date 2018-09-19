@@ -60,6 +60,11 @@ export const searchErrorSelector = createSelector(
   search => search.error
 );
 
+export const searchCurrentTextSelector = createSelector(
+  searchSelector,
+  search => search.currentText
+);
+
 export const exchangeSelector = createSelector(
   selectedStockSelector,
   selectedStock => selectedStock.exchange

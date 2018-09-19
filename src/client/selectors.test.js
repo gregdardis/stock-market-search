@@ -9,6 +9,7 @@ import {
   fetchingSelector,
   previousCloseSelector,
   previousCloseValueSelector,
+  searchCurrentTextSelector,
   searchErrorSelector,
   searchSelector,
   selectedStockSelector,
@@ -179,6 +180,13 @@ describe('searchErrorSelector', () => {
   it('should return search error from state', () => {
     expect(searchErrorSelector(mockState))
       .to.equal(mockSearch.error);
+  });
+});
+
+describe('searchCurrentTextSelector', () => {
+  it('should return currentText of search from state', () => {
+    expect(searchCurrentTextSelector(mockState))
+      .to.equal(mockSearch.currentText);
   });
 });
 
