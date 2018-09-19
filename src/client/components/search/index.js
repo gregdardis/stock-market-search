@@ -8,6 +8,10 @@ import {
   updateSearchText,
   setStockFromMemCache
 } from '../../actions';
+import {
+  searchCurrentTextSelector,
+  stocksSelector
+} from '../../../client/selectors';
 
 const mapDispatchToProps = dispatch => ({
   clearError() {
@@ -38,8 +42,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  text: state.search.currentText,
-  stocks: state.stocks
+  text: searchCurrentTextSelector(state),
+  stocks: stocksSelector(state)
 });
 
 export default connect(
