@@ -7,6 +7,7 @@ import {
   currentPriceValueSelector,
   exchangeSelector,
   fetchingSelector,
+  fetchingStockSelector,
   previousCloseSelector,
   previousCloseValueSelector,
   searchCurrentTextSelector,
@@ -64,27 +65,27 @@ const mockStocks = {
 
 const mockState = {
   chartTimePeriodIndex: 1,
-  fetching: true,
+  fetching: 'MSFT',
   search: mockSearch,
   selectedStock: 'MSFT',
   stocks: mockStocks
 };
 
 describe('selectedStockSymbolSelector', () => {
-  it('should return selectedStock from state', () => {
+  it('should return selectedStock from the state', () => {
     expect(selectedStockSymbolSelector(mockState))
       .to.deep.equal(mockState.selectedStock);
   });
 });
 
 describe('stocksSelector', () => {
-  it('should return stocks from state', () => {
+  it('should return stocks from the state', () => {
     expect(stocksSelector(mockState)).to.deep.equal(mockStocks);
   });
 });
 
 describe('selectedStockSelector', () => {
-  it('should return actual stock data for selectedStock', () => {
+  it('should return actual stock data for selectedStock from the state', () => {
     const selectedStock = selectedStockSelector
       .resultFunc(mockState.selectedStock, mockState.stocks);
 
@@ -93,7 +94,7 @@ describe('selectedStockSelector', () => {
 });
 
 describe('stockOverviewDataSelector', () => {
-  it('should return stockOverviewData from state', () => {
+  it('should return stockOverviewData from the state', () => {
     const stockOverviewData = stockOverviewDataSelector
       .resultFunc(mockStocks.MSFT);
 
@@ -103,7 +104,7 @@ describe('stockOverviewDataSelector', () => {
 });
 
 describe('currentPriceSelector', () => {
-  it('should return current price of selected stock from state', () => {
+  it('should return current price of selected stock from the state', () => {
     const currentPrice = currentPriceSelector
       .resultFunc(mockStockOverviewData);
 
@@ -123,7 +124,7 @@ describe('currentPriceValueSelector', () => {
 });
 
 describe('previousCloseSelector', () => {
-  it('should return previous close of selected stock from state', () => {
+  it('should return previous close of selected stock from the state', () => {
     const previousClose = previousCloseSelector
       .resultFunc(mockStockOverviewData);
 
@@ -143,7 +144,7 @@ describe('previousCloseValueSelector', () => {
 });
 
 describe('companyNameSelector', () => {
-  it('should return company name for the given stock', () => {
+  it('should return company name for the given stock from the state', () => {
     const companyName = companyNameSelector
       .resultFunc(mockStocks.MSFT);
 
@@ -152,46 +153,57 @@ describe('companyNameSelector', () => {
 });
 
 describe('selectedStockValueForKeySelector', () => {
-  expect(selectedStockValueForKeySelector(mockState, 'oneDayStockData'))
-    .to.deep.equal(mockOneDayStockData);
+  it('should return selected stock value for a specific key '+
+     'from the state', () => {
+    expect(selectedStockValueForKeySelector(mockState, 'oneDayStockData'))
+      .to.deep.equal(mockOneDayStockData);
+  });
 });
 
 describe('chartTimePeriodIndexSelector', () => {
-  it('should return chartTimePeriodIndex from state', () => {
+  it('should return chartTimePeriodIndex from the state', () => {
     expect(chartTimePeriodIndexSelector(mockState))
       .to.equal(mockState.chartTimePeriodIndex);
   });
 });
 
 describe('fetchingSelector', () => {
-  it('should return fetching from state', () => {
+  it('should return fetching from the state', () => {
     expect(fetchingSelector(mockState))
-      .to.equal(true);
+      .to.equal(mockState.fetching);
+  });
+});
+
+describe('fetchingStockSelector', () => {
+  it('should return stock being fetched from the state', () => {
+    expect(fetchingStockSelector(mockState))
+      .to.deep.equal(mockStocks.MSFT);
   });
 });
 
 describe('searchSelector', () => {
-  it('should return search from state', () => {
-    expect(searchSelector(mockState)).to.deep.equal(mockSearch);
+  it('should return search from the state', () => {
+    expect(searchSelector(mockState))
+      .to.deep.equal(mockSearch);
   });
 });
 
 describe('searchErrorSelector', () => {
-  it('should return search error from state', () => {
+  it('should return search error from the state', () => {
     expect(searchErrorSelector(mockState))
       .to.equal(mockSearch.error);
   });
 });
 
 describe('searchCurrentTextSelector', () => {
-  it('should return currentText of search from state', () => {
+  it('should return currentText of search from the state', () => {
     expect(searchCurrentTextSelector(mockState))
       .to.equal(mockSearch.currentText);
   });
 });
 
 describe('exchangeSelector', () => {
-  it('should get exchange for selectedStock', () => {
+  it('should get exchange for selectedStock from the state', () => {
     expect(exchangeSelector(mockState))
       .to.equal(mockStocks.MSFT.exchange);
   });
