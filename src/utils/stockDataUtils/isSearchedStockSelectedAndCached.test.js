@@ -18,14 +18,20 @@ describe('isSearchedStockSelectedAndCached', () => {
     stocks: mockStocks
   };
 
-  // beforeAll(() => {
-  //   selectors.fetchingSelector = jest.fn().mockReturnValue('MSFT');
-  //   selectors.stocksSelector = jest.fn().mockReturnValue(mockStocks);
-  // });
+  beforeEach(() => {
+    selectors.fetchingSelector = jest.fn()
+      .mockReturnValue('MSFT');
 
-  // afterAll(() => {
-  //   jest.resetAllMocks();
-  // });
+    selectors.fetchingStockSelector = jest.fn()
+      .mockReturnValue(mockStocks.MSFT);
+
+    selectors.selectedStockSymbolSelector = jest.fn()
+      .mockReturnValue('MSFT');
+  });
+
+  afterAll(() => {
+    jest.resetAllMocks();
+  });
 
   it('returns true if selected stock is being fetched', () => {
     expect(isSearchedStockSelectedAndCached(mockState))
@@ -36,6 +42,9 @@ describe('isSearchedStockSelectedAndCached', () => {
       ...mockState,
       fetching: null
     };
+
+    selectors.fetchingSelector.mockReturnValue(null);
+
     expect(isSearchedStockSelectedAndCached(mockFalseFetchingState))
       .to.equal(false);
   });
@@ -44,6 +53,9 @@ describe('isSearchedStockSelectedAndCached', () => {
       ...mockState,
       fetching: 'GOOG'
     };
+
+    selectors.fetchingSelector.mockReturnValue('GOOG');
+
     expect(isSearchedStockSelectedAndCached(mockNonCachedButFetchingState))
       .to.equal(false);
   });
@@ -52,6 +64,9 @@ describe('isSearchedStockSelectedAndCached', () => {
       ...mockState,
       selectedStock: 'A'
     };
+
+    selectors.selectedStockSymbolSelector.mockReturnValue('A');
+
     expect(isSearchedStockSelectedAndCached(mockSelectedStockNotFetchedState))
       .to.equal(false);
   });
