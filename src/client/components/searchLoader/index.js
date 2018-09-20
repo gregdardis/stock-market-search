@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import SearchLoader from './SearchLoader';
 
-function searchedStockSelected(state) {
+function isSearchedStockSelected(state) {
   const { fetching, stocks } = state;
   if (fetching && stocks[fetching]) {
     return stocks[fetching].symbol === state.selectedStock;
@@ -10,10 +10,8 @@ function searchedStockSelected(state) {
   return false;
 }
 
-const mapStateToProps = state => {
-  return {
-    showingCachedStock: searchedStockSelected(state)
-  };
-};
+const mapStateToProps = state => ({
+  showingCachedStock: isSearchedStockSelected(state)
+});
 
 export default connect(mapStateToProps)(SearchLoader);

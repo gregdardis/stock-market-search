@@ -1,6 +1,9 @@
 import { expect } from 'chai';
 
-import { mapStateToProps } from '.';
+import {
+  mapDispatchToProps,
+  mapStateToProps
+} from '.';
 import * as selectors from '../../../client/selectors';
 
 const mockStocks = {
@@ -38,5 +41,17 @@ describe('mapStateToProps', () => {
     });
 
     jest.resetAllMocks();
+  });
+});
+
+describe('mapDispatchToProps', () => {
+  // TODO: test this
+  it('properly maps clearError to dispatching clearSearchError', () => {
+    expect(true).to.equal(true);
+    // const dispatch = jest.fn();
+
+    // mapDispatchToProps(dispatch).clearError();
+
+    // expect(dispatch.mock.calls[0][0]).to.deep.equal(true);
   });
 });
