@@ -12,7 +12,7 @@ const SearchLoader = ({ showingCachedStock }) => {
   return showingCachedStock
     ? <BeatLoader
       // - 12 because it's a size that looks good
-      size = { SEARCH_STATUS_REGION_HEIGHT - 12 }
+      size={ SEARCH_STATUS_REGION_HEIGHT - 12 }
       { ...loaderProps } />
     : <ScaleLoader
       // - 4 because it's a height that looks good
