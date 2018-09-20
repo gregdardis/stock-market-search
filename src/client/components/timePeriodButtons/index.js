@@ -4,13 +4,7 @@ import TimePeriodButtons from './TimePeriodButtons';
 import { updateChartTimePeriodIndex } from '../../actions';
 import { chartTimePeriodIndexSelector } from '../../selectors';
 
-const mapDispatchToProps = dispatch => ({
-  updateChartTimePeriodIndex(index) {
-    dispatch(
-      updateChartTimePeriodIndex(index)
-    );
-  }
-});
+const actions = { updateChartTimePeriodIndex };
 
 export const mapStateToProps = state => ({
   chartTimePeriodIndex: chartTimePeriodIndexSelector(state)
@@ -18,5 +12,5 @@ export const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  actions
 )(TimePeriodButtons);
