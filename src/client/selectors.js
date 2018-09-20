@@ -49,9 +49,16 @@ export function selectedStockValueForKeySelector(state, key) {
     selectedStock => selectedStock[key]
   )(state);
 }
+
 export const chartTimePeriodIndexSelector = state => state.chartTimePeriodIndex;
 
 export const fetchingSelector = state => state.fetching;
+
+export const fetchingStockSelector = createSelector(
+  fetchingSelector,
+  stocksSelector,
+  (fetching, stocks) => stocks[fetching]
+);
 
 export const searchSelector = state => state.search;
 

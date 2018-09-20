@@ -5,7 +5,7 @@ import {
   isSearchedStockSelectedAndCached
 } from '../../../utils/stockDataUtils/isSearchedStockSelectedAndCached';
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   showingCachedStock: isSearchedStockSelectedAndCached(state)
 });
 
