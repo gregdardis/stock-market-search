@@ -3,8 +3,6 @@ import { expect } from 'chai';
 import { mapStateToProps } from '.';
 import * as selectors from '../../selectors';
 
-// TODO: stub selectors in these tests
-
 describe('mapStateToProps', () => {
   const mockState = {
     fetching: null,
