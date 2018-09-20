@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
 
 import StockDataRegion from './StockDataRegion';
+import { fetchingSelector } from '../../selectors';
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   showNoDataMessage: !state.fetching && !state.selectedStock,
   showResults: !!state.selectedStock
 });

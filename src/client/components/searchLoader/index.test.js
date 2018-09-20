@@ -12,6 +12,7 @@ describe('mapStateToProps', () => {
       MSFT: {}
     }
   };
+
   it('should map state to props properly', () => {
     isSearchedStockSelectedAndCached.isSearchedStockSelectedAndCached =
       jest.fn().mockReturnValue(true);
