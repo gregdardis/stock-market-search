@@ -13,8 +13,9 @@ import {
   OPTIONAL_LABEL_EPS
 } from '../../../constants/userFacingStrings';
 
-const cellShouldShowBottomBorder = (cellIndex, numCells) =>
-  cellIndex + 1 !== numCells;
+export function cellShouldShowBottomBorder(cellIndex, numCells) {
+  return cellIndex + 1 !== numCells;
+}
 
 const singleColumnProps = {
   cellShouldShowBottomBorder,
