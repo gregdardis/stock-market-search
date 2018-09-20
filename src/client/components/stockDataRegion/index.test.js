@@ -1,12 +1,27 @@
 import { expect } from 'chai';
 
 import { mapStateToProps } from '.';
+import * as selectors from '../../selectors';
+
+// TODO: stub selectors in these tests
 
 describe('mapStateToProps', () => {
   const mockState = {
     fetching: null,
     selectedStock: null
   };
+
+  beforeEach(() => {
+    selectors.fetchingSelector = jest.fn()
+      .mockReturnValue(null);
+
+    selectors.selectedStockSymbolSelector = jest.fn()
+      .mockReturnValue(null);
+  });
+
+  afterAll(() => {
+    jest.resetAllMocks();
+  });
 
   it('properly maps state when not fetching and no selectedStock', () => {
     expect(mapStateToProps(mockState))
@@ -21,6 +36,9 @@ describe('mapStateToProps', () => {
       fetching: 'MSFT'
     };
 
+    selectors.fetchingSelector
+      .mockReturnValue(mockStateFetching.fetching);
+
     expect(mapStateToProps(mockStateFetching))
       .to.deep.equal({
         showNoDataMessage: false,
@@ -32,6 +50,9 @@ describe('mapStateToProps', () => {
       ...mockState,
       selectedStock: 'MSFT'
     };
+
+    selectors.selectedStockSymbolSelector
+      .mockReturnValue(mockStateSelectedStock.selectedStock);
 
     expect(mapStateToProps(mockStateSelectedStock))
       .to.deep.equal({
@@ -45,6 +66,12 @@ describe('mapStateToProps', () => {
       fetching: 'MSFT',
       selectedStock: 'MSFT'
     };
+
+    selectors.selectedStockSymbolSelector
+      .mockReturnValue(mockStateSelectedStockAndFetching.selectedStock);
+
+    selectors.fetchingSelector
+      .mockReturnValue(mockStateSelectedStockAndFetching.fetching);
 
     expect(mapStateToProps(mockStateSelectedStockAndFetching))
       .to.deep.equal({
