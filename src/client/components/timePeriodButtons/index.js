@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 
 import TimePeriodButtons from './TimePeriodButtons';
 import { updateChartTimePeriodIndex } from '../../actions';
+import { chartTimePeriodIndexSelector } from '../../selectors';
 
 const mapDispatchToProps = dispatch => ({
   updateChartTimePeriodIndex(index) {
@@ -11,8 +12,8 @@ const mapDispatchToProps = dispatch => ({
   }
 });
 
-const mapStateToProps = state => ({
-  chartTimePeriodIndex: state.chartTimePeriodIndex
+export const mapStateToProps = state => ({
+  chartTimePeriodIndex: chartTimePeriodIndexSelector(state)
 });
 
 export default connect(
