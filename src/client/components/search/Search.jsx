@@ -6,14 +6,14 @@ import classNames from 'classnames';
 import './search.css';
 
 const Search = ({
-  clearError,
-  clearText,
+  clearSearchError,
+  clearSearchText,
   fetchStock,
   hasError,
   setStockFromMemCache,
   stocks = {},
   text,
-  updateText
+  updateSearchText
 }) => {
   const focusEndOfInput = event => {
     const temp = event.target.value;
@@ -26,19 +26,19 @@ const Search = ({
         setStockFromMemCache(text);
       }
       fetchStock(text);
-      clearError();
+      clearSearchError();
     }
   };
   const handleChange = event => {
-    updateText(event.target.value);
-    clearError();
+    updateSearchText(event.target.value);
+    clearSearchError();
   };
   const handleKeyDown = event => {
     const keyPressed = event.key;
     if (keyPressed === 'Enter') {
       handleSearch();
     } else if (keyPressed === 'Escape') {
-      clearText();
+      clearSearchText();
     }
   };
   return (
@@ -68,13 +68,13 @@ const Search = ({
   );
 };
 Search.propTypes = {
-  clearError: PropTypes.func.isRequired,
-  clearText: PropTypes.func.isRequired,
+  clearSearchError: PropTypes.func.isRequired,
+  clearSearchText: PropTypes.func.isRequired,
   fetchStock: PropTypes.func.isRequired,
   hasError: PropTypes.bool.isRequired,
   setStockFromMemCache: PropTypes.func.isRequired,
   stocks: PropTypes.object,
   text: PropTypes.string.isRequired,
-  updateText: PropTypes.func.isRequired
+  updateSearchText: PropTypes.func.isRequired
 };
 export default Search;

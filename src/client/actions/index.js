@@ -14,7 +14,6 @@ export {
   UPDATE_SEARCH_TEXT,
   clearSearchError,
   clearSearchText,
-  performSearch,
   receiveSearchError,
   updateSearchText
 } from './search';

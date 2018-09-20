@@ -13,33 +13,13 @@ import {
   stocksSelector
 } from '../../../client/selectors';
 
-const mapDispatchToProps = dispatch => ({
-  clearError() {
-    dispatch(
-      clearSearchError()
-    );
-  },
-  clearText() {
-    dispatch(
-      clearSearchText()
-    );
-  },
-  fetchStock(searchText) {
-    dispatch(
-      fetchStock(searchText)
-    );
-  },
-  setStockFromMemCache(searchText) {
-    dispatch(
-      setStockFromMemCache(searchText)
-    );
-  },
-  updateText(searchText) {
-    dispatch(
-      updateSearchText(searchText)
-    );
-  }
-});
+const actions = {
+  clearSearchError,
+  clearSearchText,
+  fetchStock,
+  setStockFromMemCache,
+  updateSearchText
+};
 
 export const mapStateToProps = state => ({
   text: searchCurrentTextSelector(state),
@@ -48,5 +28,5 @@ export const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  actions
 )(Search);
