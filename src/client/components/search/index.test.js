@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
 import {
-  mapDispatchToProps,
+  // mapDispatchToProps,
   mapStateToProps
 } from '.';
 import * as selectors from '../../../client/selectors';

@@ -24,14 +24,14 @@ const mapDispatchToProps = dispatch => ({
       clearSearchText()
     );
   },
-  performSearch(searchText, stocks) {
-    if (stocks[searchText]) {
-      dispatch(
-        setStockFromMemCache(searchText)
-      );
-    }
+  fetchStock(searchText) {
     dispatch(
       fetchStock(searchText)
+    );
+  },
+  setStockFromMemCache(searchText) {
+    dispatch(
+      setStockFromMemCache(searchText)
     );
   },
   updateText(searchText) {

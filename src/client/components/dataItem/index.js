@@ -21,11 +21,8 @@ const mapStateToProps = (state, ownProps) => ({
   value: formatValueFromStateAndProps(state, ownProps)
 });
 
-const mapDispatchToProps = null;
-
 const DataItemContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(DataItem);
 
 DataItemContainer.propTypes = {

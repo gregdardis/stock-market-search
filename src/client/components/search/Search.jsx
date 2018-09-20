@@ -8,10 +8,11 @@ import './search.css';
 const Search = ({
   clearError,
   clearText,
+  fetchStock,
   hasError,
-  performSearch,
-  text,
+  setStockFromMemCache,
   stocks = {},
+  text,
   updateText
 }) => {
   const focusEndOfInput = event => {
@@ -21,7 +22,10 @@ const Search = ({
   };
   const handleSearch = () => {
     if (text) {
-      performSearch(text, stocks);
+      if (stocks[text]) {
+        setStockFromMemCache(text);
+      }
+      fetchStock(text);
       clearError();
     }
   };
@@ -66,8 +70,9 @@ const Search = ({
 Search.propTypes = {
   clearError: PropTypes.func.isRequired,
   clearText: PropTypes.func.isRequired,
+  fetchStock: PropTypes.func.isRequired,
   hasError: PropTypes.bool.isRequired,
-  performSearch: PropTypes.func.isRequired,
+  setStockFromMemCache: PropTypes.func.isRequired,
   stocks: PropTypes.object,
   text: PropTypes.string.isRequired,
   updateText: PropTypes.func.isRequired
