@@ -86,7 +86,7 @@ describe('handleSearch', () => {
     const fetchStock = jest.fn();
     const clearSearchError = jest.fn();
 
-    const propsHandleSearchFunction = {
+    const handleSearchFunctionProps = {
       ...baseProps,
       clearSearchError,
       fetchStock,
@@ -95,16 +95,48 @@ describe('handleSearch', () => {
     };
 
     const wrapper = shallow(
-      <Search { ...propsHandleSearchFunction }/>
+      <Search { ...handleSearchFunctionProps }/>
     );
 
     wrapper.instance().handleSearch();
 
-    expect(propsHandleSearchFunction.clearSearchError)
+    expect(handleSearchFunctionProps.clearSearchError)
       .toHaveBeenCalledTimes(1);
-    expect(propsHandleSearchFunction.fetchStock)
+    expect(handleSearchFunctionProps.fetchStock)
       .toHaveBeenCalledTimes(1);
-    expect(propsHandleSearchFunction.setStockFromMemCache)
+    expect(handleSearchFunctionProps.setStockFromMemCache)
       .toHaveBeenCalledTimes(0);
+  });
+});
+
+describe('handleChange', () => {
+  it('calls correct functions', () => {
+    const updateSearchText = jest.fn();
+    const clearSearchError = jest.fn();
+
+    const handleChangeProps = {
+      ...baseProps,
+      clearSearchError,
+      updateSearchText
+    };
+
+    const mockEvent = {
+      target: {
+        value: 'a'
+      }
+    };
+
+    const wrapper = shallow(
+      <Search {...handleChangeProps } />
+    );
+
+    wrapper.instance().handleChange(mockEvent);
+
+    expect(handleChangeProps.clearSearchError)
+      .toHaveBeenCalledTimes(1);
+    expect(handleChangeProps.updateSearchText)
+      .toHaveBeenCalledTimes(1);
+    expect(handleChangeProps.updateSearchText)
+      .toHaveBeenCalledWith(mockEvent.target.value);
   });
 });
