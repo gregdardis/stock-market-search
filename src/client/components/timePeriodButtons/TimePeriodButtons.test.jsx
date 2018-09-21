@@ -1,0 +1,79 @@
+import React from 'react';
+import { shallow } from 'enzyme';
+
+import TimePeriodButtons from './TimePeriodButtons';
+import { THEME_COLOR_MEDIUM1 } from '../../../constants/colors';
+import * as formatting from '../../../constants/formatting';
+
+describe('<TimePeriodButtons />', () => {
+  const mockChartTimePeriodIndex = 4;
+  const mockUpdateChartTimePeriodIndex = () => {};
+  it('calls correct method when handleClick is clicked', () => {
+    const updateChartTimePeriodIndex = jest.fn();
+
+    const wrapper = shallow(
+      <TimePeriodButtons
+        chartTimePeriodIndex={ mockChartTimePeriodIndex }
+        updateChartTimePeriodIndex={ updateChartTimePeriodIndex }
+      />
+    );
+    wrapper.find('RaisedButton').first().simulate('click');
+    expect(updateChartTimePeriodIndex).toHaveBeenCalledTimes(1);
+  });
+  it('has proper className for styling', () => {
+    const wrapper = shallow(
+      <TimePeriodButtons
+        chartTimePeriodIndex={ mockChartTimePeriodIndex }
+        updateChartTimePeriodIndex={ mockUpdateChartTimePeriodIndex }
+      />
+    );
+
+    expect(wrapper.hasClass('timePeriodButtons')).toBe(true);
+  });
+  it('renders 7 RaisedButtons with normal CHART_META_DATA', () => {
+    const wrapper = shallow(
+      <TimePeriodButtons
+        chartTimePeriodIndex={ mockChartTimePeriodIndex }
+        updateChartTimePeriodIndex={ mockUpdateChartTimePeriodIndex }
+      />
+    );
+
+    expect(wrapper.find('RaisedButton')).toHaveLength(7);
+  });
+  it('renders no RaisedButtons if CHART_META_DATA has length 0', () => {
+    formatting.CHART_META_DATA = [];
+    const wrapper = shallow(
+      <TimePeriodButtons
+        chartTimePeriodIndex={ mockChartTimePeriodIndex }
+        updateChartTimePeriodIndex={ mockUpdateChartTimePeriodIndex }
+      />
+    );
+
+    expect(wrapper.find('RaisedButton')).toHaveLength(0);
+  });
+});
+
+describe('getButtonStyle', () => {
+  it('properly gets button style if buttonIndex === chartTimePeriodIndex',
+    () => {
+      const buttonIndex = 4;
+      const wrapper = shallow(
+        <TimePeriodButtons chartTimePeriodIndex={buttonIndex} />
+      );
+
+      expect(wrapper.instance().getButtonStyle(buttonIndex))
+        .toEqual({
+          backgroundColor: THEME_COLOR_MEDIUM1
+        });
+    });
+  it('properly gets button style if buttonIndex !== chartTimePeriodIndex',
+    () => {
+      const buttonIndex = 4;
+      const wrapper = shallow(
+        <TimePeriodButtons chartTimePeriodIndex={5} />
+      );
+
+      expect(wrapper.instance().getButtonStyle(buttonIndex))
+        .toEqual({});
+    });
+});
