@@ -5,14 +5,10 @@ import { expect } from 'chai';
 import { NavBar } from './NavBar';
 import { THEME_COLOR_DARK1 } from '../../../constants/colors';
 import { APP_NAME } from '../../../constants/userFacingStrings';
-import {
-  URL_GLOSSARY,
-  URL_HOME
-} from '../../../constants/routes';
 import { menuItems } from './NavBar';
 
 describe('<NavBar />', () => {
-  const mockPathName = URL_HOME;
+  const mockPathName = menuItems[0].url;
   let wrapper;
 
   beforeAll(() => {
