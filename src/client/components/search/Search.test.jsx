@@ -17,8 +17,7 @@ const baseProps = {
   stocks: {
     MSFT: {}
   },
-  /* eslint-disable-next-line no-undefined */
-  text: undefined,
+  text: 'ABCD',
   updateSearchText: mockFunction
 };
 
@@ -29,7 +28,7 @@ describe('<Search />', () => {
 });
 
 describe('handleSearch', () => {
-  it('should call none of it\'s functions if text is undefined', () => {
+  it('should call none of it\'s functions if text is empty string', () => {
     const setStockFromMemCache = jest.fn();
     const fetchStock = jest.fn();
     const clearSearchError = jest.fn();
@@ -38,7 +37,8 @@ describe('handleSearch', () => {
       ...baseProps,
       clearSearchError,
       fetchStock,
-      setStockFromMemCache
+      setStockFromMemCache,
+      text: ''
     };
 
     const wrapper = shallow(
@@ -90,8 +90,7 @@ describe('handleSearch', () => {
       ...baseProps,
       clearSearchError,
       fetchStock,
-      setStockFromMemCache,
-      text: 'ABCD'
+      setStockFromMemCache
     };
 
     const wrapper = shallow(
@@ -138,5 +137,60 @@ describe('handleChange', () => {
       .toHaveBeenCalledTimes(1);
     expect(handleChangeProps.updateSearchText)
       .toHaveBeenCalledWith(mockEvent.target.value);
+  });
+});
+
+describe('handleKeyDown', () => {
+  it('behaves properly if enter key is pressed', () => {
+    const clearSearchText = jest.fn();
+    const handleSearchSpy = jest.spyOn(Search.prototype, 'handleSearch');
+
+    const handleKeyDownProps = {
+      ...baseProps,
+      clearSearchText
+    };
+
+    const wrapper = shallow(
+      <Search {...handleKeyDownProps } />
+    );
+
+    const mockEvent = {
+      key: 'Enter'
+    };
+
+    wrapper.instance().handleKeyDown(mockEvent);
+
+    expect(handleKeyDownProps.clearSearchText)
+      .toHaveBeenCalledTimes(0);
+    expect(handleSearchSpy)
+      .toHaveBeenCalledTimes(1);
+
+    handleSearchSpy.mockClear();
+  });
+  it('behaves properly if escape key is pressed', () => {
+    const clearSearchText = jest.fn();
+    const handleSearchSpy = jest.spyOn(Search.prototype, 'handleSearch');
+
+    const handleKeyDownProps = {
+      ...baseProps,
+      clearSearchText
+    };
+
+    const wrapper = shallow(
+      <Search {...handleKeyDownProps } />
+    );
+
+    const mockEvent = {
+      key: 'Escape'
+    };
+
+    wrapper.instance().handleKeyDown(mockEvent);
+
+    expect(handleKeyDownProps.clearSearchText)
+      .toHaveBeenCalledTimes(1);
+    expect(handleSearchSpy)
+      .toHaveBeenCalledTimes(0);
+
+    handleSearchSpy.mockClear();
   });
 });
