@@ -24,7 +24,7 @@ const menuItems = [
   }
 ];
 
-class NavBar extends Component {
+export class NavBar extends Component {
   render() {
     const { pathname } = this.props.location;
     return (
