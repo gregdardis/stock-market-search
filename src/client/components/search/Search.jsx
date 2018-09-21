@@ -1,26 +1,32 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
 import classNames from 'classnames';
 
 import './search.css';
 
-const Search = ({
-  clearSearchError,
-  clearSearchText,
-  fetchStock,
-  hasError,
-  setStockFromMemCache,
-  stocks = {},
-  text,
-  updateSearchText
-}) => {
-  const focusEndOfInput = event => {
+class Search extends Component {
+  constructor(props) {
+    super(props);
+    this.focusEndOfInput = this.focusEndOfInput.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+  }
+  focusEndOfInput(event) {
     const temp = event.target.value;
     event.target.value = '';
     event.target.value = temp;
-  };
-  const handleSearch = () => {
+  }
+  handleSearch() {
+    const {
+      clearSearchError,
+      fetchStock,
+      setStockFromMemCache,
+      stocks,
+      text
+    } = this.props;
+
     if (text) {
       if (stocks[text]) {
         setStockFromMemCache(text);
@@ -28,45 +34,53 @@ const Search = ({
       fetchStock(text);
       clearSearchError();
     }
-  };
-  const handleChange = event => {
+  }
+  handleChange(event) {
+    const { clearSearchError, updateSearchText } = this.props;
+
     updateSearchText(event.target.value);
     clearSearchError();
-  };
-  const handleKeyDown = event => {
+  }
+  handleKeyDown(event) {
+    const { clearSearchText } = this.props;
+
     const keyPressed = event.key;
     if (keyPressed === 'Enter') {
-      handleSearch();
+      this.handleSearch();
     } else if (keyPressed === 'Escape') {
       clearSearchText();
     }
-  };
-  return (
-    <div className='search'>
-      <input
-        type='text'
-        className={ classNames({
-          searchText: true,
-          error: hasError
-        }) }
-        value={ text }
-        onChange={ handleChange }
-        onKeyDown={ handleKeyDown }
-        placeholder='Stock symbol'
-        autoFocus
-        required
-        onFocus={ focusEndOfInput }
-        spellCheck={ false }
-        maxLength={ 15 }
-      />
-      <FontAwesome
-        className='searchButton'
-        name='search'
-        onClick={ handleSearch }
-      />
-    </div>
-  );
-};
+  }
+  render() {
+    const { hasError, text } = this.props;
+
+    return (
+      <div className='search'>
+        <input
+          type='text'
+          className={ classNames({
+            searchText: true,
+            error: hasError
+          }) }
+          value={ text }
+          onChange={ this.handleChange }
+          onKeyDown={ this.handleKeyDown }
+          placeholder='Stock symbol'
+          autoFocus
+          required
+          onFocus={ this.focusEndOfInput }
+          spellCheck={ false }
+          maxLength={ 15 }
+        />
+        <FontAwesome
+          className='searchButton'
+          name='search'
+          onClick={ this.handleSearch }
+        />
+      </div>
+    );
+  }
+}
 Search.propTypes = {
   clearSearchError: PropTypes.func.isRequired,
   clearSearchText: PropTypes.func.isRequired,
