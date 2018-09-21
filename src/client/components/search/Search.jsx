@@ -4,6 +4,12 @@ import FontAwesome from 'react-fontawesome';
 import classNames from 'classnames';
 
 import './search.css';
+import {
+  SEARCH_INPUT_MAX_LENGTH
+} from '../../../constants/numeric';
+import {
+  SEARCH_INPUT_PLACEHOLDER
+} from '../../../constants/userFacingStrings';
 
 class Search extends Component {
   constructor(props) {
@@ -65,12 +71,12 @@ class Search extends Component {
           value={ text }
           onChange={ this.handleChange }
           onKeyDown={ this.handleKeyDown }
-          placeholder='Stock symbol'
+          placeholder={ SEARCH_INPUT_PLACEHOLDER }
           autoFocus
           required
           onFocus={ this.focusEndOfInput }
           spellCheck={ false }
-          maxLength={ 15 }
+          maxLength={ SEARCH_INPUT_MAX_LENGTH }
         />
         <FontAwesome
           className='searchButton'

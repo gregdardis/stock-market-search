@@ -1,10 +1,13 @@
 import React from 'react';
-import {
-  mount,
-  shallow
-} from 'enzyme';
+import { shallow } from 'enzyme';
 
 import Search from './Search';
+import {
+  SEARCH_INPUT_MAX_LENGTH
+} from '../../../constants/numeric';
+import {
+  SEARCH_INPUT_PLACEHOLDER
+} from '../../../constants/userFacingStrings';
 
 const mockFunction = () => {};
 
@@ -12,7 +15,7 @@ const baseProps = {
   clearSearchError: mockFunction,
   clearSearchText: mockFunction,
   fetchStock: mockFunction,
-  hasError: false,
+  hasError: true,
   setStockFromMemCache: mockFunction,
   stocks: {
     MSFT: {}
@@ -22,8 +25,119 @@ const baseProps = {
 };
 
 describe('<Search />', () => {
-  it('true equals true', () => {
-    expect(true).toBe(true);
+  let wrapper;
+
+  beforeAll(() => {
+    wrapper = shallow(<Search { ...baseProps } />);
+  });
+
+  it('has proper className for styling', () => {
+    expect(wrapper.hasClass('search')).toBe(true);
+  });
+  it('has two children', () => {
+    expect(wrapper.children()).toHaveLength(2);
+  });
+  it('has an input as first child', () => {
+    expect(wrapper.childAt(0).name()).toBe('input');
+  });
+  it('has a FontAwesome button as second child', () => {
+    expect(wrapper.childAt(1).name()).toBe('FontAwesome');
+  });
+  test('input has type text', () => {
+    expect(wrapper.find('input').prop('type')).toBe('text');
+  });
+  test('input has correct className', () => {
+    expect(wrapper.find('input').hasClass('searchText error')).toBe(true);
+  });
+  test('input has correct value', () => {
+    expect(wrapper.find('input').prop('value')).toBe(baseProps.text);
+  });
+  test('invoking onChange input prop calls correct function', () => {
+    const handleChangeSpy = jest.spyOn(Search.prototype, 'handleChange')
+      .mockImplementation();
+
+    wrapper = shallow(<Search { ...baseProps } />);
+
+    wrapper.find('input').prop('onChange')();
+
+    expect(handleChangeSpy).toHaveBeenCalledTimes(1);
+
+    handleChangeSpy.mockRestore();
+  });
+  test('invoking onKeyDown input prop calls correct function', () => {
+    const handleKeyDownSpy = jest.spyOn(Search.prototype, 'handleKeyDown')
+      .mockImplementation();
+
+    wrapper = shallow(<Search { ...baseProps } />);
+
+    wrapper.find('input').prop('onKeyDown')();
+
+    expect(handleKeyDownSpy).toHaveBeenCalledTimes(1);
+
+    handleKeyDownSpy.mockRestore();
+  });
+  test('input has correct placeholder prop', () => {
+    expect(wrapper.find('input').prop('placeholder'))
+      .toBe(SEARCH_INPUT_PLACEHOLDER);
+  });
+  test('input has autoFocus prop', () => {
+    expect(wrapper.find('input').prop('autoFocus')).toBe(true);
+  });
+  test('input has required prop', () => {
+    expect(wrapper.find('input').prop('required')).toBe(true);
+  });
+  test('invoking onFocus input prop calls correct function', () => {
+    const focusEndOfInputSpy = jest.spyOn(
+      Search.prototype,
+      'focusEndOfInput'
+    ).mockImplementation();
+
+    wrapper = shallow(<Search { ...baseProps } />);
+
+    wrapper.find('input').prop('onFocus')();
+
+    expect(focusEndOfInputSpy).toHaveBeenCalledTimes(1);
+
+    focusEndOfInputSpy.mockRestore();
+  });
+  test('input has correct spellCheck prop', () => {
+    expect(wrapper.find('input').prop('spellCheck')).toBe(false);
+  });
+  test('input has correct maxLength prop', () => {
+    expect(wrapper.find('input').prop('maxLength'))
+      .toBe(SEARCH_INPUT_MAX_LENGTH);
+  });
+  test('FontAwesome has correct className', () => {
+    expect(wrapper.find('FontAwesome').hasClass('searchButton'))
+      .toBe(true);
+  });
+  test('FontAwesome has correct name prop', () => {
+    expect(wrapper.find('FontAwesome').prop('name')).toBe('search');
+  });
+  test('invoking onClick FontAwesome prop calls correct function', () => {
+    const handleSearchSpy = jest.spyOn(Search.prototype, 'handleSearch')
+      .mockImplementation();
+
+    wrapper = shallow(<Search { ...baseProps } />);
+
+    wrapper.find('FontAwesome').prop('onClick')();
+
+    expect(handleSearchSpy).toHaveBeenCalledTimes(1);
+
+    handleSearchSpy.mockRestore();
+  });
+});
+
+describe('focusEndOfInput', () => {
+  it('executes without crashing', () => {
+    const mockEvent = {
+      target: {
+        value: ''
+      }
+    };
+
+    const wrapper = shallow(<Search { ...baseProps } />);
+    wrapper.instance().focusEndOfInput(mockEvent);
   });
 });
 
@@ -193,4 +307,31 @@ describe('handleKeyDown', () => {
 
     handleSearchSpy.mockClear();
   });
+  it('behaves properly if a key that is neither escape nor enter is pressed',
+    () => {
+      const clearSearchText = jest.fn();
+      const handleSearchSpy = jest.spyOn(Search.prototype, 'handleSearch');
+
+      const handleKeyDownProps = {
+        ...baseProps,
+        clearSearchText
+      };
+
+      const wrapper = shallow(
+        <Search {...handleKeyDownProps } />
+      );
+
+      const mockEvent = {
+        key: 'ArrowDown'
+      };
+
+      wrapper.instance().handleKeyDown(mockEvent);
+
+      expect(handleKeyDownProps.clearSearchText)
+        .toHaveBeenCalledTimes(0);
+      expect(handleSearchSpy)
+        .toHaveBeenCalledTimes(0);
+
+      handleSearchSpy.mockClear();
+    });
 });
