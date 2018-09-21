@@ -5,9 +5,10 @@ import TimePeriodButtons from './TimePeriodButtons';
 import { THEME_COLOR_MEDIUM1 } from '../../../constants/colors';
 import * as formatting from '../../../constants/formatting';
 
+const mockUpdateChartTimePeriodIndex = () => {};
+const mockChartTimePeriodIndex = 4;
+
 describe('<TimePeriodButtons />', () => {
-  const mockChartTimePeriodIndex = 4;
-  const mockUpdateChartTimePeriodIndex = () => {};
   it('calls correct method when handleClick is clicked', () => {
     const updateChartTimePeriodIndex = jest.fn();
 
@@ -58,7 +59,10 @@ describe('getButtonStyle', () => {
     () => {
       const buttonIndex = 4;
       const wrapper = shallow(
-        <TimePeriodButtons chartTimePeriodIndex={buttonIndex} />
+        <TimePeriodButtons
+          chartTimePeriodIndex={ buttonIndex }
+          updateChartTimePeriodIndex={ mockUpdateChartTimePeriodIndex }
+        />
       );
 
       expect(wrapper.instance().getButtonStyle(buttonIndex))
@@ -70,7 +74,10 @@ describe('getButtonStyle', () => {
     () => {
       const buttonIndex = 4;
       const wrapper = shallow(
-        <TimePeriodButtons chartTimePeriodIndex={5} />
+        <TimePeriodButtons
+          chartTimePeriodIndex={ 5 }
+          updateChartTimePeriodIndex={ mockUpdateChartTimePeriodIndex }
+        />
       );
 
       expect(wrapper.instance().getButtonStyle(buttonIndex))
