@@ -13,7 +13,7 @@ import { THEME_COLOR_DARK1 } from '../../../constants/colors';
 import { APP_NAME } from '../../../constants/userFacingStrings';
 import './navBar.css';
 
-const menuItems = [
+export const menuItems = [
   {
     url: URL_HOME,
     title: 'Home'
