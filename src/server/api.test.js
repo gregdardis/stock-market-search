@@ -5,13 +5,30 @@ import * as chartData from '../utils/apiUtils/chartData';
 
 describe('GET /api/stocks/:symbol', () => {
   let mockRequestMaxStockData;
+  let mockRequestQuote;
+  let mockRequestOneDayStockData;
+  let mockRequestFiveDayStockData;
 
   beforeAll(() => {
+    const mockRequestImplementation = (_symbol, callback) => (
+      callback(null, {})
+    );
+
     mockRequestMaxStockData = jest.spyOn(
       chartData, 'requestMaxStockData'
-    ).mockImplementation(
-      (_symbol, callback) => callback(null, {})
-    );
+    ).mockImplementation(mockRequestImplementation);
+
+    mockRequestQuote = jest.spyOn(
+      chartData, 'requestQuote'
+    ).mockImplementation(mockRequestImplementation);
+
+    mockRequestOneDayStockData = jest.spyOn(
+      chartData, 'requestOneDayStockData'
+    ).mockImplementation(mockRequestImplementation);
+
+    mockRequestFiveDayStockData = jest.spyOn(
+      chartData, 'requestFiveDayStockData'
+    ).mockImplementation(mockRequestImplementation);
   });
 
   afterAll(() => {
@@ -36,6 +53,18 @@ describe('GET /api/stocks/:symbol', () => {
       });
   });
   it('returns 404 for an invalid stock symbol', () => {
+    mockRequestQuote.mockImplementationOnce((_symbol, callback) => {
+      callback('error');
+    });
+    mockRequestFiveDayStockData.mockImplementationOnce((_symbol, callback) => {
+      callback('error');
+    });
+    mockRequestMaxStockData.mockImplementationOnce((_symbol, callback) => {
+      callback('error');
+    });
+    mockRequestOneDayStockData.mockImplementationOnce((_symbol, callback) => {
+      callback('error');
+    });
     const mockSymbolInvalid = 'MSFTT';
     return request(server).get(`/api/stocks/${ mockSymbolInvalid }`)
       .then(res => {
