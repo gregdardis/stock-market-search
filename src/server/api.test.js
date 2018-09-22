@@ -41,7 +41,7 @@ describe('GET /api/stocks/:symbol', () => {
     server = app.listen(3000);
   });
 
-  afterEach((done) => {
+  afterEach(done => {
     server.close(done);
   });
 
@@ -71,5 +71,4 @@ describe('GET /api/stocks/:symbol', () => {
         expect(res.statusCode).toBe(404);
       });
   });
-  // TODO: test requestQuote etc have been called with spies
 });
