@@ -1,9 +1,25 @@
 import request from 'supertest';
 
 import app from '.';
+import * as chartData from '../utils/apiUtils/chartData';
 
 describe('GET /api/stocks/:symbol', () => {
+  let mockRequestMaxStockData;
+
+  beforeAll(() => {
+    mockRequestMaxStockData = jest.spyOn(
+      chartData, 'requestMaxStockData'
+    ).mockImplementation(
+      (_symbol, callback) => callback(null, {})
+    );
+  });
+
+  afterAll(() => {
+    jest.restoreAllMocks();
+  });
+
   let server;
+
   beforeEach(() => {
     server = app.listen(3000);
   });
@@ -26,4 +42,5 @@ describe('GET /api/stocks/:symbol', () => {
         expect(res.statusCode).toBe(404);
       });
   });
+  // TODO: test requestQuote etc have been called with spies
 });

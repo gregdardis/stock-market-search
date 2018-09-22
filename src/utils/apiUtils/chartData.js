@@ -31,7 +31,11 @@ export function getAdjustedDateForTimestamp(gmtoffset, timestamp) {
   return new Date(adjustedTimestamp);
 }
 
-export function formatAndAdjustDateForTimestamp(gmtoffset, timestamp, dateAndTimeFormat) {
+export function formatAndAdjustDateForTimestamp(
+  gmtoffset,
+  timestamp,
+  dateAndTimeFormat
+) {
   const dateAndTime = getAdjustedDateForTimestamp(gmtoffset, timestamp);
   return dateFormat(dateAndTime, dateAndTimeFormat, true);
 }
