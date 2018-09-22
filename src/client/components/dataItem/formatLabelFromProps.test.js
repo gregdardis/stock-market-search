@@ -3,24 +3,19 @@ import { expect } from 'chai';
 import { formatLabelFromProps } from './formatLabelFromProps';
 
 describe('formatLabelFromProps', () => {
-  const mockProps = {
-    label: 'Volume'
-  };
+  const mockLabel = 'Volume';
+  const mockOptionalLabel = 'Avg';
 
   it('properly formats label from props with no optional label', () => {
-    expect(formatLabelFromProps(mockProps))
-      .to.equal(mockProps.label);
+    expect(formatLabelFromProps({ label: mockLabel }))
+      .to.equal(mockLabel);
   });
   it('properly formats label from props with optional label', () => {
-    const mockPropsWithOptionalLabel = {
-      ...mockProps,
-      optionalLabel: 'Avg'
-    };
-
-    expect(formatLabelFromProps(mockPropsWithOptionalLabel))
-      .to.equal(
-        mockPropsWithOptionalLabel.label +
-        ' (' + mockPropsWithOptionalLabel.optionalLabel + ') '
-      );
+    expect(formatLabelFromProps({
+      label: mockLabel, optionalLabel: mockOptionalLabel
+    })).to.equal(
+      mockLabel +
+        ' (' + mockOptionalLabel + ') '
+    );
   });
 });
