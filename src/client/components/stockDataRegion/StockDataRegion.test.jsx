@@ -36,7 +36,7 @@ describe('<StockDataRegion />', () => {
 
   it('should have 2 children if showing results', () => {
     expect(wrapper.children()).to.have.length(2);
-    expect(wrapper.childAt(0).type()).to.equal('div');
+    expect(wrapper.childAt(0)).to.have.type('div');
     expect(wrapper.childAt(1).name())
       .to.equal('CSSTransitionGroup');
   });
@@ -47,7 +47,7 @@ describe('<StockDataRegion />', () => {
     const stockDataRegionDiv = wrapper.childAt(0);
 
     expect(stockDataRegionDiv.children()).to.have.length(2);
-    expect(stockDataRegionDiv.childAt(0).type()).to.equal('div');
+    expect(stockDataRegionDiv.childAt(0)).to.have.type('div');
     expect(stockDataRegionDiv.childAt(1).name())
       .to.equal('SelectableTimePeriodChart');
   });
