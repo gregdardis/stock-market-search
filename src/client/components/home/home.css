@@ -12,8 +12,5 @@
 
 .searchStatus {
   margin: 0 auto;
-}
-
-.searchStatus.hidden {
-  visibility: hidden;
+  height: 24px;
 }
