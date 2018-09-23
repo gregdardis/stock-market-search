@@ -12,9 +12,9 @@ describe('<NavBar />', () => {
   let wrapper;
 
   beforeAll(() => {
-    wrapper = shallow(<NavBar location={{
-      pathname: mockPathName
-    }} />);
+    wrapper = shallow(
+      <NavBar location={{ pathname: mockPathName }} />
+    );
   });
 
   test('outer div has the proper className for styling', () => {
@@ -28,39 +28,40 @@ describe('<NavBar />', () => {
   test('outer div has 2 children', () => {
     expect(wrapper.children()).to.have.length(2);
   });
-  test('outer div has one span as a first child', () => {
+  test('outer div has a span as a first child', () => {
     expect(wrapper.find('span')).to.have.length(1);
     expect(wrapper.childAt(0).type()).to.equal('span');
   });
-  test('outer div child span has proper className', () => {
+  test('title span has proper className', () => {
     expect(wrapper.find('span')).to.have.className('title');
   });
-  test('outer div child span has proper text', () => {
+  test('title span has proper text', () => {
     expect(wrapper.find('span').text()).to.equal(APP_NAME);
   });
-  test('outer div has one ul as second child', () => {
+  test('outer div has a ul as second child', () => {
     expect(wrapper.find('ul')).to.have.length(1);
     expect(wrapper.childAt(1).type()).to.equal('ul');
   });
-  test('outer div child ul has proper className', () => {
+  test('nav ul has proper className', () => {
     expect(wrapper.find('ul')).to.have.className('nav');
   });
-  test('2 menuItems are rendered as li\'s' , () => {
+  test('2 menuItems are rendered as li\'s', () => {
     const ul = wrapper.find('ul');
     expect(ul.children()).to.have.length(2);
-    expect(ul.find('li')).to.have.length(2);
+    expect(ul.childAt(0).type()).to.equal('li');
+    expect(ul.childAt(1).type()).to.equal('li');
   });
-  test('first li in nav ul has "selected" className', () => {
+  test('first nav link has "selected" className', () => {
     expect(wrapper.find('ul').childAt(0)).to.have.className('selected');
   });
-  test('second li in nav ul has empty className', () => {
+  test('second nav link has empty className', () => {
     expect(wrapper.find('ul').childAt(1)).to.have.className('');
   });
-  test('first li in nav ul has key url', () => {
+  test('first nav link has key url', () => {
     expect(wrapper.find('ul').childAt(0).key())
       .to.equal(menuItems[0].url);
   });
-  test('second li in nav ul has key url', () => {
+  test('second nav link has key url', () => {
     expect(wrapper.find('ul').childAt(1).key())
       .to.equal(menuItems[1].url);
   });
