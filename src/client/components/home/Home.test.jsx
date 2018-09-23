@@ -2,22 +2,28 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
 
-import Home from './Home';
+import Home from '.';
+import Search from '../search';
+import SearchStatus from '../searchStatus';
+import StockDataRegion from '../stockDataRegion';
 
 describe('<Home />', () => {
-  it('has the correct className for styling', () => {
-    const wrapper = shallow(<Home loading={ false }/>);
+  let wrapper;
 
+  beforeAll(() => {
+    wrapper = shallow(<Home />);
+  });
+
+  it('has the correct className for styling', () => {
     expect(wrapper).to.have.className('home');
   });
-  it('Renders Search', () => {
-    const wrapper = shallow(<Home loading={ false }/>);
-
-    expect(wrapper).to.have.exactly(1).descendants('Connect(Search)');
+  it('renders Search component', () => {
+    expect(wrapper.find(Search)).to.have.length(1);
   });
-  it('Renders StockDataRegion', () => {
-    const wrapper = shallow(<Home loading={ false }/>);
-
-    expect(wrapper).to.have.exactly(1).descendants('Connect(StockDataRegion)');
+  it('renders SearchStatus component', () => {
+    expect(wrapper.find(SearchStatus)).to.have.length(1);
+  });
+  it('renders StockDataRegion component', () => {
+    expect(wrapper.find(StockDataRegion)).to.have.length(1);
   });
 });
