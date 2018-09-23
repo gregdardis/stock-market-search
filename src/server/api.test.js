@@ -10,25 +10,7 @@ describe('GET /api/stocks/:symbol', () => {
   let mockRequestFiveDayStockData;
 
   beforeAll(() => {
-    const mockRequestImplementation = (_symbol, callback) => (
-      callback(null, {})
-    );
-
-    mockRequestMaxStockData = jest.spyOn(
-      chartData, 'requestMaxStockData'
-    ).mockImplementation(mockRequestImplementation);
-
-    mockRequestQuote = jest.spyOn(
-      chartData, 'requestQuote'
-    ).mockImplementation(mockRequestImplementation);
-
-    mockRequestOneDayStockData = jest.spyOn(
-      chartData, 'requestOneDayStockData'
-    ).mockImplementation(mockRequestImplementation);
-
-    mockRequestFiveDayStockData = jest.spyOn(
-      chartData, 'requestFiveDayStockData'
-    ).mockImplementation(mockRequestImplementation);
+    
   });
 
   afterAll(() => {
@@ -46,6 +28,22 @@ describe('GET /api/stocks/:symbol', () => {
   });
 
   it('returns 200 for a valid stock symbol', () => {
+    const mockRequestImplementation = (_symbol, callback) => (
+      callback(null, {})
+    );
+
+    chartData.requestMaxStockData = jest.fn()
+      .mockImplementation(mockRequestImplementation);
+
+    chartData.requestQuote = jest.fn()
+      .mockImplementation(mockRequestImplementation);
+
+    chartData.requestOneDayStockData = jest.fn()
+      .mockImplementation(mockRequestImplementation);
+
+    chartData.requestFiveDayStockData = jest.fn()
+      .mockImplementation(mockRequestImplementation);
+
     const mockSymbolValid = 'MSFT';
     return request(server).get(`/api/stocks/${ mockSymbolValid }`)
       .then(res => {
@@ -53,16 +51,7 @@ describe('GET /api/stocks/:symbol', () => {
       });
   });
   it('returns 404 for an invalid stock symbol', () => {
-    mockRequestQuote.mockImplementationOnce((_symbol, callback) => {
-      callback('error');
-    });
-    mockRequestFiveDayStockData.mockImplementationOnce((_symbol, callback) => {
-      callback('error');
-    });
-    mockRequestMaxStockData.mockImplementationOnce((_symbol, callback) => {
-      callback('error');
-    });
-    mockRequestOneDayStockData.mockImplementationOnce((_symbol, callback) => {
+    chartData.requestQuote.mockImplementationOnce((_symbol, callback) => {
       callback('error');
     });
     const mockSymbolInvalid = 'MSFTT';
