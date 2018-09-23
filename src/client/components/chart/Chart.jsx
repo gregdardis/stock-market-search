@@ -10,12 +10,14 @@ import {
   YAxis
 } from 'recharts';
 
-import { addCommas } from '../../../utils/formatting/numberFormatting';
+import {
+  addCommas,
+  formatAsPrice
+} from '../../../utils/formatting/numberFormatting';
 import './chart.css';
 import { CHART_DATA_KEY_Y_AXIS } from '../../../constants/formatting';
 import { CHART_LINE_COLOR } from '../../../constants/colors';
 import {
-  formatAsPrice,
   getTooltipLabelFormatter,
   getXAxisDataKey,
   getXAxisMinTickGap,

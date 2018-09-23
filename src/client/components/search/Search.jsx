@@ -1,75 +1,101 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
 import classNames from 'classnames';
 
 import './search.css';
+import {
+  SEARCH_INPUT_MAX_LENGTH
+} from '../../../constants/numeric';
+import {
+  SEARCH_INPUT_PLACEHOLDER
+} from '../../../constants/userFacingStrings';
 
-const Search = ({
-  clearError,
-  clearText,
-  hasError,
-  performSearch,
-  text,
-  stocks = {},
-  updateText
-}) => {
-  const focusEndOfInput = event => {
+class Search extends Component {
+  constructor(props) {
+    super(props);
+    this.focusEndOfInput = this.focusEndOfInput.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+  }
+  focusEndOfInput(event) {
     const temp = event.target.value;
     event.target.value = '';
     event.target.value = temp;
-  };
-  const handleSearch = () => {
-    if (text) {
-      performSearch(text, stocks);
-      clearError();
+  }
+  handleSearch() {
+    const {
+      clearSearchError,
+      fetchStock,
+      setStockFromMemCache,
+      stocks,
+      text
+    } = this.props;
+
+    if (!text) {
+      return;
     }
-  };
-  const handleChange = event => {
-    updateText(event.target.value);
-    clearError();
-  };
-  const handleKeyDown = event => {
+    clearSearchError();
+    if (stocks[text]) {
+      setStockFromMemCache(text);
+    }
+    fetchStock(text);
+  }
+  handleChange(event) {
+    const { clearSearchError, updateSearchText } = this.props;
+
+    updateSearchText(event.target.value);
+    clearSearchError();
+  }
+  handleKeyDown(event) {
+    const { clearSearchText } = this.props;
+
     const keyPressed = event.key;
     if (keyPressed === 'Enter') {
-      handleSearch();
+      this.handleSearch();
     } else if (keyPressed === 'Escape') {
-      clearText();
+      clearSearchText();
     }
-  };
-  return (
-    <div className='search'>
-      <input
-        type='text'
-        className={ classNames({
-          searchText: true,
-          error: hasError
-        }) }
-        value={ text }
-        onChange={ handleChange }
-        onKeyDown={ handleKeyDown }
-        placeholder='Stock symbol'
-        autoFocus
-        required
-        onFocus={ focusEndOfInput }
-        spellCheck={ false }
-        maxLength={ 15 }
-      />
-      <FontAwesome
-        className='searchButton'
-        name='search'
-        onClick={ handleSearch }
-      />
-    </div>
-  );
-};
+  }
+  render() {
+    const { hasError, text } = this.props;
+
+    return (
+      <div className='search'>
+        <input
+          type='text'
+          className={ classNames({
+            searchText: true,
+            error: hasError
+          }) }
+          value={ text }
+          onChange={ this.handleChange }
+          onKeyDown={ this.handleKeyDown }
+          placeholder={ SEARCH_INPUT_PLACEHOLDER }
+          autoFocus
+          required
+          onFocus={ this.focusEndOfInput }
+          spellCheck={ false }
+          maxLength={ SEARCH_INPUT_MAX_LENGTH }
+        />
+        <FontAwesome
+          className='searchButton'
+          name='search'
+          onClick={ this.handleSearch }
+        />
+      </div>
+    );
+  }
+}
 Search.propTypes = {
-  clearError: PropTypes.func.isRequired,
-  clearText: PropTypes.func.isRequired,
+  clearSearchError: PropTypes.func.isRequired,
+  clearSearchText: PropTypes.func.isRequired,
+  fetchStock: PropTypes.func.isRequired,
   hasError: PropTypes.bool.isRequired,
-  performSearch: PropTypes.func.isRequired,
+  setStockFromMemCache: PropTypes.func.isRequired,
   stocks: PropTypes.object,
   text: PropTypes.string.isRequired,
-  updateText: PropTypes.func.isRequired
+  updateSearchText: PropTypes.func.isRequired
 };
 export default Search;

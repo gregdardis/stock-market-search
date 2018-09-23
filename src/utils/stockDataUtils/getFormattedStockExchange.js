@@ -1,9 +1,7 @@
-import {
-  getSelectedStockValueForKey
-} from '.';
+import { exchangeSelector } from '../../client/selectors';
 
 export const getFormattedStockExchange = state => {
-  const exchange = getSelectedStockValueForKey(state, 'exchange');
+  const exchange = exchangeSelector(state);
   switch (exchange) {
   case 'Toronto':
     return 'TSX';

@@ -1,19 +1,12 @@
 import { connect } from 'react-redux';
 
 import SearchLoader from './SearchLoader';
+import {
+  isSearchedStockSelectedAndCached
+} from '../../../utils/stockDataUtils/isSearchedStockSelectedAndCached';
 
-function searchedStockSelected(state) {
-  const { fetching, stocks } = state;
-  if (fetching && stocks[fetching]) {
-    return stocks[fetching].symbol === state.selectedStock;
-  }
-  return false;
-}
-
-const mapStateToProps = state => {
-  return {
-    showingCachedStock: searchedStockSelected(state)
-  };
-};
+export const mapStateToProps = state => ({
+  showingCachedStock: isSearchedStockSelectedAndCached(state)
+});
 
 export default connect(mapStateToProps)(SearchLoader);

@@ -2,7 +2,6 @@ import DataItem from '../dataItem';
 
 import {
   LABEL_AVERAGE,
-  LABEL_DIVIDEND,
   LABEL_FCFY,
   LABEL_HIGH,
   LABEL_LOW,
@@ -11,12 +10,12 @@ import {
   LABEL_PE_RATIO,
   LABEL_ROE,
   LABEL_VOLUME,
-  OPTIONAL_LABEL_DIVIDEND,
   OPTIONAL_LABEL_EPS
 } from '../../../constants/userFacingStrings';
 
-const cellShouldShowBottomBorder = (cellIndex, numCells) =>
-  cellIndex + 1 !== numCells;
+export function cellShouldShowBottomBorder(cellIndex, numCells) {
+  return cellIndex + 1 !== numCells;
+}
 
 const singleColumnProps = {
   cellShouldShowBottomBorder,
@@ -63,46 +62,3 @@ export const columnComponentsProps = {
   ],
   ...singleColumnProps
 };
-
-// To use if we ever want to display the data as a Row of 3 Columns
-export const rowComponentsProps = [
-  // Column 1:
-  {
-    componentsProps: [
-      { label: LABEL_OPEN },
-      { label: LABEL_HIGH },
-      { label: LABEL_LOW }
-    ],
-    rowKey: '1',
-    ...singleColumnProps
-  },
-  // Column 2:
-  {
-    componentsProps: [
-      { label: LABEL_MARKET_CAP },
-      {
-        label: LABEL_VOLUME,
-        optionalLabel: LABEL_AVERAGE
-      },
-      {
-        label: LABEL_DIVIDEND,
-        optionalLabel: OPTIONAL_LABEL_DIVIDEND
-      }
-    ],
-    rowKey: '2',
-    ...singleColumnProps
-  },
-  // Column 3:
-  {
-    componentsProps: [
-      {
-        label: LABEL_PE_RATIO,
-        optionalLabel: OPTIONAL_LABEL_EPS
-      },
-      { label: LABEL_ROE },
-      { label: LABEL_FCFY }
-    ],
-    rowKey: '3',
-    ...singleColumnProps
-  }
-];

@@ -13,11 +13,6 @@ export const clearSearchText = () => ({
   type: CLEAR_SEARCH_TEXT
 });
 
-export const performSearch = searchText => ({
-  type: PERFORM_SEARCH,
-  searchText
-});
-
 export const receiveSearchError = errorMessage => ({
   type: RECEIVE_SEARCH_ERROR,
   errorMessage

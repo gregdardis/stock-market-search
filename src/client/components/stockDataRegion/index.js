@@ -1,10 +1,15 @@
 import { connect } from 'react-redux';
 
 import StockDataRegion from './StockDataRegion';
+import {
+  fetchingSelector,
+  selectedStockSymbolSelector
+} from '../../selectors';
 
-const mapStateToProps = state => ({
-  showNoDataMessage: !state.fetching && !state.selectedStock,
-  showResults: !!state.selectedStock
+export const mapStateToProps = state => ({
+  showNoDataMessage: !fetchingSelector(state)
+    && !selectedStockSymbolSelector(state),
+  showResults: !!selectedStockSymbolSelector(state)
 });
 
 export default connect(mapStateToProps)(StockDataRegion);

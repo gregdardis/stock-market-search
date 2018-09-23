@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import CSSTransitionGroup from 'react-addons-css-transition-group';
 
 import Column from '../column';
 import CompanyGeneralInfo from '../companyGeneralInfo';
@@ -9,7 +9,7 @@ import { MESSAGE_NO_DATA } from '../../../constants/userFacingStrings';
 import SelectableTimePeriodChart from '../selectableTimePeriodChart';
 import './stockDataRegion.css';
 
-const Message = () => (
+export const Message = () => (
   <p className='noDataMessage'>
     { MESSAGE_NO_DATA }
   </p>
@@ -30,12 +30,12 @@ const StockDataRegion = ({
       </div>
       : null
     }
-    <ReactCSSTransitionGroup
+    <CSSTransitionGroup
       transitionName='fade'
       transitionEnterTimeout={500}
       transitionLeaveTimeout={300}>
       { showNoDataMessage ? <Message /> : null }
-    </ReactCSSTransitionGroup>
+    </CSSTransitionGroup>
   </div>
 );
 

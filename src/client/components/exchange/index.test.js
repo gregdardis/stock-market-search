@@ -2,7 +2,7 @@ import { expect } from 'chai';
 
 import { mapStateToProps } from '.';
 import * as getFormattedStockExchange from
-  '../../../utils/stateGetters/getFormattedStockExchange';
+  '../../../utils/stockDataUtils/getFormattedStockExchange';
 
 describe('mapStateToProps', () => {
   it('maps state to props properly', () => {

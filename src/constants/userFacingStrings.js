@@ -33,3 +33,5 @@ export const MESSAGE_UNKNOWN_STOCK_EXCHANGE =
 
 export const OPTIONAL_LABEL_DIVIDEND = '%';
 export const OPTIONAL_LABEL_EPS = 'EPS';
+
+export const SEARCH_INPUT_PLACEHOLDER = 'Stock symbol';

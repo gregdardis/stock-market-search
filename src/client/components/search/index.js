@@ -5,44 +5,28 @@ import {
   clearSearchError,
   clearSearchText,
   fetchStock,
-  updateSearchText,
-  setStockFromMemCache
+  setStockFromMemCache,
+  updateSearchText
 } from '../../actions';
+import {
+  searchCurrentTextSelector,
+  stocksSelector
+} from '../../../client/selectors';
 
-const mapDispatchToProps = dispatch => ({
-  clearError() {
-    dispatch(
-      clearSearchError()
-    );
-  },
-  clearText() {
-    dispatch(
-      clearSearchText()
-    );
-  },
-  performSearch(searchText, stocks) {
-    if (stocks[searchText]) {
-      dispatch(
-        setStockFromMemCache(searchText)
-      );
-    }
-    dispatch(
-      fetchStock(searchText)
-    );
-  },
-  updateText(searchText) {
-    dispatch(
-      updateSearchText(searchText)
-    );
-  }
-});
+const actions = {
+  clearSearchError,
+  clearSearchText,
+  fetchStock,
+  setStockFromMemCache,
+  updateSearchText
+};
 
-const mapStateToProps = state => ({
-  text: state.search.currentText,
-  stocks: state.stocks
+export const mapStateToProps = state => ({
+  text: searchCurrentTextSelector(state),
+  stocks: stocksSelector(state)
 });
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  actions
 )(Search);
