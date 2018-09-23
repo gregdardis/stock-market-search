@@ -1,8 +1,6 @@
 import { expect } from 'chai';
 
-import {
-  mapStateToProps
-} from '.';
+import { mapStateToProps } from '.';
 import * as selectors from '../../../client/selectors';
 
 const mockStocks = {

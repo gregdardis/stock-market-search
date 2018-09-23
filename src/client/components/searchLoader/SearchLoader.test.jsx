@@ -14,13 +14,13 @@ describe('<SearchLoader />', () => {
       <SearchLoader showingCachedStock={ true } />
     );
 
-    expect(wrapper.type()).to.deep.equal(BeatLoader);
+    expect(wrapper).to.have.type(BeatLoader);
   });
   it('renders correct component if not showingCachedStock', () => {
     const wrapper = shallow(
       <SearchLoader showingCachedStock={ false } />
     );
 
-    expect(wrapper.type()).to.deep.equal(ScaleLoader);
+    expect(wrapper).to.have.type(ScaleLoader);
   });
 });

@@ -7,7 +7,11 @@ import { Message } from './StockDataRegion';
 import { MESSAGE_NO_DATA } from '../../../constants/userFacingStrings';
 
 describe('<Message />', () => {
-  const wrapper = shallow(<Message />);
+  let wrapper;
+
+  beforeAll(() => {
+    wrapper = shallow(<Message />);
+  });
 
   it('has proper className for styling', () => {
     expect(wrapper).to.have.className('noDataMessage');
@@ -24,7 +28,6 @@ describe('<StockDataRegion />', () => {
   };
 
   const noDataMessageProps = {
-    ...baseProps,
     showNoDataMessage: true,
     showResults: false
   };
@@ -37,10 +40,10 @@ describe('<StockDataRegion />', () => {
     expect(wrapper.childAt(1).name())
       .to.equal('CSSTransitionGroup');
   });
-  it('should have proper className for first child styling', () => {
+  it('should have proper className stockDataRegion div styling', () => {
     expect(wrapper.childAt(0)).to.have.className('stockDataRegion');
   });
-  it('should have 2 children as children of the first child div', () => {
+  it('stockDataRegion div should have 2 children', () => {
     const stockDataRegionDiv = wrapper.childAt(0);
 
     expect(stockDataRegionDiv.children()).to.have.length(2);
@@ -48,11 +51,10 @@ describe('<StockDataRegion />', () => {
     expect(stockDataRegionDiv.childAt(1).name())
       .to.equal('SelectableTimePeriodChart');
   });
-  it('should have proper className for first child of first child', () => {
+  it('textData div should have proper className', () => {
     expect(wrapper.childAt(0).childAt(0)).to.have.className('textData');
   });
-  it('should have 2 correct children for children of ' +
-     'first child of first child div', () => {
+  it('textData div should have 2 children', () => {
     const stockDataRegionDiv = wrapper.childAt(0);
     const textDataDiv = stockDataRegionDiv.childAt(0);
 
