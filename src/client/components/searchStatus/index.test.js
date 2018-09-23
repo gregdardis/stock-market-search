@@ -1,15 +1,20 @@
 import { expect } from 'chai';
 
 import { mapStateToProps } from './index';
+import * as selectors from '../../selectors';
 
 describe('mapStateToProps', () => {
   it('maps given state to props when fetching', () => {
+    const mockStock = 'MSFT';
     const mockState = {
-      fetching: 'MSFT',
+      fetching: mockStock,
       search: {
         error: null
       }
     };
+
+    selectors.fetchingSelector = jest.fn(() => mockStock);
+    selectors.searchErrorSelector = jest.fn(() => null);
 
     expect(mapStateToProps(mockState)).to.deep.equal({
       loading: true,
@@ -24,6 +29,9 @@ describe('mapStateToProps', () => {
         error: mockError
       }
     };
+
+    selectors.fetchingSelector = jest.fn(() => null);
+    selectors.searchErrorSelector = jest.fn(() => mockError);
 
     expect(mapStateToProps(mockState)).to.deep.equal({
       loading: false,

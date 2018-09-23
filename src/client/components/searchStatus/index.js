@@ -1,12 +1,11 @@
 import { connect } from 'react-redux';
 
 import SearchStatus from './SearchStatus';
+import { fetchingSelector, searchErrorSelector } from '../../selectors';
 
-// TODO: Are there selectors that can be used here in another branch
-// or do I need to make my own?
 export const mapStateToProps = state => ({
-  loading: !!state.fetching,
-  searchError: state.search.error
+  loading: !!fetchingSelector(state),
+  searchError: searchErrorSelector(state)
 });
 
 export default connect(mapStateToProps)(SearchStatus);
