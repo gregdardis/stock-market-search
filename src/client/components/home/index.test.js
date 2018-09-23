@@ -14,8 +14,18 @@ const mockStateFetching = {
 const mockStateNotFetching = {
   fetching: null,
   search: {
+    currentText: 'MSFT',
+    error: null
+  }
+};
+
+const mockSearchError = 'No stock with symbol "MSFTT" was found.';
+
+const mockStateWithSearchError = {
+  fetching: null,
+  search: {
     currentText: 'MSFTT',
-    error: 'No stock with symbol "MSFTT" was found.'
+    error: mockSearchError
   }
 };
 
@@ -30,7 +40,7 @@ describe('mapStateToProps', () => {
     expect(mapStateToProps(mockStateFetching))
       .to.deep.equal({
         loading: true,
-        searchError: null
+        searchError: mockStateFetching.search.error
       });
   });
   it('properly maps state to props while not fetching', () => {
@@ -44,6 +54,19 @@ describe('mapStateToProps', () => {
       .to.deep.equal({
         loading: false,
         searchError: mockStateNotFetching.search.error
+      });
+  });
+  it('properly maps state to props with a search error', () => {
+    selectors.fetchingSelector = jest.fn()
+      .mockReturnValue(null);
+
+    selectors.searchErrorSelector = jest.fn()
+      .mockReturnValue(mockSearchError);
+
+    expect(mapStateToProps(mockStateWithSearchError))
+      .to.deep.equal({
+        loading: false,
+        searchError: mockSearchError
       });
   });
 });
