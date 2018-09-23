@@ -39,6 +39,7 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => ({
   text: state.search.currentText,
+  searchError: state.search.error,
   stocks: state.stocks
 });
 

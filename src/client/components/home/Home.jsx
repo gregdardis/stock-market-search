@@ -8,7 +8,7 @@ import './home.css';
 
 const Home = ({ loading, searchError }) => (
   <div className='home'>
-    <Search hasError={ !!searchError } />
+    <Search />
     <SearchStatus loading={ loading } searchError={ searchError }/>
     <StockDataRegion />
   </div>
