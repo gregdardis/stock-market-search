@@ -1,9 +1,8 @@
 export const formatLabelFromProps = ownProps => {
-  const label = ownProps.label;
-  const optionalLabel = ownProps.optionalLabel;
+  const { label, optionalLabel } = ownProps;
 
   if (!optionalLabel) {
     return label;
   }
-  return label + ' (' + optionalLabel + ') ';
+  return `${ label } (${ optionalLabel })`;
 };

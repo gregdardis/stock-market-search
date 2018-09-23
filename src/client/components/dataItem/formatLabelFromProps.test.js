@@ -13,9 +13,6 @@ describe('formatLabelFromProps', () => {
   it('properly formats label from props with optional label', () => {
     expect(formatLabelFromProps({
       label: mockLabel, optionalLabel: mockOptionalLabel
-    })).to.equal(
-      mockLabel +
-        ' (' + mockOptionalLabel + ') '
-    );
+    })).to.equal(`${mockLabel} (${ mockOptionalLabel })`);
   });
 });
