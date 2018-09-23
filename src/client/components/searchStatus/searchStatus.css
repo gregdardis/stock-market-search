@@ -1,0 +1,9 @@
+.searchStatus {
+  margin: 0 auto;
+  height: 24px;
+}
+
+.error {
+  margin: 0;
+  color: red;
+}
