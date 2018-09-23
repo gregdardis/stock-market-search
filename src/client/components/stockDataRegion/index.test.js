@@ -4,11 +4,6 @@ import { mapStateToProps } from '.';
 import * as selectors from '../../selectors';
 
 describe('mapStateToProps', () => {
-  const mockState = {
-    fetching: null,
-    selectedStock: null
-  };
-
   beforeEach(() => {
     selectors.fetchingSelector = jest.fn()
       .mockReturnValue(null);
@@ -22,6 +17,10 @@ describe('mapStateToProps', () => {
   });
 
   it('properly maps state when not fetching and no selectedStock', () => {
+    const mockState = {
+      fetching: null,
+      selectedStock: null
+    };
     expect(mapStateToProps(mockState))
       .to.deep.equal({
         showNoDataMessage: true,
@@ -30,8 +29,8 @@ describe('mapStateToProps', () => {
   });
   it('properly maps state when fetching and no selectedStock', () => {
     const mockStateFetching = {
-      ...mockState,
-      fetching: 'MSFT'
+      fetching: 'MSFT',
+      selectedStock: null
     };
 
     selectors.fetchingSelector
@@ -45,7 +44,7 @@ describe('mapStateToProps', () => {
   });
   it('properly maps state when selectedStock but not fetching', () => {
     const mockStateSelectedStock = {
-      ...mockState,
+      fetching: null,
       selectedStock: 'MSFT'
     };
 
@@ -60,7 +59,6 @@ describe('mapStateToProps', () => {
   });
   it('properly maps state when both selectedStock and fetching', () => {
     const mockStateSelectedStockAndFetching = {
-      ...mockState,
       fetching: 'MSFT',
       selectedStock: 'MSFT'
     };
