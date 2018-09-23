@@ -1,9 +1,8 @@
-import express from 'express';
+import chalk from 'chalk';
 
-import apiRouter from './api';
+import app from './server';
+import { port } from './config';
 
-const app = express();
-
-app.use('/api', apiRouter);
-
-export default app;
+app.listen(port, () =>
+  console.log(chalk.green(`Server is listening on port ${port}`))
+);

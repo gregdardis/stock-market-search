@@ -1,23 +1,13 @@
 import request from 'supertest';
 
-import app from '.';
+import app from './server';
 import * as chartData from '../utils/apiUtils/chartData';
 
 describe('GET /api/stocks/:symbol', () => {
-  let mockRequestMaxStockData;
-  let mockRequestQuote;
-  let mockRequestOneDayStockData;
-  let mockRequestFiveDayStockData;
-
-  beforeAll(() => {
-    
-  });
-
-  afterAll(() => {
-    jest.restoreAllMocks();
-  });
-
   let server;
+  const mockFailedRequest = (_symbol, callback) => (
+    callback('error')
+  );
 
   beforeEach(() => {
     server = app.listen(3000);
@@ -25,6 +15,10 @@ describe('GET /api/stocks/:symbol', () => {
 
   afterEach(done => {
     server.close(done);
+  });
+
+  afterAll(() => {
+    jest.restoreAllMocks();
   });
 
   it('returns 200 for a valid stock symbol', () => {
@@ -45,16 +39,30 @@ describe('GET /api/stocks/:symbol', () => {
       .mockImplementation(mockRequestImplementation);
 
     const mockSymbolValid = 'MSFT';
+
     return request(server).get(`/api/stocks/${ mockSymbolValid }`)
       .then(res => {
         expect(res.statusCode).toBe(200);
       });
   });
-  it('returns 404 for an invalid stock symbol', () => {
-    chartData.requestQuote.mockImplementationOnce((_symbol, callback) => {
-      callback('error');
-    });
+  it('returns 404 for an invalid stock symbol for all requests', () => {
+    chartData.requestQuote.mockImplementationOnce(mockFailedRequest);
+    chartData.requestMaxStockData.mockImplementationOnce(mockFailedRequest);
+    chartData.requestOneDayStockData.mockImplementationOnce(mockFailedRequest);
+    chartData.requestFiveDayStockData.mockImplementationOnce(mockFailedRequest);
+
     const mockSymbolInvalid = 'MSFTT';
+
+    return request(server).get(`/api/stocks/${ mockSymbolInvalid }`)
+      .then(res => {
+        expect(res.statusCode).toBe(404);
+      });
+  });
+  it('returns 404 for an invalid stock symbol for one request', () => {
+    chartData.requestQuote.mockImplementationOnce(mockFailedRequest);
+
+    const mockSymbolInvalid = 'ABC';
+
     return request(server).get(`/api/stocks/${ mockSymbolInvalid }`)
       .then(res => {
         expect(res.statusCode).toBe(404);

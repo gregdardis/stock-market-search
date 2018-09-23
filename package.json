@@ -13,7 +13,7 @@
       "!**/constants/**",
       "!src/client/render.js",
       "!src/server/config/index.js",
-      "!src/server/server.js"
+      "!src/server/index.js"
     ],
     "testMatch": [
       "**/*.test.{js,jsx}"
