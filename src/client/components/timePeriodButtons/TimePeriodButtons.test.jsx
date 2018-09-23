@@ -9,7 +9,7 @@ const mockUpdateChartTimePeriodIndex = () => {};
 const mockChartTimePeriodIndex = 4;
 
 describe('<TimePeriodButtons />', () => {
-  it('calls correct method when handleClick is clicked', () => {
+  it('calls correct method when handleClick is called', () => {
     const updateChartTimePeriodIndex = jest.fn();
 
     const wrapper = shallow(

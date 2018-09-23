@@ -8,10 +8,6 @@ describe('getFormattedStockExchange', () => {
     selectors.exchangeSelector = jest.fn();
   });
 
-  afterAll(() => {
-    jest.resetAllMocks();
-  });
-
   it('returns TSX if state.exchange is Toronto', () => {
     selectors.exchangeSelector.mockReturnValue('Toronto');
     expect(getFormattedStockExchange({ exchange: 'Toronto' }))
@@ -22,9 +18,14 @@ describe('getFormattedStockExchange', () => {
     expect(getFormattedStockExchange({ exchange: 'NasdaqGS' }))
       .toEqual('NASDAQ');
   });
-  it('returns the exchange if state.exchange is anything else', () => {
+  it('returns NYSE if state.exchange is NYSE', () => {
     selectors.exchangeSelector.mockReturnValue('NYSE');
-    expect(getFormattedStockExchange({ exchange: 'Anything else' }))
+    expect(getFormattedStockExchange({ exchange: 'NYSE' }))
       .toEqual('NYSE');
+  });
+  it('returns the exchange if state.exchange is anything else', () => {
+    selectors.exchangeSelector.mockReturnValue('Anything else');
+    expect(getFormattedStockExchange({ exchange: 'Anything else' }))
+      .toEqual('Anything else');
   });
 });

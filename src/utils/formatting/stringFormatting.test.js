@@ -61,6 +61,9 @@ const ownProps = {
 };
 
 describe('formatValueFromStateAndProps', () => {
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
   it('should properly format when ALL fields are defined', () => {
     const state = createMockState({
       value: actualValue,
@@ -74,8 +77,6 @@ describe('formatValueFromStateAndProps', () => {
     expect(formatValueFromStateAndProps(state, ownProps))
       .to
       .equal(`${expectedValueFormatted} (${expectedOptionalValueFormatted})`);
-
-    jest.resetAllMocks();
   });
   it('should properly format when value is not defined', () => {
     const state = createMockState({
@@ -89,8 +90,6 @@ describe('formatValueFromStateAndProps', () => {
     expect(formatValueFromStateAndProps(state, ownProps))
       .to
       .equal(`${BLANK_FIELD} (${expectedOptionalValueFormatted})`);
-
-    jest.resetAllMocks();
   });
   it('should properly format when optionalValue is not defined', () => {
     const state = createMockState({
@@ -104,8 +103,6 @@ describe('formatValueFromStateAndProps', () => {
     expect(formatValueFromStateAndProps(state, ownProps))
       .to
       .equal(`${expectedValueFormatted}`);
-
-    jest.resetAllMocks();
   });
   it('should properly format when valueFormat is not defined', () => {
     const state = createMockState({
@@ -121,8 +118,6 @@ describe('formatValueFromStateAndProps', () => {
       .equal(
         `${expectedValueDefaultFormat} (${expectedOptionalValueFormatted})`
       );
-
-    jest.resetAllMocks();
   });
   it('should properly format when optionalValueFormat is not defined', () => {
     const state = createMockState({
@@ -138,8 +133,6 @@ describe('formatValueFromStateAndProps', () => {
       .equal(
         `${expectedValueFormatted} (${expectedOptionalValueDefaultFormat})`
       );
-
-    jest.resetAllMocks();
   });
   it('should properly format when value and valueFormat are not defined',
     () => {
@@ -153,8 +146,6 @@ describe('formatValueFromStateAndProps', () => {
       expect(formatValueFromStateAndProps(state, ownProps))
         .to
         .equal(`${BLANK_FIELD} (${expectedOptionalValueFormatted})`);
-
-      jest.resetAllMocks();
     });
   it('should properly format when value and optionalValue are not defined',
     () => {
@@ -168,8 +159,6 @@ describe('formatValueFromStateAndProps', () => {
       expect(formatValueFromStateAndProps(state, ownProps))
         .to
         .equal(BLANK_FIELD);
-
-      jest.resetAllMocks();
     });
   it('should properly format when value and optionalValueFormat ' +
      'are not defined', () => {
@@ -183,8 +172,6 @@ describe('formatValueFromStateAndProps', () => {
     expect(formatValueFromStateAndProps(state, ownProps))
       .to
       .equal(`${BLANK_FIELD} (${expectedOptionalValueDefaultFormat})`);
-
-    jest.resetAllMocks();
   });
   it('should properly format when optionalValue and valueFormat ' + 
      'are not defined', () => {
@@ -198,8 +185,6 @@ describe('formatValueFromStateAndProps', () => {
     expect(formatValueFromStateAndProps(state, ownProps))
       .to
       .equal(expectedValueDefaultFormat);
-
-    jest.resetAllMocks();
   });
   it('should properly format when optionalValue and optionalValueFormat ' +
      'are not defined', () => {
@@ -213,8 +198,6 @@ describe('formatValueFromStateAndProps', () => {
     expect(formatValueFromStateAndProps(state, ownProps))
       .to
       .equal(`${expectedValueFormatted}`);
-
-    jest.resetAllMocks();
   });
   it('should properly format when valueFormat and optionalValueFormat ' +
      'are not defined', () => {
@@ -230,8 +213,6 @@ describe('formatValueFromStateAndProps', () => {
       .equal(
         `${expectedValueDefaultFormat} (${expectedOptionalValueDefaultFormat})`
       );
-
-    jest.resetAllMocks();
   });
   it('should properly format when only value is defined', () => {
     const state = createMockState({
@@ -243,8 +224,6 @@ describe('formatValueFromStateAndProps', () => {
     expect(formatValueFromStateAndProps(state, ownProps))
       .to
       .equal(expectedValueDefaultFormat);
-
-    jest.resetAllMocks();
   });
   it('should properly format when only optionalValue is defined', () => {
     const state = createMockState({
@@ -256,8 +235,6 @@ describe('formatValueFromStateAndProps', () => {
     expect(formatValueFromStateAndProps(state, ownProps))
       .to
       .equal(`${BLANK_FIELD} (${expectedOptionalValueDefaultFormat})`);
-
-    jest.resetAllMocks();
   });
   it('should properly format when only valueFormat is defined', () => {
     const state = createMockState({
@@ -269,8 +246,6 @@ describe('formatValueFromStateAndProps', () => {
     expect(formatValueFromStateAndProps(state, ownProps))
       .to
       .equal(BLANK_FIELD);
-
-    jest.resetAllMocks();
   });
   it('should properly format when only optionalValueFormat is defined', () => {
     const state = createMockState({
@@ -282,8 +257,6 @@ describe('formatValueFromStateAndProps', () => {
     expect(formatValueFromStateAndProps(state, ownProps))
       .to
       .equal(BLANK_FIELD);
-
-    jest.resetAllMocks();
   });
   it('should properly format when NO fields are defined', () => {
     const state = createMockState({});
@@ -293,7 +266,5 @@ describe('formatValueFromStateAndProps', () => {
     expect(formatValueFromStateAndProps(state, ownProps))
       .to
       .equal(BLANK_FIELD);
-
-    jest.resetAllMocks();
   });
 });
