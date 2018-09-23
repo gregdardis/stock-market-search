@@ -6,13 +6,23 @@ import * as calculatePriceChange
 import * as selectors from '../../selectors';
 import * as numberFormatting
   from '../../../utils/formatting/numberFormatting';
+import { LABEL_CURRENT_PRICE } from '../../../constants/userFacingStrings';
 
 describe('mapStateToProps', () => {
   it('properly maps state to props', () => {
     const mockCurrentPrice = 113.14125321;
     const mockPriceChange = 1.26521123;
 
-    const mockState = {};
+    const mockState = {
+      selectedStock: 'MSFT',
+      stocks: {
+        MSFT: {
+          stockOverviewData: {
+            [LABEL_CURRENT_PRICE]: mockCurrentPrice
+          }
+        }
+      }
+    };
 
     selectors.currentPriceValueSelector = jest.fn()
       .mockReturnValue(mockCurrentPrice);

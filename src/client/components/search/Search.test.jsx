@@ -9,7 +9,7 @@ import {
   SEARCH_INPUT_PLACEHOLDER
 } from '../../../constants/userFacingStrings';
 
-const mockFunction = () => {};
+const mockFunction = jest.fn();
 
 const baseProps = {
   clearSearchError: mockFunction,
@@ -56,9 +56,9 @@ describe('<Search />', () => {
     const handleChangeSpy = jest.spyOn(Search.prototype, 'handleChange')
       .mockImplementation();
 
-    wrapper = shallow(<Search { ...baseProps } />);
+    const onChangeWrapper = shallow(<Search { ...baseProps } />);
 
-    wrapper.find('input').prop('onChange')();
+    onChangeWrapper.find('input').prop('onChange')();
 
     expect(handleChangeSpy).toHaveBeenCalledTimes(1);
 
@@ -68,9 +68,9 @@ describe('<Search />', () => {
     const handleKeyDownSpy = jest.spyOn(Search.prototype, 'handleKeyDown')
       .mockImplementation();
 
-    wrapper = shallow(<Search { ...baseProps } />);
+    const keyDownWrapper = shallow(<Search { ...baseProps } />);
 
-    wrapper.find('input').prop('onKeyDown')();
+    keyDownWrapper.find('input').prop('onKeyDown')();
 
     expect(handleKeyDownSpy).toHaveBeenCalledTimes(1);
 
@@ -92,9 +92,9 @@ describe('<Search />', () => {
       'focusEndOfInput'
     ).mockImplementation();
 
-    wrapper = shallow(<Search { ...baseProps } />);
+    const focusEndOfInputWrapper = shallow(<Search { ...baseProps } />);
 
-    wrapper.find('input').prop('onFocus')();
+    focusEndOfInputWrapper.find('input').prop('onFocus')();
 
     expect(focusEndOfInputSpy).toHaveBeenCalledTimes(1);
 
@@ -118,9 +118,9 @@ describe('<Search />', () => {
     const handleSearchSpy = jest.spyOn(Search.prototype, 'handleSearch')
       .mockImplementation();
 
-    wrapper = shallow(<Search { ...baseProps } />);
+    const handleSearchWrapper = shallow(<Search { ...baseProps } />);
 
-    wrapper.find('FontAwesome').prop('onClick')();
+    handleSearchWrapper.find('FontAwesome').prop('onClick')();
 
     expect(handleSearchSpy).toHaveBeenCalledTimes(1);
 

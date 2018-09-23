@@ -33,13 +33,14 @@ class Search extends Component {
       text
     } = this.props;
 
-    if (text) {
-      if (stocks[text]) {
-        setStockFromMemCache(text);
-      }
-      fetchStock(text);
-      clearSearchError();
+    if (!text) {
+      return;
     }
+    clearSearchError();
+    if (stocks[text]) {
+      setStockFromMemCache(text);
+    }
+    fetchStock(text);
   }
   handleChange(event) {
     const { clearSearchError, updateSearchText } = this.props;

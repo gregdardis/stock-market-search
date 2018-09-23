@@ -43,13 +43,6 @@ export const previousCloseValueSelector = createSelector(
   previousClose => previousClose.value
 );
 
-export function selectedStockValueForKeySelector(state, key) {
-  return createSelector(
-    selectedStockSelector,
-    selectedStock => selectedStock[key]
-  )(state);
-}
-
 export const chartTimePeriodIndexSelector = state => state.chartTimePeriodIndex;
 
 export const fetchingSelector = state => state.fetching;
@@ -76,3 +69,10 @@ export const exchangeSelector = createSelector(
   selectedStockSelector,
   selectedStock => selectedStock.exchange
 );
+
+export function selectedStockValueForKeySelector(state, key) {
+  return createSelector(
+    selectedStockSelector,
+    selectedStock => selectedStock[key]
+  )(state);
+}
