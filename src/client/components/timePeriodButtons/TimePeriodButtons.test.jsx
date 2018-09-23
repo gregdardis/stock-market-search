@@ -55,7 +55,7 @@ describe('<TimePeriodButtons />', () => {
 });
 
 describe('getButtonStyle', () => {
-  it('properly gets button style if buttonIndex === chartTimePeriodIndex',
+  it('properly styles button if buttonIndex === chartTimePeriodIndex',
     () => {
       const buttonIndex = 4;
       const wrapper = shallow(
@@ -70,7 +70,7 @@ describe('getButtonStyle', () => {
           backgroundColor: THEME_COLOR_MEDIUM1
         });
     });
-  it('properly gets button style if buttonIndex !== chartTimePeriodIndex',
+  it('properly styles button if buttonIndex !== chartTimePeriodIndex',
     () => {
       const buttonIndex = 4;
       const wrapper = shallow(
