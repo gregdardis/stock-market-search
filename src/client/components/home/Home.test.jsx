@@ -10,4 +10,14 @@ describe('<Home />', () => {
 
     expect(wrapper).to.have.className('home');
   });
+  it('Renders Search', () => {
+    const wrapper = shallow(<Home loading={ false }/>);
+
+    expect(wrapper).to.have.exactly(1).descendants('Connect(Search)');
+  });
+  it('Renders StockDataRegion', () => {
+    const wrapper = shallow(<Home loading={ false }/>);
+
+    expect(wrapper).to.have.exactly(1).descendants('Connect(StockDataRegion)');
+  });
 });
