@@ -142,7 +142,7 @@ describe('focusEndOfInput', () => {
 });
 
 describe('handleSearch', () => {
-  it('should call none of it\'s functions if text is empty string', () => {
+  it('should call none of its functions if text is empty string', () => {
     const setStockFromMemCache = jest.fn();
     const fetchStock = jest.fn();
     const clearSearchError = jest.fn();
@@ -168,7 +168,7 @@ describe('handleSearch', () => {
     expect(propsHandleSearchFunction.setStockFromMemCache)
       .toHaveBeenCalledTimes(0);
   });
-  it('should call correct functions if text is in stocks in state', () => {
+  it('should call correct functions if text is in stocks prop', () => {
     const setStockFromMemCache = jest.fn();
     const fetchStock = jest.fn();
     const clearSearchError = jest.fn();
@@ -195,7 +195,7 @@ describe('handleSearch', () => {
       .toHaveBeenCalledTimes(1);
   });
   it('should call correct functions if text is not undefined, ' +
-     'but is not a stock in the state', () => {
+     'but is not in stocks prop', () => {
     const setStockFromMemCache = jest.fn();
     const fetchStock = jest.fn();
     const clearSearchError = jest.fn();
@@ -233,9 +233,11 @@ describe('handleChange', () => {
       updateSearchText
     };
 
+    const mockTypedChar = 'a';
+
     const mockEvent = {
       target: {
-        value: 'a'
+        value: mockTypedChar
       }
     };
 
@@ -250,14 +252,23 @@ describe('handleChange', () => {
     expect(handleChangeProps.updateSearchText)
       .toHaveBeenCalledTimes(1);
     expect(handleChangeProps.updateSearchText)
-      .toHaveBeenCalledWith(mockEvent.target.value);
+      .toHaveBeenCalledWith(mockTypedChar);
   });
 });
 
 describe('handleKeyDown', () => {
+  let handleSearchSpy;
+
+  beforeAll(() => {
+    handleSearchSpy = jest.spyOn(Search.prototype, 'handleSearch');
+  });
+
+  afterEach(() => {
+    handleSearchSpy.mockClear();
+  });
+
   it('behaves properly if enter key is pressed', () => {
     const clearSearchText = jest.fn();
-    const handleSearchSpy = jest.spyOn(Search.prototype, 'handleSearch');
 
     const handleKeyDownProps = {
       ...baseProps,
@@ -278,12 +289,9 @@ describe('handleKeyDown', () => {
       .toHaveBeenCalledTimes(0);
     expect(handleSearchSpy)
       .toHaveBeenCalledTimes(1);
-
-    handleSearchSpy.mockClear();
   });
   it('behaves properly if escape key is pressed', () => {
     const clearSearchText = jest.fn();
-    const handleSearchSpy = jest.spyOn(Search.prototype, 'handleSearch');
 
     const handleKeyDownProps = {
       ...baseProps,
@@ -304,13 +312,10 @@ describe('handleKeyDown', () => {
       .toHaveBeenCalledTimes(1);
     expect(handleSearchSpy)
       .toHaveBeenCalledTimes(0);
-
-    handleSearchSpy.mockClear();
   });
   it('behaves properly if a key that is neither escape nor enter is pressed',
     () => {
       const clearSearchText = jest.fn();
-      const handleSearchSpy = jest.spyOn(Search.prototype, 'handleSearch');
 
       const handleKeyDownProps = {
         ...baseProps,
@@ -331,7 +336,5 @@ describe('handleKeyDown', () => {
         .toHaveBeenCalledTimes(0);
       expect(handleSearchSpy)
         .toHaveBeenCalledTimes(0);
-
-      handleSearchSpy.mockClear();
     });
 });
