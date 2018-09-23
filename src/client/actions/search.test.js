@@ -25,18 +25,6 @@ describe('search actions', () => {
       .deep
       .equal(expectedAction);
   });
-  it('should create an action to perform a search', () => {
-    const searchText = mockStockData.symbol;
-    const expectedAction = {
-      type: search.PERFORM_SEARCH,
-      searchText
-    };
-
-    expect(search.performSearch(searchText))
-      .to
-      .deep
-      .equal(expectedAction);
-  });
   it('should create an action to receive a search error', () => {
     const errorMessage = ERROR_MESSAGE_UNEXPECTED;
     const expectedAction = {

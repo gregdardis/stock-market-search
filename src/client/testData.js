@@ -85,7 +85,7 @@ const stockOverviewData = {
 };
 const symbol = 'LNR.TO';
 
-export const mockStockData = {
+export const mockStockData = Object.freeze({
   companyName,
   exchange,
   fiveDayStockData,
@@ -93,4 +93,4 @@ export const mockStockData = {
   oneDayStockData,
   stockOverviewData,
   symbol
-};
+});

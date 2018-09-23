@@ -13,6 +13,7 @@ import { BLANK_FIELD } from '../../constants/userFacingStrings';
 import {
   LABEL_DIVIDEND
 } from '../../constants/userFacingStrings';
+import * as selectors from '../../client/selectors';
 
 const createMockState = ({
   symbol = 'MSFT',
@@ -60,6 +61,9 @@ const ownProps = {
 };
 
 describe('formatValueFromStateAndProps', () => {
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
   it('should properly format when ALL fields are defined', () => {
     const state = createMockState({
       value: actualValue,
@@ -67,6 +71,9 @@ describe('formatValueFromStateAndProps', () => {
       valueFormat,
       optionalValueFormat
     });
+    selectors.stockOverviewDataSelector =
+      jest.fn().mockReturnValue(state.stocks.MSFT.stockOverviewData);
+
     expect(formatValueFromStateAndProps(state, ownProps))
       .to
       .equal(`${expectedValueFormatted} (${expectedOptionalValueFormatted})`);
@@ -77,6 +84,9 @@ describe('formatValueFromStateAndProps', () => {
       valueFormat,
       optionalValueFormat
     });
+    selectors.stockOverviewDataSelector =
+      jest.fn().mockReturnValue(state.stocks.MSFT.stockOverviewData);
+
     expect(formatValueFromStateAndProps(state, ownProps))
       .to
       .equal(`${BLANK_FIELD} (${expectedOptionalValueFormatted})`);
@@ -87,6 +97,9 @@ describe('formatValueFromStateAndProps', () => {
       valueFormat,
       optionalValueFormat
     });
+    selectors.stockOverviewDataSelector =
+      jest.fn().mockReturnValue(state.stocks.MSFT.stockOverviewData);
+
     expect(formatValueFromStateAndProps(state, ownProps))
       .to
       .equal(`${expectedValueFormatted}`);
@@ -97,6 +110,9 @@ describe('formatValueFromStateAndProps', () => {
       optionalValue: actualOptionalValue,
       optionalValueFormat
     });
+    selectors.stockOverviewDataSelector =
+      jest.fn().mockReturnValue(state.stocks.MSFT.stockOverviewData);
+
     expect(formatValueFromStateAndProps(state, ownProps))
       .to
       .equal(
@@ -109,6 +125,9 @@ describe('formatValueFromStateAndProps', () => {
       optionalValue: actualOptionalValue,
       valueFormat
     });
+    selectors.stockOverviewDataSelector =
+      jest.fn().mockReturnValue(state.stocks.MSFT.stockOverviewData);
+
     expect(formatValueFromStateAndProps(state, ownProps))
       .to
       .equal(
@@ -121,6 +140,9 @@ describe('formatValueFromStateAndProps', () => {
         optionalValue: actualOptionalValue,
         optionalValueFormat
       });
+      selectors.stockOverviewDataSelector =
+        jest.fn().mockReturnValue(state.stocks.MSFT.stockOverviewData);
+
       expect(formatValueFromStateAndProps(state, ownProps))
         .to
         .equal(`${BLANK_FIELD} (${expectedOptionalValueFormatted})`);
@@ -131,6 +153,9 @@ describe('formatValueFromStateAndProps', () => {
         valueFormat,
         optionalValueFormat
       });
+      selectors.stockOverviewDataSelector =
+        jest.fn().mockReturnValue(state.stocks.MSFT.stockOverviewData);
+
       expect(formatValueFromStateAndProps(state, ownProps))
         .to
         .equal(BLANK_FIELD);
@@ -141,6 +166,9 @@ describe('formatValueFromStateAndProps', () => {
       optionalValue: actualOptionalValue,
       valueFormat
     });
+    selectors.stockOverviewDataSelector =
+      jest.fn().mockReturnValue(state.stocks.MSFT.stockOverviewData);
+
     expect(formatValueFromStateAndProps(state, ownProps))
       .to
       .equal(`${BLANK_FIELD} (${expectedOptionalValueDefaultFormat})`);
@@ -151,6 +179,9 @@ describe('formatValueFromStateAndProps', () => {
       value: actualValue,
       optionalValueFormat
     });
+    selectors.stockOverviewDataSelector =
+      jest.fn().mockReturnValue(state.stocks.MSFT.stockOverviewData);
+
     expect(formatValueFromStateAndProps(state, ownProps))
       .to
       .equal(expectedValueDefaultFormat);
@@ -161,6 +192,9 @@ describe('formatValueFromStateAndProps', () => {
       value: actualValue,
       valueFormat
     });
+    selectors.stockOverviewDataSelector =
+      jest.fn().mockReturnValue(state.stocks.MSFT.stockOverviewData);
+      
     expect(formatValueFromStateAndProps(state, ownProps))
       .to
       .equal(`${expectedValueFormatted}`);
@@ -171,6 +205,9 @@ describe('formatValueFromStateAndProps', () => {
       value: actualValue,
       optionalValue: actualOptionalValue
     });
+    selectors.stockOverviewDataSelector =
+      jest.fn().mockReturnValue(state.stocks.MSFT.stockOverviewData);
+
     expect(formatValueFromStateAndProps(state, ownProps))
       .to
       .equal(
@@ -181,6 +218,9 @@ describe('formatValueFromStateAndProps', () => {
     const state = createMockState({
       value: actualValue
     });
+    selectors.stockOverviewDataSelector =
+      jest.fn().mockReturnValue(state.stocks.MSFT.stockOverviewData);
+
     expect(formatValueFromStateAndProps(state, ownProps))
       .to
       .equal(expectedValueDefaultFormat);
@@ -189,6 +229,9 @@ describe('formatValueFromStateAndProps', () => {
     const state = createMockState({
       optionalValue: actualOptionalValue
     });
+    selectors.stockOverviewDataSelector =
+      jest.fn().mockReturnValue(state.stocks.MSFT.stockOverviewData);
+
     expect(formatValueFromStateAndProps(state, ownProps))
       .to
       .equal(`${BLANK_FIELD} (${expectedOptionalValueDefaultFormat})`);
@@ -197,6 +240,9 @@ describe('formatValueFromStateAndProps', () => {
     const state = createMockState({
       valueFormat
     });
+    selectors.stockOverviewDataSelector =
+      jest.fn().mockReturnValue(state.stocks.MSFT.stockOverviewData);
+
     expect(formatValueFromStateAndProps(state, ownProps))
       .to
       .equal(BLANK_FIELD);
@@ -205,12 +251,18 @@ describe('formatValueFromStateAndProps', () => {
     const state = createMockState({
       optionalValueFormat
     });
+    selectors.stockOverviewDataSelector =
+      jest.fn().mockReturnValue(state.stocks.MSFT.stockOverviewData);
+
     expect(formatValueFromStateAndProps(state, ownProps))
       .to
       .equal(BLANK_FIELD);
   });
   it('should properly format when NO fields are defined', () => {
     const state = createMockState({});
+    selectors.stockOverviewDataSelector =
+      jest.fn().mockReturnValue(state.stocks.MSFT.stockOverviewData);
+
     expect(formatValueFromStateAndProps(state, ownProps))
       .to
       .equal(BLANK_FIELD);

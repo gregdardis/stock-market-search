@@ -2,6 +2,8 @@ import { expect } from 'chai';
 
 import {
   addCommas,
+  calculateFormattedPriceChangePercentage,
+  formatAsPrice,
   padSingleDigitWithZero
 } from './numberFormatting';
 
@@ -98,6 +100,22 @@ describe('addCommas', () => {
   });
 });
 
+describe('calculateFormattedPriceChangePercentage', () => {
+  it('properly calculates price change percent and formats it', () => {
+    expect(calculateFormattedPriceChangePercentage(5.14, 1004.27))
+      .to.equal('0.51%');
+  });
+});
+
+describe('formatAsPrice', () => {
+  it('formats a number as price', () => {
+    expect(formatAsPrice(1000)).to.equal('$1,000.00');
+  });
+  it('formats a number with decimal as price', () => {
+    expect(formatAsPrice(1000.513)).to.equal('$1,000.51');
+  });
+});
+
 describe('padSingleDigitWithZero', () => {
   it('should pad 0 with a 0 and stringify', () => {
     expect(padSingleDigitWithZero(0))
@@ -153,7 +171,8 @@ describe('padSingleDigitWithZero', () => {
     }).to
       .throw();
   });
-  it('should throw an error if given numbers followed by letters (in a string)', () => {
+  it('should throw an error if given numbers followed by letters ' +
+     '(in a string)', () => {
     expect(() => {
       padSingleDigitWithZero('12hello');
     }).to

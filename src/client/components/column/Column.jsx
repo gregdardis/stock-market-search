@@ -6,7 +6,7 @@ import './column.css';
 const Column = ({
   // The cellShouldShowBottomBorder function allows us to optionally customize
   // the appearance of individual cells in the column, by giving them a bottom
-  // border. We could do a similar thing for Row if the need ever arose.
+  // border.
   cellShouldShowBottomBorder = () => false,
   columnCellComponent,
   columnKeyName,

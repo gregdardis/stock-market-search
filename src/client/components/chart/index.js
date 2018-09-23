@@ -4,9 +4,10 @@ import Chart from './Chart';
 import {
   getStockDataForSelectedTimePeriod
 } from '../../../utils/stockDataUtils/getStockDataForSelectedTimePeriod';
+import { chartTimePeriodIndexSelector } from '../../selectors';
 
 export const mapStateToProps = state => ({
-  chartTimePeriodIndex: state.chartTimePeriodIndex,
+  chartTimePeriodIndex: chartTimePeriodIndexSelector(state),
   data: getStockDataForSelectedTimePeriod(state)
 });
 
