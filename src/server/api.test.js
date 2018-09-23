@@ -10,7 +10,7 @@ describe('GET /api/stocks/:symbol', () => {
   );
 
   beforeEach(() => {
-    server = app.listen(3000);
+    server = app.listen(3005);
   });
 
   afterEach(done => {
