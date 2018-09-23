@@ -5,11 +5,15 @@ import { shallow } from 'enzyme';
 import PriceAndTodaysPriceChange from './PriceAndTodaysPriceChange';
 
 describe('<PriceAndTodaysPriceChange />', () => {
+  const mockCurrentPrice = '$113.38';
+  const mockPriceChange = '$1.68';
+  const mockPriceChangePercentage = '1.48%';
+
   const baseProps = {
-    currentPrice: '$113.38',
+    currentPrice: mockCurrentPrice,
     isPositiveChange: true,
-    priceChange: '$1.68',
-    priceChangePercentage: '1.48%'
+    priceChange: mockPriceChange,
+    priceChangePercentage: mockPriceChangePercentage
   };
 
   it('has the proper classname for styling', () => {
@@ -22,13 +26,13 @@ describe('<PriceAndTodaysPriceChange />', () => {
 
     expect(wrapper.children()).to.have.length(2);
   });
-  it('has first child div with correct text and className', () => {
+  it('displays the current price with the correct className for styling', () => {
     const wrapper = shallow(<PriceAndTodaysPriceChange { ...baseProps }/>);
     const firstChild = wrapper.childAt(0);
 
     expect(firstChild.type()).to.equal('div');
     expect(firstChild).to.have.className('currentPrice');
-    expect(firstChild).to.have.text(baseProps.currentPrice);
+    expect(firstChild).to.have.text(mockCurrentPrice);
   });
   it('has second child div with correct text and className ' +
      'for positive change', () => {
@@ -38,8 +42,7 @@ describe('<PriceAndTodaysPriceChange />', () => {
     expect(secondChild.type()).to.equal('div');
     expect(secondChild).to.have.className('positive');
     expect(secondChild).to.have.text(
-      '+' + baseProps.priceChange +
-      ' (+' + baseProps.priceChangePercentage + ')'
+      `+${ mockPriceChange } (+${ mockPriceChangePercentage })`
     );
   });
   it('has second child div with correct text and className ' +
@@ -56,8 +59,7 @@ describe('<PriceAndTodaysPriceChange />', () => {
     expect(secondChild.type()).to.equal('div');
     expect(secondChild).to.have.className('negative');
     expect(secondChild).to.have.text(
-      baseProps.priceChange +
-      ' (' + baseProps.priceChangePercentage + ')'
+      `${ mockPriceChange } (${ mockPriceChangePercentage })`
     );
   });
 });
