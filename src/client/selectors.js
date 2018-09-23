@@ -4,11 +4,9 @@ import {
   LABEL_PREVIOUS_CLOSE
 } from '../constants/userFacingStrings';
 
+export const chartTimePeriodIndexSelector = state => state.chartTimePeriodIndex;
 export const selectedStockSymbolSelector = state => state.selectedStock;
 export const stocksSelector = state => state.stocks;
-export const fetchingSelector = state => state.fetching;
-export const searchSelector = state => state.search;
-export const chartTimePeriodIndexSelector = state => state.chartTimePeriodIndex;
 
 export const selectedStockSelector = createSelector(
   selectedStockSymbolSelector,
@@ -46,11 +44,15 @@ export const previousCloseValueSelector = createSelector(
   previousClose => previousClose.value
 );
 
+export const fetchingSelector = state => state.fetching;
+
 export const fetchingStockSelector = createSelector(
   fetchingSelector,
   stocksSelector,
   (fetching, stocks) => stocks[fetching]
 );
+
+export const searchSelector = state => state.search;
 
 export const searchErrorSelector = createSelector(
   searchSelector,
