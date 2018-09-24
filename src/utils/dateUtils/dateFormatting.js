@@ -1,6 +1,10 @@
 import dateFormat from 'dateformat';
 
 import { padSingleDigitWithZero } from '../formatting/numberFormatting';
+import {
+  MILLISECONDS_PER_SECOND,
+  SECONDS_PER_MINUTE
+} from '../../constants/numeric';
 
 // Reinventing the wheel here, but it was good unit testing
 // practice and the method works
@@ -20,11 +24,28 @@ export const formatDateForMaxStockData = date => {
   return `${year}-${month}-${day}`;
 };
 
-export function tryFormatDate(date, format) {
+export function tryFormatDateWithoutTime(dateString, format) {
   try {
-    return dateFormat(date, format);
+    const date = new Date(dateString);
+    const timezoneOffsetMinutes = date.getTimezoneOffset();
+    const dateWithCorrectTimezone = new Date(
+      date.getTime() +
+      Math.abs(
+        timezoneOffsetMinutes * SECONDS_PER_MINUTE * MILLISECONDS_PER_SECOND
+      )
+    );
+    return dateFormat(dateWithCorrectTimezone, format);
   } catch (error) {
     console.error(error);
   }
-  return date;
+  return dateString;
+}
+
+export function tryFormatDateWithTime(dateString, format) {
+  try {
+    return dateFormat(dateString, format);
+  } catch (error) {
+    console.error(error);
+  }
+  return dateString;
 }

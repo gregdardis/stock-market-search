@@ -1,7 +1,9 @@
 import { expect } from 'chai';
 
 import {
-  formatDateForMaxStockData
+  formatDateForMaxStockData,
+  tryFormatDateWithoutTime,
+  tryFormatDateWithTime
 } from './dateFormatting';
 
 const daysInMonth = {
@@ -83,5 +85,28 @@ describe('formatDateForMaxStockData', () => {
       formatDateForMaxStockData(() => console.log('function'));
     }).to
       .throw();
+  });
+});
+
+describe('tryFormatDateWithoutTime', () => {
+  it('formats date as expected', () => {
+    expect(tryFormatDateWithoutTime('2018-07-31', 'mmm d, yyyy'))
+      .to.equal('Jul 31, 2018');
+  });
+  it('formats date with no year, only month and day as expected', () => {
+    expect(tryFormatDateWithoutTime('2018-07-31', 'mmm d'))
+      .to.equal('Jul 31');
+  });
+  it('formats date with no day, only month and year as expected', () => {
+    expect(tryFormatDateWithoutTime('2018-07-31', 'mmm yyyy'))
+      .to.equal('Jul 2018');
+  });
+});
+
+describe('tryFormatDateWithTime', () => {
+  it('formats date with time as expected', () => {
+    expect(tryFormatDateWithTime(
+      'Tuesday, September 18 2:15 PM', 'mmm d, h:MM TT')
+    ).to.equal('Sep 18, 2:15 PM');
   });
 });
