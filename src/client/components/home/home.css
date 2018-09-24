@@ -4,16 +4,3 @@
   flex-direction: column;
   width: 100%;
 }
-
-.error {
-  margin: 0;
-  color: red;
-}
-
-.searchStatus {
-  margin: 0 auto;
-}
-
-.searchStatus.hidden {
-  visibility: hidden;
-}

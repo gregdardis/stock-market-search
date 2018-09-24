@@ -10,6 +10,7 @@ import {
 } from '../../actions';
 import {
   searchCurrentTextSelector,
+  searchErrorSelector,
   stocksSelector
 } from '../../../client/selectors';
 
@@ -22,8 +23,9 @@ const actions = {
 };
 
 export const mapStateToProps = state => ({
-  text: searchCurrentTextSelector(state),
-  stocks: stocksSelector(state)
+  hasError: !!searchErrorSelector(state),
+  stocks: stocksSelector(state),
+  text: searchCurrentTextSelector(state)
 });
 
 export default connect(

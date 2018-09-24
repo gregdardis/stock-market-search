@@ -26,14 +26,20 @@ const mockState = {
 
 describe('mapStateToProps', () => {
   it('maps state to props properly', () => {
+    const mockText = 'MSFT';
+
     selectors.searchCurrentTextSelector = jest.fn()
-      .mockReturnValue('MSFT');
+      .mockReturnValue(mockText);
+
+    selectors.searchErrorSelector = jest.fn()
+      .mockReturnValue(null);
 
     selectors.stocksSelector = jest.fn()
       .mockReturnValue(mockStocks);
 
     expect(mapStateToProps(mockState)).to.deep.equal({
-      text: 'MSFT',
+      text: mockText,
+      hasError: false,
       stocks: mockStocks
     });
 
