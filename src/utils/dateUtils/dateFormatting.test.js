@@ -91,7 +91,10 @@ describe('tryFormatDateWithoutTime', () => {
     const consoleSpy = jest.spyOn(console, 'error');
 
     tryFormatDateWithoutTime('invalid date', 'mmm d, yyyy');
+
     expect(consoleSpy).toHaveBeenCalledTimes(1);
+
+    consoleSpy.mockRestore();
   });
 });
 
@@ -100,5 +103,14 @@ describe('tryFormatDateWithTime', () => {
     expect(tryFormatDateWithTime(
       'Tuesday, September 18 2:15 PM', 'mmm d, h:MM TT')
     ).toBe('Sep 18, 2:15 PM');
+  });
+  it('logs an error to the console if given an invalid date and time', () => {
+    const consoleSpy = jest.spyOn(console, 'error');
+
+    tryFormatDateWithTime('invalid date and time', 'mmm d, h:MM TT');
+
+    expect(consoleSpy).toHaveBeenCalledTimes(1);
+
+    consoleSpy.mockRestore();
   });
 });
