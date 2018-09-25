@@ -18,13 +18,13 @@ import {
 import {
   parseDailyData
 } from '../apiUtils/responseParsing';
+import { createStock } from '../stockDataUtils/createStock';
 import {
   formatAndAdjustDateForTimestamp,
   getEndOfDayTimestampIndex,
-  getStartOfDayTimestampIndex
+  getStartOfDayTimestampIndex,
+  getTimestampForDay
 } from './timestamps';
-
-import { createStock } from '../stockDataUtils/createStock';
 
 function getDatesAndTimesForOneDay(
   close,
@@ -55,13 +55,6 @@ function getDatesAndTimesForOneDay(
     });
   }
   return datesTimesAndPrices;
-}
-
-// days are 0 indexed
-function getTimestampForDay(dayIndex, meta, isStart = true) {
-  // regular consists of an array of arrays, where the first array
-  // index corresponds to the day, second is always a single element array
-  return meta.tradingPeriods.regular[dayIndex][0][isStart ? 'start' : 'end'];
 }
 
 function getTimestampIntervals(numberOfDays, meta) {

@@ -42,3 +42,9 @@ export function getEndOfDayTimestampIndex(dayIndex, timestampsPerDay) {
   }
   return Math.floor((dayIndex + 1) * timestampsPerDay);
 }
+
+export function getTimestampForDay(dayIndex, meta, isStart = true) {
+  // regular consists of an array of arrays, where the first array
+  // index corresponds to the day, second is always a single element array
+  return meta.tradingPeriods.regular[dayIndex][0][isStart ? 'start' : 'end'];
+}

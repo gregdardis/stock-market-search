@@ -5,7 +5,8 @@ import {
   formatAndAdjustDateForTimestamp,
   getAdjustedDateForTimestamp,
   getEndOfDayTimestampIndex,
-  getStartOfDayTimestampIndex
+  getStartOfDayTimestampIndex,
+  getTimestampForDay
 } from './timestamps';
 
 describe('getAdjustedDateForTimestamp', function() {
@@ -242,5 +243,35 @@ describe('getEndOfDayTimestampIndex', function() {
     expect(() => {
       getEndOfDayTimestampIndex(dayIndex, () => {});
     }).to.throw();
+  });
+});
+
+describe('getTimestampForDay', () => {
+  const timestampForStartDay = 13542623334;
+  const timestampForEndDay = 23532623421;
+  const dayIndex = 0;
+  const mockMeta = {
+    tradingPeriods: {
+      regular: [
+        [
+          {
+            start: timestampForStartDay,
+            end: timestampForEndDay
+          }
+        ]
+      ]
+    }
+  };
+  it('properly gets start timestamp for start day', () => {
+    const isStart = true;
+
+    expect(getTimestampForDay(dayIndex, mockMeta, isStart))
+      .to.equal(timestampForStartDay);
+  });
+  it('properly gets start timestamp for end day', () => {
+    const isStart = false;
+
+    expect(getTimestampForDay(dayIndex, mockMeta, isStart))
+      .to.equal(timestampForEndDay);
   });
 });
