@@ -18,3 +18,11 @@ export function formatAndAdjustDateForTimestamp(
   const dateAndTime = getAdjustedDateForTimestamp(gmtoffset, timestamp);
   return dateFormat(dateAndTime, dateAndTimeFormat, true);
 }
+
+export function getStartOfDayTimestampIndex(dayIndex, timestampsPerDay) {
+  return Math.floor(dayIndex * timestampsPerDay);
+}
+
+export function getEndOfDayTimestampIndex(dayIndex, timestampsPerDay) {
+  return Math.floor((dayIndex + 1) * timestampsPerDay);
+}

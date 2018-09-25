@@ -18,17 +18,13 @@ import {
 import {
   parseDailyData
 } from '../apiUtils/responseParsing';
-import { formatAndAdjustDateForTimestamp } from './timeStamps';
+import {
+  formatAndAdjustDateForTimestamp,
+  getEndOfDayTimestampIndex,
+  getStartOfDayTimestampIndex
+} from './timestamps';
 
 import { createStock } from '../stockDataUtils/createStock';
-
-export function getStartOfDayTimestampIndex(dayIndex, timestampsPerDay) {
-  return Math.floor(dayIndex * timestampsPerDay);
-}
-
-export function getEndOfDayTimestampIndex(dayIndex, timestampsPerDay) {
-  return Math.floor((dayIndex + 1) * timestampsPerDay);
-}
 
 function getDatesAndTimesForOneDay(
   close,
