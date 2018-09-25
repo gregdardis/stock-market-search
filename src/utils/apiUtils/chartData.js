@@ -4,14 +4,12 @@ import {
   quote
 } from 'yahoo-finance';
 import rp from 'request-promise';
-import dateFormat from 'dateformat';
 
 import {
   DATE_FORMAT_FIVE_DAY,
   DATE_FORMAT_ONE_DAY
 } from '../../constants/formatting';
 import {
-  MILLISECONDS_PER_SECOND,
   QUERY_INTERVAL_FIVE_DAY,
   QUERY_INTERVAL_ONE_DAY,
   QUERY_RANGE_FIVE_DAY,
@@ -20,25 +18,9 @@ import {
 import {
   parseDailyData
 } from '../apiUtils/responseParsing';
+import { formatAndAdjustDateForTimestamp } from './timeStamps';
 
 import { createStock } from '../stockDataUtils/createStock';
-
-// NOTE: this date has timezone UTC, which is incorrect but works in this
-// case because we are just extracting the time
-export function getAdjustedDateForTimestamp(gmtoffset, timestamp) {
-  const adjustedTimestamp =
-    (timestamp + gmtoffset) * MILLISECONDS_PER_SECOND;
-  return new Date(adjustedTimestamp);
-}
-
-export function formatAndAdjustDateForTimestamp(
-  gmtoffset,
-  timestamp,
-  dateAndTimeFormat
-) {
-  const dateAndTime = getAdjustedDateForTimestamp(gmtoffset, timestamp);
-  return dateFormat(dateAndTime, dateAndTimeFormat, true);
-}
 
 export function getStartOfDayTimestampIndex(dayIndex, timestampsPerDay) {
   return Math.floor(dayIndex * timestampsPerDay);
