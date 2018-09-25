@@ -26,7 +26,7 @@ export function getQueryForIntradayData(symbol, range, interval) {
   '&corsDomain=finance.yahoo.com&.tsrc=finance';
 }
 
-function generateStockDataRequestError(functionName, err) {
+export function generateStockDataRequestError(functionName, err) {
   return `Failed in ${functionName} with error: ${err}`;
 }
 

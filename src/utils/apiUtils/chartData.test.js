@@ -1,7 +1,10 @@
 import { expect } from 'chai';
 
-import { getQueryForIntradayData } from './chartData';
-import { 
+import {
+  generateStockDataRequestError,
+  getQueryForIntradayData
+} from './chartData';
+import {
   QUERY_INTERVAL_ONE_DAY,
   QUERY_RANGE_ONE_DAY
 } from '../../constants/numeric';
@@ -21,4 +24,14 @@ describe('getQueryForIntradayData', () => {
         '&corsDomain=finance.yahoo.com&.tsrc=finance'
       );
   });
+});
+
+describe('generateStockDataRequestError', () => {
+  const mockFunctionName = 'myFunction';
+  const mockError = 'An error has occurred.';
+
+  expect(generateStockDataRequestError(mockFunctionName, mockError))
+    .to.equal(
+      `Failed in ${mockFunctionName} with error: ${mockError}`
+    );
 });
