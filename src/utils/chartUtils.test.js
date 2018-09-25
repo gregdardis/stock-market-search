@@ -60,9 +60,9 @@ describe('getTooltipLabelFormatter', () => {
       dateFormatting,
       'tryFormatDateWithoutTime'
     );
-    const fn = getTooltipLabelFormatter(2);
+    const tooltipLabelFormatter = getTooltipLabelFormatter(2);
 
-    fn('09-14-18');
+    tooltipLabelFormatter('09-14-18');
 
     expect(mockTryFormatDateWithoutTime).toHaveBeenCalledTimes(1);
 
@@ -206,9 +206,9 @@ describe('getXAxisTickFormatter', () => {
       dateFormatting,
       'tryFormatDateWithoutTime'
     );
-    const fn = getTooltipLabelFormatter(2);
+    const xAxisTickFormatter = getXAxisTickFormatter(2);
 
-    fn('09-14-18');
+    xAxisTickFormatter('09-14-18');
 
     expect(mockTryFormatDateWithoutTime).toHaveBeenCalledTimes(1);
 
