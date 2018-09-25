@@ -20,9 +20,25 @@ export function formatAndAdjustDateForTimestamp(
 }
 
 export function getStartOfDayTimestampIndex(dayIndex, timestampsPerDay) {
+  if (dayIndex < 0
+    || timestampsPerDay < 0
+    || typeof dayIndex !== 'number'
+    || typeof timestampsPerDay !== 'number') {
+    throw new Error(
+      `${getStartOfDayTimestampIndex.name} requires positive number inputs.`
+    );
+  }
   return Math.floor(dayIndex * timestampsPerDay);
 }
 
 export function getEndOfDayTimestampIndex(dayIndex, timestampsPerDay) {
+  if (dayIndex < 0
+    || timestampsPerDay < 0
+    || typeof dayIndex !== 'number'
+    || typeof timestampsPerDay !== 'number') {
+    throw new Error(
+      `${getEndOfDayTimestampIndex.name} requires positive number inputs.`
+    );
+  }
   return Math.floor((dayIndex + 1) * timestampsPerDay);
 }

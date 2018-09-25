@@ -47,6 +47,98 @@ describe('getStartOfDayTimestampIndex', function() {
       .to
       .equal(startOfDayTimestampIndex);
   });
+  it('throws an error if dayIndex is negative', () => {
+    expect(() => {
+      getStartOfDayTimestampIndex(-1, timestampsPerDay);
+    }).to.throw();
+  });
+  it('throws an error if timestampsPerDay is negative', () => {
+    expect(() => {
+      getStartOfDayTimestampIndex(dayIndex, -1);
+    }).to.throw();
+  });
+  it('throws an error if dayIndex is an array', () => {
+    expect(() => {
+      getStartOfDayTimestampIndex([], timestampsPerDay);
+    }).to.throw();
+  });
+  it('throws an error if dayIndex is an object', () => {
+    expect(() => {
+      getStartOfDayTimestampIndex({}, timestampsPerDay);
+    }).to.throw();
+  });
+  it('throws an error if dayIndex is a boolean', () => {
+    expect(() => {
+      getStartOfDayTimestampIndex(true, timestampsPerDay);
+    }).to.throw();
+  });
+  it('throws an error if dayIndex is an empty string', () => {
+    expect(() => {
+      getStartOfDayTimestampIndex('', timestampsPerDay);
+    }).to.throw();
+  });
+  it('throws an error if dayIndex is a numeric string', () => {
+    expect(() => {
+      getStartOfDayTimestampIndex('5', timestampsPerDay);
+    }).to.throw();
+  });
+  it('throws an error if dayIndex is numbers followed by letters', () => {
+    expect(() => {
+      getStartOfDayTimestampIndex('5hello', timestampsPerDay);
+    }).to.throw();
+  });
+  it('throws an error if dayIndex is letters followed by numbers', () => {
+    expect(() => {
+      getStartOfDayTimestampIndex('hello5', timestampsPerDay);
+    }).to.throw();
+  });
+  it('throws an error if dayIndex is a function', () => {
+    expect(() => {
+      getStartOfDayTimestampIndex(() => {}, timestampsPerDay);
+    }).to.throw();
+  });
+  it('throws an error if timestampsPerDay is an array', () => {
+    expect(() => {
+      getStartOfDayTimestampIndex(dayIndex, []);
+    }).to.throw();
+  });
+  it('throws an error if timestampsPerDay is an object', () => {
+    expect(() => {
+      getStartOfDayTimestampIndex(dayIndex, {});
+    }).to.throw();
+  });
+  it('throws an error if timestampsPerDay is a boolean', () => {
+    expect(() => {
+      getStartOfDayTimestampIndex(dayIndex, true);
+    }).to.throw();
+  });
+  it('throws an error if timestampsPerDay is an empty string', () => {
+    expect(() => {
+      getStartOfDayTimestampIndex(dayIndex, '');
+    }).to.throw();
+  });
+  it('throws an error if timestampsPerDay is a numeric string', () => {
+    expect(() => {
+      getStartOfDayTimestampIndex(dayIndex, '5');
+    }).to.throw();
+  });
+  it('throws an error if timestampsPerDay is numbers ' +
+     'followed by letters', () => {
+    expect(() => {
+      getStartOfDayTimestampIndex(dayIndex, '5hello');
+    }).to.throw();
+  });
+  it('throws an error if timestampsPerDay is letters ' +
+     'followed by numbers', () => {
+    expect(() => {
+      getStartOfDayTimestampIndex(dayIndex, 'hello5');
+    }).to.throw();
+  });
+  it('throws an error if timestampsPerDay is a function', () => {
+    expect(() => {
+      getStartOfDayTimestampIndex(dayIndex, () => {});
+    }).to.throw();
+  });
 });
 
 describe('getEndOfDayTimestampIndex', function() {
@@ -58,5 +150,97 @@ describe('getEndOfDayTimestampIndex', function() {
     expect(getEndOfDayTimestampIndex(dayIndex, timestampsPerDay))
       .to
       .equal(endOfDayTimestampIndex);
+  });
+  it('throws an error if dayIndex is negative', () => {
+    expect(() => {
+      getEndOfDayTimestampIndex(-1, timestampsPerDay);
+    }).to.throw();
+  });
+  it('throws an error if timestampsPerDay is negative', () => {
+    expect(() => {
+      getEndOfDayTimestampIndex(dayIndex, -1);
+    }).to.throw();
+  });
+  it('throws an error if dayIndex is an array', () => {
+    expect(() => {
+      getEndOfDayTimestampIndex([], timestampsPerDay);
+    }).to.throw();
+  });
+  it('throws an error if dayIndex is an object', () => {
+    expect(() => {
+      getEndOfDayTimestampIndex({}, timestampsPerDay);
+    }).to.throw();
+  });
+  it('throws an error if dayIndex is a boolean', () => {
+    expect(() => {
+      getEndOfDayTimestampIndex(true, timestampsPerDay);
+    }).to.throw();
+  });
+  it('throws an error if dayIndex is an empty string', () => {
+    expect(() => {
+      getEndOfDayTimestampIndex('', timestampsPerDay);
+    }).to.throw();
+  });
+  it('throws an error if dayIndex is a numeric string', () => {
+    expect(() => {
+      getEndOfDayTimestampIndex('5', timestampsPerDay);
+    }).to.throw();
+  });
+  it('throws an error if dayIndex is numbers followed by letters', () => {
+    expect(() => {
+      getEndOfDayTimestampIndex('5hello', timestampsPerDay);
+    }).to.throw();
+  });
+  it('throws an error if dayIndex is letters followed by numbers', () => {
+    expect(() => {
+      getEndOfDayTimestampIndex('hello5', timestampsPerDay);
+    }).to.throw();
+  });
+  it('throws an error if dayIndex is a function', () => {
+    expect(() => {
+      getEndOfDayTimestampIndex(() => {}, timestampsPerDay);
+    }).to.throw();
+  });
+  it('throws an error if timestampsPerDay is an array', () => {
+    expect(() => {
+      getEndOfDayTimestampIndex(dayIndex, []);
+    }).to.throw();
+  });
+  it('throws an error if timestampsPerDay is an object', () => {
+    expect(() => {
+      getEndOfDayTimestampIndex(dayIndex, {});
+    }).to.throw();
+  });
+  it('throws an error if timestampsPerDay is a boolean', () => {
+    expect(() => {
+      getEndOfDayTimestampIndex(dayIndex, true);
+    }).to.throw();
+  });
+  it('throws an error if timestampsPerDay is an empty string', () => {
+    expect(() => {
+      getEndOfDayTimestampIndex(dayIndex, '');
+    }).to.throw();
+  });
+  it('throws an error if timestampsPerDay is a numeric string', () => {
+    expect(() => {
+      getEndOfDayTimestampIndex(dayIndex, '5');
+    }).to.throw();
+  });
+  it('throws an error if timestampsPerDay is numbers ' +
+     'followed by letters', () => {
+    expect(() => {
+      getEndOfDayTimestampIndex(dayIndex, '5hello');
+    }).to.throw();
+  });
+  it('throws an error if timestampsPerDay is letters ' +
+     'followed by numbers', () => {
+    expect(() => {
+      getEndOfDayTimestampIndex(dayIndex, 'hello5');
+    }).to.throw();
+  });
+  it('throws an error if timestampsPerDay is a function', () => {
+    expect(() => {
+      getEndOfDayTimestampIndex(dayIndex, () => {});
+    }).to.throw();
   });
 });
