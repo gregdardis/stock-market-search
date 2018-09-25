@@ -54,19 +54,19 @@ describe('getStockDataKey', () => {
 });
 
 describe('getTooltipLabelFormatter', () => {
-  it('gets tooltip label formatter and calls it, ensuring tryFormatDate' +
-     'was called', () => {
-    const mockTryFormatDate = jest.spyOn(
+  it('gets tooltip label formatter and calls it, ensuring ' +
+     'tryFormatDateWithoutTime was called', () => {
+    const mockTryFormatDateWithoutTime = jest.spyOn(
       dateFormatting,
-      'tryFormatDate'
+      'tryFormatDateWithoutTime'
     );
-    const fn = getTooltipLabelFormatter(1);
+    const tooltipLabelFormatter = getTooltipLabelFormatter(2);
 
-    fn('09-14-18');
+    tooltipLabelFormatter('09-14-18');
 
-    expect(mockTryFormatDate).toHaveBeenCalledTimes(1);
+    expect(mockTryFormatDateWithoutTime).toHaveBeenCalledTimes(1);
 
-    mockTryFormatDate.mockReset();
+    mockTryFormatDateWithoutTime.mockReset();
   });
   it('returns null if chartTimePeriodIndex is negative', () => {
     expect(getTooltipLabelFormatter(-1)).toBeNull();
@@ -200,19 +200,19 @@ describe('getXAxisMinTickGap', () => {
 });
 
 describe('getXAxisTickFormatter', () => {
-  it('gets X axis tick formatter and calls it, ensuring tryFormatDate' +
-     'was called', () => {
-    const mockTryFormatDate = jest.spyOn(
+  it('gets X axis tick formatter and calls it, ensuring ' +
+     'tryFormatDateWithoutTime was called', () => {
+    const mockTryFormatDateWithoutTime = jest.spyOn(
       dateFormatting,
-      'tryFormatDate'
+      'tryFormatDateWithoutTime'
     );
-    const fn = getTooltipLabelFormatter(1);
+    const xAxisTickFormatter = getXAxisTickFormatter(2);
 
-    fn('09-14-18');
+    xAxisTickFormatter('09-14-18');
 
-    expect(mockTryFormatDate).toHaveBeenCalledTimes(1);
+    expect(mockTryFormatDateWithoutTime).toHaveBeenCalledTimes(1);
 
-    mockTryFormatDate.mockReset();
+    mockTryFormatDateWithoutTime.mockReset();
   });
   it('returns null if chartTimePeriodIndex is negative', () => {
     expect(getXAxisTickFormatter(-1)).toBeNull();

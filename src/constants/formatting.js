@@ -1,4 +1,7 @@
-import { tryFormatDate } from '../utils/dateUtils/dateFormatting';
+import {
+  tryFormatDateWithoutTime,
+  tryFormatDateWithTime
+} from '../utils/dateUtils/dateFormatting';
 import {
   getStockDataForPreviousMonths,
   getStockDataForPreviousYears
@@ -33,9 +36,9 @@ export const CHART_META_DATA = [{
   xAxisMinTickGap: 110,
   getStockDataForTimePeriod: fiveDayStockData => fiveDayStockData,
   getTooltipLabelFormatter: dateAndTime =>
-    tryFormatDate(dateAndTime, 'mmm d, h:MM TT'),
+    tryFormatDateWithTime(dateAndTime, 'mmm d, h:MM TT'),
   getXAxisTickFormatter: dateAndTime =>
-    tryFormatDate(dateAndTime, 'mmm d, h:MM TT')
+    tryFormatDateWithTime(dateAndTime, 'mmm d, h:MM TT')
 },
 {
   label: LABEL_ONE_MONTH,
@@ -45,9 +48,9 @@ export const CHART_META_DATA = [{
   getStockDataForTimePeriod: maxStockData =>
     getStockDataForPreviousMonths(maxStockData, 1),
   getTooltipLabelFormatter: date =>
-    tryFormatDate(date, 'mmm d, yyyy'),
+    tryFormatDateWithoutTime(date, 'mmm d, yyyy'),
   getXAxisTickFormatter: date =>
-    tryFormatDate(date, 'mmm d')
+    tryFormatDateWithoutTime(date, 'mmm d')
 },
 {
   label: LABEL_THREE_MONTH,
@@ -57,9 +60,9 @@ export const CHART_META_DATA = [{
   getStockDataForTimePeriod: maxStockData =>
     getStockDataForPreviousMonths(maxStockData, 3),
   getTooltipLabelFormatter: date =>
-    tryFormatDate(date, 'mmm d, yyyy'),
+    tryFormatDateWithoutTime(date, 'mmm d, yyyy'),
   getXAxisTickFormatter: date =>
-    tryFormatDate(date, 'mmm d')
+    tryFormatDateWithoutTime(date, 'mmm d')
 },
 {
   label: LABEL_ONE_YEAR,
@@ -69,9 +72,9 @@ export const CHART_META_DATA = [{
   getStockDataForTimePeriod: maxStockData =>
     getStockDataForPreviousYears(maxStockData, 1),
   getTooltipLabelFormatter: date =>
-    tryFormatDate(date, 'mmm d, yyyy'),
+    tryFormatDateWithoutTime(date, 'mmm d, yyyy'),
   getXAxisTickFormatter: date =>
-    tryFormatDate(date, 'mmm d')
+    tryFormatDateWithoutTime(date, 'mmm d')
 },
 {
   label: LABEL_FIVE_YEAR,
@@ -81,9 +84,9 @@ export const CHART_META_DATA = [{
   getStockDataForTimePeriod: maxStockData =>
     getStockDataForPreviousYears(maxStockData, 5),
   getTooltipLabelFormatter: date =>
-    tryFormatDate(date, 'mmm d, yyyy'),
+    tryFormatDateWithoutTime(date, 'mmm d, yyyy'),
   getXAxisTickFormatter: date =>
-    tryFormatDate(date, 'mmm yyyy')
+    tryFormatDateWithoutTime(date, 'mmm yyyy')
 },
 {
   label: LABEL_MAX,
@@ -92,9 +95,9 @@ export const CHART_META_DATA = [{
   xAxisMinTickGap: 130,
   getStockDataForTimePeriod: maxStockData => maxStockData,
   getTooltipLabelFormatter: date =>
-    tryFormatDate(date, 'mmm d, yyyy'),
+    tryFormatDateWithoutTime(date, 'mmm d, yyyy'),
   getXAxisTickFormatter: date =>
-    tryFormatDate(date, 'mmm yyyy')
+    tryFormatDateWithoutTime(date, 'mmm yyyy')
 }];
 
 // formatting dates within the state
