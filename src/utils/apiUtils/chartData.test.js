@@ -9,8 +9,6 @@ import {
   QUERY_RANGE_ONE_DAY
 } from '../../constants/numeric';
 
-/* eslint-disable no-undefined */
-
 describe('getQueryForIntradayData', () => {
   it('properly returns query for intraday data', () => {
     const mockSymbol = 'MSFT';
