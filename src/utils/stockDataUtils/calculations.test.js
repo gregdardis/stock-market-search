@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-import * as typeChecking from '../typeChecking';
+import * as parseIntExact from '../parseIntExact';
 import { calculateFcfy } from './calculations';
 
 /* eslint-disable no-undefined */
@@ -17,7 +17,7 @@ describe('calculateFcfy', () => {
 
   beforeEach(() => {
     parseIntExactStub = sinon.stub(
-      typeChecking, 'parseIntExact'
+      parseIntExact, 'parseIntExact'
     );
     parseIntExactStub.onCall(0).returns(freeCashFlow);
     parseIntExactStub.onCall(1).returns(marketCap);

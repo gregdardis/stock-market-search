@@ -1,4 +1,4 @@
-import { parseIntExact } from '../typeChecking';
+import { parseIntExact } from '../parseIntExact';
 
 /** Returns a decimal, multiply by 100 for a percentage */
 export function calculateFcfy(freeCashflow, marketCap) {

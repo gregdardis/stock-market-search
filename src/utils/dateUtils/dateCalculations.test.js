@@ -7,7 +7,7 @@ import {
   calculateDateMonthsInPast
 } from './dateCalculations';
 
-import * as typeChecking from '../typeChecking';
+import * as parseIntExact from '../parseIntExact';
 
 /* eslint-disable no-undefined */
 
@@ -24,7 +24,7 @@ describe('calculateDateDaysInPast', () => {
   let parseIntExactStub;
 
   beforeEach(function() {
-    parseIntExactStub = sinon.stub(typeChecking, 'parseIntExact');
+    parseIntExactStub = sinon.stub(parseIntExact, 'parseIntExact');
   });
 
   afterEach(function() {
@@ -251,7 +251,7 @@ describe('calculateDateMonthsInPast', () => {
   let parseIntExactStub;
 
   beforeEach(function() {
-    parseIntExactStub = sinon.stub(typeChecking, 'parseIntExact');
+    parseIntExactStub = sinon.stub(parseIntExact, 'parseIntExact');
   });
 
   afterEach(function() {
