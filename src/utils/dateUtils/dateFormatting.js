@@ -36,7 +36,10 @@ export function tryFormatDateWithoutTime(dateString, format) {
     );
     return dateFormat(dateWithCorrectTimezone, format);
   } catch (error) {
-    console.error(`An error occurred in ${tryFormatDateWithoutTime.name}:`, error);
+    console.error(
+      `An error occurred in ${tryFormatDateWithoutTime.name}:`,
+      error
+    );
   }
   return dateString;
 }
