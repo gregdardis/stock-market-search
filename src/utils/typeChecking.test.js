@@ -1,8 +1,6 @@
 import { expect } from 'chai';
 
-import {
-  isString
-} from './typeChecking';
+import { isString } from './typeChecking';
 
 describe('isString', () => {
   it('returns true if given a string', () => {
