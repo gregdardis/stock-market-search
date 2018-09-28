@@ -1,4 +1,4 @@
-import { parseIntExact } from '../typeChecking';
+import { parseIntExact } from '../parseIntExact';
 
 export function calculateDateDaysInPast(date, days) {
   const parsedDays = parseIntExact(days);
