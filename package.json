@@ -38,7 +38,9 @@
     "test:watch": "npm run test -- --watch"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
+    "babel-jest": "^23.6.0",
     "babel-loader": "^7.1.5",
     "babel-plugin-istanbul": "^5.0.1",
     "babel-preset-env": "^1.7.0",
@@ -71,8 +73,6 @@
   "dependencies": {
     "array-flatten": "^2.1.1",
     "async": "^2.6.1",
-    "babel-cli": "^6.26.0",
-    "babel-jest": "^23.6.0",
     "classnames": "2.2.6",
     "dateformat": "^3.0.3",
     "express": "^4.16.3",
