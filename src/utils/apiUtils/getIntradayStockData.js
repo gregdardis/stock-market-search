@@ -90,11 +90,10 @@ export function getIntradayStockData(
 
   // Array of objects, one for each day.
   // Each contains a start timestamp and end timestamp for that trading day.
-  console.log('META:', meta);
   const timestampIntervals = getTimestampIntervals(numberOfDays, meta);
 
   const { close } = indicators.quote[0];
-  const datesTimesAndPrices = getDatesTimesAndPrices(
+  return getDatesTimesAndPrices(
     close,
     gmtoffset,
     numberOfDays,
@@ -102,5 +101,4 @@ export function getIntradayStockData(
     timestamp,
     timestampIntervals
   );
-  return datesTimesAndPrices;
 }
