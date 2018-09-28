@@ -20,7 +20,7 @@ import {
 import { createStock } from '../stockDataUtils/createStock';
 import { getIntradayStockData } from './getIntradayStockData';
 
-export function getQueryForIntradayData(symbol, range, interval) {
+export function generateQueryForIntradayData(symbol, range, interval) {
   return `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}` +
   `?range=${range}&includePrePost=true&interval=${interval}` +
   '&corsDomain=finance.yahoo.com&.tsrc=finance';
@@ -51,7 +51,7 @@ export function requestQuote(symbol, callback) {
     }
   ).catch(err => {
     callback(
-      generateStockDataRequestError(requestQuote.name, err)
+      new Error(generateStockDataRequestError(requestQuote.name, err))
     );
   });
 }
@@ -70,13 +70,15 @@ export function requestMaxStockData(symbol, callback) {
     }
   ).catch(err => {
     callback(
-      generateStockDataRequestError(requestMaxStockData.name, err)
+      new Error(
+        generateStockDataRequestError(requestMaxStockData.name, err)
+      )
     );
   });
 }
 
 export function requestOneDayStockData(symbol, callback) {
-  const queryOneDay = getQueryForIntradayData(
+  const queryOneDay = generateQueryForIntradayData(
     symbol,
     QUERY_RANGE_ONE_DAY,
     QUERY_INTERVAL_ONE_DAY
@@ -90,13 +92,15 @@ export function requestOneDayStockData(symbol, callback) {
       );
     }).catch(err => {
       callback(
-        generateStockDataRequestError(requestOneDayStockData.name, err)
+        new Error(
+          generateStockDataRequestError(requestOneDayStockData.name, err)
+        )
       );
     });
 }
 
 export function requestFiveDayStockData(symbol, callback) {
-  const queryFiveDay = getQueryForIntradayData(symbol,
+  const queryFiveDay = generateQueryForIntradayData(symbol,
     QUERY_RANGE_FIVE_DAY,
     QUERY_INTERVAL_FIVE_DAY
   );
@@ -109,7 +113,9 @@ export function requestFiveDayStockData(symbol, callback) {
       );
     }).catch(err => {
       callback(
-        generateStockDataRequestError(requestFiveDayStockData.name, err)
+        new Error(
+          generateStockDataRequestError(requestFiveDayStockData.name, err)
+        )
       );
     });
 }
