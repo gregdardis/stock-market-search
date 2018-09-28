@@ -26,7 +26,6 @@ describe('formatAndAdjustDateForTimestamp', function() {
   const gmtoffset = 1000;
   const timestamp = 2000;
   const dateAndTimeFormat = 'h:MM TT';
-  const adjustedDateForTimestamp = new Date(3000000);
 
   it('gets date and time given proper inputs', function() {
     expect(formatAndAdjustDateForTimestamp(
@@ -34,7 +33,7 @@ describe('formatAndAdjustDateForTimestamp', function() {
       timestamp,
       dateAndTimeFormat
     )).to
-      .equal(dateFormat(adjustedDateForTimestamp, dateAndTimeFormat, true));
+      .equal('12:50 AM');
   });
 });
 
