@@ -1,52 +1,35 @@
 import { expect } from 'chai';
-import dateFormat from 'dateformat';
 
 import {
-  getAdjustedDateForTimestamp,
-  formatAndAdjustDateForTimestamp,
-  getEndOfDayTimestampIndex,
-  getStartOfDayTimestampIndex
+  generateStockDataRequestError,
+  generateQueryForIntradayData
 } from './chartData';
+import {
+  QUERY_INTERVAL_ONE_DAY,
+  QUERY_RANGE_ONE_DAY
+} from '../../constants/numeric';
 
-/* eslint-disable no-undefined */
+describe('generateQueryForIntradayData', () => {
+  it('properly returns query for intraday data', () => {
+    const mockSymbol = 'MSFT';
+    const mockRange = QUERY_RANGE_ONE_DAY;
+    const mockInterval = QUERY_INTERVAL_ONE_DAY;
 
-describe('getAdjustedDateForTimestamp', function() {
-  it('returns correct date for a timestamp and gmt offset', function() {
-    const gmtoffset = 1000;
-    const timestamp = 2000;
-    const adjustedDateForTimestamp = new Date(3000000);
-
-    expect(getAdjustedDateForTimestamp(gmtoffset, timestamp))
-      .to
-      .deep
-      .equal(adjustedDateForTimestamp);
+    expect(generateQueryForIntradayData(mockSymbol, mockRange, mockInterval))
+      .to.equal(
+        `https://query1.finance.yahoo.com/v8/finance/chart/${mockSymbol}` +
+        `?range=${mockRange}&includePrePost=true&interval=${mockInterval}` +
+        '&corsDomain=finance.yahoo.com&.tsrc=finance'
+      );
   });
 });
 
-describe('formatAndAdjustDateForTimestamp', function() {
-  const gmtoffset = 1000;
-  const timestamp = 2000;
-  const dateAndTimeFormat = 'h:MM TT';
-  const adjustedDateForTimestamp = new Date(3000000);
-  it('gets date and time given proper inputs', function() {
-    expect(formatAndAdjustDateForTimestamp(gmtoffset, timestamp, dateAndTimeFormat))
-      .to
-      .equal(dateFormat(adjustedDateForTimestamp, dateAndTimeFormat, true));
-  });
-});
+describe('generateStockDataRequestError', () => {
+  const mockFunctionName = 'myFunction';
+  const mockError = 'An error has occurred.';
 
-describe('getStartOfDayTimestampIndex', function() {
-  it('gets start of day timestamp index', function() {
-    expect(getStartOfDayTimestampIndex(5, 24))
-      .to
-      .equal(120);
-  });
-});
-
-describe('getEndOfDayTimestampIndex', function() {
-  it('gets end of day timestamp index', function() {
-    expect(getEndOfDayTimestampIndex(5, 24))
-      .to
-      .equal(144);
-  });
+  expect(generateStockDataRequestError(mockFunctionName, mockError))
+    .to.equal(
+      `Failed in ${mockFunctionName} with error: ${mockError}`
+    );
 });
