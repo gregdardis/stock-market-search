@@ -38,12 +38,12 @@ function getDatesAndTimesForOneDay(
   return datesTimesAndPrices;
 }
 
-function getTimestampIntervals(numberOfDays, meta) {
+function getTimestampIntervals(numberOfDays, metaData) {
   let timestampIntervals = [];
   for (let dayIndex = 0; dayIndex < numberOfDays; dayIndex++) {
     timestampIntervals.push({
-      start: getTimestampForDay(dayIndex, meta),
-      end: getTimestampForDay(dayIndex, meta, false)
+      start: getTimestampForDay(dayIndex, metaData),
+      end: getTimestampForDay(dayIndex, metaData, false)
     });
   }
   return timestampIntervals;
@@ -90,6 +90,7 @@ export function getIntradayStockData(
 
   // Array of objects, one for each day.
   // Each contains a start timestamp and end timestamp for that trading day.
+  console.log('META:', meta);
   const timestampIntervals = getTimestampIntervals(numberOfDays, meta);
 
   const { close } = indicators.quote[0];
