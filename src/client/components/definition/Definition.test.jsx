@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { expect } from 'chai';
+import MathJax from '@nteract/mathjax';
 
 import Definition from './Definition';
 
@@ -50,7 +51,7 @@ describe('<Definition />', () => {
         equations: mockEquations
       }} />
     );
-    expect(wrapper.find('p').at(0).text()).to.equal('$$equation1$$');
-    expect(wrapper.find('p').at(1).text()).to.equal('$$equation2$$');
+    expect(wrapper.find(MathJax.Node).at(0).prop('children')).to.equal('equation1');
+    expect(wrapper.find(MathJax.Node).at(1).prop('children')).to.equal('equation2');
   });
 });

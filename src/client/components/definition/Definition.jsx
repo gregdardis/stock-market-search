@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import MathJax from '@nteract/mathjax';
 
 import './definition.css';
 
@@ -16,9 +17,11 @@ const Definition = ({
       : null
     }
     { definition.equations
-      ? definition.equations.map(equation => (
-        <p key={equation}>$${equation}$$</p>
-      ))
+      ? <MathJax.Context>
+        { definition.equations.map(equation =>
+          <MathJax.Node key={ equation }>{ equation }</MathJax.Node>
+        ) }
+      </MathJax.Context>
       : null
     }
   </div>
