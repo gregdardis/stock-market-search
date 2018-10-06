@@ -1,11 +1,11 @@
 import {
-  CHART_META_DATA
+  CHART_METADATA
 } from '../constants/formatting';
 
 function isNumberAndInChartMetaDataRange(number) {
   if (typeof number !== 'number'
       || number < 0
-      || number >= CHART_META_DATA.length) {
+      || number >= CHART_METADATA.length) {
     return false;
   }
   return true;
@@ -15,33 +15,33 @@ export function getStockDataKey(chartTimePeriodIndex) {
   if (!isNumberAndInChartMetaDataRange(chartTimePeriodIndex)) {
     return null;
   }
-  return CHART_META_DATA[chartTimePeriodIndex].stockDataKey;
+  return CHART_METADATA[chartTimePeriodIndex].stockDataKey;
 }
 
 export function getTooltipLabelFormatter(chartTimePeriodIndex) {
   if (!isNumberAndInChartMetaDataRange(chartTimePeriodIndex)) {
     return null;
   }
-  return CHART_META_DATA[chartTimePeriodIndex].getTooltipLabelFormatter;
+  return CHART_METADATA[chartTimePeriodIndex].getTooltipLabelFormatter;
 }
 
 export function getXAxisDataKey(chartTimePeriodIndex) {
   if (!isNumberAndInChartMetaDataRange(chartTimePeriodIndex)) {
     return null;
   }
-  return CHART_META_DATA[chartTimePeriodIndex].xAxisDataKey;
+  return CHART_METADATA[chartTimePeriodIndex].xAxisDataKey;
 }
 
 export function getXAxisMinTickGap(chartTimePeriodIndex) {
   if (!isNumberAndInChartMetaDataRange(chartTimePeriodIndex)) {
     return null;
   }
-  return CHART_META_DATA[chartTimePeriodIndex].xAxisMinTickGap;
+  return CHART_METADATA[chartTimePeriodIndex].xAxisMinTickGap;
 }
 
 export function getXAxisTickFormatter(chartTimePeriodIndex) {
   if (!isNumberAndInChartMetaDataRange(chartTimePeriodIndex)) {
     return null;
   }
-  return CHART_META_DATA[chartTimePeriodIndex].getXAxisTickFormatter;
+  return CHART_METADATA[chartTimePeriodIndex].getXAxisTickFormatter;
 }

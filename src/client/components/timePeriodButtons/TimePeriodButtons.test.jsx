@@ -6,6 +6,7 @@ import TimePeriodButtons from './TimePeriodButtons';
 import { THEME_COLOR_MEDIUM1 } from '../../../constants/colors';
 import * as formatting from '../../../constants/formatting';
 
+const originalChartMetadata = formatting.CHART_METADATA;
 const mockUpdateChartTimePeriodIndex = () => {};
 const mockChartTimePeriodIndex = 4;
 
@@ -32,7 +33,7 @@ describe('<TimePeriodButtons />', () => {
 
     chaiExpect(wrapper).to.have.className('timePeriodButtons');
   });
-  it('renders 7 RaisedButtons with normal CHART_META_DATA', () => {
+  it('renders 7 RaisedButtons with normal CHART_METADATA', () => {
     const wrapper = shallow(
       <TimePeriodButtons
         chartTimePeriodIndex={ mockChartTimePeriodIndex }
@@ -42,8 +43,8 @@ describe('<TimePeriodButtons />', () => {
 
     chaiExpect(wrapper.find('RaisedButton')).to.have.length(7);
   });
-  it('renders no RaisedButtons if CHART_META_DATA has length 0', () => {
-    formatting.CHART_META_DATA = [];
+  it('renders no RaisedButtons if CHART_METADATA has length 0', () => {
+    formatting.CHART_METADATA = [];
     const wrapper = shallow(
       <TimePeriodButtons
         chartTimePeriodIndex={ mockChartTimePeriodIndex }
@@ -52,6 +53,9 @@ describe('<TimePeriodButtons />', () => {
     );
 
     chaiExpect(wrapper.find('RaisedButton')).to.have.length(0);
+
+    // restore mock
+    formatting.CHART_METADATA = originalChartMetadata;
   });
 });
 

@@ -6,17 +6,17 @@ import {
   getXAxisTickFormatter
 } from './chartUtils';
 import * as dateFormatting from './dateUtils/dateFormatting';
-import { CHART_META_DATA } from '../constants/formatting';
+import { CHART_METADATA } from '../constants/formatting';
 
 describe('getStockDataKey', () => {
-  it('gets xAxisDataKey from CHART_META_DATA', () => {
+  it('gets xAxisDataKey from CHART_METADATA', () => {
     expect(getStockDataKey(0)).toBe('oneDayStockData');
   });
   it('returns null if chartTimePeriodIndex is negative', () => {
     expect(getStockDataKey(-1)).toBeNull();
   });
   it('returns null if chartTimePeriodIndex is too high', () => {
-    expect(getStockDataKey(CHART_META_DATA.length)).toBeNull();
+    expect(getStockDataKey(CHART_METADATA.length)).toBeNull();
   });
   it('returns null if chartTimePeriodIndex is a string', () => {
     expect(getStockDataKey('hello')).toBeNull();
@@ -72,7 +72,7 @@ describe('getTooltipLabelFormatter', () => {
     expect(getTooltipLabelFormatter(-1)).toBeNull();
   });
   it('returns null if chartTimePeriodIndex is too high', () => {
-    expect(getTooltipLabelFormatter(CHART_META_DATA.length)).toBeNull();
+    expect(getTooltipLabelFormatter(CHART_METADATA.length)).toBeNull();
   });
   it('returns null if chartTimePeriodIndex is a string', () => {
     expect(getTooltipLabelFormatter('hello')).toBeNull();
@@ -110,14 +110,14 @@ describe('getTooltipLabelFormatter', () => {
 });
 
 describe('getXAxisDataKey', () => {
-  it('gets xAxisDataKey from CHART_META_DATA', () => {
+  it('gets xAxisDataKey from CHART_METADATA', () => {
     expect(getXAxisDataKey(0)).toBe('dateAndTime');
   });
   it('returns null if chartTimePeriodIndex is negative', () => {
     expect(getXAxisDataKey(-1)).toBeNull();
   });
   it('returns null if chartTimePeriodIndex is too high', () => {
-    expect(getXAxisDataKey(CHART_META_DATA.length)).toBeNull();
+    expect(getXAxisDataKey(CHART_METADATA.length)).toBeNull();
   });
   it('returns null if chartTimePeriodIndex is a string', () => {
     expect(getXAxisDataKey('hello')).toBeNull();
@@ -155,14 +155,14 @@ describe('getXAxisDataKey', () => {
 });
 
 describe('getXAxisMinTickGap', () => {
-  it('gets xAxisDataKey from CHART_META_DATA', () => {
+  it('gets xAxisDataKey from CHART_METADATA', () => {
     expect(getXAxisMinTickGap(0)).toBe(100);
   });
   it('returns null if chartTimePeriodIndex is negative', () => {
     expect(getXAxisMinTickGap(-1)).toBeNull();
   });
   it('returns null if chartTimePeriodIndex is too high', () => {
-    expect(getXAxisMinTickGap(CHART_META_DATA.length)).toBeNull();
+    expect(getXAxisMinTickGap(CHART_METADATA.length)).toBeNull();
   });
   it('returns null if chartTimePeriodIndex is a string', () => {
     expect(getXAxisMinTickGap('hello')).toBeNull();
@@ -218,7 +218,7 @@ describe('getXAxisTickFormatter', () => {
     expect(getXAxisTickFormatter(-1)).toBeNull();
   });
   it('returns null if chartTimePeriodIndex is too high', () => {
-    expect(getXAxisTickFormatter(CHART_META_DATA.length)).toBeNull();
+    expect(getXAxisTickFormatter(CHART_METADATA.length)).toBeNull();
   });
   it('returns null if chartTimePeriodIndex is a string', () => {
     expect(getXAxisTickFormatter('hello')).toBeNull();
