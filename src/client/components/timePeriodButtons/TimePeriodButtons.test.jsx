@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { expect as chaiExpect } from 'chai';
 
 import TimePeriodButtons from './TimePeriodButtons';
 import { THEME_COLOR_MEDIUM1 } from '../../../constants/colors';
@@ -29,7 +30,7 @@ describe('<TimePeriodButtons />', () => {
       />
     );
 
-    expect(wrapper.hasClass('timePeriodButtons')).toBe(true);
+    chaiExpect(wrapper).to.have.className('timePeriodButtons');
   });
   it('renders 7 RaisedButtons with normal CHART_META_DATA', () => {
     const wrapper = shallow(
@@ -39,7 +40,7 @@ describe('<TimePeriodButtons />', () => {
       />
     );
 
-    expect(wrapper.find('RaisedButton')).toHaveLength(7);
+    chaiExpect(wrapper.find('RaisedButton')).to.have.length(7);
   });
   it('renders no RaisedButtons if CHART_META_DATA has length 0', () => {
     formatting.CHART_META_DATA = [];
@@ -50,7 +51,7 @@ describe('<TimePeriodButtons />', () => {
       />
     );
 
-    expect(wrapper.find('RaisedButton')).toHaveLength(0);
+    chaiExpect(wrapper.find('RaisedButton')).to.have.length(0);
   });
 });
 
@@ -65,8 +66,8 @@ describe('getButtonStyle', () => {
         />
       );
 
-      expect(wrapper.instance().getButtonStyle(buttonIndex))
-        .toEqual({
+      chaiExpect(wrapper.instance().getButtonStyle(buttonIndex))
+        .to.deep.equal({
           backgroundColor: THEME_COLOR_MEDIUM1
         });
     });
@@ -80,7 +81,7 @@ describe('getButtonStyle', () => {
         />
       );
 
-      expect(wrapper.instance().getButtonStyle(buttonIndex))
-        .toEqual({});
+      chaiExpect(wrapper.instance().getButtonStyle(buttonIndex))
+        .to.deep.equal({});
     });
 });
