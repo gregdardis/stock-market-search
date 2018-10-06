@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import PropTypes from 'prop-types';
 
-import { CHART_META_DATA } from '../../../constants/formatting';
+import { CHART_METADATA } from '../../../constants/formatting';
 import { THEME_COLOR_MEDIUM1 } from '../../../constants/colors';
 import './timePeriodButtons.css';
 
@@ -26,7 +26,7 @@ class TimePeriodButtons extends Component {
     const { chartTimePeriodIndex } = this.props;
     return (
       <div className='timePeriodButtons'>
-        { CHART_META_DATA.map((timePeriod, index) => (
+        { CHART_METADATA.map((timePeriod, index) => (
           <RaisedButton
             key={ index }
             label={ timePeriod.label }

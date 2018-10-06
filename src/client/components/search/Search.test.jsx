@@ -1,5 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import { expect as chaiExpect } from 'chai';
+import FontAwesome from 'react-fontawesome';
 
 import Search from './Search';
 import {
@@ -32,25 +34,25 @@ describe('<Search />', () => {
   });
 
   it('has proper className for styling', () => {
-    expect(wrapper.hasClass('search')).toBe(true);
+    chaiExpect(wrapper).to.have.className('search');
   });
   it('has two children', () => {
-    expect(wrapper.children()).toHaveLength(2);
+    chaiExpect(wrapper.children()).to.have.length(2);
   });
   it('has an input as first child', () => {
-    expect(wrapper.childAt(0).name()).toBe('input');
+    chaiExpect(wrapper.childAt(0)).to.have.tagName('input');
   });
   it('has a FontAwesome button as second child', () => {
-    expect(wrapper.childAt(1).name()).toBe('FontAwesome');
+    chaiExpect(wrapper.childAt(1)).to.have.type(FontAwesome);
   });
   test('input has type text', () => {
-    expect(wrapper.find('input').prop('type')).toBe('text');
+    chaiExpect(wrapper.find('input')).to.have.prop('type', 'text');
   });
   test('input has correct className', () => {
-    expect(wrapper.find('input').hasClass('searchText error')).toBe(true);
+    chaiExpect(wrapper.find('input')).to.have.className('searchText error');
   });
   test('input has correct value', () => {
-    expect(wrapper.find('input').prop('value')).toBe(baseProps.text);
+    chaiExpect(wrapper.find('input')).to.have.prop('value', baseProps.text);
   });
   test('invoking onChange input prop calls correct function', () => {
     const handleChangeSpy = jest.spyOn(Search.prototype, 'handleChange')
@@ -77,14 +79,14 @@ describe('<Search />', () => {
     handleKeyDownSpy.mockRestore();
   });
   test('input has correct placeholder prop', () => {
-    expect(wrapper.find('input').prop('placeholder'))
-      .toBe(SEARCH_INPUT_PLACEHOLDER);
+    chaiExpect(wrapper.find('input'))
+      .to.have.prop('placeholder', SEARCH_INPUT_PLACEHOLDER);
   });
   test('input has autoFocus prop', () => {
-    expect(wrapper.find('input').prop('autoFocus')).toBe(true);
+    chaiExpect(wrapper.find('input')).to.have.prop('autoFocus', true);
   });
   test('input has required prop', () => {
-    expect(wrapper.find('input').prop('required')).toBe(true);
+    chaiExpect(wrapper.find('input')).to.have.prop('required', true);
   });
   test('invoking onFocus input prop calls correct function', () => {
     const focusEndOfInputSpy = jest.spyOn(
@@ -101,18 +103,17 @@ describe('<Search />', () => {
     focusEndOfInputSpy.mockRestore();
   });
   test('input has correct spellCheck prop', () => {
-    expect(wrapper.find('input').prop('spellCheck')).toBe(false);
+    chaiExpect(wrapper.find('input')).to.have.prop('spellCheck', false);
   });
   test('input has correct maxLength prop', () => {
-    expect(wrapper.find('input').prop('maxLength'))
-      .toBe(SEARCH_INPUT_MAX_LENGTH);
+    chaiExpect(wrapper.find('input'))
+      .to.have.prop('maxLength', SEARCH_INPUT_MAX_LENGTH);
   });
   test('FontAwesome has correct className', () => {
-    expect(wrapper.find('FontAwesome').hasClass('searchButton'))
-      .toBe(true);
+    chaiExpect(wrapper.find('FontAwesome')).to.have.className('searchButton');
   });
   test('FontAwesome has correct name prop', () => {
-    expect(wrapper.find('FontAwesome').prop('name')).toBe('search');
+    chaiExpect(wrapper.find('FontAwesome')).to.have.prop('name', 'search');
   });
   test('invoking onClick FontAwesome prop calls correct function', () => {
     const handleSearchSpy = jest.spyOn(Search.prototype, 'handleSearch')

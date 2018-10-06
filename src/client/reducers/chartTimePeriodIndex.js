@@ -2,10 +2,10 @@ import {
   SET_CHART_TO_DEFAULT_TIME_PERIOD,
   UPDATE_CHART_TIME_PERIOD_INDEX
 } from '../actions';
-import { CHART_META_DATA } from '../../constants/formatting';
+import { CHART_METADATA } from '../../constants/formatting';
 import { LABEL_ONE_YEAR } from '../../constants/userFacingStrings';
 
-const defaultTimePeriodIndex = CHART_META_DATA.findIndex(element =>
+const defaultTimePeriodIndex = CHART_METADATA.findIndex(element =>
   element.label === LABEL_ONE_YEAR
 );
 

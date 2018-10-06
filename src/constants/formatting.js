@@ -18,7 +18,7 @@ import {
 
 export const CHART_DATA_KEY_Y_AXIS = 'price';
 
-export const CHART_META_DATA = [{
+export const CHART_METADATA = [{
   label: LABEL_ONE_DAY,
   stockDataKey: 'oneDayStockData',
   xAxisDataKey: 'dateAndTime',
