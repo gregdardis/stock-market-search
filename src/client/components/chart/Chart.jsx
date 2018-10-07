@@ -42,7 +42,8 @@ const Chart = ({
         formatter={ price => formatAsPrice(price) }
         separator=': ' />
       <Line type='monotone' dataKey={ CHART_DATA_KEY_Y_AXIS } dot={ false }
-        stroke={ CHART_LINE_COLOR } isAnimationActive={ false } />
+        stroke={ CHART_LINE_COLOR } isAnimationActive={ false }
+        connectNulls={ true } />
     </LineChart>
   </ResponsiveContainer>
 );
