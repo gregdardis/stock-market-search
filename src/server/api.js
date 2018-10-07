@@ -7,7 +7,7 @@ import {
   requestMaxStockData,
   requestOneDayStockData,
   requestQuote
-} from '../utils/apiUtils/chartData';
+} from './utils/apiUtils/chartData';
 
 const router = express.Router();
 

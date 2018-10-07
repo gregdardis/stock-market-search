@@ -1,4 +1,6 @@
-import { formatDateForMaxStockData } from '../dateUtils/dateFormatting';
+import {
+  formatDateForMaxStockData
+} from '../../../utils/dateUtils/dateFormatting';
 
 export function parseDailyData(dailyData) {
   let datesAndPrices = [];

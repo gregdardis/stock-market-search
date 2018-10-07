@@ -7,17 +7,15 @@ import rp from 'request-promise';
 import {
   DATE_FORMAT_FIVE_DAY,
   DATE_FORMAT_ONE_DAY
-} from '../../constants/formatting';
+} from '../../../constants/formatting';
 import {
   QUERY_INTERVAL_FIVE_DAY,
   QUERY_INTERVAL_ONE_DAY,
   QUERY_RANGE_FIVE_DAY,
   QUERY_RANGE_ONE_DAY
-} from '../../constants/numeric';
-import {
-  parseDailyData
-} from '../apiUtils/responseParsing';
-import { createStock } from '../stockDataUtils/createStock';
+} from '../../../constants/numeric';
+import { parseDailyData } from './responseParsing';
+import { createStock } from '../../../utils/stockDataUtils/createStock';
 import { getIntradayStockData } from './getIntradayStockData';
 
 export function generateQueryForIntradayData(symbol, range, interval) {
