@@ -5,7 +5,7 @@ import { expect } from 'chai';
 import Glossary from '.';
 import { DEFINITIONS } from '../../components/definition/definitionData';
 
-/* eslint-disable no-undefined*/
+/* eslint-disable no-undefined */
 
 describe('<Glossary />', () => {
   it('has correct classname for styling', () => {

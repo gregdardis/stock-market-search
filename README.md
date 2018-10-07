@@ -1,4 +1,4 @@
-# Stock Market Search 
+# Stock Market Search
 [![Coverage Status](https://coveralls.io/repos/github/gregdardis/stock-market-search/badge.svg?branch=master)](https://coveralls.io/github/gregdardis/stock-market-search?branch=master&service=github)
 ## Description
 
@@ -13,3 +13,9 @@ The front end tech stack includes [React](https://github.com/facebook/react), [R
 3. In one terminal window, start server: `npm run start`
 4. In another terminal window, start client: `npm run dev`
 5. In a browser, open the url that was printed to the console in step 4 when the client started.  This is likely http://localhost:8080.
+
+## Run BVTs
+
+1. In one terminal window, start server: `npm run start`
+2. In another terminal window, start client: `npm run dev`
+3. In third terminal window, run BVTs: `npm run bvt`
