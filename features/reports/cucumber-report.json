@@ -1,0 +1,74 @@
+[
+  {
+    "description": "  As an stock-market-search user\n  In order to find out more about the financial info I'm viewing for a stock\n  I want to read definitions of financial terms in the glossary",
+    "elements": [
+      {
+        "id": "viewing-the-glossary;navigate-to-glossary",
+        "keyword": "Scenario",
+        "line": 6,
+        "name": "Navigate to glossary",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "name": "I am on the homepage",
+            "result": {
+              "status": "passed",
+              "duration": 318125
+            },
+            "line": 7,
+            "match": {
+              "location": "/Users/Hailey/GitHub/stock-market-info/features/step-definitions/glossary-steps.js:4"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "name": "I click the glossary button in the menu",
+            "result": {
+              "status": "passed",
+              "duration": 69840
+            },
+            "line": 8,
+            "match": {
+              "location": "/Users/Hailey/GitHub/stock-market-info/features/step-definitions/glossary-steps.js:7"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "name": "I should see the glossary",
+            "result": {
+              "status": "passed",
+              "duration": 74036
+            },
+            "line": 9,
+            "match": {
+              "location": "/Users/Hailey/GitHub/stock-market-info/features/step-definitions/glossary-steps.js:10"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "After ",
+            "result": {
+              "status": "passed",
+              "duration": 1207847047
+            },
+            "hidden": true,
+            "match": {
+              "location": "/Users/Hailey/GitHub/stock-market-info/node_modules/selenium-cucumber-js/runtime/world.js:221"
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "viewing-the-glossary",
+    "keyword": "Feature",
+    "line": 1,
+    "name": "Viewing the glossary",
+    "tags": [],
+    "uri": "/Users/Hailey/GitHub/stock-market-info/features/glossary.feature"
+  }
+]

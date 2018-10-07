@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+    <testsuite name="viewing-the-glossary;navigate-to-glossary" tests="3" failures="0" skipped="0">
+        <properties>
+            <property name="URI" value="/Users/Hailey/GitHub/stock-market-info/features/glossary.feature">
+            </property>
+        </properties>
+        <testcase name="Given I am on the homepage" classname="viewing-the-glossary;navigate-to-glossary" time="0.000318125">
+        </testcase>
+        <testcase name="When I click the glossary button in the menu" classname="viewing-the-glossary;navigate-to-glossary" time="0.00006984">
+        </testcase>
+        <testcase name="Then I should see the glossary" classname="viewing-the-glossary;navigate-to-glossary" time="0.000074036">
+        </testcase>
+    </testsuite>
+</testsuites>

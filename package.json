@@ -31,6 +31,7 @@
   "license": "ISC",
   "scripts": {
     "build": "webpack --config ./config/webpack.config.dev.js",
+    "bvt": "node ./node_modules/selenium-cucumber-js/index.js",
     "dev": "webpack-dev-server --config ./config/webpack.config.dev.js",
     "dev:test": "npm-run-all --parallel dev test:watch",
     "start": "babel-watch src/server",
