@@ -7,7 +7,7 @@ import {
 import {
   QUERY_INTERVAL_ONE_DAY,
   QUERY_RANGE_ONE_DAY
-} from '../../constants/numeric';
+} from '../../../constants/numeric';
 
 describe('generateQueryForIntradayData', () => {
   it('properly returns query for intraday data', () => {

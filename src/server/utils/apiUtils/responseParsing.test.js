@@ -1,8 +1,7 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 
-import * as dateFormatting from '../dateUtils/dateFormatting';
-
+import * as dateFormatting from '../../../utils/dateUtils/dateFormatting';
 import { parseDailyData } from './responseParsing';
 
 describe('parseDailyData', function() {

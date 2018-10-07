@@ -1,6 +1,6 @@
 import dateFormat from 'dateformat';
 
-import { MILLISECONDS_PER_SECOND } from '../../constants/numeric';
+import { MILLISECONDS_PER_SECOND } from '../../../constants/numeric';
 
 // NOTE: this date has timezone UTC
 export function getAdjustedDateForTimestamp(gmtoffset, timestamp) {

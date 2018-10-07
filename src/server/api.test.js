@@ -1,7 +1,7 @@
 import request from 'supertest';
 
 import app from './server';
-import * as chartData from '../utils/apiUtils/chartData';
+import * as chartData from './utils/apiUtils/chartData';
 
 describe('GET /api/stocks/:symbol', () => {
   let server;

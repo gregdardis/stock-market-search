@@ -1,4 +1,3 @@
-import dateFormat from 'dateformat';
 import { expect } from 'chai';
 
 import {
