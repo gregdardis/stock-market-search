@@ -7,5 +7,5 @@ Feature: Search for a stock
     Given I am on the homepage
     And my cursor is in the searchbar
     When I type text that is an invalid stock symbol
-    And I press ENETER to search
+    And I press ENTER to search
     Then I should see an error message that the stock was not found
