@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
 
+const exampleSearchText = 'MSFT';
 const homeElements = page.home.elements;
 const invalidStockSymbol = 'ASDF';
-const exampleSearchText = 'MSFT';
 
 module.exports = function() {
   this.Given(/^my cursor is in the searchbar$/, () => {
