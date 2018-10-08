@@ -32,5 +32,19 @@ module.exports = function() {
     });
   // TODO: add steps for valid stock search
   // TODO: add steps for search with ENTER
-  // TODO: add steps for clear search text with ESC
+  this.When(/^focus is on the searchbar$/, () => {
+    return driver.findElement(homeElements.searchText).then(search => {
+      return search.click();
+    });
+  });
+  this.Then(/^I press Escape$/, () => {
+    return driver.findElement(homeElements.searchText).then(search => {
+      return search.sendKeys(selenium.Key.ESCAPE);
+    });
+  });
+  this.Then(/^the searchbar should be cleared of all text$/, () => {
+    return driver.findElement(homeElements.searchText).then(search => {
+      return driver.wait(until.elementTextIs(search, ''));
+    });
+  });
 };
