@@ -13,7 +13,7 @@ module.exports = function() {
       return search.sendKeys(invalidStockSymbol);
     });
   });
-  this.Then(/^I press ENTER to search$/, () => {
+  this.Then(/^I click the search icon$/, () => {
     return driver.findElement(by.css('.searchButton')).then(button => {
       return button.click();
     });
