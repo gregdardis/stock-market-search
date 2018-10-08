@@ -1,5 +1,7 @@
 /* eslint-disable no-undef */
 
+const { invalidStockSymbol } = shared.constants;
+
 module.exports = function() {
   this.When(/^my cursor is in the searchbar$/, () => {
     return driver.findElement(by.css('.searchText')).then(search => {
@@ -8,7 +10,7 @@ module.exports = function() {
   });
   this.Then(/^I type text that is an invalid stock symbol$/, () => {
     return driver.findElement(by.css('.searchText')).then(search => {
-      return search.sendKeys('ASDF');
+      return search.sendKeys(invalidStockSymbol);
     });
   });
   this.Then(/^I press ENTER to search$/, () => {
@@ -23,7 +25,7 @@ module.exports = function() {
         .then(status => {
           return driver.wait(until.elementTextIs(
             status,
-            'No stock with symbol "ASDF" was found.'
+            `No stock with symbol "${invalidStockSymbol}" was found.`
           ));
         });
     });
