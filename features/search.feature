@@ -17,5 +17,6 @@ Feature: Search for a stock
   Scenario: Clear Search input text with Escape key
     Given I am on the homepage
     And focus is on the searchbar
+    And there is text in the searchbar
     When I press Escape
     Then the searchbar should be cleared of all text

@@ -1,20 +1,21 @@
 /* eslint-disable no-undef */
 
-const invalidStockSymbol = 'ASDF';
 const homeElements = page.home.elements;
+const invalidStockSymbol = 'ASDF';
+const exampleSearchText = 'MSFT';
 
 module.exports = function() {
-  this.When(/^my cursor is in the searchbar$/, () => {
+  this.Given(/^my cursor is in the searchbar$/, () => {
     return driver.findElement(homeElements.searchText).then(search => {
       return search.click();
     });
   });
-  this.Then(/^I type text that is an invalid stock symbol$/, () => {
+  this.When(/^I type text that is an invalid stock symbol$/, () => {
     return driver.findElement(homeElements.searchText).then(search => {
       return search.sendKeys(invalidStockSymbol);
     });
   });
-  this.Then(/^I click the search icon$/, () => {
+  this.When(/^I click the search icon$/, () => {
     return driver.findElement(homeElements.searchButton).then(button => {
       return button.click();
     });
@@ -32,12 +33,17 @@ module.exports = function() {
     });
   // TODO: add steps for valid stock search
   // TODO: add steps for search with ENTER
-  this.When(/^focus is on the searchbar$/, () => {
+  this.Given(/^focus is on the searchbar$/, () => {
     return driver.findElement(homeElements.searchText).then(search => {
       return search.click();
     });
   });
-  this.Then(/^I press Escape$/, () => {
+  this.Given(/^there is text in the searchbar$/, () => {
+    return driver.findElement(homeElements.searchText).then(search => {
+      return search.sendKeys(exampleSearchText);
+    });
+  });
+  this.When(/^I press Escape$/, () => {
     return driver.findElement(homeElements.searchText).then(search => {
       return search.sendKeys(selenium.Key.ESCAPE);
     });
