@@ -9,3 +9,9 @@ Feature: Search for a stock
     When I type text that is an invalid stock symbol
     And I press ENTER to search
     Then I should see an error message that the stock was not found
+
+  # TODO: add scenario for valid stock search
+
+  # TODO: add scenario for search with ENTER
+
+  # TODO: add scenario for clear search text with ESC

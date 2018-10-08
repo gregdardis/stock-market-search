@@ -19,6 +19,15 @@ module.exports = function() {
   this.Then(
     /^I should see an error message that the stock was not found$/,
     () => {
-      return driver.wait(until.elementLocated(by.css('.error')));
+      return driver.wait(until.elementLocated(by.css('.searchStatus')))
+        .then(status => {
+          return driver.wait(until.elementTextIs(
+            status,
+            'No stock with symbol "ASDF" was found.'
+          ));
+        });
     });
+  // TODO: add steps for valid stock search
+  // TODO: add steps for search with ENTER
+  // TODO: add steps for clear search text with ESC
 };
