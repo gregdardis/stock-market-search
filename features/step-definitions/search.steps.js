@@ -1,27 +1,28 @@
 /* eslint-disable no-undef */
 
 const { invalidStockSymbol } = shared.constants;
+const homeElements = page.home.elements;
 
 module.exports = function() {
   this.When(/^my cursor is in the searchbar$/, () => {
-    return driver.findElement(by.css('.searchText')).then(search => {
+    return driver.findElement(homeElements.searchText).then(search => {
       return search.click();
     });
   });
   this.Then(/^I type text that is an invalid stock symbol$/, () => {
-    return driver.findElement(by.css('.searchText')).then(search => {
+    return driver.findElement(homeElements.searchText).then(search => {
       return search.sendKeys(invalidStockSymbol);
     });
   });
   this.Then(/^I click the search icon$/, () => {
-    return driver.findElement(by.css('.searchButton')).then(button => {
+    return driver.findElement(homeElements.searchButton).then(button => {
       return button.click();
     });
   });
   this.Then(
     /^I should see an error message that the stock was not found$/,
     () => {
-      return driver.wait(until.elementLocated(by.css('.searchStatus')))
+      return driver.wait(until.elementLocated(homeElements.searchStatus))
         .then(status => {
           return driver.wait(until.elementTextIs(
             status,
