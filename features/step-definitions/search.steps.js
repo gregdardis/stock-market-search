@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 
-const { invalidStockSymbol } = shared.constants;
+const invalidStockSymbol = 'ASDF';
 const homeElements = page.home.elements;
 
 module.exports = function() {
