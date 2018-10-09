@@ -5,19 +5,10 @@ const homeElements = page.home.elements;
 const invalidStockSymbol = 'ASDF';
 
 module.exports = function() {
-  this.Given(/^my cursor is in the searchbar$/, () => {
-    return driver.findElement(homeElements.searchText).then(search => {
-      return search.click();
-    });
-  });
+  // Scenario: Search for an invalid stock
   this.When(/^I type text that is an invalid stock symbol$/, () => {
     return driver.findElement(homeElements.searchText).then(search => {
       return search.sendKeys(invalidStockSymbol);
-    });
-  });
-  this.When(/^I click the search icon$/, () => {
-    return driver.findElement(homeElements.searchButton).then(button => {
-      return button.click();
     });
   });
   this.Then(
@@ -31,13 +22,26 @@ module.exports = function() {
           ));
         });
     });
-  // TODO: add steps for valid stock search
-  // TODO: add steps for search with ENTER
-  this.Given(/^focus is on the searchbar$/, () => {
+
+  // Scenario: Search for a valid stock
+  this.When(/^I type text that is a valid stock symbol$/, () => {
     return driver.findElement(homeElements.searchText).then(search => {
-      return search.click();
+      return search.sendKeys(exampleSearchText);
     });
   });
+  this.Then(/^I should see some stock results$/, () => {
+    return driver.wait(until.elementLocated(
+      by.css('div.stockDataRegion'), 10000)
+    ).then(() => {
+      return driver.findElement(by.css('div.stockDataRegion'));
+    }).then(children => {
+      expect(children.length).to.not.equal(0);
+    });
+  });
+
+  // TODO: add steps for search with ENTER
+
+  // Scenario: Clear Search input text with Escape key
   this.Given(/^there is text in the searchbar$/, () => {
     return driver.findElement(homeElements.searchText).then(search => {
       return search.sendKeys(exampleSearchText);
