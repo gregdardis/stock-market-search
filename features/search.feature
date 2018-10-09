@@ -10,11 +10,11 @@ Feature: Search for a stock
     And I click the search icon
     Then I should see an error message that the stock was not found
 
-  # Scenario: Search for a valid stock
-  #   Given I am on the homepage
-  #   And focus is on the searchbar
-  #   When I type text that is a valid stock symbol
-  #   And I click the search icon
+  Scenario: Search for a valid stock
+    Given I am on the homepage
+    And focus is on the searchbar
+    When I type text that is a valid stock symbol
+    And I click the search icon
   #   Then I should get a stock back?
 
   # TODO: add scenario for search with ENTER

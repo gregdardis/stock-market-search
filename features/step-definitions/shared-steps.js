@@ -11,4 +11,9 @@ module.exports = function() {
       return search.click();
     });
   });
+  this.When(/^I click the search icon$/, () => {
+    return driver.findElement(homeElements.searchButton).then(button => {
+      return button.click();
+    });
+  });
 };
