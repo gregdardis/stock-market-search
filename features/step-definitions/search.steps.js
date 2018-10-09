@@ -5,11 +5,6 @@ const homeElements = page.home.elements;
 const invalidStockSymbol = 'ASDF';
 
 module.exports = function() {
-  this.Given(/^my cursor is in the searchbar$/, () => {
-    return driver.findElement(homeElements.searchText).then(search => {
-      return search.click();
-    });
-  });
   this.When(/^I type text that is an invalid stock symbol$/, () => {
     return driver.findElement(homeElements.searchText).then(search => {
       return search.sendKeys(invalidStockSymbol);
@@ -31,13 +26,7 @@ module.exports = function() {
           ));
         });
     });
-  // TODO: add steps for valid stock search
   // TODO: add steps for search with ENTER
-  this.Given(/^focus is on the searchbar$/, () => {
-    return driver.findElement(homeElements.searchText).then(search => {
-      return search.click();
-    });
-  });
   this.Given(/^there is text in the searchbar$/, () => {
     return driver.findElement(homeElements.searchText).then(search => {
       return search.sendKeys(exampleSearchText);
