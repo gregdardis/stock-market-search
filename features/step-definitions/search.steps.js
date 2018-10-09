@@ -29,8 +29,18 @@ module.exports = function() {
       return search.sendKeys(exampleSearchText);
     });
   });
+  this.Then(/^I should see some stock results$/, () => {
+    return driver.wait(until.elementLocated(
+      by.css('div.stockDataRegion'), 10000)
+    ).then(() => {
+      return driver.findElement(by.css('div.stockDataRegion'));
+    }).then(children => {
+      expect(children.length).to.not.equal(0);
+    });
+  });
 
   // TODO: add steps for search with ENTER
+
   // Scenario: Clear Search input text with Escape key
   this.Given(/^there is text in the searchbar$/, () => {
     return driver.findElement(homeElements.searchText).then(search => {

@@ -15,7 +15,7 @@ Feature: Search for a stock
     And focus is on the searchbar
     When I type text that is a valid stock symbol
     And I click the search icon
-  #   Then I should get a stock back?
+    Then I should see some stock results
 
   # TODO: add scenario for search with ENTER
 
