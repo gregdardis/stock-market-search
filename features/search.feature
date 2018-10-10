@@ -17,11 +17,16 @@ Feature: Search for a stock
     And I click the search icon
     Then I should see some stock results
 
-  # TODO: add scenario for search with ENTER
+  Scenario: Search for a stock with Enter key
+    Given I am on the homepage
+    And I click on the searchbar
+    When I type text that is an invalid stock symbol
+    And I press the Enter key
+    Then I should see an error message that the stock was not found
 
   Scenario: Clear Search input text with Escape key
     Given I am on the homepage
     And I click on the searchbar
     And there is text in the searchbar
-    When I press Escape
+    When I press the Escape key
     Then the searchbar should be cleared of all text
