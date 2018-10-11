@@ -37,10 +37,9 @@ module.exports = function() {
     });
   });
   this.Then(/^I should see some stock results$/, () => {
-    return driver.wait(until.elementLocated(
-      by.css('div.stockDataRegion'), 10000)
+    return driver.wait(until.elementLocated(homeElements.stockDataRegion)
     ).then(() => {
-      return driver.findElement(by.css('div.stockDataRegion'));
+      return driver.findElement(homeElements.stockDataRegion);
     }).then(children => {
       expect(children.length).to.not.equal(0);
     });
