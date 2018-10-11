@@ -20,9 +20,9 @@ Feature: Search for a stock
   Scenario: Search for a stock with Enter key
     Given I am on the homepage
     And I click on the searchbar
-    When I type text that is an invalid stock symbol
+    When I type text that is a valid stock symbol
     And I press the Enter key
-    Then I should see an error message that the stock was not found
+    Then I should see some stock results
 
   Scenario: Clear Search input text with Escape key
     Given I am on the homepage
