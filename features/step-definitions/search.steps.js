@@ -5,7 +5,6 @@ const homeElements = page.home.elements;
 const invalidStockSymbol = 'ASDF';
 
 module.exports = function() {
-  // Scenario: Search for an invalid stock
   this.Given(/^I click on the searchbar$/, () => {
     return driver.findElement(homeElements.searchText).then(search => {
       return search.click();
@@ -32,8 +31,6 @@ module.exports = function() {
           ));
         });
     });
-
-  // Scenario: Search for a valid stock
   this.When(/^I type text that is a valid stock symbol$/, () => {
     return driver.findElement(homeElements.searchText).then(search => {
       return search.sendKeys(exampleSearchText);
@@ -48,15 +45,11 @@ module.exports = function() {
       expect(children.length).to.not.equal(0);
     });
   });
-
-  // Scenario: Search for a stock with Enter key
   this.When(/^I press the Enter key$/, () => {
     return driver.findElement(homeElements.searchText).then(search => {
       return search.sendKeys(selenium.Key.ENTER);
     });
   });
-
-  // Scenario: Clear Search input text with Escape key
   this.Given(/^there is text in the searchbar$/, () => {
     return driver.findElement(homeElements.searchText).then(search => {
       return search.sendKeys(exampleSearchText);
