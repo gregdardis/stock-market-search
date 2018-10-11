@@ -6,6 +6,7 @@ module.exports = {
   elements: {
     searchButton: by.css('.searchButton'),
     searchStatus: by.css('.searchStatus'),
-    searchText: by.css('.searchText')
+    searchText: by.css('.searchText'),
+    stockDataRegion: by.css('div.stockDataRegion')
   }
 };
